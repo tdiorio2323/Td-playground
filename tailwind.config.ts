@@ -6,7 +6,7 @@ export default {
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		"./src/**/*.{js,ts,jsx,tsx}", // More general pattern for src
 	],
 	prefix: "",
 	theme: {
@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'bebas': ['Bebas Neue', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

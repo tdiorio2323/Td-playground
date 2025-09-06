@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, Send, DollarSign, ArrowRight } from "lucide-react";
 
 interface AuthPageProps {
   onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
@@ -70,85 +70,45 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-4 relative"
-      style={{
-        backgroundImage: `url('/lovable-uploads/f930301b-774c-429c-97b7-b7f1cb17f432.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
     >
       {/* Dark overlay for better contrast */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/20" />
       
-      <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-white/10 shadow-2xl relative z-10">
+      <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-white/10 border-2 shadow-lg relative z-10">
         <CardHeader className="text-center space-y-6">
-          <div className="flex items-center justify-center">
-            <img
-              src="/lovable-uploads/f930301b-774c-429c-97b7-b7f1cb17f432.png"
-              alt="Cabana Logo"
-              className="h-64 w-auto"
-            />
-          </div>
-          <p className="text-muted-foreground text-lg">Welcome back</p>
         </CardHeader>
 
         <CardContent className="space-y-6 pb-8">
-          {/* Keypad */}
-          <div className="grid grid-cols-3 gap-4 max-w-xs mx-auto">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
-              <Button
-                key={digit}
-                type="button"
-                onClick={() => handleKeypadPress(digit.toString())}
-                className="h-16 w-16 text-xl font-bold bg-white/10 hover:bg-white/20 text-white border border-white/30"
-                variant="outline"
-              >
-                {digit}
-              </Button>
-            ))}
-            <Button
-              type="button"
-              onClick={handleKeypadClear}
-              className="h-16 w-16 text-lg font-bold bg-red-500/20 hover:bg-red-500/30 text-white border border-red-500/50"
-              variant="outline"
-            >
-              ⌫
-            </Button>
-            <Button
-              type="button"
-              onClick={() => handleKeypadPress("0")}
-              className="h-16 w-16 text-xl font-bold bg-white/10 hover:bg-white/20 text-white border border-white/30"
-              variant="outline"
-            >
-              0
-            </Button>
-            <div></div>
-          </div>
+          <div className="flex flex-col items-center space-y-0">
+            <div className="flex items-center justify-center">
+              <img
+                src="/logo.png"
+                alt="TD Studios Logo"
+                className="h-auto max-h-60 w-auto"
+              />
+            </div>
+            <p className="text-white text-4xl font-inter">WELCOME BACK</p>
+            <p className="text-white font-inter text-lg">@tdstudiosco</p>
+            {/* Chrome Effect Icons */}
+            <div className="flex justify-center items-center space-x-8 py-4">
+              <Mail className="w-11 h-11 text-gray-300 drop-shadow-lg" />
+              <Phone className="w-11 h-11 text-gray-300 drop-shadow-lg" />
+              <Send className="w-11 h-11 text-gray-300 drop-shadow-lg" />
+              <DollarSign className="w-11 h-11 text-gray-300 drop-shadow-lg" />
+            </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Button 
-              type="submit" 
-              disabled={isLoading} 
-              className="w-full h-16 relative overflow-hidden bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm"
-              variant="outline"
-            >
-              <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                <span className="font-bebas text-2xl tracking-[0.5em] animate-slide-right whitespace-nowrap">
-                  E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R
-                </span>
-              </div>
-              <span className="relative z-10 font-bebas text-2xl tracking-[0.5em] opacity-0">
-                E N T E R
-              </span>
-            </Button>
-          </form>
+            {/* New Buttons */}
+            <div className="flex flex-col justify-center items-center space-y-4 py-4 mb-8">
+              <Button className="w-64 h-11 text-white bg-white/20 backdrop-blur-sm font-bebas text-2xl">Menu</Button>
+              <Button className="w-64 h-11 text-white bg-white/20 backdrop-blur-sm font-bebas text-2xl">Telegram</Button>
+              <Button className="w-64 h-11 text-white bg-white/20 backdrop-blur-sm font-bebas text-2xl">Instagram</Button>
+              <Button className="w-64 h-11 text-white bg-white/20 backdrop-blur-sm font-bebas text-2xl">Specials</Button>
+              <Button className="w-64 h-11 text-white bg-white/20 backdrop-blur-sm font-bebas text-2xl">Contact</Button>
+            </div>
 
-          {/* Social Icons */}
-          <div className="flex justify-center items-center space-x-8 max-w-xs mx-auto px-4">
-            <Facebook className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-            <Instagram className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-            <Twitter className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-            <Youtube className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
+            {/* New WWW.TDSTUDIOSNY.COM text */}
+            <p className="text-white font-bebas uppercase absolute bottom-[8px] left-1/2 transform -translate-x-1/2 text-2xl">WWW.TDSTUDIOSNY.COM</p>
+
           </div>
         </CardContent>
       </Card>
