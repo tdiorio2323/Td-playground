@@ -87,7 +87,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 className="h-auto max-h-60 w-auto"
               />
             </div>
-            <p className="text-white text-4xl font-inter">WELCOME BACK</p>
+            <p className="text-white text-5xl font-bebas">WELCOME BACK</p>
             <p className="text-white font-inter text-lg">@tdstudiosco</p>
             {/* Chrome Effect Icons */}
             <div className="flex justify-center items-center space-x-8 py-4">
