@@ -25,14 +25,7 @@ const Portal = () => {
     { id: 'media', name: 'Media Gallery', icon: Image, color: 'from-pink-500 to-rose-500' },
     { id: 'videos', name: 'Video Library', icon: Video, color: 'from-green-500 to-emerald-600' },
     { id: 'projects', name: 'Projects', icon: Folder, color: 'from-orange-500 to-red-500' },
-    { id: 'settings', name: 'Settings', icon: Settings, color: 'from-gray-500 to-slate-600' },
-    { id: 'team', name: 'Team', icon: Users, color: 'from-indigo-500 to-blue-600' },
-    { id: 'calendar', name: 'Calendar', icon: Calendar, color: 'from-teal-500 to-cyan-600' },
-    { id: 'messages', name: 'Messages', icon: MessageSquare, color: 'from-violet-500 to-purple-600' },
-    { id: 'analytics', name: 'Analytics', icon: BarChart3, color: 'from-amber-500 to-yellow-500' },
-    { id: 'premium', name: 'Premium', icon: Crown, color: 'from-yellow-400 to-amber-500' },
-    { id: 'ai-tools', name: 'AI Tools', icon: Sparkles, color: 'from-cyan-400 to-blue-500' },
-    { id: 'luxury', name: 'Luxury Suite', icon: Gem, color: 'from-rose-400 to-pink-500' }
+    { id: 'settings', name: 'Settings', icon: Settings, color: 'from-gray-500 to-slate-600' }
   ];
 
   const handleProjectClick = (projectId: string) => {
@@ -43,7 +36,7 @@ const Portal = () => {
     <div 
       className="min-h-screen relative"
       style={{
-        backgroundImage: `url('/lovable-uploads/6884296d-7d53-4d5f-8169-0418ff1d5824.png')`,
+        backgroundImage: `url('/lovable-uploads/74a236e3-3b28-4ffa-8e8e-cd545be0f4e5.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
