@@ -23,12 +23,12 @@ export default function AuthCardGlass() {
       {/* Column layout to keep groups evenly spaced & centered */}
       <div className="flex flex-col items-center text-center gap-6">
         {/* Top group: Logo, Welcome, Contact icons */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-2">
           {/* Logo */}
           <img
-            src="/td-logo-chrome.png"
+            src="/TD STUDIOS CHROME LOGO.png"
             alt="TD Studios"
-            className="h-16 sm:h-20 object-contain drop-shadow-[0_2px_8px_rgba(255,255,255,.2)]"
+            className="h-16 sm:h-20 object-contain drop-shadow-[0_2px_8px_rgba(255,255,255,.2)] mb-4"
           />
 
           <h2 className="text-xl sm:text-2xl font-semibold tracking-wide text-white/90">
