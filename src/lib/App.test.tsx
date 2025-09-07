@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import App from './App';
 
 // Mock the page components to isolate the routing logic
@@ -16,11 +16,11 @@ vi.mock('./pages/ProjectPage', () => ({ default: () => <div>Project Page</div> }
 
 describe('App Routing', () => {
   // Helper function to render the App with a specific route
-  const renderWithRouter = (route: string) => {
-    // The App component uses BrowserRouter, so we don't need to wrap it again.
-    // We just need to push the state to the history API.
-    window.history.pushState({}, 'Test page', route);
-    return render(<App />);
+  const renderWithRouter = (route: string) => {    
+    // The App component uses BrowserRouter internally, but for testing,
+    // it's better to wrap it in a MemoryRouter to control the history.
+    // The outer router (MemoryRouter) will take precedence.
+    return render(<MemoryRouter initialEntries={[route]}><App /></MemoryRouter>);
   };
 
   it('should render the Index page for the root route', () => {
