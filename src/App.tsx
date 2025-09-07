@@ -21,7 +21,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
-          <Route path="/" element={<Auth />} />
+          <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/auth2" element={<Auth />} />
           <Route path="/shop" element={<Shop />} />
@@ -30,8 +30,8 @@ const App = () => (
           <Route path="/brand" element={<Brand />} />
           <Route path="/portal" element={<Portal />} />
           <Route path="/project/:id" element={<ProjectPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "/*" ROUTE */}
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
