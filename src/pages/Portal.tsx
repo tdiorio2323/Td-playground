@@ -1,31 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   FileText, 
   Image, 
   Video, 
   Folder, 
-  Settings, 
-  Users, 
-  Calendar,
-  MessageSquare,
-  BarChart3,
+  Settings,
   Sparkles,
-  Crown,
-  Gem
+  StickyNote
 } from "lucide-react";
 
 const Portal = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('User');
+  const [notes, setNotes] = useState('');
+
+  // Get username from session storage or default to 'User'
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem('username') || 'User';
+    setUsername(storedUsername);
+    
+    // Load notes from localStorage
+    const savedNotes = localStorage.getItem('user-notes') || '';
+    setNotes(savedNotes);
+  }, []);
+
+  const handleNotesChange = (value: string) => {
+    setNotes(value);
+    localStorage.setItem('user-notes', value);
+  };
 
   const projects = [
     { id: 'documents', name: 'Documents', icon: FileText, color: 'from-blue-500 to-purple-600' },
     { id: 'media', name: 'Media Gallery', icon: Image, color: 'from-pink-500 to-rose-500' },
     { id: 'videos', name: 'Video Library', icon: Video, color: 'from-green-500 to-emerald-600' },
     { id: 'projects', name: 'Projects', icon: Folder, color: 'from-orange-500 to-red-500' },
-    { id: 'settings', name: 'Settings', icon: Settings, color: 'from-gray-500 to-slate-600' }
+    { id: 'settings', name: 'Settings', icon: Settings, color: 'from-gray-500 to-slate-600' },
+    { id: 'notes', name: 'Quick Notes', icon: StickyNote, color: 'from-teal-500 to-cyan-600' }
   ];
 
   const handleProjectClick = (projectId: string) => {
@@ -48,28 +62,30 @@ const Portal = () => {
       
       <div className="relative z-10 container mx-auto px-6 py-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-            Luxury Portal
-          </h1>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Your premium workspace for creativity, collaboration, and luxury experiences
-          </p>
-        </div>
+        <header className="text-center mb-16">
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 max-w-4xl mx-auto">
+            <h1 className="text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+              Welcome {username}
+            </h1>
+            <p className="text-xl text-white/80">
+              Your premium workspace for creativity, collaboration, and luxury experiences
+            </p>
+          </div>
+        </header>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {/* Projects Grid - 2 rows of 3 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
           {projects.map((project) => (
             <Card
               key={project.id}
               className="group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-white/10 border-white/20 backdrop-blur-md"
               onClick={() => handleProjectClick(project.id)}
             >
-              <CardContent className="p-6 text-center">
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
-                  <project.icon className="w-8 h-8 text-white" />
+              <CardContent className="p-8 text-center">
+                <div className={`w-20 h-20 mx-auto mb-6 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                  <project.icon className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-white font-semibold text-sm group-hover:text-purple-200 transition-colors duration-300">
+                <h3 className="text-white font-semibold text-lg group-hover:text-purple-200 transition-colors duration-300">
                   {project.name}
                 </h3>
               </CardContent>
@@ -77,26 +93,44 @@ const Portal = () => {
           ))}
         </div>
 
-        {/* Bottom Actions */}
-        <div className="flex justify-center mt-12 space-x-4">
-          <Button 
-            variant="frost" 
-            size="lg"
-            onClick={() => navigate('/shop')}
-            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
-          >
-            <Sparkles className="mr-2 h-5 w-5" />
-            Back to Shop
-          </Button>
-          <Button 
-            variant="frost" 
-            size="lg"
-            className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-300/30 text-white hover:from-purple-500/30 hover:to-pink-500/30"
-          >
-            <Crown className="mr-2 h-5 w-5" />
-            Upgrade to Premium
-          </Button>
-        </div>
+        {/* Footer */}
+        <footer className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            {/* Your Logo Space */}
+            <div className="text-center">
+              <div className="w-32 h-20 bg-white/20 border-2 border-dashed border-white/40 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <span className="text-white/60 text-sm">Your Logo</span>
+              </div>
+              <p className="text-white/60 text-sm">TD Studios</p>
+            </div>
+
+            {/* Notes Card */}
+            <Card className="bg-white/20 border-white/30">
+              <CardHeader>
+                <CardTitle className="text-white text-center flex items-center justify-center gap-2">
+                  <StickyNote className="w-5 h-5" />
+                  Quick Notes
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Textarea
+                  placeholder="Add your notes here..."
+                  value={notes}
+                  onChange={(e) => handleNotesChange(e.target.value)}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60 min-h-[100px] resize-none"
+                />
+              </CardContent>
+            </Card>
+
+            {/* Client Logo Space */}
+            <div className="text-center">
+              <div className="w-32 h-20 bg-white/20 border-2 border-dashed border-white/40 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <span className="text-white/60 text-sm">Client Logo</span>
+              </div>
+              <p className="text-white/60 text-sm">Client Brand</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
