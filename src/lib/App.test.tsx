@@ -23,53 +23,24 @@ describe('App Routing', () => {
     return render(<MemoryRouter initialEntries={[route]}><App /></MemoryRouter>);
   };
 
-  it('should render the Index page for the root route', () => {
-    renderWithRouter('/');
-    expect(screen.getByText('Index Page')).toBeInTheDocument();
-  });
+  const testRoutes = [
+    { path: '/', componentText: 'Index Page', description: 'root' },
+    { path: '/auth', componentText: 'Auth Page', description: '/auth' },
+    { path: '/auth2', componentText: 'Auth Page', description: '/auth2' },
+    { path: '/shop', componentText: 'Shop Page', description: '/shop' },
+    { path: '/checkout', componentText: 'Checkout Page', description: '/checkout' },
+    { path: '/admin', componentText: 'Admin Page', description: '/admin' },
+    { path: '/brand', componentText: 'Brand Page', description: '/brand' },
+    { path: '/portal', componentText: 'Portal Page', description: '/portal' },
+    { path: '/project/some-id-123', componentText: 'Project Page', description: 'dynamic /project/:id' },
+    { path: '/this-route-does-not-exist', componentText: 'Not Found Page', description: 'non-existent' },
+  ];
 
-  it('should render the Auth page for the /auth route', () => {
-    renderWithRouter('/auth');
-    expect(screen.getByText('Auth Page')).toBeInTheDocument();
-  });
-
-  it('should render the Auth page for the /auth2 route', () => {
-    renderWithRouter('/auth2');
-    expect(screen.getByText('Auth Page')).toBeInTheDocument();
-  });
-
-  it('should render the Shop page for the /shop route', () => {
-    renderWithRouter('/shop');
-    expect(screen.getByText('Shop Page')).toBeInTheDocument();
-  });
-
-  it('should render the Checkout page for the /checkout route', () => {
-    renderWithRouter('/checkout');
-    expect(screen.getByText('Checkout Page')).toBeInTheDocument();
-  });
-
-  it('should render the Admin page for the /admin route', () => {
-    renderWithRouter('/admin');
-    expect(screen.getByText('Admin Page')).toBeInTheDocument();
-  });
-
-  it('should render the Brand page for the /brand route', () => {
-    renderWithRouter('/brand');
-    expect(screen.getByText('Brand Page')).toBeInTheDocument();
-  });
-
-  it('should render the Portal page for the /portal route', () => {
-    renderWithRouter('/portal');
-    expect(screen.getByText('Portal Page')).toBeInTheDocument();
-  });
-
-  it('should render the ProjectPage for a dynamic /project/:id route', () => {
-    renderWithRouter('/project/some-id-123');
-    expect(screen.getByText('Project Page')).toBeInTheDocument();
-  });
-
-  it('should render the NotFound page for a non-existent route', () => {
-    renderWithRouter('/this-route-does-not-exist');
-    expect(screen.getByText('Not Found Page')).toBeInTheDocument();
-  });
+  it.each(testRoutes)(
+    'should render the $componentText for the $description route',
+    ({ path, componentText }) => {
+      renderWithRouter(path);
+      expect(screen.getByText(componentText)).toBeInTheDocument();
+    }
+  );
 });
