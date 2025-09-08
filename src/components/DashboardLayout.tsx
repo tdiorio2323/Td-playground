@@ -24,7 +24,7 @@ export function DashboardLayout({ userRole = 'super_admin' }: DashboardLayoutPro
   const navigation = {
     super_admin: [
       { name: 'Dashboard', href: '/admin', icon: Home },
-      { name: 'Cannabis Brands', href: '/admin/brands', icon: Leaf },
+      { name: 'Creator Brands', href: '/admin/brands', icon: Leaf },
       { name: 'Subscriptions', href: '/admin/subscriptions', icon: BarChart3 },
       { name: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
       { name: 'Settings', href: '/admin/settings', icon: Settings },
@@ -84,11 +84,11 @@ export function DashboardLayout({ userRole = 'super_admin' }: DashboardLayoutPro
               <div>
                 <h1 className="text-lg font-bold text-primary-foreground">
                   {userRole === 'super_admin' ? 'Admin Portal' : 
-                   userRole === 'brand_owner' ? 'Brand Portal' : 'Cannabis Hub'}
+                   userRole === 'brand_owner' ? 'Brand Portal' : 'Cabana VIP Hub'}
                 </h1>
                 <p className="text-sm text-primary-foreground/70">
                   {userRole === 'super_admin' ? 'Platform Management' : 
-                   userRole === 'brand_owner' ? 'Manage Your Store' : 'Order Cannabis'}
+                   userRole === 'brand_owner' ? 'Manage Your Store' : 'Order Content'}
                 </p>
               </div>
             </div>

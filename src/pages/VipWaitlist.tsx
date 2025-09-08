@@ -64,7 +64,7 @@ export default function VipWaitlist() {
           </div>
           <CardTitle className="text-2xl text-white">Join VIP Waitlist</CardTitle>
           <p className="text-white/80">
-            Get exclusive early access to premium cannabis products and special deals.
+            Get exclusive early access to premium creator content and special experiences.
           </p>
         </CardHeader>
         <CardContent>

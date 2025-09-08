@@ -49,12 +49,13 @@ src/
 ```
 
 ### Key Application Features
-This appears to be a multi-tenant application with:
+**Cabana VIP** — invite-only creator network shell with:
+- **VIP waitlist system** for exclusive access
+- **Creator onboarding** flow and profiles  
+- **Link-in-bio** dynamic pages
+- **Creator portal** interface with project management
 - **Authentication system** with Supabase
-- **E-commerce functionality** (shop, checkout)
-- **Admin dashboard** for management
-- **Brand/project management** system
-- **Customer portal** interface
+- **Admin dashboard** for network management
 - **Dynamic project pages** with parameterized routing
 
 ### Development Configuration

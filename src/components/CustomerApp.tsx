@@ -285,7 +285,7 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
                   className="h-8 w-auto"
                 />
                 <p className="text-white/60 text-sm">
-                  Premium cannabis delivery service bringing you the finest products right to your door.
+                  Premium Cabana VIP delivery service bringing you the finest creator content right to your door.
                 </p>
                 <div className="flex space-x-4">
                   <a href="#" className="text-white/60 hover:text-white transition-colors">

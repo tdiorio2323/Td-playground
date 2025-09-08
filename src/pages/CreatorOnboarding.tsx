@@ -72,7 +72,7 @@ export default function CreatorOnboarding() {
           </div>
           <CardTitle className="text-2xl text-white">Creator Onboarding</CardTitle>
           <p className="text-white/80">
-            Set up your creator profile and start building your cannabis brand presence.
+            Set up your creator profile and start building your Cabana VIP brand presence.
           </p>
         </CardHeader>
         <CardContent>
@@ -107,7 +107,7 @@ export default function CreatorOnboarding() {
               <Label htmlFor="bio" className="text-white/90">Bio (Optional)</Label>
               <Textarea
                 id="bio"
-                placeholder="Tell your audience about your cannabis brand..."
+                placeholder="Tell your audience about your creator brand..."
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/60 min-h-[100px]"

@@ -114,7 +114,7 @@ const Portal = () => {
               <h2 className="text-2xl font-bold text-white">New Features</h2>
               <Sparkles className="w-6 h-6 text-yellow-400" />
             </div>
-            <p className="text-white/70">Discover our latest cannabis community features</p>
+            <p className="text-white/70">Discover our latest Cabana VIP community features</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
