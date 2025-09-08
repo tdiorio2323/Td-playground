@@ -10,7 +10,10 @@ import {
   Folder, 
   Settings,
   Sparkles,
-  StickyNote
+  StickyNote,
+  Crown,
+  User,
+  Link
 } from "lucide-react";
 
 const Portal = () => {
@@ -42,8 +45,18 @@ const Portal = () => {
     { id: 'notes', name: 'Quick Notes', icon: StickyNote, color: 'from-teal-500 to-cyan-600' }
   ];
 
+  const newFeatures = [
+    { id: 'vip', name: 'Join VIP', icon: Crown, color: 'from-yellow-500 to-amber-600', path: '/waitlist' },
+    { id: 'creator', name: 'Creator Onboard', icon: User, color: 'from-green-500 to-emerald-600', path: '/onboard' },
+    { id: 'bio', name: 'Link in Bio', icon: Link, color: 'from-purple-500 to-violet-600', path: '/bio/demo' }
+  ];
+
   const handleProjectClick = (projectId: string) => {
     navigate(`/project/${projectId}`);
+  };
+
+  const handleFeatureClick = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -74,7 +87,7 @@ const Portal = () => {
         </header>
 
         {/* Projects Grid - 2 rows of 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-8">
           {projects.map((project) => (
             <Card
               key={project.id}
@@ -91,6 +104,37 @@ const Portal = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* New Features Section */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Sparkles className="w-6 h-6 text-yellow-400" />
+              <h2 className="text-2xl font-bold text-white">New Features</h2>
+              <Sparkles className="w-6 h-6 text-yellow-400" />
+            </div>
+            <p className="text-white/70">Discover our latest cannabis community features</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {newFeatures.map((feature) => (
+              <Card
+                key={feature.id}
+                className="group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br from-white/20 to-white/5 border-white/30 backdrop-blur-md"
+                onClick={() => handleFeatureClick(feature.path)}
+              >
+                <CardContent className="p-6 text-center">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg group-hover:text-yellow-200 transition-colors duration-300">
+                    {feature.name}
+                  </h3>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Footer */}
