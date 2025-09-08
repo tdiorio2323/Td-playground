@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Eye, EyeOff, KeyRound } from "lucide-react";
 
 interface AuthPageProps {
   onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
@@ -11,26 +13,66 @@ interface AuthPageProps {
 
 export const AuthPage = ({ onLogin }: AuthPageProps) => {
   const navigate = useNavigate();
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    secret: ""
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showSecret, setShowSecret] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleKeypadPress = (digit: string) => {
-    if (password.length < 3) {
-      setPassword(prev => prev + digit);
-    }
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleKeypadClear = () => {
-    setPassword("");
+  const validateForm = () => {
+    if (!formData.username.trim()) {
+      toast({
+        title: "Error",
+        description: "Username is required",
+        variant: "destructive"
+      });
+      return false;
+    }
+    if (!formData.password.trim()) {
+      toast({
+        title: "Error", 
+        description: "Password is required",
+        variant: "destructive"
+      });
+      return false;
+    }
+    if (!formData.secret.trim()) {
+      toast({
+        title: "Error",
+        description: "Secret code is required",
+        variant: "destructive"
+      });
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== "420") {
+    
+    if (!validateForm()) return;
+
+    // Demo credentials - replace with real auth
+    const validCredentials = {
+      username: "admin",
+      password: "cannabis420",
+      secret: "cabana"
+    };
+
+    if (formData.username !== validCredentials.username ||
+        formData.password !== validCredentials.password ||
+        formData.secret !== validCredentials.secret) {
       toast({
-        title: "Error",
-        description: "Invalid password",
+        title: "Access Denied",
+        description: "Invalid credentials or secret code",
         variant: "destructive"
       });
       return;
@@ -43,15 +85,15 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
       try {
         toast({
           title: "Welcome back!",
-          description: "You have been signed in successfully.",
+          description: `Signed in as ${formData.username}`,
         });
 
-        // For demo purposes, navigate to shop page
-        navigate('/shop');
+        // Navigate to portal instead of shop
+        navigate('/portal');
 
         // Call onLogin if provided (for backward compatibility)
         if (onLogin) {
-          onLogin('customer');
+          onLogin('admin');
         }
 
       } catch (error: any) {
@@ -68,78 +110,119 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
 
   return (
-    <div 
+    <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
-        backgroundImage: `url('/lovable-uploads/f930301b-774c-429c-97b7-b7f1cb17f432.png')`,
+        backgroundImage: "url('/cabana-builder-background.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Dark overlay for better contrast */}
-      <div className="absolute inset-0 bg-black/40" />
       
-      <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-white/10 shadow-2xl relative z-10">
-        <CardHeader className="text-center space-y-6">
+      
+      <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10">
+        <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
             <img
               src="/lovable-uploads/f930301b-774c-429c-97b7-b7f1cb17f432.png"
               alt="Cabana Logo"
-              className="h-64 w-auto"
+              className="h-32 w-auto"
             />
           </div>
-          <p className="text-muted-foreground text-lg">Welcome back</p>
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold text-white">Cabana</h1>
+          </div>
         </CardHeader>
 
         <CardContent className="space-y-6 pb-8">
-          {/* Keypad */}
-          <div className="grid grid-cols-3 gap-4 max-w-xs mx-auto">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
-              <Button
-                key={digit}
-                type="button"
-                onClick={() => handleKeypadPress(digit.toString())}
-                className="h-16 w-16 text-xl font-bold bg-white/10 hover:bg-white/20 text-white border border-white/30"
-                variant="outline"
-              >
-                {digit}
-              </Button>
-            ))}
-            <Button
-              type="button"
-              onClick={handleKeypadClear}
-              className="h-16 w-16 text-lg font-bold bg-red-500/20 hover:bg-red-500/30 text-white border border-red-500/50"
-              variant="outline"
-            >
-              ⌫
-            </Button>
-            <Button
-              type="button"
-              onClick={() => handleKeypadPress("0")}
-              className="h-16 w-16 text-xl font-bold bg-white/10 hover:bg-white/20 text-white border border-white/30"
-              variant="outline"
-            >
-              0
-            </Button>
-            <div></div>
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Username Field */}
+            <div className="space-y-2">
+              <Label htmlFor="username" className="text-white/90 text-sm font-medium">
+                Username
+              </Label>
+              <Input
+                id="username"
+                type="text"
+                placeholder="Enter your username"
+                value={formData.username}
+                onChange={(e) => handleInputChange('username', e.target.value)}
+                className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                required
+              />
+            </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Password Field */}
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-white/90 text-sm font-medium">
+                Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={(e) => handleInputChange('password', e.target.value)}
+                  className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm pr-12"
+                  required
+                />
+                <Button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 p-0 bg-transparent hover:bg-white/10"
+                  variant="ghost"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4 text-white/60" /> : <Eye className="w-4 h-4 text-white/60" />}
+                </Button>
+              </div>
+            </div>
+
+            {/* Secret Code Field */}
+            <div className="space-y-2">
+              <Label htmlFor="secret" className="text-white/90 text-sm font-medium flex items-center gap-2">
+                <KeyRound className="w-4 h-4" />
+                Secret Access Code
+              </Label>
+              <div className="relative">
+                <Input
+                  id="secret"
+                  type={showSecret ? "text" : "password"}
+                  placeholder="Enter exclusive access code"
+                  value={formData.secret}
+                  onChange={(e) => handleInputChange('secret', e.target.value)}
+                  className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm pr-12"
+                  required
+                />
+                <Button
+                  type="button"
+                  onClick={() => setShowSecret(!showSecret)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 p-0 bg-transparent hover:bg-white/10"
+                  variant="ghost"
+                >
+                  {showSecret ? <EyeOff className="w-4 h-4 text-white/60" /> : <Eye className="w-4 h-4 text-white/60" />}
+                </Button>
+              </div>
+            </div>
+
+            {/* Submit Button */}
             <Button 
               type="submit" 
               disabled={isLoading} 
-              className="w-full h-16 relative overflow-hidden bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm"
+              className="w-full h-14 relative overflow-hidden bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border border-white/30 backdrop-blur-sm font-semibold text-lg"
               variant="outline"
             >
-              <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                <span className="font-bebas text-2xl tracking-[0.5em] animate-slide-right whitespace-nowrap">
-                  E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E N T E R
-                </span>
-              </div>
-              <span className="relative z-10 font-bebas text-2xl tracking-[0.5em] opacity-0">
-                E N T E R
-              </span>
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Authenticating...
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <KeyRound className="w-5 h-5" />
+                  ACCESS PORTAL
+                </div>
+              )}
             </Button>
           </form>
 
