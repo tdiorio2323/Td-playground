@@ -1,0 +1,19 @@
+D public/lovable-uploads/827a6d46-d4f2-4ea8-9cf2-e7eb451da03b.png
+ M src/components/CreatorLandingPage.tsx
+ M src/router.tsx
+ M tailwind.config.ts
+?? GEMINI.md
+?? public/360_F_326435430_16afW26tzA2FFQy0kconTGJAoiBoRArJ.jpg
+?? public/827a6d46-d4f2-4ea8-9cf2-e7eb451da03b.png
+?? src/app/
+?? src/components/CartDrawer.tsx
+?? src/components/Footer.tsx
+?? src/components/Header.tsx
+?? src/components/ProductCard.tsx
+?? src/components/ProductGrid.tsx
+?? src/hooks/use-cart.tsx
+?? src/hooks/use-products.tsx
+?? src/lib/firebase.ts
+?? src/lib/products.ts
+?? src/lib/types.ts
+?? src/pages/Dashboard.tsx

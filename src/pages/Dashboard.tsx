@@ -3,16 +3,17 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Phone, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
-interface CreatorLandingPageProps {
-  socialLink: string;
-  creatorName: string;
-}
-
-const CreatorLandingPage: React.FC<CreatorLandingPageProps> = ({ socialLink, creatorName }) => {
+const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col p-4 relative">
-      <div className="absolute inset-0 bg-black/20" />
-      {/* Navbar */}
+      {/* Static Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url('/827a6d46-d4f2-4ea8-9cf2-e7eb451da03b.png')` }}
+      />
+      <div className="absolute inset-0 bg-black/40" /> {/* Overlay */}
+
+      {/* Content (Navbar and Card) */}
       <nav className="w-full bg-black/50 backdrop-blur-md border-b border-white/10 px-6 flex justify-between items-center relative z-20">
         {/* Left Section (Menu Items) */}
         <div className="flex space-x-4">
@@ -36,17 +37,16 @@ const CreatorLandingPage: React.FC<CreatorLandingPageProps> = ({ socialLink, cre
           />
         </div>
       </nav>
-      <Card className="w-full mx-auto my-8 h-[calc(100vh-64px)] bg-black/30 backdrop-blur-sm border-white/10 border-2 shadow-lg relative z-10 flex-grow">
+      <Card className="w-[90%] mx-auto my-8 h-[calc(100vh-64px)] bg-black/30 backdrop-blur-sm border-white/10 border-2 shadow-lg relative z-10 flex-grow">
         <CardHeader className="text-center space-y-6">
-          <h1 className="text-white text-4xl font-bebas">Creator Dashboard for {creatorName}</h1>
+          <h1 className="text-white text-4xl font-bebas">Your Dashboard</h1>
         </CardHeader>
-        <CardContent className="space-y-6 pb-8 text-white">
-          <p>Social Link: <a href={socialLink} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:underline">{socialLink}</a></p>
-          <p>This is a stub component. Please replace with actual content.</p>
+        <CardContent className="space-y-6 px-8 py-6 text-white">
+          {/* Add your dashboard content here. */}
         </CardContent>
       </Card>
     </div>
   );
 };
 
-export default CreatorLandingPage;
+export default Dashboard;

@@ -5,6 +5,7 @@ import App from "./App";
 import CreatorLandingPage from "./components/CreatorLandingPage";
 import NotFound from "./components/NotFound";
 import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter(
   [
@@ -24,6 +25,10 @@ const router = createBrowserRouter(
               creatorName="Rubi Rose"
             />
           ),
+        },
+        {
+          path: "dashboard",
+          element: <Dashboard />,
         },
         {
           path: "*",

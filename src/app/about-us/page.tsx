@@ -1,0 +1,1 @@
+export default function Page(){ return (<div className="space-y-6"><h1 className="text-2xl font-semibold">About Us</h1><div className="card space-y-2"><p className="text-neutral-300">Wireframe scaffold. Replace copy with your brand story.</p><p className="text-neutral-400">Use Firestore or keep static JSON during design.</p></div></div>) }

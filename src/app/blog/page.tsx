@@ -1,0 +1,3 @@
+export default function Page(){ return (<div className="space-y-6"><h1 className="text-2xl font-semibold">Blog</h1><div className="grid md:grid-cols-3 gap-4">
+{[1,2,3].map(i=>(<article key={i} className="card space-y-2"><div className="aspect-video wire rounded-xl bg-neutral-900"></div><h2 className="font-medium">Post title {i}</h2><p className="text-sm text-neutral-400">Short excerpt.</p></article>))}
+</div></div>) }

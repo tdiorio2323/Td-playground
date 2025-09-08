@@ -1,0 +1,229 @@
+diff --git a/public/lovable-uploads/827a6d46-d4f2-4ea8-9cf2-e7eb451da03b.png b/public/lovable-uploads/827a6d46-d4f2-4ea8-9cf2-e7eb451da03b.png
+deleted file mode 100644
+index 980f902..0000000
+Binary files a/public/lovable-uploads/827a6d46-d4f2-4ea8-9cf2-e7eb451da03b.png and /dev/null differ
+diff --git a/src/components/CreatorLandingPage.tsx b/src/components/CreatorLandingPage.tsx
+index 7e8f085..9f8af03 100644
+--- a/src/components/CreatorLandingPage.tsx
++++ b/src/components/CreatorLandingPage.tsx
+@@ -1,4 +1,7 @@
+ import React from 'react';
++import { Card, CardContent, CardHeader } from '@/components/ui/card';
++import { Phone, Search } from 'lucide-react';
++import { Input } '@/components/ui/input';
+ 
+ interface CreatorLandingPageProps {
+   socialLink: string;
+@@ -7,10 +10,41 @@ interface CreatorLandingPageProps {
+ 
+ const CreatorLandingPage: React.FC<CreatorLandingPageProps> = ({ socialLink, creatorName }) => {
+   return (
+-    <div>
+-      <h1>Creator Landing Page for {creatorName}</h1>
+-      <p>Social Link: <a href={socialLink} target="_blank" rel="noopener noreferrer">{socialLink}</a></p>
+-      <p>This is a stub component. Please replace with actual content.</p>
++    <div className="min-h-screen flex flex-col p-4 relative">
++      <div className="absolute inset-0 bg-black/20" />
++      {/* Navbar */}
++      <nav className="w-full bg-black/50 backdrop-blur-md border-b border-white/10 px-6 flex justify-between items-center relative z-20">
++        {/* Left Section (Menu Items) */}
++        <div className="flex space-x-4">
++          <a href="/" className="text-white hover:text-gray-300 text-lg font-bebas uppercase">Home</a>
++          <a href="/auth" className="text-white hover:text-gray-300 text-lg font-bebas uppercase">Auth</a>
++          <a href="/creator" className="text-white hover:text-gray-300 text-lg font-bebas uppercase">Creator</a>
++          <a href="/dashboard" className="text-white hover:text-gray-300 text-lg font-bebas uppercase">Dashboard</a>
++        </div>
++        {/* Center Section (Logo) */}
++        <div className="absolute left-1/2 transform -translate-x-1/2">
++          <img src="/TD STUDIOS CHROME LOGO.png" alt="TD Studios Logo" className="h-16 w-auto" />
++        </div>
++        {/* Right Section (Icons + Search) */}
++        <div className="flex items-center space-x-4">
++          <Phone className="h-6 w-6 text-white cursor-pointer hover:text-gray-300" />
++          <Search className="h-6 w-6 text-white cursor-pointer hover:text-gray-300" />
++          <Input
++            type="text"
++            placeholder="Search..."
++            className="w-32 bg-white/10 border-white/20 text-white placeholder:text-white/60"
++          />
++        </div>
++      </nav>
++      <Card className="w-full mx-auto my-8 h-[calc(100vh-64px)] bg-black/30 backdrop-blur-sm border-white/10 border-2 shadow-lg relative z-10 flex-grow">
++        <CardHeader className="text-center space-y-6">
++          <h1 className="text-white text-4xl font-bebas">Creator Dashboard for {creatorName}</h1>
++        </CardHeader>
++        <CardContent className="space-y-6 pb-8 text-white">
++          <p>Social Link: <a href={socialLink} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:underline">{socialLink}</a></p>
++          <p>This is a stub component. Please replace with actual content.</p>
++        </CardContent>
++      </Card>
+     </div>
+   );
+ };
+diff --git a/src/router.tsx b/src/router.tsx
+index 5fac96d..a967fe1 100644
+--- a/src/router.tsx
++++ b/src/router.tsx
+@@ -5,6 +5,7 @@ import App from "./App";
+ import CreatorLandingPage from "./components/CreatorLandingPage";
+ import NotFound from "./components/NotFound";
+ import Auth from "./pages/Auth";
++import Dashboard from "./pages/Dashboard";
+ 
+ const router = createBrowserRouter(
+   [
+@@ -25,6 +26,10 @@ const router = createBrowserRouter(
+             />
+           ),
+         },
++        {
++          path: "dashboard",
++          element: <Dashboard />,
++        },
+         {
+           path: "*",
+           element: <NotFound />,
+diff --git a/tailwind.config.ts b/tailwind.config.ts
+index 6aafd49..5abfbb4 100644
+--- a/tailwind.config.ts
++++ b/tailwind.config.ts
+@@ -1,127 +1,12 @@
+-import type { Config } from "tailwindcss";
++import type { Config } from "tailwindcss"
+ 
+-export default {
+-	darkMode: ["class"],
+-	content: [
+-		"./pages/**/*.{ts,tsx}",
+-		"./components/**/*.{ts,tsx}",
+-		"./app/**/*.{ts,tsx}",
+-		"./src/**/*.{js,ts,jsx,tsx}", // More general pattern for src
+-	],
+-	prefix: "",
+-	theme: {
+-		container: {
+-			center: true,
+-			padding: '2rem',
+-			screens: {
+-				'2xl': '1400px'
+-			}
+-		},
+-		extend: {
+-			fontFamily: {
+-				'bebas': ['Bebas Neue', 'sans-serif'],
+-				'inter': ['Inter', 'sans-serif'],
+-			},
+-			colors: {
+-				border: 'hsl(var(--border))',
+-				input: 'hsl(var(--input))',
+-				ring: 'hsl(var(--ring))',
+-				background: 'hsl(var(--background))',
+-				foreground: 'hsl(var(--foreground))',
+-				primary: {
+-					DEFAULT: 'hsl(var(--primary))',
+-					foreground: 'hsl(var(--primary-foreground))',
+-					hover: 'hsl(var(--primary-hover))',
+-					glow: 'hsl(var(--primary-glow))'
+-				},
+-				secondary: {
+-					DEFAULT: 'hsl(var(--secondary))',
+-					foreground: 'hsl(var(--secondary-foreground))'
+-				},
+-				destructive: {
+-					DEFAULT: 'hsl(var(--destructive))',
+-					foreground: 'hsl(var(--destructive-foreground))'
+-				},
+-				muted: {
+-					DEFAULT: 'hsl(var(--muted))',
+-					foreground: 'hsl(var(--muted-foreground))'
+-				},
+-				accent: {
+-					DEFAULT: 'hsl(var(--accent))',
+-					foreground: 'hsl(var(--accent-foreground))'
+-				},
+-				popover: {
+-					DEFAULT: 'hsl(var(--popover))',
+-					foreground: 'hsl(var(--popover-foreground))'
+-				},
+-				card: {
+-					DEFAULT: 'hsl(var(--card))',
+-					foreground: 'hsl(var(--card-foreground))'
+-				},
+-				success: {
+-					DEFAULT: 'hsl(var(--success))',
+-					foreground: 'hsl(var(--success-foreground))'
+-				},
+-				warning: {
+-					DEFAULT: 'hsl(var(--warning))',
+-					foreground: 'hsl(var(--warning-foreground))'
+-				},
+-				sidebar: {
+-					DEFAULT: 'hsl(var(--sidebar-background))',
+-					foreground: 'hsl(var(--sidebar-foreground))',
+-					primary: 'hsl(var(--sidebar-primary))',
+-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+-					accent: 'hsl(var(--sidebar-accent))',
+-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+-					border: 'hsl(var(--sidebar-border))',
+-					ring: 'hsl(var(--sidebar-ring))'
+-				}
+-			},
+-			backgroundImage: {
+-				'gradient-primary': 'var(--gradient-primary)',
+-				'gradient-hero': 'var(--gradient-hero)',
+-				'gradient-card': 'var(--gradient-card)'
+-			},
+-			boxShadow: {
+-				'glow': 'var(--shadow-glow)',
+-				'green': 'var(--shadow-green)',
+-				'sm': 'var(--shadow-sm)',
+-				'md': 'var(--shadow-md)',
+-				'lg': 'var(--shadow-lg)'
+-			},
+-			borderRadius: {
+-				lg: 'var(--radius)',
+-				md: 'calc(var(--radius) - 2px)',
+-				sm: 'calc(var(--radius) - 4px)'
+-			},
+-			keyframes: {
+-				'accordion-down': {
+-					from: {
+-						height: '0'
+-					},
+-					to: {
+-						height: 'var(--radix-accordion-content-height)'
+-					}
+-				},
+-				'accordion-up': {
+-					from: {
+-						height: 'var(--radix-accordion-content-height)'
+-					},
+-					to: {
+-						height: '0'
+-					}
+-				},
+-				'slide-right': {
+-					'0%': { transform: 'translateX(-100%)' },
+-					'100%': { transform: 'translateX(100%)' }
+-				}
+-			},
+-			animation: {
+-				'accordion-down': 'accordion-down 0.2s ease-out',
+-				'accordion-up': 'accordion-up 0.2s ease-out',
+-				'slide-right': 'slide-right 6s linear infinite',
+-			}
+-		}
+-	},
+-	plugins: [require("tailwindcss-animate")],
+-} satisfies Config;
++const config: Config = {
++  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
++  theme: {
++    extend: {
++      colors: { brand: { DEFAULT: "#111827", gold: "#d4af37" } }
++    }
++  },
++  plugins: [],
++}
++export default config
+\ No newline at end of file
