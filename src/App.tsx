@@ -12,6 +12,9 @@ import Admin from "./pages/Admin";
 import Brand from "./pages/Brand";
 import Portal from "./pages/Portal";
 import ProjectPage from "./pages/ProjectPage";
+import VipWaitlist from "./pages/VipWaitlist";
+import CreatorOnboarding from "./pages/CreatorOnboarding";
+import LinkInBio from "./pages/LinkInBio";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,9 @@ const App = () => (
           <Route path="/brand" element={<Brand />} />
           <Route path="/portal" element={<Portal />} />
           <Route path="/project/:id" element={<ProjectPage />} />
+          <Route path="/waitlist" element={<VipWaitlist />} />
+          <Route path="/onboard" element={<CreatorOnboarding />} />
+          <Route path="/bio/:username" element={<LinkInBio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "/*" ROUTE */}
           <Route path="/*" element={<NotFound />} />
         </Routes>
