@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Cabana VIP - Invite-Only Creator Network
 
 ## Project info
 
@@ -52,13 +52,19 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with:
+**Cabana VIP** — invite-only creator network shell
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Features
+- 🎭 VIP waitlist system
+- 🎨 Creator onboarding flow  
+- 🔗 Link-in-bio profiles
+- 🏛️ Creator portal interface
+- 🛡️ Invite-only access control
+
+## Tech Stack
+- Vite + TypeScript + React
+- shadcn/ui + Tailwind CSS
+- Supabase backend integration
 
 ## How can I deploy this project?
 

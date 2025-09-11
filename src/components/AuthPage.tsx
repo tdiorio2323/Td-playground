@@ -27,52 +27,46 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const validateForm = () => {
-    if (!formData.username.trim()) {
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Auto-fill secret code if not provided
+    const finalFormData = {
+      ...formData,
+      secret: formData.secret || "cabana" // Auto-fill secret if empty
+    };
+
+    // Only validate username and password
+    if (!finalFormData.username.trim()) {
       toast({
         title: "Error",
         description: "Username is required",
         variant: "destructive"
       });
-      return false;
+      return;
     }
-    if (!formData.password.trim()) {
+    if (!finalFormData.password.trim()) {
       toast({
         title: "Error", 
         description: "Password is required",
         variant: "destructive"
       });
-      return false;
+      return;
     }
-    if (!formData.secret.trim()) {
-      toast({
-        title: "Error",
-        description: "Secret code is required",
-        variant: "destructive"
-      });
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
 
     // Demo credentials - replace with real auth
     const validCredentials = {
-      username: "admin",
-      password: "cannabis420",
+      username: "td",
+      password: "420",
       secret: "cabana"
     };
 
-    if (formData.username !== validCredentials.username ||
-        formData.password !== validCredentials.password ||
-        formData.secret !== validCredentials.secret) {
+    if (finalFormData.username !== validCredentials.username ||
+        finalFormData.password !== validCredentials.password) {
       toast({
         title: "Access Denied",
-        description: "Invalid credentials or secret code",
+        description: "Invalid username or password",
         variant: "destructive"
       });
       return;
@@ -178,21 +172,21 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </div>
             </div>
 
-            {/* Secret Code Field */}
+            {/* Secret Code Field - Optional */}
             <div className="space-y-2">
               <Label htmlFor="secret" className="text-white/90 text-sm font-medium flex items-center gap-2">
                 <KeyRound className="w-4 h-4" />
-                Secret Access Code
+                Secret Access Code 
+                <span className="text-white/60 text-xs">(auto-handled)</span>
               </Label>
               <div className="relative">
                 <Input
                   id="secret"
                   type={showSecret ? "text" : "password"}
-                  placeholder="Enter exclusive access code"
+                  placeholder="Auto-granted (leave empty)"
                   value={formData.secret}
                   onChange={(e) => handleInputChange('secret', e.target.value)}
                   className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm pr-12"
-                  required
                 />
                 <Button
                   type="button"

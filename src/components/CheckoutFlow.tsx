@@ -180,7 +180,7 @@ export const CheckoutFlow = ({ cartItems, total, onBack, onOrderComplete }: Chec
                       </Badge>
                       {item.thc_percentage && (
                         <Badge variant="secondary" className="text-xs">
-                          {item.thc_percentage}% THC
+                          {item.thc_percentage}% content
                         </Badge>
                       )}
                     </div>

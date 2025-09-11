@@ -67,10 +67,10 @@ const SuperAdminDashboard = () => {
   };
 
   const recentBrands = [
-    { id: 1, name: "Green Valley Cannabis", email: "contact@greenvalley.com", status: "pending", applied: "2024-01-25", revenue: 12500 },
+    { id: 1, name: "Green Valley Creators", email: "contact@greenvalley.com", status: "pending", applied: "2024-01-25", revenue: 12500 },
     { id: 2, name: "High Quality Herbs", email: "info@hqherbs.com", status: "active", applied: "2024-01-20", revenue: 28900 },
-    { id: 3, name: "Cannabis Craft Co", email: "hello@cannabiscraft.com", status: "pending", applied: "2024-01-22", revenue: 0 },
-    { id: 4, name: "Pure Cannabis", email: "support@purecannabis.com", status: "active", applied: "2024-01-18", revenue: 45200 }
+    { id: 3, name: "Creative Craft Co", email: "hello@creativecloud.com", status: "pending", applied: "2024-01-22", revenue: 0 },
+    { id: 4, name: "Pure Creators", email: "support@purecreators.com", status: "active", applied: "2024-01-18", revenue: 45200 }
   ];
 
   const getStatusBadge = (status: string) => {
