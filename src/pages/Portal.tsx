@@ -29,6 +29,7 @@ const Portal = () => {
     setUsername(storedUsername);
     
     // Load notes from localStorage
+  useEffect(() => {    
     if (user) {
       setUsername(user.email?.split('@')[0] || 'User');
     }
