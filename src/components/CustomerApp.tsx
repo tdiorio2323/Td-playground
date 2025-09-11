@@ -148,6 +148,8 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
                       sessionStorage.setItem('cartItems', JSON.stringify(cart));
                       sessionStorage.setItem('cartTotal', cartTotal.toString());
                       navigate('/checkout');
+                    } else if (cart.length > 0) {                      
+                      navigate('/checkout', { state: { cartItems: cart, cartTotal: cartTotal } });
                     } else {
                       toast.info('Add items to cart first!');
                     }
