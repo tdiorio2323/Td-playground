@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/integrations/supabase/auth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,7 +18,6 @@ import {
 
 const Portal = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
   const [username, setUsername] = useState('User');
   const [notes, setNotes] = useState('');
 
@@ -29,14 +27,9 @@ const Portal = () => {
     setUsername(storedUsername);
     
     // Load notes from localStorage
-  useEffect(() => {    
-    if (user) {
-      setUsername(user.email?.split('@')[0] || 'User');
-    }
     const savedNotes = localStorage.getItem('user-notes') || '';
     setNotes(savedNotes);
   }, []);
-  }, [user]);
 
   const handleNotesChange = (value: string) => {
     setNotes(value);
