@@ -70,10 +70,13 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               <Button
                 type="button"
                 onClick={() => window.open('https://exclusive.com/juanita', '_blank')}
-                className="w-full h-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+                className="w-full h-14 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 hover:from-yellow-600 hover:via-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_0_20px_rgba(234,179,8,0.4)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/30 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-white/40 after:to-transparent after:animate-[shimmer_2s_infinite] after:pointer-events-none"
+                style={{
+                  animation: 'shimmer 2s infinite'
+                }}
               >
-                <Lock className="w-5 h-5 mr-2" />
-                Exclusive
+                <Lock className="w-5 h-5 mr-2 relative z-10" />
+                <span className="relative z-10">Exclusive</span>
               </Button>
               <Button
                 type="button"
