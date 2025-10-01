@@ -82,81 +82,41 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               >
                 Only Fans 💎
               </Button>
+              <Button
+                type="button"
+                onClick={() => window.open('https://www.tiktok.com/@juanita', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                TikTok
+              </Button>
+              <Button
+                type="button"
+                onClick={() => window.open('https://kick.com/juanita', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                Kick
+              </Button>
+              <Button
+                type="button"
+                onClick={() => window.open('https://twitter.com/juanita', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                <Twitter className="w-5 h-5 mr-2" />
+                Twitter
+              </Button>
+              <Button
+                type="button"
+                onClick={() => window.open('https://exclusive.com/juanita', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                Exclusive
+              </Button>
             </div>
           </div>
         </CardHeader>
 
         <CardContent className="space-y-6 pb-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Username Field */}
-            <div className="space-y-2">
-              <Label htmlFor="username" className="text-white/90 text-sm font-medium">
-                Username
-              </Label>
-              <Input
-                id="username"
-                type="text"
-                placeholder="Enter your username"
-                value={formData.username}
-                onChange={(e) => handleInputChange('username', e.target.value)}
-                className="h-12 bg-white border-white/20 text-black placeholder:text-gray-500 focus:border-white/40 backdrop-blur-sm"
-                required
-              />
-            </div>
-
-            {/* Password Field */}
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-white/90 text-sm font-medium">
-                Password
-              </Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
-                  className="h-12 bg-white border-white/20 text-black placeholder:text-gray-500 focus:border-white/40 backdrop-blur-sm pr-12"
-                  required
-                />
-                <Button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 p-0 bg-transparent hover:bg-white/10"
-                  variant="ghost"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4 text-white/60" /> : <Eye className="w-4 h-4 text-white/60" />}
-                </Button>
-              </div>
-            </div>
-
-            {/* Secret Code Field - Optional */}
-            <div className="space-y-2">
-              <Label htmlFor="secret" className="text-white/90 text-sm font-medium flex items-center gap-2">
-                <KeyRound className="w-4 h-4" />
-                Secret Access Code 
-                <span className="text-white/60 text-xs">(auto-handled)</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="secret"
-                  type={showSecret ? "text" : "password"}
-                  placeholder="Auto-granted (leave empty)"
-                  value={formData.secret}
-                  onChange={(e) => handleInputChange('secret', e.target.value)}
-                  className="h-12 bg-white border-white/20 text-black placeholder:text-gray-500 hover:border-pink-500/50 focus:border-pink-500 focus-visible:ring-pink-500 backdrop-blur-sm pr-12"
-                />
-                <Button
-                  type="button"
-                  onClick={() => setShowSecret(!showSecret)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 p-0 bg-transparent hover:bg-white/10"
-                  variant="ghost"
-                >
-                  {showSecret ? <EyeOff className="w-4 h-4 text-white/60" /> : <Eye className="w-4 h-4 text-white/60" />}
-                </Button>
-              </div>
-            </div>
-
             {/* Submit Button */}
             <Button
               type="submit"
