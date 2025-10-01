@@ -69,7 +69,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
-                onClick={() => window.open('https://exclusive.com/juanita', '_blank')}
+                onClick={() => window.open('https://letslink.tdstudiosny.com/cabana', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 hover:from-yellow-600 hover:via-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_0_20px_rgba(234,179,8,0.4)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/30 before:to-transparent before:pointer-events-none before:animate-[pulse_3s_ease-in-out_infinite]"
               >
                 <Lock className="w-5 h-5 mr-2 relative z-10" />
@@ -77,7 +77,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://www.instagram.com/juanita_jcv/', '_blank')}
+                onClick={() => window.open('https://www.instagram.com', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 <Instagram className="w-5 h-5 mr-2" />
@@ -85,28 +85,28 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://onlyfans.com/juanitajcv', '_blank')}
+                onClick={() => window.open('https://onlyfans.com', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 Only Fans 💎
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://www.tiktok.com/@juanita', '_blank')}
+                onClick={() => window.open('https://www.tiktok.com', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 TikTok
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://kick.com/juanita', '_blank')}
+                onClick={() => window.open('https://kick.com', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 Kick
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://twitter.com/juanita', '_blank')}
+                onClick={() => window.open('https://twitter.com', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 <Twitter className="w-5 h-5 mr-2" />
@@ -114,7 +114,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://youtube.com/@juanita', '_blank')}
+                onClick={() => window.open('https://youtube.com', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 <Youtube className="w-5 h-5 mr-2" />
