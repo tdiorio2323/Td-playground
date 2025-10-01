@@ -121,6 +121,17 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 YouTube
               </Button>
             </div>
+            <div className="mt-4 text-center">
+              <a
+                href="https://wa.me/13474859935?text=Hi%20it's%20%40________%20%2C%20Here%20are%20my%20links%2C%20and%20here%20is%20how%20I%20want%20it%3A"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-sm hover:text-white/80 transition-colors"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
+                Request Custom Link Page
+              </a>
+            </div>
           </div>
         </CardHeader>
 
