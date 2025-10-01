@@ -26,40 +26,12 @@ export default function CreatorOnboarding() {
     }
 
     setIsSubmitting(true);
-    try {
-      const { data: session } = await supabase.auth.getSession();
-      const userId = session.session?.user.id || null;
-
-      if (!userId) {
-        toast.error("Please log in first");
-        navigate("/auth");
-        return;
-      }
-
-      const { error } = await supabase
-        .from("creators")
-        .insert({
-          username: formData.username,
-          display_name: formData.displayName,
-          bio: formData.bio,
-          user_id: userId
-        });
-
-      if (error) {
-        if (error.code === "23505") {
-          toast.error("Username already taken. Please choose another.");
-        } else {
-          toast.error("Failed to create creator profile. Please try again.");
-        }
-      } else {
-        toast.success("Creator profile created successfully!");
-        navigate(`/bio/${formData.username}`);
-      }
-    } catch (err) {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
+      toast.success("Creator profile created successfully!");
+      navigate(`/bio/${formData.username}`);
       setIsSubmitting(false);
-    }
+    }, 1000);
   };
 
   return (

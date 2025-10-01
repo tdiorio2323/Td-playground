@@ -117,10 +117,8 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url('/lovable-uploads/6884296d-7d53-4d5f-8169-0418ff1d5824.png')`
-    }}>
-      <div className="min-h-screen bg-black/60 backdrop-blur-sm">
+    <div className="min-h-screen bg-black">
+      <div className="min-h-screen">
         {/* Header */}
         <header className="bg-black/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
@@ -191,8 +189,8 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
                 <SelectContent>
                   <SelectItem value="all">All Categories</SelectItem>
                   {categories.map(category => (
-                    <SelectItem key={category} value={category}>
-                      {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
+                    <SelectItem key={category} value={category || ''}>
+                      {category ? category.charAt(0).toUpperCase() + category.slice(1).replaceAll('_', ' ') : ''}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -228,7 +226,7 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
                     <div>
                       <h3 className="font-semibold text-white text-lg">{product.name}</h3>
                       <Badge variant="secondary" className="mt-1 bg-white/20 text-white/80">
-                        {product.category.charAt(0).toUpperCase() + product.category.slice(1).replace('_', ' ')}
+                        {product.category ? product.category.charAt(0).toUpperCase() + product.category.slice(1).replaceAll('_', ' ') : ''}
                       </Badge>
                     </div>
                     
@@ -279,55 +277,25 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
         {/* Footer */}
         <footer className="bg-black/80 backdrop-blur-md border-t border-white/10 mt-16">
           <div className="container mx-auto px-4 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <img 
-                  src="/lovable-uploads/bff2ab24-8836-4dfa-836d-bff37b607cfa.png" 
-                  alt="Cabana" 
+                <img
+                  src="/lovable-uploads/bff2ab24-8836-4dfa-836d-bff37b607cfa.png"
+                  alt="Cabana"
                   className="h-8 w-auto"
                 />
                 <p className="text-white/60 text-sm">
                   Premium Cabana VIP delivery service bringing you the finest creator content right to your door.
                 </p>
-                <div className="flex space-x-4">
-                  <a href="#" className="text-white/60 hover:text-white transition-colors">
-                    <span className="sr-only">Instagram</span>
-                    <div className="w-6 h-6 bg-white/20 rounded"></div>
-                  </a>
-                  <a href="#" className="text-white/60 hover:text-white transition-colors">
-                    <span className="sr-only">Twitter</span>
-                    <div className="w-6 h-6 bg-white/20 rounded"></div>
-                  </a>
-                </div>
               </div>
-              
-              <div>
-                <h3 className="font-semibold text-white mb-4">Quick Links</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Shop All</a></li>
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Flower</a></li>
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Edibles</a></li>
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Pre-rolls</a></li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-white mb-4">Support</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Help Center</a></li>
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Track Order</a></li>
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Returns</a></li>
-                  <li><a href="#" className="text-white/60 hover:text-white transition-colors">Contact Us</a></li>
-                </ul>
-              </div>
-              
+
               <div>
                 <h3 className="font-semibold text-white mb-4">Follow @cabana</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="aspect-square bg-white/10 rounded-lg"></div>
-                  <div className="aspect-square bg-white/10 rounded-lg"></div>
-                  <div className="aspect-square bg-white/10 rounded-lg"></div>
-                  <div className="aspect-square bg-white/10 rounded-lg"></div>
+                <div className="flex gap-3">
+                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
                 </div>
               </div>
             </div>

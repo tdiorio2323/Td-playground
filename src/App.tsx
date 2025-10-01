@@ -5,10 +5,32 @@ import { AuthProvider } from "@/integrations/supabase/auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import TheDash from "./pages/TheDash";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import SharedLayout from "./SharedLayout";
 import Auth from "./pages/Auth";
+import Auth3 from "./pages/Auth3";
+import Auth3_2 from "./pages/Auth3_2";
+import Auth3_3 from "./pages/Auth3_3";
+import Auth3_4 from "./pages/Auth3_4";
+import Auth4 from "./pages/Auth4";
+import Auth5 from "./pages/Auth5";
+import Auth6 from "./pages/Auth6";
+import Auth7 from "./pages/Auth7";
+import Auth8 from "./pages/Auth8";
+import Auth9 from "./pages/Auth9";
+import Auth10 from "./pages/Auth10";
+import Auth11 from "./pages/Auth11";
+import Auth12 from "./pages/Auth12";
+import Auth13 from "./pages/Auth13";
+import Auth14 from "./pages/Auth14";
+import Auth15 from "./pages/Auth15";
+import Auth16 from "./pages/Auth16";
+import Auth17 from "./pages/Auth17";
+import Auth18 from "./pages/Auth18";
+import Auth19 from "./pages/Auth19";
+import Auth20 from "./pages/Auth20";
 import Admin from "./pages/Admin";
 import Brand from "./pages/Brand";
 import Portal from "./pages/Portal";
@@ -29,27 +51,44 @@ const App = () => (
         <Sonner />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
-            {/* Public routes */}
+            {/* All routes - no auth required */}
             <Route element={<SharedLayout />}>
               <Route path="/" element={<Index />} />
+              <Route path="/thedash" element={<TheDash />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/auth2" element={<Auth />} />
+              <Route path="/juanita" element={<Auth3 />} />
+              <Route path="/juanita2" element={<Auth3_2 />} />
+              <Route path="/juanita3" element={<Auth3_3 />} />
+              <Route path="/juanita4" element={<Auth3_4 />} />
+              <Route path="/letslink" element={<Auth3_4 />} />
+              <Route path="/auth4" element={<Auth4 />} />
+              <Route path="/auth5" element={<Auth5 />} />
+              <Route path="/auth6" element={<Auth6 />} />
+              <Route path="/auth7" element={<Auth7 />} />
+              <Route path="/auth8" element={<Auth8 />} />
+              <Route path="/auth9" element={<Auth9 />} />
+              <Route path="/auth10" element={<Auth10 />} />
+              <Route path="/auth11" element={<Auth11 />} />
+              <Route path="/auth12" element={<Auth12 />} />
+              <Route path="/auth13" element={<Auth13 />} />
+              <Route path="/auth14" element={<Auth14 />} />
+              <Route path="/auth15" element={<Auth15 />} />
+              <Route path="/auth16" element={<Auth16 />} />
+              <Route path="/auth17" element={<Auth17 />} />
+              <Route path="/auth18" element={<Auth18 />} />
+              <Route path="/auth19" element={<Auth19 />} />
+              <Route path="/auth20" element={<Auth20 />} />
               <Route path="/waitlist" element={<VipWaitlist />} />
               <Route path="/bio/:username" element={<LinkInBio />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/brand" element={<Brand />} />
+              <Route path="/portal" element={<Portal />} />
+              <Route path="/project/:id" element={<ProjectPage />} />
+              <Route path="/onboard" element={<CreatorOnboarding />} />
               <Route path="/*" element={<NotFound />} />
-            </Route>
-
-            {/* Protected routes */}
-            <Route element={<ProtectedRoute />}>
-              <Route element={<SharedLayout />}>
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/brand" element={<Brand />} />
-                <Route path="/portal" element={<Portal />} />
-                <Route path="/project/:id" element={<ProjectPage />} />
-                <Route path="/onboard" element={<CreatorOnboarding />} />
-              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

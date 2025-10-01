@@ -30,75 +30,16 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Auto-fill secret code if not provided
-    const finalFormData = {
-      ...formData,
-      secret: formData.secret || "cabana" // Auto-fill secret if empty
-    };
 
-    // Only validate username and password
-    if (!finalFormData.username.trim()) {
-      toast({
-        title: "Error",
-        description: "Username is required",
-        variant: "destructive"
-      });
-      return;
-    }
-    if (!finalFormData.password.trim()) {
-      toast({
-        title: "Error", 
-        description: "Password is required",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Demo credentials - replace with real auth
-    const validCredentials = {
-      username: "td",
-      password: "420",
-      secret: "cabana"
-    };
-
-    if (finalFormData.username !== validCredentials.username ||
-        finalFormData.password !== validCredentials.password) {
-      toast({
-        title: "Access Denied",
-        description: "Invalid username or password",
-        variant: "destructive"
-      });
-      return;
-    }
-
+    // Frontend demo - no actual authentication
     setIsLoading(true);
 
-    // Simulate authentication delay
     setTimeout(() => {
-      try {
-        toast({
-          title: "Welcome back!",
-          description: `Signed in as ${formData.username}`,
-        });
-
-        // Navigate to portal instead of shop
-        navigate('/portal');
-
-        // Call onLogin if provided (for backward compatibility)
-        if (onLogin) {
-          onLogin('admin');
-        }
-
-      } catch (error: any) {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive"
-        });
-      } finally {
-        setIsLoading(false);
-      }
+      toast({
+        title: "Demo Mode",
+        description: "This is a frontend component playground - no authentication required",
+      });
+      setIsLoading(false);
     }, 1000);
   };
 
@@ -118,13 +59,30 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
             <img
-              src="/lovable-uploads/f930301b-774c-429c-97b7-b7f1cb17f432.png"
-              alt="Cabana Logo"
-              className="h-32 w-auto"
+              src="/lovable-uploads/juanita.jpg"
+              alt="Juanita Profile"
+              className="h-32 w-32 rounded-full object-cover border-4 border-white/30 shadow-lg"
             />
           </div>
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-white">Cabana</h1>
+          <div className="space-y-4 w-full px-8">
+            <h1 className="text-3xl font-bold text-white text-center">JUANITA 💫</h1>
+            <div className="flex flex-col gap-3 w-full">
+              <Button
+                type="button"
+                onClick={() => window.open('https://www.instagram.com/juanita_jcv/', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                <Instagram className="w-5 h-5 mr-2" />
+                Instagram
+              </Button>
+              <Button
+                type="button"
+                onClick={() => window.open('https://onlyfans.com/juanitajcv', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                Only Fans 💎
+              </Button>
+            </div>
           </div>
         </CardHeader>
 
@@ -141,7 +99,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 placeholder="Enter your username"
                 value={formData.username}
                 onChange={(e) => handleInputChange('username', e.target.value)}
-                className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="h-12 bg-white border-white/20 text-black placeholder:text-gray-500 focus:border-white/40 backdrop-blur-sm"
                 required
               />
             </div>
@@ -158,7 +116,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={(e) => handleInputChange('password', e.target.value)}
-                  className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm pr-12"
+                  className="h-12 bg-white border-white/20 text-black placeholder:text-gray-500 focus:border-white/40 backdrop-blur-sm pr-12"
                   required
                 />
                 <Button
@@ -186,7 +144,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                   placeholder="Auto-granted (leave empty)"
                   value={formData.secret}
                   onChange={(e) => handleInputChange('secret', e.target.value)}
-                  className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm pr-12"
+                  className="h-12 bg-white border-white/20 text-black placeholder:text-gray-500 hover:border-pink-500/50 focus:border-pink-500 focus-visible:ring-pink-500 backdrop-blur-sm pr-12"
                 />
                 <Button
                   type="button"
@@ -200,10 +158,10 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             </div>
 
             {/* Submit Button */}
-            <Button 
-              type="submit" 
-              disabled={isLoading} 
-              className="w-full h-14 relative overflow-hidden bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border border-white/30 backdrop-blur-sm font-semibold text-lg"
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full h-14 relative overflow-hidden bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border border-white/30 backdrop-blur-sm font-semibold text-lg shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               variant="outline"
             >
               {isLoading ? (
@@ -219,14 +177,6 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               )}
             </Button>
           </form>
-
-          {/* Social Icons */}
-          <div className="flex justify-center items-center space-x-8 max-w-xs mx-auto px-4">
-            <Facebook className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-            <Instagram className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-            <Twitter className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-            <Youtube className="w-6 h-6 text-white/70 hover:text-white cursor-pointer transition-colors" />
-          </div>
         </CardContent>
       </Card>
     </div>
