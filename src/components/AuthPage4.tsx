@@ -84,7 +84,11 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
 
         <CardContent className="space-y-6 pb-8">
           {/* Image Box */}
-          <div className="w-full rounded-lg overflow-hidden border-2 border-white/20 shadow-lg" style={{ height: 'calc(3 * 3.5rem + 2 * 0.75rem)' }}>
+          <div
+            className="w-full rounded-lg overflow-hidden border-2 border-white/20 shadow-lg cursor-pointer hover:border-white/40 transition-colors"
+            style={{ height: 'calc(3 * 3.5rem + 2 * 0.75rem)' }}
+            onClick={() => window.open('https://tdstudioshq.com', '_blank')}
+          >
             <img
               src="/lovable-uploads/TD STUDIOS BLACK HERO IMAGE.jpg"
               alt="TD Studios"
