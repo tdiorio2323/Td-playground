@@ -59,13 +59,13 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
             <img
-              src="/lovable-uploads/juanita.jpg"
-              alt="Juanita Profile"
-              className="h-32 w-32 rounded-full object-cover border-4 border-white/30 shadow-lg"
+              src="/lovable-uploads/cabana-logo.png"
+              alt="Cabana"
+              className="h-32 w-32 object-contain"
             />
           </div>
           <div className="space-y-4 w-full px-8">
-            <h1 className="text-3xl font-bold text-white text-center">JUANITA 💫</h1>
+            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
