@@ -112,32 +112,19 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 <Twitter className="w-5 h-5 mr-2" />
                 Twitter
               </Button>
+              <Button
+                type="button"
+                onClick={() => window.open('https://youtube.com/@juanita', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                <Youtube className="w-5 h-5 mr-2" />
+                YouTube
+              </Button>
             </div>
           </div>
         </CardHeader>
 
         <CardContent className="space-y-6 pb-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full h-14 relative overflow-hidden bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border border-white/30 backdrop-blur-sm font-semibold text-lg shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-              variant="outline"
-            >
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Authenticating...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <KeyRound className="w-5 h-5" />
-                  ACCESS PORTAL
-                </div>
-              )}
-            </Button>
-          </form>
         </CardContent>
       </Card>
     </div>
