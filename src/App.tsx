@@ -63,7 +63,7 @@ const App = () => (
               <Route path="/juanita4" element={<Auth3_4 />} />
               <Route path="/cabana" element={<Auth3_4 />} />
               <Route path="/auth4" element={<Auth4 />} />
-              <Route path="/auth5" element={<Auth5 />} />
+              <Route path="/joincabana" element={<Auth5 />} />
               <Route path="/auth6" element={<Auth6 />} />
               <Route path="/auth7" element={<Auth7 />} />
               <Route path="/auth8" element={<Auth8 />} />
