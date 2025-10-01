@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Facebook, Instagram, Twitter, Youtube, Eye, EyeOff, KeyRound } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Eye, EyeOff, KeyRound, Lock } from "lucide-react";
 
 interface AuthPageProps {
   onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
@@ -69,6 +69,14 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
+                onClick={() => window.open('https://exclusive.com/juanita', '_blank')}
+                className="w-full h-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+              >
+                <Lock className="w-5 h-5 mr-2" />
+                Exclusive
+              </Button>
+              <Button
+                type="button"
                 onClick={() => window.open('https://www.instagram.com/juanita_jcv/', '_blank')}
                 className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
@@ -103,13 +111,6 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               >
                 <Twitter className="w-5 h-5 mr-2" />
                 Twitter
-              </Button>
-              <Button
-                type="button"
-                onClick={() => window.open('https://exclusive.com/juanita', '_blank')}
-                className="w-full h-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-              >
-                Exclusive
               </Button>
             </div>
           </div>
