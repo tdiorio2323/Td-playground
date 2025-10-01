@@ -49,32 +49,32 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
             <img
-              src="/lovable-uploads/td sttone.png"
-              alt="TD Studios Profile"
-              className="h-32 w-32 rounded-full object-cover border-4 border-white/30 shadow-lg"
+              src="/lovable-uploads/cabana-logo.png"
+              alt="Cabana"
+              className="h-32 w-32 object-contain"
             />
           </div>
           <div className="space-y-4 w-full px-8">
-            <h1 className="text-3xl font-bold text-white text-center">TD STUDIOS</h1>
+            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
                 onClick={() => navigate('/juanita')}
-                className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+                className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 ADMIN PORTAL
               </Button>
               <Button
                 type="button"
                 onClick={() => navigate('/juanita2')}
-                className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+                className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 Link Page/Slide
               </Button>
               <Button
                 type="button"
                 onClick={() => navigate('/juanita3')}
-                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 EXCLUSIVE PAGE
               </Button>
@@ -97,7 +97,7 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-14 relative overflow-hidden bg-white/90 hover:bg-white text-black border-2 border-white/40 backdrop-blur-md font-semibold text-lg shadow-[inset_0_2px_0_0_rgba(255,255,255,0.8),0_8px_32px_rgba(255,255,255,0.2)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/40 before:to-transparent before:pointer-events-none"
+              className="w-full h-14 relative overflow-hidden bg-gradient-to-b from-white to-white/95 hover:from-white hover:to-white/90 text-black border-2 border-white/60 backdrop-blur-xl font-semibold text-lg shadow-[inset_0_3px_8px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.05)] before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/60 before:via-transparent before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-tr after:from-transparent after:via-white/20 after:to-white/40 after:pointer-events-none"
               variant="outline"
             >
               {isLoading ? (

@@ -27,9 +27,9 @@ const Index = () => {
     };
 
     updateMetaTag('og:title', 'TD STUDIOS');
-    updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/td sttone.png`);
+    updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/cabana-logo.png`);
     updateMetaName('twitter:title', 'TD STUDIOS');
-    updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/td sttone.png`);
+    updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/cabana-logo.png`);
     updateMetaName('twitter:card', 'summary_large_image');
   }, []);
 

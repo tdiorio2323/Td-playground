@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ballet Font */
+@font-face {
+  font-family: 'Ballet';
+  src: url('/fonts/Ballet-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-optical-sizing: auto;
+}
+
 /* Cabana VIP design system - luxury creator network theme
 All colors MUST be HSL.
 */
