@@ -77,7 +77,7 @@ export const AuthPage10 = () => {
               onClick={() => window.open("https://shopquickprintz.tdstudiosny.com", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #9146FF, #6C2EFF)",
+                backgroundImage: "linear-gradient(180deg, #10B981, #FFFFFF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
