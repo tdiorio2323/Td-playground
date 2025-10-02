@@ -67,7 +67,7 @@ export const AuthPage10 = () => {
               onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #D62976, #962FBF, #4F5BD5)",
+                backgroundImage: "linear-gradient(180deg, #962FBF, #D62976, #962FBF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
