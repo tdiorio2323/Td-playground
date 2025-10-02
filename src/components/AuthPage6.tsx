@@ -48,7 +48,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
-        backgroundImage: "url('/cabana-builder-background.png')",
+        backgroundImage: "url('/lovable-uploads/tdsparklesblack.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -70,17 +70,18 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
               <Button
                 type="button"
                 onClick={() => window.open('https://www.instagram.com/lilsex_/', '_blank')}
-                className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+                className="w-full h-14 bg-gradient-to-b from-white to-white/90 hover:from-white/95 hover:to-white/85 text-black font-bold text-xl tracking-wider relative overflow-hidden shadow-[0_4px_6px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/40 before:to-transparent before:pointer-events-none"
+                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
-                <Instagram className="w-5 h-5 mr-2" />
-                Instagram
+                INSTAGRAM
               </Button>
               <Button
                 type="button"
                 onClick={() => window.open('https://onlyfans.com', '_blank')}
-                className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+                className="w-full h-14 bg-gradient-to-b from-white to-white/90 hover:from-white/95 hover:to-white/85 text-black font-bold text-xl tracking-wider relative overflow-hidden shadow-[0_4px_6px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/40 before:to-transparent before:pointer-events-none"
+                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
-                Only Fans 💎
+                ONLY FANS
               </Button>
             </div>
 
