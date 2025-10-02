@@ -80,7 +80,7 @@ export const AuthPage10 = () => {
               onClick={() => window.open("https://www.instagram.com/tdstudiosco/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #FFFFFF, #3B82F6, #FFFFFF)",
+                backgroundImage: "linear-gradient(180deg, #EF4444, #3B82F6, #EF4444)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
