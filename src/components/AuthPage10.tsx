@@ -87,17 +87,17 @@ export const AuthPage10 = () => {
               CUSTOM DESIGNS
             </Button>
 
-            {/* Website */}
+            {/* Cash App */}
             <Button
               type="button"
-              onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
+              onClick={() => window.open("https://cash.app/$reservetank", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #962FBF, #FF2EDB, #962FBF)",
+                backgroundColor: "lime",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
-              CONTACT
+              CASH APP
             </Button>
           </div>
 
