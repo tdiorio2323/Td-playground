@@ -83,17 +83,28 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
         </CardHeader>
 
         <CardContent className="space-y-6 pb-8">
-          {/* Image Box */}
-          <div
-            className="w-full rounded-lg overflow-hidden border-2 border-white/20 shadow-lg cursor-pointer hover:border-white/40 transition-colors"
-            style={{ height: 'calc(3 * 3.5rem + 2 * 0.75rem)' }}
-            onClick={() => window.open('https://tdstudioshq.com', '_blank')}
-          >
-            <img
-              src="/lovable-uploads/TD STUDIOS BLACK HERO IMAGE.jpg"
-              alt="TD Studios"
-              className="w-full h-full object-cover"
-            />
+          <div className="flex flex-col gap-3 w-full px-8">
+            <Button
+              type="button"
+              onClick={() => navigate('/juanita')}
+              className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              ADMIN PORTAL
+            </Button>
+            <Button
+              type="button"
+              onClick={() => navigate('/juanita2')}
+              className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              Link Page/Slide
+            </Button>
+            <Button
+              type="button"
+              onClick={() => navigate('/juanita3')}
+              className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              EXCLUSIVE PAGE
+            </Button>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
