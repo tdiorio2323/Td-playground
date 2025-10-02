@@ -65,7 +65,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
             />
           </div>
           <div className="space-y-4 w-full px-8">
-            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Lil Sex 💫</h1>
+            <h1 className="text-3xl font-bold text-white text-center">LIL SEX 💫</h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
