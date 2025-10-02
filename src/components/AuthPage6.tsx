@@ -84,15 +84,25 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
               </Button>
             </div>
 
+            {/* Frosted Divider */}
+            <div className="w-full h-px bg-white/20 backdrop-blur-sm mt-4"></div>
+
+            {/* Exclusive Text */}
+            <div className="text-center mt-4">
+              <h2 className="text-2xl font-bold text-white animate-shimmer bg-gradient-to-r from-white via-gray-200 to-white bg-[length:200%_100%] bg-clip-text text-transparent" style={{ width: '90%', margin: '0 auto' }}>
+                EXCLUSIVE
+              </h2>
+            </div>
+
             {/* Frosted Image Box with LS Overlay */}
-            <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg mt-3">
+            <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg mt-2">
               <div className="absolute inset-0 backdrop-blur-3xl bg-white/20"></div>
               <div className="absolute inset-0 backdrop-blur-2xl"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center z-10">
                 <img
                   src="/lovable-uploads/LS.png"
                   alt="Exclusive Content"
-                  className="w-32 h-32 object-contain opacity-40"
+                  className="w-32 h-32 object-contain"
                 />
               </div>
             </div>
