@@ -11,6 +11,14 @@
   font-optical-sizing: auto;
 }
 
+/* Dancing Script Font */
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('/fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+}
+
 /* Cabana VIP design system - luxury creator network theme
 All colors MUST be HSL.
 */
