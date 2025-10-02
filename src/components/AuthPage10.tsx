@@ -54,7 +54,7 @@ export const AuthPage10 = () => {
               onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
               className="w-full h-14 text-black font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(to bottom, #FFD54F, #FFC107)",
+                backgroundImage: "linear-gradient(180deg, #FFFFFF, #FBBF24, #FFFFFF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
@@ -80,7 +80,7 @@ export const AuthPage10 = () => {
               onClick={() => window.open("https://www.instagram.com/tdstudiosco/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #00BFFF, #0097C7)",
+                backgroundImage: "linear-gradient(180deg, #FFFFFF, #3B82F6, #FFFFFF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
