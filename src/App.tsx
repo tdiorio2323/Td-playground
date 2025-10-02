@@ -58,6 +58,7 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/auth2" element={<Auth />} />
               <Route path="/juanita" element={<Auth3 />} />
+              <Route path="/thecabana" element={<Auth3 />} />
               <Route path="/juanita2" element={<Auth3_2 />} />
               <Route path="/juanita3" element={<Auth3_3 />} />
               <Route path="/juanita4" element={<Auth3_4 />} />
