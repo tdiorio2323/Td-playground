@@ -35,7 +35,7 @@ export const AuthPage10 = () => {
             {/* EXCLUSIVE */}
             <Button
               type="button"
-              onClick={() => window.open("https://onlyfans.com", "_blank")}
+              onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
               className="w-full h-14 text-black font-bold text-xl tracking-wider"
               style={{
                 backgroundImage: "linear-gradient(to bottom, #FFD54F, #FFC107)",
@@ -48,7 +48,7 @@ export const AuthPage10 = () => {
             {/* Instagram */}
             <Button
               type="button"
-              onClick={() => window.open("https://www.instagram.com", "_blank")}
+              onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
                 backgroundImage: "linear-gradient(180deg, #D62976, #962FBF, #4F5BD5)",
@@ -58,30 +58,30 @@ export const AuthPage10 = () => {
               INSTAGRAM
             </Button>
 
-            {/* OnlyFans */}
+            {/* Custom Designs */}
             <Button
               type="button"
-              onClick={() => window.open("https://onlyfans.com", "_blank")}
+              onClick={() => window.open("https://www.instagram.com/tdstudiosco/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
                 backgroundImage: "linear-gradient(180deg, #00BFFF, #0097C7)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
-              ONLY FANS
+              CUSTOM DESIGNS
             </Button>
 
-            {/* Twitch */}
+            {/* Shop */}
             <Button
               type="button"
-              onClick={() => window.open("https://twitch.tv", "_blank")}
+              onClick={() => window.open("https://shopquickprintz.tdstudiosny.com", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
                 backgroundImage: "linear-gradient(180deg, #9146FF, #6C2EFF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
-              TWITCH
+              SHOP
             </Button>
 
             {/* Chatterly */}
