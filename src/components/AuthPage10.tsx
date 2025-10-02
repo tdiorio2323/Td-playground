@@ -71,7 +71,7 @@ export const AuthPage10 = () => {
               CUSTOM DESIGNS
             </Button>
 
-            {/* Shop */}
+            {/* Website */}
             <Button
               type="button"
               onClick={() => window.open("https://shopquickprintz.tdstudiosny.com", "_blank")}
@@ -81,7 +81,7 @@ export const AuthPage10 = () => {
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
-              SHOP
+              WEBSITE
             </Button>
 
             {/* Chatterly */}
