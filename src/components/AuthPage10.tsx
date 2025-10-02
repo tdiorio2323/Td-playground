@@ -67,7 +67,7 @@ export const AuthPage10 = () => {
               onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #962FBF, #D62976, #962FBF)",
+                backgroundImage: "linear-gradient(180deg, #962FBF, #FF2EDB, #962FBF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
@@ -103,7 +103,19 @@ export const AuthPage10 = () => {
 
           {/* Slideshow Image Box */}
           <div className="w-full px-8 mt-4">
-            <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg">
+            <div
+              className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg cursor-pointer"
+              role="button"
+              aria-label="Open Quick Printz Instagram"
+              tabIndex={0}
+              onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  window.open("https://www.instagram.com/quickprintz401/", "_blank");
+                }
+              }}
+            >
               {slideshowImages.map((image, index) => (
                 <img
                   key={index}
