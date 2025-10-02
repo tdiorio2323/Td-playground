@@ -66,7 +66,7 @@ const App = () => (
               <Route path="/auth4" element={<Auth4 />} />
               <Route path="/joincabana" element={<Auth5 />} />
               <Route path="/lilsex" element={<Auth6 />} />
-              <Route path="/auth7" element={<Auth7 />} />
+              <Route path="/starluv" element={<Auth7 />} />
               <Route path="/auth8" element={<Auth8 />} />
               <Route path="/auth9" element={<Auth9 />} />
               <Route path="/auth10" element={<Auth10 />} />
