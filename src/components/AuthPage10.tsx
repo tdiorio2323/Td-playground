@@ -83,45 +83,15 @@ export const AuthPage10 = () => {
             >
               WEBSITE
             </Button>
+          </div>
 
-            {/* Chatterly */}
-            <Button
-              type="button"
-              onClick={() => window.open("https://chatterly.me", "_blank")}
-              className="w-full h-14 text-white font-bold text-xl tracking-wider"
-              style={{
-                backgroundImage: "linear-gradient(180deg, #FF6CAB, #FF3E7F)",
-                fontFamily: "'Bebas Neue', sans-serif",
-              }}
-            >
-              CHATTERLY
-            </Button>
-
-            {/* YouTube */}
-            <Button
-              type="button"
-              onClick={() => window.open("https://youtube.com", "_blank")}
-              className="w-full h-14 text-white font-bold text-xl tracking-wider"
-              style={{
-                backgroundImage: "linear-gradient(180deg, #FF4D4D, #CC0000)",
-                fontFamily: "'Bebas Neue', sans-serif",
-              }}
-            >
-              YOUTUBE
-            </Button>
-
-            {/* TikTok */}
-            <Button
-              type="button"
-              onClick={() => window.open("https://www.tiktok.com", "_blank")}
-              className="w-full h-14 text-white font-bold text-xl tracking-wider"
-              style={{
-                backgroundImage: "linear-gradient(180deg, #60F5A1, #28D57A)",
-                fontFamily: "'Bebas Neue', sans-serif",
-              }}
-            >
-              TIKTOK
-            </Button>
+          {/* Slideshow Image Box */}
+          <div className="w-full px-8 mt-4">
+            <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg bg-white/5 backdrop-blur-sm">
+              <div className="absolute inset-0 flex items-center justify-center text-white/50 text-sm">
+                Slideshow Ready (Upload Images)
+              </div>
+            </div>
           </div>
 
           <div className="mt-4 text-center space-y-3">
