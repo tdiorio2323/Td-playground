@@ -48,17 +48,17 @@ export const AuthPage10 = () => {
 
           {/* Buttons */}
           <div className="flex flex-col gap-3 w-full px-8">
-            {/* EXCLUSIVE */}
+            {/* Shop Quick Printz */}
             <Button
               type="button"
-              onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
-              className="w-full h-14 text-black font-bold text-xl tracking-wider"
+              onClick={() => window.open("https://getquickprintz.com", "_blank")}
+              className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #FFFFFF, #FBBF24, #FFFFFF)",
+                backgroundImage: "linear-gradient(180deg, #000000, #FBBF24, #000000)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
-              EXCLUSIVE
+              SHOP QUICK PRINTZ
             </Button>
 
             {/* Instagram */}
