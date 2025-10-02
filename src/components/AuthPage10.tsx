@@ -25,9 +25,9 @@ export const AuthPage10 = () => {
 
           <h1
             className="text-6xl text-white text-center"
-            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
+            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
-            Quick Printz
+            Quick Printz ⚡
           </h1>
 
           {/* Buttons */}
