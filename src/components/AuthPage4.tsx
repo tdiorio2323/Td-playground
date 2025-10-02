@@ -54,8 +54,8 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
               className="h-32 w-32 object-contain"
             />
           </div>
-          <div className="space-y-4 w-full px-8">
-            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
+          <div className="w-full px-8">
+            <h1 className="text-6xl text-white text-center mb-3" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
@@ -82,7 +82,7 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-6 pb-8">
+        <CardContent className="pt-3 pb-8">
           <div className="flex flex-col gap-3 w-full px-8">
             <Button
               type="button"
@@ -107,7 +107,7 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
             </Button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="mt-3">
             {/* Submit Button */}
             <Button
               type="submit"
