@@ -84,14 +84,15 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
               </Button>
             </div>
 
-            {/* Frosted Image Box with Lock Overlay */}
+            {/* Frosted Image Box with LS Overlay */}
             <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg mt-3">
-              <div className="absolute inset-0 backdrop-blur-xl bg-white/10"></div>
+              <div className="absolute inset-0 backdrop-blur-3xl bg-white/20"></div>
+              <div className="absolute inset-0 backdrop-blur-2xl"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <img
-                  src="/lovable-uploads/lil sex.png"
+                  src="/lovable-uploads/LS.png"
                   alt="Exclusive Content"
-                  className="w-24 h-24 object-contain opacity-30"
+                  className="w-32 h-32 object-contain opacity-40"
                 />
               </div>
             </div>
