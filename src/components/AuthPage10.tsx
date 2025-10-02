@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Instagram, Mail } from "lucide-react";
 
 export const AuthPage10 = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const slideshowImages = [
+    "/lovable-uploads/qp-store.jpg",
+    "/lovable-uploads/qp-billboard.png",
+    "/lovable-uploads/qp-reserve-tank-cd.png",
+    "/lovable-uploads/qp-spooky.png",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % slideshowImages.length);
+    }, 1500); // 1.5 seconds
+
+    return () => clearInterval(interval);
+  }, [slideshowImages.length]);
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
@@ -87,10 +103,17 @@ export const AuthPage10 = () => {
 
           {/* Slideshow Image Box */}
           <div className="w-full px-8 mt-4">
-            <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg bg-white/5 backdrop-blur-sm">
-              <div className="absolute inset-0 flex items-center justify-center text-white/50 text-sm">
-                Slideshow Ready (Upload Images)
-              </div>
+            <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg">
+              {slideshowImages.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Quick Printz ${index + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    index === currentImageIndex ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
             </div>
           </div>
 
