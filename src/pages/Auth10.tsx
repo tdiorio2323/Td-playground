@@ -32,6 +32,8 @@ const Auth = () => {
     updateMetaName('twitter:title', 'QUICK PRINTZ');
     updateMetaName('twitter:image', shareImage);
     updateMetaName('twitter:card', 'summary_large_image');
+    // Update meta tags for Quick Printz social share
+
 
     // Favicon: switch to Quick Printz logo while on this page
     const defaultFavicon = '/favicon.ico';
