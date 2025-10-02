@@ -3,7 +3,7 @@ import { AuthPage7 } from "@/components/AuthPage7";
 
 const Auth = () => {
   useEffect(() => {
-    document.title = "STAR LUV";
+    document.title = "STAR LUV ⭐";
 
     // Update or create meta tags
     const updateMetaTag = (property: string, content: string) => {
@@ -26,9 +26,9 @@ const Auth = () => {
       meta.content = content;
     };
 
-    updateMetaTag('og:title', 'STAR LUV');
+    updateMetaTag('og:title', 'STAR LUV ⭐');
     updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/starluv.webp`);
-    updateMetaName('twitter:title', 'STAR LUV');
+    updateMetaName('twitter:title', 'STAR LUV ⭐');
     updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/starluv.webp`);
     updateMetaName('twitter:card', 'summary_large_image');
   }, []);
