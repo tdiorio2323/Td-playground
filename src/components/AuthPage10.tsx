@@ -51,7 +51,7 @@ export const AuthPage10 = () => {
             {/* Shop Quick Printz */}
             <Button
               type="button"
-              onClick={() => window.open("https://getquickprintz.com", "_blank")}
+              onClick={() => window.open("https://shopquickprintz.tdstudiosny.com", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
                 backgroundImage: "linear-gradient(180deg, #000000, #FBBF24, #000000)",
@@ -90,14 +90,14 @@ export const AuthPage10 = () => {
             {/* Website */}
             <Button
               type="button"
-              onClick={() => window.open("https://shopquickprintz.tdstudiosny.com", "_blank")}
+              onClick={() => window.open("https://www.instagram.com/quickprintz401/", "_blank")}
               className="w-full h-14 text-white font-bold text-xl tracking-wider"
               style={{
-                backgroundImage: "linear-gradient(180deg, #000000, #22C55E, #000000)",
+                backgroundImage: "linear-gradient(180deg, #962FBF, #FF2EDB, #962FBF)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
-              WEBSITE
+              CONTACT
             </Button>
           </div>
 
