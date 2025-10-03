@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/integrations/supabase/auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import TheDash from "./pages/TheDash";
 import NotFound from "./pages/NotFound";
@@ -46,13 +46,15 @@ import PremadeBagDesigns from "./pages/PremadeBagDesigns";
 
 const queryClient = new QueryClient();
 
+const Router = import.meta.env.DEV ? BrowserRouter : HashRouter;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
             {/* All routes - no auth required */}
             <Route element={<SharedLayout />}>
@@ -100,7 +102,7 @@ const App = () => (
               <Route path="/*" element={<NotFound />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </Router>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
