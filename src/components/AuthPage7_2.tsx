@@ -8,16 +8,15 @@ interface AuthPage7_2Props {
   onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
 }
 
+const images = [
+  "/lovable-uploads/starluv.webp",
+  "/lovable-uploads/starluv.webp",
+  "/lovable-uploads/starluv.webp",
+];
+
 export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Placeholder images for slideshow - you can replace these with actual image paths
-  const images = [
-    "/lovable-uploads/starluv.webp",
-    "/lovable-uploads/starluv.webp",
-    "/lovable-uploads/starluv.webp",
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,7 +24,7 @@ export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
     }, 1500); // 1.5 seconds per image
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, []);
 
   return (
     <div
