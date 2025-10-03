@@ -46,7 +46,7 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
 
 
       <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10">
-        <CardHeader className="text-center space-y-4">
+        <CardHeader className="text-center space-y-6">
           <div className="flex items-center justify-center">
             <img
               src="/lovable-uploads/cabana-logo.png"
@@ -54,36 +54,20 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
               className="h-32 w-32 object-contain"
             />
           </div>
-          <div className="w-full px-8">
-            <h1 className="text-6xl text-white text-center mb-3" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
-            <div className="flex flex-col gap-3 w-full">
-              <Button
-                type="button"
-                onClick={() => navigate('/juanita')}
-                className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-              >
-                ADMIN PORTAL
-              </Button>
-              <Button
-                type="button"
-                onClick={() => navigate('/juanita2')}
-                className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-              >
-                Link Page/Slide
-              </Button>
-              <Button
-                type="button"
-                onClick={() => navigate('/juanita3')}
-                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-              >
-                EXCLUSIVE PAGE
-              </Button>
-            </div>
-          </div>
+          <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
         </CardHeader>
 
-        <CardContent className="pt-3 pb-8">
-          <div className="flex flex-col gap-3 w-full px-8">
+        <CardContent className="pb-8">
+          <div className="flex flex-col gap-4 w-full px-8">
+            <div className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none rounded-md flex items-center justify-center cursor-not-allowed">
+              PLACEHOLDER 1
+            </div>
+            <div className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none rounded-md flex items-center justify-center cursor-not-allowed">
+              PLACEHOLDER 2
+            </div>
+            <div className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none rounded-md flex items-center justify-center cursor-not-allowed">
+              PLACEHOLDER 3
+            </div>
             <Button
               type="button"
               onClick={() => navigate('/juanita')}
@@ -107,7 +91,7 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
             </Button>
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-3">
+          <form onSubmit={handleSubmit} className="px-8 mt-4">
             {/* Submit Button */}
             <Button
               type="submit"

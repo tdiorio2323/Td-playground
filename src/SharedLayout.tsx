@@ -11,6 +11,9 @@ const SharedLayout = () => {
     const excludedExact = new Set([
       '/quickprintz',
       '/starluv',
+      '/starluv-2',
+      '/starluv-3',
+      '/starluv-4',
       '/lilsex',
       '/juanita',
       '/juanita2',

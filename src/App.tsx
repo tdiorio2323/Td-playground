@@ -18,6 +18,7 @@ import Auth4 from "./pages/Auth4";
 import Auth5 from "./pages/Auth5";
 import Auth6 from "./pages/Auth6";
 import Auth7 from "./pages/Auth7";
+import Auth7_2 from "./pages/Auth7_2";
 import Auth8 from "./pages/Auth8";
 import Auth9 from "./pages/Auth9";
 import Auth10 from "./pages/Auth10";
@@ -40,6 +41,8 @@ import CreatorOnboarding from "./pages/CreatorOnboarding";
 import LinkInBio from "./pages/LinkInBio";
 import Shop from "./pages/Shop";
 import Checkout from "./pages/Checkout";
+import Storage from "./pages/Storage";
+import PremadeBagDesigns from "./pages/PremadeBagDesigns";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +70,9 @@ const App = () => (
               <Route path="/joincabana" element={<Auth5 />} />
               <Route path="/lilsex" element={<Auth6 />} />
               <Route path="/starluv" element={<Auth7 />} />
+              <Route path="/starluv-2" element={<Auth7_2 />} />
+              <Route path="/starluv-3" element={<Auth7 />} />
+              <Route path="/starluv-4" element={<Auth7 />} />
               <Route path="/auth8" element={<Auth8 />} />
               <Route path="/auth9" element={<Auth9 />} />
               <Route path="/quickprintz" element={<Auth10 />} />
@@ -84,6 +90,8 @@ const App = () => (
               <Route path="/bio/:username" element={<LinkInBio />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/storage" element={<Storage />} />
+              <Route path="/premade-bag-designs" element={<PremadeBagDesigns />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/brand" element={<Brand />} />
               <Route path="/portal" element={<Portal />} />

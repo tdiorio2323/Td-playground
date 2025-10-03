@@ -12,7 +12,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run preview` - Preview production build locally
 
 ### Testing
-This project uses Vitest for testing. The test runner is configured in the dependencies with test setup in `src/setupTests.ts`.
+- `npm test` - Run Vitest tests
+- `npm run test:coverage` - Run tests with coverage report
+
+This project uses Vitest for testing. The test runner is configured in `vite.config.ts` with test setup in `src/setupTests.ts`.
 
 ## Project Architecture
 
@@ -22,7 +25,7 @@ This project uses Vitest for testing. The test runner is configured in the depen
 - **Styling**: Tailwind CSS with shadcn/ui components
 - **Routing**: React Router v6 with future flags enabled (`v7_startTransition`, `v7_relativeSplatPath`)
 - **State Management**: TanStack Query for server state
-- **Backend**: Supabase integration for database and auth
+- **Backend**: Mock Supabase client (frontend-only, no real database connections)
 - **UI Components**: Extensive shadcn/ui component library (49 components) with Radix UI primitives
 
 ### Directory Structure
@@ -37,7 +40,7 @@ src/
 │   └── SuperAdminDashboard.tsx
 ├── pages/              # Route components
 │   ├── Index.tsx       # Landing page
-│   ├── Auth.tsx        # Authentication
+│   ├── Auth.tsx        # Authentication (plus Auth3-Auth20 variants)
 │   ├── Shop.tsx        # E-commerce shop
 │   ├── Admin.tsx       # Admin dashboard
 │   ├── Portal.tsx      # User portal
@@ -48,8 +51,9 @@ src/
 │   └── LinkInBio.tsx   # Link-in-bio profiles
 ├── hooks/              # Custom React hooks
 ├── integrations/       # Third-party integrations
-│   └── supabase/       # Supabase client and types
+│   └── supabase/       # Mock Supabase client and types
 └── lib/                # Utilities and shared logic
+    └── meta.ts         # Route-aware metadata management
 ```
 
 ### Key Application Features
@@ -58,30 +62,37 @@ src/
 - **Creator onboarding** flow and profiles
 - **Link-in-bio** dynamic pages (route: `/bio/:username`)
 - **Creator portal** interface with project management
-- **Authentication system** with Supabase (localStorage-based session persistence)
+- **Mock authentication system** (frontend-only, no real auth)
 - **Admin dashboard** for network management
 - **Brand dashboard** for brand-specific features
 - **E-commerce features** including shop and checkout flows
 - **Dynamic project pages** with parameterized routing (`/project/:id`)
 
 ### Routing Architecture
-- **Public routes**: Landing page (`/`), auth (`/auth`, `/auth2`), waitlist (`/waitlist`), link-in-bio (`/bio/:username`)
-- **Protected routes**: All other routes require authentication via `ProtectedRoute` wrapper
-- Routes use `SharedLayout` wrapper for consistent layout across pages
-- React Router v6 with future flags enabled for forward compatibility
+- **All routes are public** - `ProtectedRoute` component is a pass-through (no real auth enforcement)
+- All routes wrap with `SharedLayout` (located at `src/SharedLayout.tsx`) which handles route-aware metadata management:
+  - Default metadata is "CABANA" for most routes
+  - Excluded routes (like `/quickprintz`, `/starluv`, `/lilsex`, `/juanita*`, `/cabana`, `/thecabana`, and `/auth*` prefix) manage their own metadata
+  - Metadata is set via `src/lib/meta.ts` which provides route-specific titles, descriptions, and social share images
+  - `SharedLayout` updates document title and OpenGraph/Twitter meta tags dynamically based on route
+- Multiple auth page variants exist (Auth, Auth3-Auth20) mapped to branded routes (e.g., `/quickprintz` → Auth10)
+- React Router v6 with future flags enabled for forward compatibility (`v7_startTransition`, `v7_relativeSplatPath`)
+- Main routing configuration is in `src/App.tsx`
 
 ### Development Configuration
 - **Path aliases**: `@/` maps to `./src/`
 - **Port**: Development server runs on port 8080
 - **TypeScript**: Relaxed config with `noImplicitAny: false` and `strictNullChecks: false`
 - **ESLint**: Configured for React with TypeScript, unused vars checking disabled
-- **Vitest**: Test configuration with jsdom environment
+- **Vitest**: Test configuration with jsdom environment and v8 coverage provider
 
-### Supabase Integration
-- Project URL: `https://crpalakzdzvtgvljlutd.supabase.co`
-- Client configured in `src/integrations/supabase/client.ts`
-- Types are auto-generated from Supabase schema in `src/integrations/supabase/types.ts`
-- Auth uses localStorage for session persistence with auto-refresh enabled
+### Mock Backend Integration
+- **Mock Supabase**: Project uses `src/integrations/supabase/mockClient.ts` instead of real Supabase connection
+- All database operations are mocked - no real API calls are made
+- Mock data is stored in `src/lib/mockData.ts` (products, profiles, user roles, sessions)
+- Auth is frontend-only with no real authentication or session management
+- Auth flow handled by `src/integrations/supabase/auth.tsx` (AuthProvider) which wraps the entire app
+- This is a **component development/prototype environment**, not a production-ready application
 
 ### Component Library
 Extensive shadcn/ui implementation with 49 components including:
@@ -95,3 +106,10 @@ Extensive shadcn/ui implementation with 49 components including:
 - Vite handles bundling with React SWC for fast compilation
 - Production builds optimize for modern browsers
 - Lovable platform integration for automatic deployment (Project ID: `dbcb82db-3a5c-4d43-86a6-c004351ecb04`)
+- Package manager: **pnpm 10.15.1+** (use pnpm, not npm)
+
+### Application Entry Points
+- **Main entry**: `src/main.tsx` - Renders the root `App` component
+- **App component**: `src/App.tsx` - Sets up providers (QueryClient, Auth, Tooltip) and routing
+- **Provider hierarchy**: QueryClientProvider → AuthProvider → TooltipProvider → BrowserRouter → Routes
+- **Global UI**: Toaster and Sonner components are rendered at app root for toast notifications
