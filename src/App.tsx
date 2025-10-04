@@ -50,6 +50,7 @@ import CabanaMgmt4 from "./pages/CabanaMgmt4";
 import LCG from "./pages/LCG";
 import Home1 from "./pages/Home1";
 import Directory from "./pages/Directory";
+import DesignLibrary from "./design-library";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
             <Route element={<SharedLayout />}>
               <Route path="/" element={<Index />} />
               <Route path="/directory" element={<Directory />} />
+              <Route path="/library" element={<DesignLibrary />} />
               <Route path="/thedash" element={<TheDash />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/auth2" element={<Auth />} />
