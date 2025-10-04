@@ -1,19 +1,42 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-Source lives in `src/`. Route-level views belong in `src/pages/`, reusable UI in `src/components/`, shared logic in `src/hooks/` and utilities in `src/lib/`. Keep third-party connectors inside `src/integrations/`. Entry files are `index.html`, `src/main.tsx`, and `src/App.tsx`. Static assets (favicons, images) live under `public/`. Core configuration sits at the repo root: `vite.config.ts`, `tailwind.config.ts`, `eslint.config.js`, and the `tsconfig*.json` set.
+- Source lives in `src/`. Route views in `src/pages/`, reusable UI in `src/components/`, hooks in `src/hooks/`, utilities in `src/lib/`, and third‑party connectors in `src/integrations/`.
+- Entry files: `index.html`, `src/main.tsx`, `src/App.tsx`.
+- Static assets in `public/`.
+- Core config at root: `vite.config.ts`, `tailwind.config.ts`, `eslint.config.js`, `tsconfig*.json`.
 
 ## Build, Test, and Development Commands
-Install dependencies with `pnpm install`. Launch the dev server via `pnpm dev` (http://localhost:8080). Run `pnpm lint` to execute ESLint on all TS/TSX files. Ship-ready bundles come from `pnpm build`, and `pnpm preview` serves the build locally. Execute unit and component tests with `pnpm vitest` (watch) or `pnpm vitest run`. For coverage reports, run `pnpm vitest --coverage`.
+- `pnpm install` — install dependencies.
+- `pnpm dev` — start dev server at http://localhost:8080.
+- `pnpm lint` — run ESLint on all TS/TSX files.
+- `pnpm build` — create production bundle.
+- `pnpm preview` — serve the production build locally.
+- `pnpm vitest` / `pnpm vitest run` — run tests (watch/CI).
+- `pnpm vitest --coverage` — generate coverage report.
 
 ## Coding Style & Naming Conventions
-Write modern TypeScript and React function components with 2-space indentation and semicolons. Match the existing quote style per file. Components in `pages/` and `components/` use PascalCase (`LoginForm.tsx`). Hooks follow `useThing` camelCase (`useAuthGuard`). Utilities in `lib/` should be named exports. Prefer Tailwind utility classes; compose variants with `cn()` from `src/lib/utils.ts` and shadcn/ui patterns.
+- TypeScript + React function components, 2‑space indent, semicolons; match file’s quote style.
+- Components (in `pages/` and `components/`) use PascalCase, e.g., `LoginForm.tsx`.
+- Hooks use camelCase `useThing`, e.g., `useAuthGuard`.
+- Utilities in `lib/` expose named exports only.
+- Prefer Tailwind utilities; compose variants with `cn()` from `src/lib/utils.ts` and shadcn/ui patterns.
 
 ## Testing Guidelines
-Vitest with jsdom powers the test suite (configured in `vite.config.ts` and bootstrapped by `src/setupTests.ts`). Name files `*.test.ts` or `*.test.tsx` and keep them near the code or in `src/__tests__/`. Tests should be deterministic: mock network calls and external SDKs. Ensure new features include coverage for happy-path and critical edge cases.
+- Vitest with jsdom (configured via `vite.config.ts`, bootstrap in `src/setupTests.ts`).
+- Name tests `*.test.ts` or `*.test.tsx`; colocate near code or in `src/__tests__/`.
+- Tests must be deterministic; mock network calls and external SDKs. Cover happy paths and critical edges.
+- Use `pnpm vitest --coverage` to review coverage for key modules.
 
 ## Commit & Pull Request Guidelines
-Write compact, present-tense commits that reference the affected view or component when relevant (e.g., "Adjust Dashboard hero spacing"). Pull requests need a clear summary, linked issues or tickets, and screenshots or GIFs for UI-facing changes. Confirm `pnpm lint` and the Vitest suite pass before requesting review, and flag breaking changes or required environment updates in the PR body.
+- Commits: compact, present tense; reference affected view/component (e.g., “Adjust Dashboard hero spacing”).
+- PRs: clear summary, linked issues/tickets, and screenshots/GIFs for UI changes.
+- Confirm `pnpm lint` and the Vitest suite pass before requesting review; flag breaking changes and required env updates.
 
 ## Security & Configuration Tips
-Never commit secrets. Store local overrides in `.env.local` with `VITE_` prefixes (e.g., `VITE_SUPABASE_URL`). Manage Supabase, Firebase, and Vercel credentials via their dashboards. Validate any new external URLs and sanitize user-provided data before rendering.
+- Never commit secrets. Use `.env.local` with `VITE_` prefixes (e.g., `VITE_SUPABASE_URL`).
+- Manage credentials via Supabase/Firebase/Vercel dashboards. Validate new external URLs and sanitize user input before rendering.
+
+## Agent‑Specific Instructions
+- When editing files, follow the structure and conventions above; keep changes minimal and focused. Update docs/tests when behavior changes. The scope of this file is the entire repository.
+

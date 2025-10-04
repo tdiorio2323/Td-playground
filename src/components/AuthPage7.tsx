@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Instagram, Mail } from "lucide-react";
 
 export const AuthPage7 = () => {
+  const navigate = useNavigate();
 
   return (
     <div
@@ -36,7 +38,7 @@ export const AuthPage7 = () => {
             {/* EXCLUSIVE */}
             <Button
               type="button"
-              onClick={() => window.open("https://onlyfans.com/xostarluv", "_blank")}
+              onClick={() => navigate('/starluv-2')}
               className="w-full h-14 text-black font-bold text-xl tracking-wider"
               style={{
                 backgroundImage: "linear-gradient(to bottom, #FFD54F, #FFC107)",

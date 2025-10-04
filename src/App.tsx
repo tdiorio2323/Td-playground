@@ -43,6 +43,13 @@ import Shop from "./pages/Shop";
 import Checkout from "./pages/Checkout";
 import Storage from "./pages/Storage";
 import PremadeBagDesigns from "./pages/PremadeBagDesigns";
+import CabanaMgmt from "./pages/CabanaMgmt";
+import CabanaMgmt2 from "./pages/CabanaMgmt2";
+import CabanaMgmt3 from "./pages/CabanaMgmt3";
+import CabanaMgmt4 from "./pages/CabanaMgmt4";
+import LCG from "./pages/LCG";
+import Home1 from "./pages/Home1";
+import Directory from "./pages/Directory";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +64,7 @@ const App = () => (
             {/* All routes - no auth required */}
             <Route element={<SharedLayout />}>
               <Route path="/" element={<Index />} />
+              <Route path="/directory" element={<Directory />} />
               <Route path="/thedash" element={<TheDash />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/auth2" element={<Auth />} />
@@ -66,6 +74,12 @@ const App = () => (
               <Route path="/juanita3" element={<Auth3_3 />} />
               <Route path="/juanita4" element={<Auth3_4 />} />
               <Route path="/cabana" element={<Auth3_4 />} />
+              <Route path="/cabanamgmt" element={<CabanaMgmt />} />
+              <Route path="/cabanamgmt-2" element={<CabanaMgmt2 />} />
+              <Route path="/cabanamgmt-3" element={<CabanaMgmt3 />} />
+              <Route path="/cabanamgmt-4" element={<CabanaMgmt4 />} />
+              <Route path="/lcg" element={<LCG />} />
+              <Route path="/home-1" element={<Home1 />} />
               <Route path="/auth4" element={<Auth4 />} />
               <Route path="/joincabana" element={<Auth5 />} />
               <Route path="/lilsex" element={<Auth6 />} />
