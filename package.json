@@ -10,7 +10,14 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "lib": "node tools/design-lib.cjs",
+    "lib:open": "node tools/design-lib.cjs open",
+    "lib:export": "node tools/design-lib.cjs export",
+    "lib:sync": "node tools/design-lib.cjs sync",
+    "lib:version": "node tools/design-lib.cjs version",
+    "routes:preview": "node tools/generate-route-screenshots.mjs --base=http://localhost:8081 --out=previews/routes-preview.html --open",
+    "routes:preview:fast": "node tools/generate-route-screenshots.mjs --base=http://localhost:8081 --out=previews/routes-preview.html --open --skip-screenshots"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -82,6 +89,7 @@
     "globals": "^15.9.0",
     "jsdom": "^27.0.0",
     "postcss": "^8.4.47",
+    "puppeteer": "^24.23.0",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",

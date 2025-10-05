@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Route Previews - TD Playground</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .header {
+      max-width: 1800px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: #888;
+      font-size: 1rem;
+    }
+
+    .base-url {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem auto;
+      max-width: 600px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.9rem;
+      color: #4ade80;
+    }
+
+    .stats {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #888;
+    }
+
+    .stat-value {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1600px) {
+      .container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .route-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .route-card:hover {
+      border-color: #4ade80;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(74, 222, 128, 0.2);
+    }
+
+    .screenshot-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .preview-screenshot {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .route-card:hover .preview-screenshot {
+      transform: scale(1.05);
+    }
+
+    .dynamic-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: #fbbf24;
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .route-info {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .route-path {
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'SF Mono', Monaco, monospace;
+      color: #4ade80;
+      margin: 0;
+    }
+
+    .route-component {
+      font-size: 0.8rem;
+      color: #888;
+      font-family: 'SF Mono', Monaco, monospace;
+      margin: 0;
+    }
+
+    .footer {
+      max-width: 1800px;
+      margin: 4rem auto 0;
+      padding: 2rem;
+      text-align: center;
+      color: #666;
+      font-size: 0.85rem;
+      border-top: 1px solid #333;
+    }
+
+    .regenerate-info {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem auto;
+      max-width: 600px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.85rem;
+      color: #fbbf24;
+    }
+
+    @media (max-width: 1600px) {
+      .frames-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📸 Route Previews</h1>
+    <p>TD Playground Component System - Screenshot Gallery</p>
+    <div class="base-url">http://localhost:8081</div>
+    <div class="stats">
+      <div class="stat-item">
+        <span>Total Routes:</span>
+        <span class="stat-value">49</span>
+      </div>
+      <div class="stat-item">
+        <span>Dynamic Routes:</span>
+        <span class="stat-value">2</span>
+      </div>
+      <div class="stat-item">
+        <span>Generated:</span>
+        <span class="stat-value">10/4/2025, 10:28:13 PM</span>
+      </div>
+    </div>
+    <div class="regenerate-info">
+      Run <code>pnpm routes:preview</code> to regenerate screenshots
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <a href="http://localhost:8081/" target="_blank" class="route-card" data-route="/">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/root_desktop.png"
+          alt="/"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/</h3>
+        <p class="route-component">Index </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/directory" target="_blank" class="route-card" data-route="/directory">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootdirectory_desktop.png"
+          alt="/directory"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/directory</h3>
+        <p class="route-component">Directory </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/library" target="_blank" class="route-card" data-route="/library">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootlibrary_desktop.png"
+          alt="/library"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/library</h3>
+        <p class="route-component">DesignLibrary </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/thedash" target="_blank" class="route-card" data-route="/thedash">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootthedash_desktop.png"
+          alt="/thedash"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/thedash</h3>
+        <p class="route-component">TheDash </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth" target="_blank" class="route-card" data-route="/auth">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth_desktop.png"
+          alt="/auth"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth</h3>
+        <p class="route-component">Auth </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth2" target="_blank" class="route-card" data-route="/auth2">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth2_desktop.png"
+          alt="/auth2"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth2</h3>
+        <p class="route-component">Auth </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/juanita" target="_blank" class="route-card" data-route="/juanita">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootjuanita_desktop.png"
+          alt="/juanita"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/juanita</h3>
+        <p class="route-component">Auth3 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/thecabana" target="_blank" class="route-card" data-route="/thecabana">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootthecabana_desktop.png"
+          alt="/thecabana"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/thecabana</h3>
+        <p class="route-component">Auth3 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/juanita2" target="_blank" class="route-card" data-route="/juanita2">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootjuanita2_desktop.png"
+          alt="/juanita2"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/juanita2</h3>
+        <p class="route-component">Auth3_2 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/juanita3" target="_blank" class="route-card" data-route="/juanita3">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootjuanita3_desktop.png"
+          alt="/juanita3"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/juanita3</h3>
+        <p class="route-component">Auth3_3 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/juanita4" target="_blank" class="route-card" data-route="/juanita4">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootjuanita4_desktop.png"
+          alt="/juanita4"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/juanita4</h3>
+        <p class="route-component">Auth3_4 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/cabana" target="_blank" class="route-card" data-route="/cabana">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootcabana_desktop.png"
+          alt="/cabana"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/cabana</h3>
+        <p class="route-component">Auth3_4 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/cabanamgmt" target="_blank" class="route-card" data-route="/cabanamgmt">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootcabanamgmt_desktop.png"
+          alt="/cabanamgmt"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/cabanamgmt</h3>
+        <p class="route-component">CabanaMgmt </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/cabanamgmt-2" target="_blank" class="route-card" data-route="/cabanamgmt-2">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootcabanamgmt-2_desktop.png"
+          alt="/cabanamgmt-2"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/cabanamgmt-2</h3>
+        <p class="route-component">CabanaMgmt2 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/cabanamgmt-3" target="_blank" class="route-card" data-route="/cabanamgmt-3">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootcabanamgmt-3_desktop.png"
+          alt="/cabanamgmt-3"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/cabanamgmt-3</h3>
+        <p class="route-component">CabanaMgmt3 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/cabanamgmt-4" target="_blank" class="route-card" data-route="/cabanamgmt-4">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootcabanamgmt-4_desktop.png"
+          alt="/cabanamgmt-4"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/cabanamgmt-4</h3>
+        <p class="route-component">CabanaMgmt4 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/lcg" target="_blank" class="route-card" data-route="/lcg">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootlcg_desktop.png"
+          alt="/lcg"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/lcg</h3>
+        <p class="route-component">LCG </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/home-1" target="_blank" class="route-card" data-route="/home-1">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/roothome-1_desktop.png"
+          alt="/home-1"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/home-1</h3>
+        <p class="route-component">Home1 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth4" target="_blank" class="route-card" data-route="/auth4">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth4_desktop.png"
+          alt="/auth4"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth4</h3>
+        <p class="route-component">Auth4 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/joincabana" target="_blank" class="route-card" data-route="/joincabana">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootjoincabana_desktop.png"
+          alt="/joincabana"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/joincabana</h3>
+        <p class="route-component">Auth5 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/lilsex" target="_blank" class="route-card" data-route="/lilsex">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootlilsex_desktop.png"
+          alt="/lilsex"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/lilsex</h3>
+        <p class="route-component">Auth6 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/starluv" target="_blank" class="route-card" data-route="/starluv">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootstarluv_desktop.png"
+          alt="/starluv"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/starluv</h3>
+        <p class="route-component">Auth7 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/starluv-2" target="_blank" class="route-card" data-route="/starluv-2">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootstarluv-2_desktop.png"
+          alt="/starluv-2"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/starluv-2</h3>
+        <p class="route-component">Auth7_2 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/starluv-3" target="_blank" class="route-card" data-route="/starluv-3">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootstarluv-3_desktop.png"
+          alt="/starluv-3"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/starluv-3</h3>
+        <p class="route-component">Auth7 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/starluv-4" target="_blank" class="route-card" data-route="/starluv-4">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootstarluv-4_desktop.png"
+          alt="/starluv-4"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/starluv-4</h3>
+        <p class="route-component">Auth7 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth8" target="_blank" class="route-card" data-route="/auth8">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth8_desktop.png"
+          alt="/auth8"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth8</h3>
+        <p class="route-component">Auth8 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth9" target="_blank" class="route-card" data-route="/auth9">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth9_desktop.png"
+          alt="/auth9"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth9</h3>
+        <p class="route-component">Auth9 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/quickprintz" target="_blank" class="route-card" data-route="/quickprintz">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootquickprintz_desktop.png"
+          alt="/quickprintz"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/quickprintz</h3>
+        <p class="route-component">Auth10 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth11" target="_blank" class="route-card" data-route="/auth11">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth11_desktop.png"
+          alt="/auth11"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth11</h3>
+        <p class="route-component">Auth11 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth12" target="_blank" class="route-card" data-route="/auth12">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth12_desktop.png"
+          alt="/auth12"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth12</h3>
+        <p class="route-component">Auth12 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth13" target="_blank" class="route-card" data-route="/auth13">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth13_desktop.png"
+          alt="/auth13"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth13</h3>
+        <p class="route-component">Auth13 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth14" target="_blank" class="route-card" data-route="/auth14">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth14_desktop.png"
+          alt="/auth14"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth14</h3>
+        <p class="route-component">Auth14 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth15" target="_blank" class="route-card" data-route="/auth15">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth15_desktop.png"
+          alt="/auth15"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth15</h3>
+        <p class="route-component">Auth15 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth16" target="_blank" class="route-card" data-route="/auth16">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth16_desktop.png"
+          alt="/auth16"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth16</h3>
+        <p class="route-component">Auth16 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth17" target="_blank" class="route-card" data-route="/auth17">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth17_desktop.png"
+          alt="/auth17"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth17</h3>
+        <p class="route-component">Auth17 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth18" target="_blank" class="route-card" data-route="/auth18">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth18_desktop.png"
+          alt="/auth18"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth18</h3>
+        <p class="route-component">Auth18 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth19" target="_blank" class="route-card" data-route="/auth19">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth19_desktop.png"
+          alt="/auth19"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth19</h3>
+        <p class="route-component">Auth19 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/auth20" target="_blank" class="route-card" data-route="/auth20">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootauth20_desktop.png"
+          alt="/auth20"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/auth20</h3>
+        <p class="route-component">Auth20 </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/waitlist" target="_blank" class="route-card" data-route="/waitlist">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootwaitlist_desktop.png"
+          alt="/waitlist"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/waitlist</h3>
+        <p class="route-component">VipWaitlist </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/bio/example-user" target="_blank" class="route-card" data-route="/bio/:username">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootbio_example-user_desktop.png"
+          alt="/bio/:username"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        <span class="dynamic-badge">Dynamic</span>
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/bio/:username</h3>
+        <p class="route-component">LinkInBio </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/shop" target="_blank" class="route-card" data-route="/shop">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootshop_desktop.png"
+          alt="/shop"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/shop</h3>
+        <p class="route-component">Shop </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/checkout" target="_blank" class="route-card" data-route="/checkout">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootcheckout_desktop.png"
+          alt="/checkout"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/checkout</h3>
+        <p class="route-component">Checkout </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/storage" target="_blank" class="route-card" data-route="/storage">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootstorage_desktop.png"
+          alt="/storage"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/storage</h3>
+        <p class="route-component">Storage </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/premade-bag-designs" target="_blank" class="route-card" data-route="/premade-bag-designs">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootpremade-bag-designs_desktop.png"
+          alt="/premade-bag-designs"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/premade-bag-designs</h3>
+        <p class="route-component">PremadeBagDesigns </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/admin" target="_blank" class="route-card" data-route="/admin">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootadmin_desktop.png"
+          alt="/admin"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/admin</h3>
+        <p class="route-component">Admin </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/brand" target="_blank" class="route-card" data-route="/brand">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootbrand_desktop.png"
+          alt="/brand"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/brand</h3>
+        <p class="route-component">Brand </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/portal" target="_blank" class="route-card" data-route="/portal">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootportal_desktop.png"
+          alt="/portal"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/portal</h3>
+        <p class="route-component">Portal </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/project/1" target="_blank" class="route-card" data-route="/project/:id">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootproject_1_desktop.png"
+          alt="/project/:id"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        <span class="dynamic-badge">Dynamic</span>
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/project/:id</h3>
+        <p class="route-component">ProjectPage </p>
+      </div>
+    </a>
+    
+
+    <a href="http://localhost:8081/onboard" target="_blank" class="route-card" data-route="/onboard">
+      <div class="screenshot-container">
+        <img
+          src="screenshots/rootonboard_desktop.png"
+          alt="/onboard"
+          class="preview-screenshot"
+          loading="lazy"
+        />
+        
+      </div>
+      <div class="route-info">
+        <h3 class="route-path">/onboard</h3>
+        <p class="route-component">CreatorOnboarding </p>
+      </div>
+    </a>
+    
+  </div>
+
+  <div class="footer">
+    <p>Generated by TD Playground Route Preview Tool</p>
+    <p>Click any screenshot to open the live route</p>
+  </div>
+</body>
+</html>

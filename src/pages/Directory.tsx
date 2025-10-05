@@ -82,7 +82,7 @@ const Directory = () => {
             <img
               src="/lovable-uploads/td sttone.png"
               alt="TD Studios"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-[center_60%]"
             />
           </div>
         </div>
