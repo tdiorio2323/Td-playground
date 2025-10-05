@@ -35,6 +35,7 @@ export function BackgroundsTab() {
             variant={selectedCategory === category ? 'default' : 'outline'}
             size="sm"
             onClick={() => setSelectedCategory(category)}
+            className="text-white"
           >
             {category}
           </Button>
@@ -76,6 +77,7 @@ export function BackgroundsTab() {
                     <Button
                       variant="ghost"
                       size="sm"
+                      className="text-white"
                       onClick={() => handleCopy(bg.name, 'tailwind', bg.tailwindClass)}
                     >
                       {tailwindCopied ? (
@@ -103,6 +105,7 @@ export function BackgroundsTab() {
                     <Button
                       variant="ghost"
                       size="sm"
+                      className="text-white"
                       onClick={() => handleCopy(bg.name, 'css', bg.cssCode)}
                     >
                       {cssCopied ? (

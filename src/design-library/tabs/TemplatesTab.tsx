@@ -3,12 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Check, Copy, Code2, Search } from 'lucide-react';
-import { components } from '../registry/components';
+import { templates } from '../registry/templates';
 import { copyToClipboard } from '../utils/copyToClipboard';
 import { SafePreview } from '../utils/SafePreview';
 
-// Lazy load components for previews - handle both default and named exports
-const componentLoaders: Record<string, React.LazyExoticComponent<any>> = {
+// Lazy load templates for previews
+const templateLoaders: Record<string, React.LazyExoticComponent<any>> = {
   'AuthPage': lazy(() => import('@/components/AuthPage').then(m => ({ default: m.default ?? m.AuthPage }))),
   'AuthPage2': lazy(() => import('@/components/AuthPage2').then(m => ({ default: m.default ?? m.AuthPage2 }))),
   'AuthPage3': lazy(() => import('@/components/AuthPage3').then(m => ({ default: m.default ?? m.AuthPage3 }))),
@@ -26,47 +26,41 @@ const componentLoaders: Record<string, React.LazyExoticComponent<any>> = {
   'CustomerApp': lazy(() => import('@/components/CustomerApp').then(m => ({ default: m.default ?? m.CustomerApp }))),
   'CheckoutFlow': lazy(() => import('@/components/CheckoutFlow').then(m => ({ default: m.default ?? m.CheckoutFlow }))),
   'DashboardLayout': lazy(() => import('@/components/DashboardLayout').then(m => ({ default: m.default ?? m.DashboardLayout }))),
-  'AuthCard': lazy(() => import('@/components/AuthCard').then(m => ({ default: m.default ?? m.AuthCard }))),
 };
 
-// Safe preview props for components that need them
-const componentProps: Record<string, any> = {
+// Safe props for templates that need them
+const templateProps: Record<string, any> = {
   'CheckoutFlow': {
     items: [{ id: 1, name: 'Sample Item', price: 10, quantity: 1 }],
     steps: ['cart', 'shipping', 'payment', 'confirmation'],
     onSubmit: () => {}
   },
   'DashboardLayout': { children: null },
-  'AuthCard': { mode: 'login' as const, onSubmit: () => {}, onToggle: () => {} },
 };
 
-export function ComponentsTab() {
+export function TemplatesTab() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const categories = ['All', ...Array.from(new Set(components.map(c => c.category)))];
+  const categories = ['All', ...Array.from(new Set(templates.map(t => t.category)))];
 
-  const filteredComponents = components.filter(comp => {
-    const matchesSearch = comp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         comp.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || comp.category === selectedCategory;
+  const filteredTemplates = templates.filter(template => {
+    const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory = selectedCategory === 'All' || template.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const handleCopy = async (componentName: string, code: string) => {
+  const handleCopy = async (templateName: string) => {
+    const code = `import { ${templateName} } from '@/components/${templateName}';\n\n<${templateName} />`;
     const success = await copyToClipboard(code);
     if (success) {
-      setCopiedId(componentName);
+      setCopiedId(templateName);
       setTimeout(() => setCopiedId(null), 2000);
     }
-  };
-
-  const getComponentCode = (path: string): string => {
-    // In a real implementation, you'd use Vite's ?raw import
-    // For now, return a placeholder
-    return `// Component code from ${path}\n// Use Vite's ?raw import to load actual source`;
   };
 
   return (
@@ -76,7 +70,7 @@ export function ComponentsTab() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <Input
-            placeholder="Search components..."
+            placeholder="Search templates..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -97,32 +91,38 @@ export function ComponentsTab() {
         </div>
       </div>
 
-      {/* Component Grid */}
+      {/* Template Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filteredComponents.map(component => {
-          const isExpanded = expandedCode === component.name;
-          const isCopied = copiedId === component.name;
-          const code = getComponentCode(component.path);
-          const ComponentPreview = componentLoaders[component.name];
+        {filteredTemplates.map(template => {
+          const isExpanded = expandedCode === template.name;
+          const isCopied = copiedId === template.name;
+          const TemplatePreview = templateLoaders[template.name];
 
           return (
-            <Card key={component.name} className="bg-white border-gray-200">
+            <Card key={template.name} className="bg-white border-gray-200">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center justify-between">
-                  <span>{component.name}</span>
+                  <span>{template.name}</span>
                   <span className="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                    {component.category}
+                    {template.category}
                   </span>
                 </CardTitle>
-                <p className="text-sm text-gray-600 mt-2">{component.description}</p>
+                <p className="text-sm text-gray-600 mt-2">{template.description}</p>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {template.tags.map(tag => (
+                    <span key={tag} className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
                   <div className="w-full h-96 overflow-hidden relative">
-                    {ComponentPreview ? (
+                    {TemplatePreview ? (
                       <SafePreview>
                         <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
-                          <ComponentPreview {...(componentProps[component.name] || {})} />
+                          <TemplatePreview {...(templateProps[template.name] || {})} />
                         </div>
                       </SafePreview>
                     ) : (
@@ -141,16 +141,7 @@ export function ComponentsTab() {
                     variant="outline"
                     size="sm"
                     className="flex-1 text-white"
-                    onClick={() => setExpandedCode(isExpanded ? null : component.name)}
-                  >
-                    <Code2 className="h-4 w-4 mr-2" />
-                    {isExpanded ? 'Hide Code' : 'View Code'}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 text-white"
-                    onClick={() => handleCopy(component.name, code)}
+                    onClick={() => handleCopy(template.name)}
                   >
                     {isCopied ? (
                       <>
@@ -160,28 +151,27 @@ export function ComponentsTab() {
                     ) : (
                       <>
                         <Copy className="h-4 w-4 mr-2" />
-                        Copy Code
+                        Copy Import
                       </>
                     )}
                   </Button>
                 </div>
-
-                {isExpanded && (
-                  <div className="bg-gray-900 text-gray-100 rounded-lg p-4 text-xs overflow-x-auto">
-                    <pre className="whitespace-pre-wrap">{code}</pre>
-                  </div>
-                )}
               </CardContent>
             </Card>
           );
         })}
       </div>
 
-      {filteredComponents.length === 0 && (
+      {filteredTemplates.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          <p>No components found matching your search.</p>
+          <p>No templates found matching your search.</p>
         </div>
       )}
+
+      {/* Stats */}
+      <div className="text-center text-sm text-gray-500">
+        Showing {filteredTemplates.length} of {templates.length} templates
+      </div>
     </div>
   );
 }

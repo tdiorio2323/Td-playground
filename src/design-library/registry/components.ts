@@ -97,21 +97,9 @@ export const components: ComponentDefinition[] = [
     description: 'Customer-facing application'
   },
   {
-    name: 'CheckoutFlow',
-    path: '/src/components/CheckoutFlow.tsx',
-    category: 'E-commerce',
-    description: 'Checkout process component'
-  },
-  {
     name: 'DashboardLayout',
     path: '/src/components/DashboardLayout.tsx',
     category: 'Layouts',
     description: 'Reusable dashboard layout wrapper'
-  },
-  {
-    name: 'AuthCard',
-    path: '/src/components/AuthCard.tsx',
-    category: 'Cards',
-    description: 'Authentication form card component'
   }
 ];
