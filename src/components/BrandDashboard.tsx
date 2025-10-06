@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/auth";
 import { toast } from "sonner";
 import { 
   BarChart, 
@@ -50,10 +50,11 @@ import {
 const BrandDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+  const { signOut } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await supabase.auth.signOut();
+      await signOut();
       navigate('/auth');
       toast.success('Logged out successfully');
     } catch (error) {
@@ -119,14 +120,7 @@ const BrandDashboard = () => {
 
   return (
     <div 
-      className="min-h-screen relative"
-      style={{
-        backgroundImage: `url('/lovable-uploads/9625d965-6a42-4323-8497-34b244302dc2.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
+      className="min-h-screen relative bg-[url('/lovable-uploads/9625d965-6a42-4323-8497-34b244302dc2.png')] bg-cover bg-center bg-no-repeat bg-fixed"
     >
       {/* Overlay for better contrast */}
       <div className="absolute inset-0 bg-black/20 backdrop-blur-[0.5px]" />
