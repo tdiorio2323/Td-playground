@@ -16,6 +16,8 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@/auth": path.resolve(__dirname, "./src/stubs/auth"),
+      "@/lib/supabase": path.resolve(__dirname, "./src/stubs/supabase"),
     },
   },
   test: {
