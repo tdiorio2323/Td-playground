@@ -7,7 +7,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/auth": ["src/stubs/auth"],
+      "@/lib/supabase": ["src/stubs/supabase"]
     },
     "noImplicitAny": false,
     "noUnusedParameters": false,
