@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth';
+import { useAuth } from '@/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -56,8 +56,7 @@ const CabanaMgmt4: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!authLoading) {
-      fetchCabanas();
+      // fetchCabanas(); // Temporarily disabled
     }
   }, [user, authLoading, navigate, fetchCabanas]);
 
