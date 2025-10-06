@@ -68,13 +68,7 @@ const Directory = () => {
 
   return (
     <div
-      className="min-h-screen p-4 sm:p-6 md:p-8"
-      style={{
-        backgroundImage: "url('/lovable-uploads/td studios black marble.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        fontFamily: "'Inter', sans-serif"
-      }}
+      className="min-h-screen p-4 sm:p-6 md:p-8 font-sans"
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 sm:mb-12">
@@ -91,7 +85,7 @@ const Directory = () => {
           {groupedRoutes.map(({ category, routes: categoryRoutes }) => (
             <Card key={category} className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
               <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-xl sm:text-2xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <CardTitle className="text-xl sm:text-2xl text-white font-sans">
                   {category}
                 </CardTitle>
               </CardHeader>
@@ -102,8 +96,7 @@ const Directory = () => {
                       key={path}
                       onClick={() => navigate(path)}
                       variant="outline"
-                      className="h-auto py-3 px-4 sm:py-4 sm:px-6 text-left justify-start bg-white/20 hover:bg-white/30 border-white/30 hover:border-white/40 text-white transition-all duration-200 backdrop-blur-sm"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
+                      className="h-auto py-3 px-4 sm:py-4 sm:px-6 text-left justify-start bg-white/20 hover:bg-white/30 border-white/30 hover:border-white/40 text-white transition-all duration-200 backdrop-blur-sm font-sans"
                     >
                       <div className="flex flex-col items-start gap-1">
                         <span className="font-semibold text-sm sm:text-base">{label}</span>

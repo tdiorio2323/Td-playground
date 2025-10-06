@@ -1,5 +1,7 @@
-const projectUrl = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+import { env } from '../env';
+
+const projectUrl = env.VITE_SUPABASE_URL;
+const anonKey = env.VITE_SUPABASE_ANON_KEY;
 
 if (!projectUrl || !anonKey) {
   console.warn('Supabase environment variables are missing. Storage calls will fail.');

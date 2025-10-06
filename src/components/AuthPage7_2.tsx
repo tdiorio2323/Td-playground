@@ -28,12 +28,7 @@ export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 relative"
-      style={{
-        backgroundImage: "url('/cabana-builder-background.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      className="min-h-screen flex items-center justify-center p-4 relative bg-[url('/cabana-builder-background.png')] bg-cover bg-center"
     >
 
 
@@ -71,7 +66,7 @@ export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
         <CardContent className="space-y-6 pb-8">
           {/* Exclusive Text */}
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-white tracking-widest animate-glitter" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
+            <h2 className="text-4xl font-bold text-white tracking-widest animate-glitter font-bebas">
               EXCLUSIVE
             </h2>
           </div>

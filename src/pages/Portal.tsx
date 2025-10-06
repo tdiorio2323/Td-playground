@@ -61,14 +61,7 @@ const Portal = () => {
 
   return (
     <div 
-      className="min-h-screen relative"
-      style={{
-        backgroundImage: `url('/lovable-uploads/74a236e3-3b28-4ffa-8e8e-cd545be0f4e5.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
+      className="min-h-screen relative bg-[url('/lovable-uploads/74a236e3-3b28-4ffa-8e8e-cd545be0f4e5.png')] bg-cover bg-center bg-no-repeat bg-fixed"
     >
       {/* Luxury overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-purple-900/30 backdrop-blur-[1px]" />

@@ -46,12 +46,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 relative"
-      style={{
-        backgroundImage: "url('/cabana-builder-background.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      className="min-h-screen flex items-center justify-center p-4 relative bg-[url('/cabana-builder-background.png')] bg-cover bg-center"
     >
       
       
@@ -65,7 +60,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             />
           </div>
           <div className="space-y-4 w-full px-8">
-            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
+            <h1 className="text-6xl text-white text-center font-ballet font-normal">Cabana</h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
@@ -122,7 +117,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </Button>
             </div>
             <div className="mt-4 text-center space-y-3">
-              <div className="text-white text-sm underline" style={{ fontFamily: 'Inter, sans-serif' }}>
+              <div className="text-white text-sm underline font-sans">
                 Request Custom Link Page
               </div>
               <div className="flex items-center justify-center gap-4">

@@ -76,14 +76,7 @@ const ProjectPage = () => {
 
   return (
     <div 
-      className="min-h-screen relative"
-      style={{
-        backgroundImage: `url('/lovable-uploads/6884296d-7d53-4d5f-8169-0418ff1d5824.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
+      className="min-h-screen relative bg-[url('/lovable-uploads/6884296d-7d53-4d5f-8169-0418ff1d5824.png')] bg-cover bg-center bg-no-repeat bg-fixed"
     >
       {/* Luxury overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-purple-900/40 backdrop-blur-[1px]" />

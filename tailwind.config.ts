@@ -19,7 +19,11 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'bebas': ['Bebas Neue', 'sans-serif'],
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				bebas: ['Bebas Neue', 'sans-serif'],
+				ballet: ['Ballet', 'cursive'],
+				cinzel: ['Cinzel', 'serif'],
+				dancing: ['Dancing Script', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

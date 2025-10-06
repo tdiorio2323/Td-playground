@@ -12,7 +12,7 @@ export default function DesignLibrary() {
   const [activeTab, setActiveTab] = useState('components');
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/td studios black marble.png')" }}>
+    <div className="min-h-screen bg-cover bg-center bg-fixed bg-[url('/lovable-uploads/td\ studios\ black\ marble.png')]">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

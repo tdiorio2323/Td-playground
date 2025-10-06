@@ -1,14 +1,3 @@
-src/pages/ProjectPage.tsx:80:      style={{
-src/pages/Portal.tsx:65:      style={{
-src/design-library/tabs/BackgroundsTab.tsx:66:                  style={{
-src/design-library/tabs/TokensTab.tsx:72:                          style={{ backgroundColor: color.value }}
-src/design-library/tabs/TokensTab.tsx:125:                        style={{
-src/design-library/tabs/TokensTab.tsx:178:                        style={{ width: token.value, height: '24px' }}
-src/pages/Directory.tsx:72:      style={{
-src/pages/Directory.tsx:94:                <CardTitle className="text-xl sm:text-2xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/pages/Directory.tsx:106:                      style={{ fontFamily: "'Inter', sans-serif" }}
-src/design-library/tabs/FontsTab.tsx:46:                      style={{
-src/design-library/index.tsx:15:    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/td studios black marble.png')" }}>
 src/components/AuthPageLCG.tsx:38:      style={{
 src/components/AuthPageLCG.tsx:65:                style={{ fontFamily: "'Inter', sans-serif" }}
 src/components/AuthPageLCG.tsx:82:                style={{ fontFamily: "'Inter', sans-serif" }}
@@ -16,28 +5,31 @@ src/components/AuthPageLCG.tsx:117:                style={{ fontFamily: "'Inter'
 src/components/AuthPageLCG.tsx:130:                style={{ fontFamily: "'Inter', sans-serif" }}
 src/components/AuthPageLCG.tsx:148:              style={{
 src/components/AuthPageLCG.tsx:167:                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-src/components/AuthPage.tsx:50:      style={{
-src/components/AuthPage.tsx:68:            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
-src/components/AuthPage.tsx:125:              <div className="text-white text-sm underline" style={{ fontFamily: 'Inter, sans-serif' }}>
-src/components/AuthPageMgmt.tsx:60:      style={{
-src/components/AuthPageMgmt.tsx:77:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
-src/components/AuthPageMgmt.tsx:83:            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
-src/components/AuthPageMgmt.tsx:93:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt.tsx:106:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt.tsx:137:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt.tsx:169:                style={{ fontFamily: "'Inter', sans-serif" }}
 src/components/AuthPage7_2.tsx:32:      style={{
 src/components/AuthPage7_2.tsx:74:            <h2 className="text-4xl font-bold text-white tracking-widest animate-glitter" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
-src/components/AuthPage4.tsx:40:      style={{
-src/components/AuthPage4.tsx:57:          <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
+src/pages/Directory.tsx:72:      style={{
+src/pages/Directory.tsx:94:                <CardTitle className="text-xl sm:text-2xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/pages/Directory.tsx:106:                      style={{ fontFamily: "'Inter', sans-serif" }}
+src/pages/ProjectPage.tsx:80:      style={{
 src/components/BrandDashboard.tsx:123:      style={{
-src/components/AuthPage10.tsx:26:      style={{
-src/components/AuthPage10.tsx:44:            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-src/components/AuthPage10.tsx:56:              style={{
-src/components/AuthPage10.tsx:69:              style={{
-src/components/AuthPage10.tsx:82:              style={{
-src/components/AuthPage10.tsx:95:              style={{
-src/components/AuthPage10.tsx:133:            <div className="text-white text-sm underline" style={{ fontFamily: 'Inter, sans-serif' }}>
+src/pages/Portal.tsx:65:      style={{
+src/design-library/index.tsx:15:    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/td studios black marble.png')" }}>
+src/components/AuthPageMgmt2.tsx:60:      style={{
+src/components/AuthPageMgmt2.tsx:77:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
+src/components/AuthPageMgmt2.tsx:83:            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
+src/components/AuthPageMgmt2.tsx:93:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt2.tsx:106:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt2.tsx:137:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt2.tsx:169:                style={{ fontFamily: "'Inter', sans-serif" }}
+src/components/AuthPage3.tsx:50:      style={{
+src/components/AuthPageMgmt3.tsx:60:      style={{
+src/components/AuthPageMgmt3.tsx:77:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
+src/components/AuthPageMgmt3.tsx:83:            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
+src/components/AuthPageMgmt3.tsx:93:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt3.tsx:106:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt3.tsx:137:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt3.tsx:169:                style={{ fontFamily: "'Inter', sans-serif" }}
+src/components/AuthPage2.tsx:33:      style={{
 src/components/AuthPage7.tsx:13:      style={{
 src/components/AuthPage7.tsx:31:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
 src/components/AuthPage7.tsx:43:              style={{
@@ -48,27 +40,35 @@ src/components/AuthPage7.tsx:95:              style={{
 src/components/AuthPage7.tsx:108:              style={{
 src/components/AuthPage7.tsx:121:              style={{
 src/components/AuthPage7.tsx:131:            <div className="text-white text-sm underline" style={{ fontFamily: 'Inter, sans-serif' }}>
-src/components/AuthPageMgmt3.tsx:60:      style={{
-src/components/AuthPageMgmt3.tsx:77:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
-src/components/AuthPageMgmt3.tsx:83:            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
-src/components/AuthPageMgmt3.tsx:93:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt3.tsx:106:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt3.tsx:137:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt3.tsx:169:                style={{ fontFamily: "'Inter', sans-serif" }}
+src/components/AuthPage.tsx:50:      style={{
+src/components/AuthPage.tsx:68:            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
+src/components/AuthPage.tsx:125:              <div className="text-white text-sm underline" style={{ fontFamily: 'Inter, sans-serif' }}>
+src/design-library/tabs/TokensTab.tsx:72:                          style={{ backgroundColor: color.value }}
+src/design-library/tabs/TokensTab.tsx:125:                        style={{
+src/design-library/tabs/TokensTab.tsx:178:                        style={{ width: token.value, height: '24px' }}
+src/design-library/tabs/BackgroundsTab.tsx:66:                  style={{
 src/components/AuthPage6.tsx:50:      style={{
 src/components/AuthPage6.tsx:68:            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}>Lil Sex 💫</h1>
 src/components/AuthPage6.tsx:74:                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
 src/components/AuthPage6.tsx:82:                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
 src/components/AuthPage6.tsx:93:              <h2 className="text-2xl font-bold text-white animate-shimmer bg-gradient-to-r from-white via-gray-200 to-white bg-[length:200%_100%] bg-clip-text text-transparent" style={{ width: '90%', margin: '0 auto' }}>
 src/components/AuthPage6.tsx:116:                style={{ fontFamily: "'Inter', sans-serif", width: '90%', display: 'inline-block' }}
-src/components/AuthPage2.tsx:33:      style={{
-src/components/AuthPageMgmt2.tsx:60:      style={{
-src/components/AuthPageMgmt2.tsx:77:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
-src/components/AuthPageMgmt2.tsx:83:            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
-src/components/AuthPageMgmt2.tsx:93:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt2.tsx:106:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt2.tsx:137:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-src/components/AuthPageMgmt2.tsx:169:                style={{ fontFamily: "'Inter', sans-serif" }}
-src/components/AuthPage3.tsx:50:      style={{
-src/components/ui/progress.tsx:20:      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+src/components/AuthPage4.tsx:40:      style={{
+src/components/AuthPage4.tsx:57:          <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
+src/components/AuthPageMgmt.tsx:60:      style={{
+src/components/AuthPageMgmt.tsx:77:            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
+src/components/AuthPageMgmt.tsx:83:            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
+src/components/AuthPageMgmt.tsx:93:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt.tsx:106:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt.tsx:137:              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+src/components/AuthPageMgmt.tsx:169:                style={{ fontFamily: "'Inter', sans-serif" }}
+src/design-library/tabs/FontsTab.tsx:46:                      style={{
+src/components/AuthPage10.tsx:26:      style={{
+src/components/AuthPage10.tsx:44:            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+src/components/AuthPage10.tsx:56:              style={{
+src/components/AuthPage10.tsx:69:              style={{
+src/components/AuthPage10.tsx:82:              style={{
+src/components/AuthPage10.tsx:95:              style={{
+src/components/AuthPage10.tsx:133:            <div className="text-white text-sm underline" style={{ fontFamily: 'Inter, sans-serif' }}>
 src/components/ui/chart.tsx:302:                  style={{
+src/components/ui/progress.tsx:20:      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}

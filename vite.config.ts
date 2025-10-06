@@ -28,4 +28,15 @@ export default defineConfig(({ mode }) => ({
       reportsDirectory: 'coverage',
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['lucide-react'],
+          query: ['@tanstack/react-query'],
+        },
+      },
+    },
+  },
 }));

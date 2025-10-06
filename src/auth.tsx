@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { supabase } from './lib/supabase'; // Corrected path
+import { supabase } from '@/lib/supabase';
 
 interface AuthContextType {
   user: any; // You might want to define a more specific User type
