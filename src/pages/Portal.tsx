@@ -37,12 +37,12 @@ const Portal = () => {
   };
 
   const projects = [
-    { id: 'documents', name: 'Documents', icon: FileText, color: 'from-blue-500 to-purple-600' },
-    { id: 'media', name: 'Media Gallery', icon: Image, color: 'from-pink-500 to-rose-500' },
-    { id: 'videos', name: 'Video Library', icon: Video, color: 'from-green-500 to-emerald-600' },
-    { id: 'projects', name: 'Projects', icon: Folder, color: 'from-orange-500 to-red-500' },
-    { id: 'settings', name: 'Settings', icon: Settings, color: 'from-gray-500 to-slate-600' },
-    { id: 'notes', name: 'Quick Notes', icon: StickyNote, color: 'from-teal-500 to-cyan-600' }
+    { id: 'documents', name: 'Documents', icon: FileText, color: 'from-blue-500 to-purple-600', path: '/project/documents' },
+    { id: 'media', name: 'Media Gallery', icon: Image, color: 'from-pink-500 to-rose-500', path: '/project/media' },
+    { id: 'component-library', name: 'Component Library', icon: Video, color: 'from-green-500 to-emerald-600', path: '/library' },
+    { id: 'projects', name: 'Projects', icon: Folder, color: 'from-orange-500 to-red-500', path: '/project/projects' },
+    { id: 'bag-designs', name: 'Bag Designs', icon: Settings, color: 'from-gray-500 to-slate-600', path: '/premade-bag-designs' },
+    { id: 'directory', name: 'Directory', icon: Folder, color: 'from-teal-500 to-cyan-600', path: '/directory' }
   ];
 
   const newFeatures = [
@@ -51,8 +51,8 @@ const Portal = () => {
     { id: 'bio', name: 'Link in Bio', icon: Link, color: 'from-purple-500 to-violet-600', path: '/bio/demo' }
   ];
 
-  const handleProjectClick = (projectId: string) => {
-    navigate(`/project/${projectId}`);
+  const handleProjectClick = (path: string) => {
+    navigate(path);
   };
 
   const handleFeatureClick = (path: string) => {
@@ -92,7 +92,7 @@ const Portal = () => {
             <Card
               key={project.id}
               className="group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-white/10 border-white/20 backdrop-blur-md"
-              onClick={() => handleProjectClick(project.id)}
+              onClick={() => handleProjectClick(project.path)}
             >
               <CardContent className="p-8 text-center">
                 <div className={`w-20 h-20 mx-auto mb-6 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
@@ -147,24 +147,6 @@ const Portal = () => {
               </div>
               <p className="text-white/60 text-sm">TD Studios</p>
             </div>
-
-            {/* Notes Card */}
-            <Card className="bg-white/20 border-white/30">
-              <CardHeader>
-                <CardTitle className="text-white text-center flex items-center justify-center gap-2">
-                  <StickyNote className="w-5 h-5" />
-                  Quick Notes
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Textarea
-                  placeholder="Add your notes here..."
-                  value={notes}
-                  onChange={(e) => handleNotesChange(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60 min-h-[100px] resize-none"
-                />
-              </CardContent>
-            </Card>
 
             {/* Client Logo Space */}
             <div className="text-center">

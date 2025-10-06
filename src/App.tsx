@@ -1,11 +1,12 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/integrations/supabase/auth";
+import { AuthProvider } from "./auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import TheDash from "./pages/TheDash";
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import SharedLayout from "./SharedLayout";
@@ -64,7 +65,7 @@ const App = () => (
           <Routes>
             {/* All routes - no auth required */}
             <Route element={<SharedLayout />}>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<Home />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/library" element={<DesignLibrary />} />
               <Route path="/thedash" element={<TheDash />} />
