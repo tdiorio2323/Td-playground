@@ -85,7 +85,7 @@ export function IconsTab() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full text-gray-900 hover:text-gray-900"
+                  className="w-full bg-white text-gray-900 hover:bg-gray-50 hover:text-gray-900 border-gray-300"
                   onClick={() => handleCopy(icon.name, icon.importName)}
                 >
                   {isCopied ? (

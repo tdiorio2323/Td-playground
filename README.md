@@ -1,79 +1,101 @@
-# Cabana VIP - Invite-Only Creator Network
+# 🧩 TD Playground
 
-## Project info
+**TD Playground** is a personal development sandbox for **building, testing, and refining UI/UX components** before integrating them into live TD Studios projects.
 
-**URL**: https://lovable.dev/projects/dbcb82db-3a5c-4d43-86a6-c004351ecb04
+---
 
-## How can I edit this code?
+## 🎯 Purpose
+A controlled environment for rapid prototyping.
+Used to experiment with layouts, design systems, component logic, and new visual patterns before production.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## ⚙️ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/dbcb82db-3a5c-4d43-86a6-c004351ecb04) and start prompting.
+### Design Library System
+- `/library` route for browsing and testing 40+ shadcn/ui components
+- Icon, template, background, and typography registries
+- CLI utilities for managing, exporting, and syncing designs
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run lib
+npm run lib:open
+npm run lib:export
+npm run lib:sync
+npm run lib:version
 ```
 
-**Edit a file directly in GitHub**
+### Route Preview Tools
+- `npm run routes:preview` → generates full route screenshots
+- `npm run routes:preview:fast` → skips images for faster previews
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Component Directory
+- `/directory` route for centralized component showcase
 
-**Use GitHub Codespaces**
+### Mock Backend
+- Local Supabase simulation for frontend-only prototyping
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 🧠 Tech Stack
+| Layer | Stack |
+|-------|--------|
+| Framework | React 18 + TypeScript + Vite |
+| Styling | Tailwind CSS + shadcn/ui |
+| Routing | React Router v6 |
+| State | TanStack Query |
+| Testing | Vitest + Testing Library |
+| Package Manager | pnpm 10.15.1+ |
 
-**Cabana VIP** — invite-only creator network shell
+---
 
-## Features
-- 🎭 VIP waitlist system
-- 🎨 Creator onboarding flow  
-- 🔗 Link-in-bio profiles
-- 🏛️ Creator portal interface
-- 🛡️ Invite-only access control
+## 🧱 Use Cases
+- Rapid UI prototyping
+- Design system experimentation
+- Interaction + animation testing
+- Client mockup development
+- Component library curation
 
-## Tech Stack
-- Vite + TypeScript + React
-- shadcn/ui + Tailwind CSS
-- Supabase backend integration
+---
 
-## How can I deploy this project?
+## 📁 Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/dbcb82db-3a5c-4d43-86a6-c004351ecb04) and click on Share -> Publish.
+```
+src/
+├── design-library/       # Central component + asset library
+│   ├── registry/         # Components, templates, icons, fonts, backgrounds
+│   └── tabs/             # Library tab views
+├── pages/                # Experimental + Auth templates (Auth1–Auth21)
+├── lib/                  # Utilities + mock data
+├── tools/                # CLI tools (library + route previews)
+└── SharedLayout.tsx      # Global layout + metadata
+```
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
+## 🚀 Commands
+```bash
+# Run dev environment
+pnpm dev
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+# Open design library
+pnpm lib:open
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+# Generate route previews
+pnpm routes:preview
+
+# Export library snapshot
+pnpm lib:export
+```
+
+---
+
+## 🧭 Purpose Summary
+
+This playground acts as your **visual lab** — a workspace for refining design language, testing user flows, and pre-building UI assets that flow into the broader TD Studios ecosystem.
+
+---
+
+**Author:** TD Studios
+**Maintainer:** Tyler Diorio
+**Directory:** `/Users/tylerdiorio/Td-playground`

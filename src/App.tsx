@@ -30,6 +30,7 @@ import Auth17 from "./pages/Auth17";
 import Auth18 from "./pages/Auth18";
 import Auth19 from "./pages/Auth19";
 import Auth20 from "./pages/Auth20";
+import Auth21 from "./pages/Auth21";
 import Admin from "./pages/Admin";
 import Brand from "./pages/Brand";
 import Portal from "./pages/Portal";
@@ -43,7 +44,6 @@ import Storage from "./pages/Storage";
 import PremadeBagDesigns from "./pages/PremadeBagDesigns";
 import CabanaMgmt from "./pages/CabanaMgmt";
 import CabanaMgmt2 from "./pages/CabanaMgmt2";
-import CabanaMgmt3 from "./pages/CabanaMgmt3";
 import CabanaMgmt4 from "./pages/CabanaMgmt4";
 import LCG from "./pages/LCG";
 import Home1 from "./pages/Home1";
@@ -77,7 +77,6 @@ const App = () => (
               <Route path="/cabana" element={<Auth3_4 />} />
               <Route path="/cabanamgmt" element={<CabanaMgmt />} />
               <Route path="/cabanamgmt-2" element={<CabanaMgmt2 />} />
-              <Route path="/cabanamgmt-3" element={<CabanaMgmt3 />} />
               <Route path="/cabanamgmt-4" element={<CabanaMgmt4 />} />
               <Route path="/lcg" element={<LCG />} />
               <Route path="/home-1" element={<Home1 />} />
@@ -101,6 +100,7 @@ const App = () => (
               <Route path="/auth18" element={<Auth18 />} />
               <Route path="/auth19" element={<Auth19 />} />
               <Route path="/auth20" element={<Auth20 />} />
+              <Route path="/soundimageband" element={<Auth21 />} />
               <Route path="/waitlist" element={<VipWaitlist />} />
               <Route path="/bio/:username" element={<LinkInBio />} />
               <Route path="/shop" element={<Shop />} />

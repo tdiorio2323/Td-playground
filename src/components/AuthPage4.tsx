@@ -59,15 +59,6 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
 
         <CardContent className="pb-8">
           <div className="flex flex-col gap-4 w-full px-8">
-            <div className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none rounded-md flex items-center justify-center cursor-not-allowed">
-              PLACEHOLDER 1
-            </div>
-            <div className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none rounded-md flex items-center justify-center cursor-not-allowed">
-              PLACEHOLDER 2
-            </div>
-            <div className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none rounded-md flex items-center justify-center cursor-not-allowed">
-              PLACEHOLDER 3
-            </div>
             <Button
               type="button"
               onClick={() => navigate('/juanita')}
@@ -89,29 +80,16 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
             >
               EXCLUSIVE PAGE
             </Button>
-          </div>
 
-          <form onSubmit={handleSubmit} className="px-8 mt-4">
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full h-14 relative overflow-hidden bg-gradient-to-b from-white to-white/95 hover:from-white hover:to-white/90 text-black border-2 border-white/60 backdrop-blur-xl font-semibold text-lg shadow-[inset_0_3px_8px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.05)] before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/60 before:via-transparent before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-tr after:from-transparent after:via-white/20 after:to-white/40 after:pointer-events-none"
-              variant="outline"
-            >
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                  Authenticating...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <KeyRound className="w-5 h-5" />
-                  Let's Link
-                </div>
-              )}
-            </Button>
-          </form>
+            {/* Image Box - extended to fill space of Let's Link button */}
+            <div className="w-full rounded-lg overflow-hidden" style={{ height: "272px" }}>
+              <img
+                src="/lovable-uploads/placeholder-image.jpg"
+                alt="Featured"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

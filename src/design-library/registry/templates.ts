@@ -1,14 +1,35 @@
-export const templates = [
+export type TemplateMeta = {
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  importPath: string; // e.g. "@/components/AuthPage"
+  namedExport?: string; // e.g. "AuthPage" if no default export
+};
+
+export const templates: TemplateMeta[] = [
   {
-    id: 'hero-section',
-    name: 'Hero Section',
-    category: 'Landing',
-    description: 'Modern hero section with gradient background',
-    code: `<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-900 via-black to-neutral-950">
-  <div className="text-center">
-    <h1 className="text-6xl font-bold text-white mb-4">Welcome</h1>
-    <p className="text-xl text-gray-300">Build amazing things</p>
-  </div>
-</div>`,
+    name: 'Auth Page',
+    description: 'A full-page authentication layout with social links.',
+    category: 'Authentication',
+    tags: ['auth', 'login', 'signup', 'social'],
+    importPath: '@/components/AuthPage',
+    namedExport: 'AuthPage', // AuthPage is a named export
+  },
+  {
+    name: 'Auth Card',
+    description: 'A simple authentication card for login/signup forms.',
+    category: 'Authentication',
+    tags: ['auth', 'card', 'login', 'signup'],
+    importPath: '@/components/AuthCard',
+    // No namedExport needed as it's a default export
+  },
+  {
+    name: 'Brand Dashboard',
+    description: 'A comprehensive dashboard for brand management.',
+    category: 'Dashboards',
+    tags: ['dashboard', 'admin', 'brand', 'analytics'],
+    importPath: '@/components/BrandDashboard',
+    // No namedExport needed as it's a default export
   },
 ];

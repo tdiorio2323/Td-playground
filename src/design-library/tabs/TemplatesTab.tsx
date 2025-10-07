@@ -1,159 +1,130 @@
-import { useState, lazy } from 'react';
+import React, { useMemo, useState, Suspense } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Check, Copy, Code2, Search } from 'lucide-react';
-import { templates } from '../registry/templates';
-import { copyToClipboard } from '../utils/copyToClipboard';
-import { SafePreview } from '../utils/SafePreview';
+import { Code2, Check, Copy } from 'lucide-react';
 
-// Lazy load templates for previews
-const templateLoaders: Record<string, React.LazyExoticComponent<any>> = {
-  'AuthPage': lazy(() => import('@/components/AuthPage').then(m => ({ default: m.default ?? m.AuthPage }))),
-  'AuthPage2': lazy(() => import('@/components/AuthPage2').then(m => ({ default: m.default ?? m.AuthPage2 }))),
-  'AuthPage3': lazy(() => import('@/components/AuthPage3').then(m => ({ default: m.default ?? m.AuthPage3 }))),
-  'AuthPage4': lazy(() => import('@/components/AuthPage4').then(m => ({ default: m.default ?? m.AuthPage4 }))),
-  'AuthPage6': lazy(() => import('@/components/AuthPage6').then(m => ({ default: m.default ?? m.AuthPage6 }))),
-  'AuthPage7': lazy(() => import('@/components/AuthPage7').then(m => ({ default: m.default ?? m.AuthPage7 }))),
-  'AuthPage7_2': lazy(() => import('@/components/AuthPage7_2').then(m => ({ default: m.default ?? m.AuthPage7_2 }))),
-  'AuthPage10': lazy(() => import('@/components/AuthPage10').then(m => ({ default: m.default ?? m.AuthPage10 }))),
-  'AuthPageLCG': lazy(() => import('@/components/AuthPageLCG').then(m => ({ default: m.default ?? m.AuthPageLCG }))),
-  'AuthPageMgmt': lazy(() => import('@/components/AuthPageMgmt').then(m => ({ default: m.default ?? m.AuthPageMgmt }))),
-  'AuthPageMgmt2': lazy(() => import('@/components/AuthPageMgmt2').then(m => ({ default: m.default ?? m.AuthPageMgmt2 }))),
-  'AuthPageMgmt3': lazy(() => import('@/components/AuthPageMgmt3').then(m => ({ default: m.default ?? m.AuthPageMgmt3 }))),
-  'BrandDashboard': lazy(() => import('@/components/BrandDashboard').then(m => ({ default: m.default ?? m.BrandDashboard }))),
-  'SuperAdminDashboard': lazy(() => import('@/components/SuperAdminDashboard').then(m => ({ default: m.default ?? m.SuperAdminDashboard }))),
-  'CustomerApp': lazy(() => import('@/components/CustomerApp').then(m => ({ default: m.default ?? m.CustomerApp }))),
-  'CheckoutFlow': lazy(() => import('@/components/CheckoutFlow').then(m => ({ default: m.default ?? m.CheckoutFlow }))),
-  'DashboardLayout': lazy(() => import('@/components/DashboardLayout').then(m => ({ default: m.default ?? m.DashboardLayout }))),
+type TemplateMeta = {
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  importPath: string; // e.g. "@/components/AuthPage"
+  namedExport?: string; // e.g. "AuthPage" if no default export
 };
 
-// Safe props for templates that need them
-const templateProps: Record<string, any> = {
-  'CheckoutFlow': {
-    items: [{ id: 1, name: 'Sample Item', price: 10, quantity: 1 }],
-    steps: ['cart', 'shipping', 'payment', 'confirmation'],
-    onSubmit: () => {}
-  },
-  'DashboardLayout': { children: null },
-};
+import { templates } from '@/design-library/registry/templates'; // ensure this exists
+
+function ErrorBoundary({ children }: { children: React.ReactNode }) {
+  const [error, setError] = useState<Error | null>(null);
+  if (error) {
+    return (
+      <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded p-3">
+        Preview error: {error.message}
+      </div>
+    );
+  }
+  return (
+    <React.Suspense fallback={<div className="text-gray-400 text-sm">Loading preview…</div>}>
+      <Boundary onError={setError}>{children}</Boundary>
+    </React.Suspense>
+  );
+}
+
+// Minimal error boundary with render prop
+class Boundary extends React.Component<{ onError: (e: Error) => void; children: React.ReactNode }, { hasError: boolean }> {
+  constructor(props:any){ super(props); this.state = { hasError:false }; }
+  static getDerivedStateFromError(){ return { hasError:true }; }
+  componentDidCatch(error:Error){ this.props.onError(error); }
+  render(){ return this.state.hasError ? null : this.props.children; }
+}
+
+const templateLoaders: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {};
+function getLoader(t: TemplateMeta) {
+  if (templateLoaders[t.name]) return templateLoaders[t.name];
+  templateLoaders[t.name] = React.lazy(async () => {
+    const mod = await import(/* @vite-ignore */ t.importPath);
+    const Comp = (t.namedExport ? mod[t.namedExport] : mod.default) ?? mod.default ?? Object.values(mod)[0];
+    if (!Comp) throw new Error(`No export found for ${t.name}`);
+    return { default: Comp };
+  });
+  return templateLoaders[t.name];
+}
 
 export function TemplatesTab() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [expandedCode, setExpandedCode] = useState<string | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [cat, setCat] = useState<string | 'All'>('All');
+  const [copied, setCopied] = useState<string | null>(null);
 
-  const categories = ['All', ...Array.from(new Set(templates.map(t => t.category)))];
+  const categories = useMemo(() => ['All', ...Array.from(new Set(templates.map(t => t.category)))], []);
+  const filtered = useMemo(() => {
+    const q = query.toLowerCase();
+    return templates.filter(t =>
+      (cat === 'All' || t.category === cat) &&
+      (t.name.toLowerCase().includes(q) || t.tags.some(tag => tag.toLowerCase().includes(q)))
+    );
+  }, [query, cat]);
 
-  const filteredTemplates = templates.filter(template => {
-    const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         template.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         template.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesCategory = selectedCategory === 'All' || template.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const handleCopy = async (templateName: string) => {
-    const code = `import { ${templateName} } from '@/components/${templateName}';\n\n<${templateName} />`;
-    const success = await copyToClipboard(code);
-    if (success) {
-      setCopiedId(templateName);
-      setTimeout(() => setCopiedId(null), 2000);
-    }
-  };
+  async function handleCopy(name: string) {
+    const t = templates.find(x => x.name === name);
+    if (!t) return;
+    const importLine = t.namedExport
+      ? `import { ${t.namedExport} } from "${t.importPath}";`
+      : `import ${t.name.replace(/\s+/g,'')} from "${t.importPath}";`;
+    await navigator.clipboard.writeText(importLine);
+    setCopied(name);
+    setTimeout(() => setCopied(null), 1200);
+  }
 
   return (
-    <div className="space-y-6">
-      {/* Search and Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input
-            placeholder="Search templates..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
-        </div>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-2">
+        <input
+          className="border rounded px-3 py-2 w-full max-w-sm"
+          placeholder="Search templates…"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+        />
         <div className="flex gap-2 flex-wrap">
-          {categories.map(category => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className="text-white"
-            >
-              {category}
+          {categories.map(c => (
+            <Button key={c} size="sm" variant={c===cat?'default':'outline'} onClick={()=>setCat(c as any)}>
+              {c}
             </Button>
           ))}
         </div>
       </div>
 
-      {/* Template Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filteredTemplates.map(template => {
-          const isExpanded = expandedCode === template.name;
-          const isCopied = copiedId === template.name;
-          const TemplatePreview = templateLoaders[template.name];
-
+        {filtered.map(t => {
+          const Preview = getLoader(t);
           return (
-            <Card key={template.name} className="bg-white border-gray-200">
+            <Card key={t.name} className="bg-white border-gray-200">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center justify-between">
-                  <span>{template.name}</span>
+                  <span>{t.name}</span>
                   <span className="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                    {template.category}
+                    {t.category}
                   </span>
                 </CardTitle>
-                <p className="text-sm text-gray-600 mt-2">{template.description}</p>
+                <p className="text-sm text-gray-600 mt-2">{t.description}</p>
                 <div className="flex flex-wrap gap-1 mt-2">
-                  {template.tags.map(tag => (
-                    <span key={tag} className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
-                      {tag}
-                    </span>
+                  {t.tags.map(tag => (
+                    <span key={tag} className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">{tag}</span>
                   ))}
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
                   <div className="w-full h-96 overflow-hidden relative">
-                    {TemplatePreview ? (
-                      <SafePreview>
-                        <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
-                          <TemplatePreview {...(templateProps[template.name] || {})} />
-                        </div>
-                      </SafePreview>
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="text-center text-gray-400 text-sm">
-                          <Code2 className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                          <p>Preview unavailable</p>
-                        </div>
+                    <ErrorBoundary>
+                      <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
+                        <Preview />
                       </div>
-                    )}
+                    </ErrorBoundary>
                   </div>
                 </div>
-
                 <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 text-white"
-                    onClick={() => handleCopy(template.name)}
-                  >
-                    {isCopied ? (
-                      <>
-                        <Check className="h-4 w-4 mr-2" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-4 w-4 mr-2" />
-                        Copy Import
-                      </>
-                    )}
+                  <Button variant="outline" size="sm" className="flex-1 text-white" onClick={()=>handleCopy(t.name)}>
+                    {copied===t.name ? (<><Check className="h-4 w-4 mr-2"/>Copied!</>) : (<><Copy className="h-4 w-4 mr-2"/>Copy Import</>)}
                   </Button>
                 </div>
               </CardContent>
@@ -162,15 +133,14 @@ export function TemplatesTab() {
         })}
       </div>
 
-      {filteredTemplates.length === 0 && (
+      {filtered.length===0 && (
         <div className="text-center py-12 text-gray-500">
-          <p>No templates found matching your search.</p>
+          <p>No templates found.</p>
         </div>
       )}
 
-      {/* Stats */}
       <div className="text-center text-sm text-gray-500">
-        Showing {filteredTemplates.length} of {templates.length} templates
+        Showing {filtered.length} of {templates.length} templates
       </div>
     </div>
   );

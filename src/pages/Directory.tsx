@@ -5,9 +5,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const Directory = () => {
   const navigate = useNavigate();
 
-  const routes = [
+  const topRoutes = [
+    { path: "/directory", label: "Directory", category: "Core" },
+    { path: "/library", label: "Design Library", category: "Core" },
+    { path: "/admin", label: "Admin", category: "Core" },
+  ];
+
+  const allRoutes = [
     { path: "/", label: "Index (Landing)", category: "Core" },
     { path: "/thedash", label: "The Dash", category: "Core" },
+    { path: "/authcard", label: "Auth Card Preview", category: "Core" },
 
     { path: "/auth", label: "Auth", category: "Auth Routes" },
     { path: "/auth2", label: "Auth 2", category: "Auth Routes" },
@@ -41,7 +48,6 @@ const Directory = () => {
 
     { path: "/cabanamgmt", label: "Cabana Management", category: "Management" },
     { path: "/cabanamgmt-2", label: "Cabana Management 2", category: "Management" },
-    { path: "/cabanamgmt-3", label: "Cabana Management 3", category: "Management" },
     { path: "/cabanamgmt-4", label: "Cabana Management 4", category: "Management" },
     { path: "/lcg", label: "Legacy Capital Group", category: "Management" },
     { path: "/home-1", label: "Home 1", category: "Management" },
@@ -51,7 +57,6 @@ const Directory = () => {
     { path: "/checkout", label: "Checkout", category: "App Features" },
     { path: "/storage", label: "Storage", category: "App Features" },
     { path: "/premade-bag-designs", label: "Premade Bag Designs", category: "App Features" },
-    { path: "/admin", label: "Admin", category: "App Features" },
     { path: "/brand", label: "Brand", category: "App Features" },
     { path: "/portal", label: "Portal", category: "App Features" },
     { path: "/onboard", label: "Creator Onboarding", category: "App Features" },
@@ -59,11 +64,14 @@ const Directory = () => {
     { path: "/project/1", label: "Project Page (Demo)", category: "App Features" },
   ];
 
-  // Group routes by category
-  const categories = Array.from(new Set(routes.map(r => r.category)));
+  // Filter out top routes from allRoutes to avoid duplication in grouped categories
+  const filteredRoutes = allRoutes.filter(route => !topRoutes.some(topRoute => topRoute.path === route.path));
+
+  // Group remaining routes by category
+  const categories = Array.from(new Set(filteredRoutes.map(r => r.category)));
   const groupedRoutes = categories.map(category => ({
     category,
-    routes: routes.filter(r => r.category === category)
+    routes: filteredRoutes.filter(r => r.category === category)
   }));
 
   return (
@@ -88,6 +96,31 @@ const Directory = () => {
         </div>
 
         <div className="grid gap-4 sm:gap-6 md:gap-8">
+          <Card key="top-routes" className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-xl sm:text-2xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Quick Access
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+                {topRoutes.map(({ path, label }) => (
+                  <Button
+                    key={path}
+                    onClick={() => navigate(path)}
+                    variant="outline"
+                    className="h-auto py-3 px-4 sm:py-4 sm:px-6 text-left justify-start bg-white/20 hover:bg-white/30 border-white/30 hover:border-white/40 text-white transition-all duration-200 backdrop-blur-sm"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    <div className="flex flex-col items-start gap-1">
+                      <span className="font-semibold text-sm sm:text-base">{label}</span>
+                      <span className="text-xs text-slate-200">{path}</span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
           {groupedRoutes.map(({ category, routes: categoryRoutes }) => (
             <Card key={category} className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
               <CardHeader className="p-4 sm:p-6">
