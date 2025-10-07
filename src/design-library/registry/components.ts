@@ -73,12 +73,6 @@ export const components: ComponentDefinition[] = [
     description: 'Management portal login - variant 2'
   },
   {
-    name: 'AuthPageMgmt3',
-    path: '/src/components/AuthPageMgmt3.tsx',
-    category: 'Management',
-    description: 'Management portal login - variant 3'
-  },
-  {
     name: 'BrandDashboard',
     path: '/src/components/BrandDashboard.tsx',
     category: 'Dashboards',

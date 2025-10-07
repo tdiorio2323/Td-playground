@@ -1,4 +1,6 @@
-# CLAUDE.md — TD Playground
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Overview
 
@@ -18,12 +20,19 @@ It exists for:
 
 | Command | Description |
 |---------|-------------|
-| `pnpm dev` | Start the development server |
+| `pnpm dev` | Start dev server (localhost:8080) |
+| `pnpm build` | Production build |
+| `pnpm build:dev` | Development mode build |
+| `pnpm lint` | Run ESLint |
+| `pnpm preview` | Preview production build |
+| `pnpm test` | Run tests in watch mode |
+| `pnpm test:coverage` | Run tests with coverage report |
 | `pnpm lib` | Display library stats and component counts |
 | `pnpm lib:open` | Launch the design library at `/library` |
 | `pnpm lib:export` | Export library snapshot |
 | `pnpm lib:sync` | Sync library assets to another project |
-| `pnpm routes:preview` | Generate route screenshots |
+| `pnpm lib:version` | Show library version info |
+| `pnpm routes:preview` | Generate route screenshots (requires dev server on :8081) |
 | `pnpm routes:preview:fast` | Fast preview generation without images |
 
 ## Architecture
@@ -63,14 +72,39 @@ src/
 All UI components are tested via Vitest and @testing-library/react.
 Testing setup is configured within `vite.config.ts` and `src/setupTests.ts`.
 
+Run individual test files:
+```bash
+pnpm test path/to/test.test.tsx
+```
+
+## Design Library System
+
+The design library is a core feature of this playground, accessible at `/library`:
+
+- **Registry System**: Components, templates, icons, fonts, and backgrounds are cataloged in `src/design-library/registry/*.ts`
+- **Adding Components**: Register new components in `src/design-library/registry/components.ts` with name, path, category, and description
+- **CLI Tool**: `tools/design-lib.cjs` manages library operations (stats, export, sync, version)
+- **Categories**: Auth Pages, Management, Dashboards, Apps, Layouts
+
+## Routing Architecture
+
+- Built on React Router v6 with centralized route definitions in `src/App.tsx`
+- All routes wrapped in `SharedLayout` for consistent global metadata and layout
+- No authentication guards - all routes publicly accessible for prototyping
+- Route naming convention: `/auth*` for auth pages, branded routes use client names (e.g., `/starluv`, `/cabana`, `/lcg`)
+
+## Path Alias
+
+Use `@/` to reference the `src/` directory:
+```typescript
+import { Button } from "@/components/ui/button"
+```
+
 ## Notes
 
-- Authentication is stubbed; no actual backend connection.
-- All mock data is local and can be edited in `lib/mockData.ts`.
-- The `/library` route acts as a visual documentation layer for internal components.
-
-## Contributors
-
-**Primary Maintainer:** Tyler Diorio
-**Organization:** TD Studios
-**Location:** `/Users/tylerdiorio/Td-playground`
+- Authentication is stubbed; no actual backend connection
+- All mock data is local and can be edited in `lib/mockData.ts`
+- The `/library` route acts as a visual documentation layer for internal components
+- Dev server runs on port 8080 (configured in `vite.config.ts`)
+- Route preview tool expects dev server on port 8081
+- Package manager: pnpm 10.15.1+

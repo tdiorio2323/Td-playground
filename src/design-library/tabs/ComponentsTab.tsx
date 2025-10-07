@@ -20,7 +20,6 @@ const componentLoaders: Record<string, React.LazyExoticComponent<any>> = {
   'AuthPageLCG': lazy(() => import('@/components/AuthPageLCG').then(m => ({ default: m.default ?? m.AuthPageLCG }))),
   'AuthPageMgmt': lazy(() => import('@/components/AuthPageMgmt').then(m => ({ default: m.default ?? m.AuthPageMgmt }))),
   'AuthPageMgmt2': lazy(() => import('@/components/AuthPageMgmt2').then(m => ({ default: m.default ?? m.AuthPageMgmt2 }))),
-  'AuthPageMgmt3': lazy(() => import('@/components/AuthPageMgmt3').then(m => ({ default: m.default ?? m.AuthPageMgmt3 }))),
   'BrandDashboard': lazy(() => import('@/components/BrandDashboard').then(m => ({ default: m.default ?? m.BrandDashboard }))),
   'SuperAdminDashboard': lazy(() => import('@/components/SuperAdminDashboard').then(m => ({ default: m.default ?? m.SuperAdminDashboard }))),
   'CustomerApp': lazy(() => import('@/components/CustomerApp').then(m => ({ default: m.default ?? m.CustomerApp }))),

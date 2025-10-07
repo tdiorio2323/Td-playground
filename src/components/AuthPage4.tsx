@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, KeyRound } from "lucide-react";
+import Breakout from "@/components/Breakout";
 
 interface AuthPage4Props {
   onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
@@ -61,33 +62,14 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
           <div className="flex flex-col gap-4 w-full px-8">
             <Button
               type="button"
-              onClick={() => navigate('/juanita')}
+              onClick={() => navigate('/directory')}
               className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
             >
-              ADMIN PORTAL
-            </Button>
-            <Button
-              type="button"
-              onClick={() => navigate('/juanita2')}
-              className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-            >
-              Link Page/Slide
-            </Button>
-            <Button
-              type="button"
-              onClick={() => navigate('/juanita3')}
-              className="w-full h-14 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
-            >
-              EXCLUSIVE PAGE
+              ENTER
             </Button>
 
-            {/* Image Box - extended to fill space of Let's Link button */}
-            <div className="w-full rounded-lg overflow-hidden" style={{ height: "272px" }}>
-              <img
-                src="/lovable-uploads/placeholder-image.jpg"
-                alt="Featured"
-                className="w-full h-full object-cover"
-              />
+            <div className="mt-4 w-full flex justify-center">
+              <Breakout w={300} h={320} />
             </div>
           </div>
         </CardContent>
