@@ -1,13 +1,11 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/integrations/supabase/auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import TheDash from "./pages/TheDash";
 import NotFound from "./pages/NotFound";
-import ProtectedRoute from "./ProtectedRoute";
 import SharedLayout from "./SharedLayout";
 import Auth from "./pages/Auth";
 import Auth3 from "./pages/Auth3";
@@ -51,23 +49,24 @@ import LCG from "./pages/LCG";
 import Home1 from "./pages/Home1";
 import Directory from "./pages/Directory";
 import DesignLibrary from "./design-library";
+import AuthCardPreview from "./pages/AuthCardPreview";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <Routes>
-            {/* All routes - no auth required */}
-            <Route element={<SharedLayout />}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Routes>
+          {/* All routes - no auth required */}
+          <Route element={<SharedLayout />}>
               <Route path="/" element={<Index />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/library" element={<DesignLibrary />} />
               <Route path="/thedash" element={<TheDash />} />
+              <Route path="/authcard" element={<AuthCardPreview />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/auth2" element={<Auth />} />
               <Route path="/juanita" element={<Auth3 />} />
@@ -118,7 +117,6 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
-    </AuthProvider>
   </QueryClientProvider>
 );
 

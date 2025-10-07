@@ -159,11 +159,6 @@ All colors MUST be HSL.
 
   body {
     @apply text-foreground;
-    background-image: url('/lovable-uploads/74a236e3-3b28-4ffa-8e8e-cd545be0f4e5.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
   }
 }
 

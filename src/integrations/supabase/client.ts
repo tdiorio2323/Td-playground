@@ -1,11 +1,23 @@
-// Frontend-only mock client - no real database connections
-import type { Database } from './types';
-import { createMockSupabaseClient } from './mockClient';
+// Stub Supabase client for UI-only sandbox
+// No real backend connection - all operations are no-ops
 
-// This project uses mock data only - no real API connections
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-
-const mockClient = createMockSupabaseClient();
-
-export const supabase = mockClient as any;
+export const supabase = {
+  from: () => ({
+    select: () => Promise.resolve({ data: [], error: null }),
+    insert: () => Promise.resolve({ data: null, error: null }),
+    update: () => Promise.resolve({ data: null, error: null }),
+    delete: () => Promise.resolve({ error: null }),
+  }),
+  auth: {
+    signUp: () => Promise.resolve({ data: null, error: null }),
+    signIn: () => Promise.resolve({ data: null, error: null }),
+    signOut: () => Promise.resolve({ error: null }),
+    getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+  },
+  storage: {
+    from: () => ({
+      upload: () => Promise.resolve({ data: null, error: null }),
+      getPublicUrl: () => ({ data: { publicUrl: '' } }),
+    }),
+  },
+};
