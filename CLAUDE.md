@@ -93,6 +93,14 @@ The design library is a core feature of this playground, accessible at `/library
 - No authentication guards - all routes publicly accessible for prototyping
 - Route naming convention: `/auth*` for auth pages, branded routes use client names (e.g., `/starluv`, `/cabana`, `/lcg`)
 
+### Key Routes
+- `/` - Home page with ENTER button and Breakout game
+- `/library` - Design library browser (40+ shadcn/ui components)
+- `/directory` - Centralized component showcase
+- `/authcard` - UI-only AuthCard component preview
+- `/thedash` - Dashboard template
+- `/auth`, `/auth2-21`, `/juanita`, `/cabana`, `/starluv`, etc. - Auth page variations
+
 ## Path Alias
 
 Use `@/` to reference the `src/` directory:
@@ -102,9 +110,11 @@ import { Button } from "@/components/ui/button"
 
 ## Notes
 
-- Authentication is stubbed; no actual backend connection
+- Authentication is stubbed; no actual backend connection (Supabase client included but locally simulated)
 - All mock data is local and can be edited in `lib/mockData.ts`
 - The `/library` route acts as a visual documentation layer for internal components
+- The `/directory` route provides a centralized component showcase
 - Dev server runs on port 8080 (configured in `vite.config.ts`)
 - Route preview tool expects dev server on port 8081
-- Package manager: pnpm 10.15.1+
+- Package manager: pnpm 10.15.1+ (enforced via packageManager field)
+- IMPORTANT: Use `pnpm` not `npm` - this project requires pnpm

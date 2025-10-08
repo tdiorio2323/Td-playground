@@ -31,6 +31,7 @@ import Auth18 from "./pages/Auth18";
 import Auth19 from "./pages/Auth19";
 import Auth20 from "./pages/Auth20";
 import Auth21 from "./pages/Auth21";
+import LexiStarShow from "./pages/LexiStarShow";
 import Admin from "./pages/Admin";
 import Brand from "./pages/Brand";
 import Portal from "./pages/Portal";
@@ -101,6 +102,7 @@ const App = () => (
               <Route path="/auth19" element={<Auth19 />} />
               <Route path="/auth20" element={<Auth20 />} />
               <Route path="/soundimageband" element={<Auth21 />} />
+              <Route path="/lexistarshow" element={<LexiStarShow />} />
               <Route path="/waitlist" element={<VipWaitlist />} />
               <Route path="/bio/:username" element={<LinkInBio />} />
               <Route path="/shop" element={<Shop />} />
