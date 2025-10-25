@@ -68,13 +68,13 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
               ENTER
             </Button>
 
-            {/* Pink Button - Cabana */}
+            {/* Pink Button - Cabana Group */}
             <Button
               type="button"
               onClick={() => window.open('https://www.cabanagrp.com', '_blank')}
               className="w-full h-14 bg-[#FF1493] hover:bg-[#E0127B] text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
             >
-              CABANA
+              CABANA GROUP
             </Button>
 
             {/* Green Button - Verde */}

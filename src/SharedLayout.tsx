@@ -25,9 +25,9 @@ const SharedLayout = () => {
     const isExcludedPrefix = pathname.startsWith('/auth');
     if (excludedExact.has(pathname) || isExcludedPrefix) return;
 
-    // Default CABANA metadata
-    const title = 'CABANA';
-    const image = `${window.location.origin}/lovable-uploads/cabana-logo.png`;
+    // Default TD STUDIOS metadata
+    const title = 'TD STUDIOS';
+    const image = `${window.location.origin}/lovable-uploads/td-mtv.png`;
     document.title = title;
 
     const ensureMetaProperty = (property: string, content: string) => {

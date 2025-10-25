@@ -3,7 +3,7 @@ import { AuthPage4 } from "@/components/AuthPage4";
 
 const Auth = () => {
   useEffect(() => {
-    document.title = "CABANA";
+    document.title = "TD STUDIOS";
 
     // Update or create meta tags
     const updateMetaTag = (property: string, content: string) => {
@@ -26,10 +26,10 @@ const Auth = () => {
       meta.content = content;
     };
 
-    updateMetaTag('og:title', 'CABANA');
-    updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/cabana-logo.png`);
-    updateMetaName('twitter:title', 'CABANA');
-    updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/cabana-logo.png`);
+    updateMetaTag('og:title', 'TD STUDIOS');
+    updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/td-mtv.png`);
+    updateMetaName('twitter:title', 'TD STUDIOS');
+    updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/td-mtv.png`);
     updateMetaName('twitter:card', 'summary_large_image');
   }, []);
 

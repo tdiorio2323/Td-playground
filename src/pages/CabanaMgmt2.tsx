@@ -3,7 +3,7 @@ import { AuthPageMgmt2 } from "@/components/AuthPageMgmt2";
 
 const CabanaMgmt2 = () => {
   useEffect(() => {
-    document.title = "CABANA Management";
+    document.title = "TD STUDIOS Management";
 
     // Update or create meta tags
     const updateMetaTag = (property: string, content: string) => {
@@ -26,10 +26,10 @@ const CabanaMgmt2 = () => {
       meta.content = content;
     };
 
-    updateMetaTag('og:title', 'CABANA Management');
-    updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/cabana-logo.png`);
-    updateMetaName('twitter:title', 'CABANA Management');
-    updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/cabana-logo.png`);
+    updateMetaTag('og:title', 'TD STUDIOS Management');
+    updateMetaTag('og:image', `${window.location.origin}/lovable-uploads/td-mtv.png`);
+    updateMetaName('twitter:title', 'TD STUDIOS Management');
+    updateMetaName('twitter:image', `${window.location.origin}/lovable-uploads/td-mtv.png`);
     updateMetaName('twitter:card', 'summary_large_image');
   }, []);
 
