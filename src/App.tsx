@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Index from "./pages/Index";
 import TheDash from "./pages/TheDash";
 import NotFound from "./pages/NotFound";
@@ -53,77 +54,93 @@ import DesignLibrary from "./design-library";
 import AuthCardPreview from "./pages/AuthCardPreview";
 import ProductDetail from "./pages/ProductDetail";
 import Spooky from "./pages/Spooky";
+import Hub from "./pages/Hub";
+import CasinoNav from "./pages/CasinoNav";
+import { CommandPalette } from "./components/CommandPalette";
+import { FloatingNavButton } from "./components/FloatingNavButton";
+import { DevMenuOverlay } from "./components/DevMenuOverlay";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <Routes>
-          {/* All routes - no auth required */}
-          <Route element={<SharedLayout />}>
-              <Route path="/" element={<Index />} />
-              <Route path="/directory" element={<Directory />} />
-              <Route path="/library" element={<DesignLibrary />} />
-              <Route path="/spooky" element={<Spooky />} />
-              <Route path="/thedash" element={<TheDash />} />
-              <Route path="/authcard" element={<AuthCardPreview />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/auth2" element={<Auth />} />
-              <Route path="/juanita" element={<Auth3 />} />
-              <Route path="/thecabana" element={<Auth3 />} />
-              <Route path="/juanita2" element={<Auth3_2 />} />
-              <Route path="/juanita3" element={<Auth3_3 />} />
-              <Route path="/juanita4" element={<Auth3_4 />} />
-              <Route path="/cabana" element={<Auth3_4 />} />
-              <Route path="/cabanamgmt" element={<CabanaMgmt />} />
-              <Route path="/cabanamgmt-2" element={<CabanaMgmt2 />} />
-              <Route path="/cabanamgmt-4" element={<CabanaMgmt4 />} />
-              <Route path="/lcg" element={<LCG />} />
-              <Route path="/home-1" element={<Home1 />} />
-              <Route path="/auth4" element={<Auth4 />} />
-              <Route path="/joincabana" element={<Auth5 />} />
-              <Route path="/lilsex" element={<Auth6 />} />
-              <Route path="/starluv" element={<Auth7 />} />
-              <Route path="/starluv-2" element={<Auth7_2 />} />
-              <Route path="/starluv-3" element={<Auth7 />} />
-              <Route path="/starluv-4" element={<Auth7 />} />
-              <Route path="/auth8" element={<Auth8 />} />
-              <Route path="/auth9" element={<Auth9 />} />
-              <Route path="/quickprintz" element={<Auth10 />} />
-              <Route path="/auth11" element={<Auth11 />} />
-              <Route path="/auth12" element={<Auth12 />} />
-              <Route path="/auth13" element={<Auth13 />} />
-              <Route path="/auth14" element={<Auth14 />} />
-              <Route path="/auth15" element={<Auth15 />} />
-              <Route path="/auth16" element={<Auth16 />} />
-              <Route path="/auth17" element={<Auth17 />} />
-              <Route path="/auth18" element={<Auth18 />} />
-              <Route path="/auth19" element={<Auth19 />} />
-              <Route path="/auth20" element={<Auth20 />} />
-              <Route path="/soundimageband" element={<Auth21 />} />
-              <Route path="/lexistarshow" element={<LexiStarShow />} />
-              <Route path="/waitlist" element={<VipWaitlist />} />
-              <Route path="/bio/:username" element={<LinkInBio />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/product/:id" element={<ProductDetail />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/storage" element={<Storage />} />
-              <Route path="/premade-bag-designs" element={<PremadeBagDesigns />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/brand" element={<Brand />} />
-              <Route path="/portal" element={<Portal />} />
-              <Route path="/project/:id" element={<ProjectPage />} />
-              <Route path="/onboard" element={<CreatorOnboarding />} />
-              <Route path="/*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <Routes>
+            {/* All routes - no auth required */}
+            <Route element={<SharedLayout />}>
+                <Route path="/" element={<Index />} />
+                <Route path="/directory" element={<Directory />} />
+                <Route path="/library" element={<DesignLibrary />} />
+                <Route path="/spooky" element={<Spooky />} />
+                <Route path="/thedash" element={<TheDash />} />
+                <Route path="/authcard" element={<AuthCardPreview />} />
+                <Route path="/hub" element={<Hub />} />
+                <Route path="/casino-nav" element={<CasinoNav />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/auth2" element={<Auth />} />
+                <Route path="/juanita" element={<Auth3 />} />
+                <Route path="/thecabana" element={<Auth3 />} />
+                <Route path="/juanita2" element={<Auth3_2 />} />
+                <Route path="/juanita3" element={<Auth3_3 />} />
+                <Route path="/juanita4" element={<Auth3_4 />} />
+                <Route path="/cabana" element={<Auth3_4 />} />
+                <Route path="/cabanamgmt" element={<CabanaMgmt />} />
+                <Route path="/cabanamgmt-2" element={<CabanaMgmt2 />} />
+                <Route path="/cabanamgmt-4" element={<CabanaMgmt4 />} />
+                <Route path="/lcg" element={<LCG />} />
+                <Route path="/home-1" element={<Home1 />} />
+                <Route path="/auth4" element={<Auth4 />} />
+                <Route path="/joincabana" element={<Auth5 />} />
+                <Route path="/lilsex" element={<Auth6 />} />
+                <Route path="/starluv" element={<Auth7 />} />
+                <Route path="/starluv-2" element={<Auth7_2 />} />
+                <Route path="/starluv-3" element={<Auth7 />} />
+                <Route path="/starluv-4" element={<Auth7 />} />
+                <Route path="/auth8" element={<Auth8 />} />
+                <Route path="/auth9" element={<Auth9 />} />
+                <Route path="/quickprintz" element={<Auth10 />} />
+                <Route path="/auth11" element={<Auth11 />} />
+                <Route path="/auth12" element={<Auth12 />} />
+                <Route path="/auth13" element={<Auth13 />} />
+                <Route path="/auth14" element={<Auth14 />} />
+                <Route path="/auth15" element={<Auth15 />} />
+                <Route path="/auth16" element={<Auth16 />} />
+                <Route path="/auth17" element={<Auth17 />} />
+                <Route path="/auth18" element={<Auth18 />} />
+                <Route path="/auth19" element={<Auth19 />} />
+                <Route path="/auth20" element={<Auth20 />} />
+                <Route path="/soundimageband" element={<Auth21 />} />
+                <Route path="/lexistarshow" element={<LexiStarShow />} />
+                <Route path="/waitlist" element={<VipWaitlist />} />
+                <Route path="/bio/:username" element={<LinkInBio />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/storage" element={<Storage />} />
+                <Route path="/premade-bag-designs" element={<PremadeBagDesigns />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/brand" element={<Brand />} />
+                <Route path="/portal" element={<Portal />} />
+                <Route path="/project/:id" element={<ProjectPage />} />
+                <Route path="/onboard" element={<CreatorOnboarding />} />
+                <Route path="/*" element={<NotFound />} />
+              </Route>
+            </Routes>
+
+            {/* Global Navigation Components */}
+            <CommandPalette open={commandPaletteOpen} onOpenChange={setCommandPaletteOpen} />
+            <FloatingNavButton onClick={() => setCommandPaletteOpen(true)} />
+            <DevMenuOverlay />
+          </BrowserRouter>
+        </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
