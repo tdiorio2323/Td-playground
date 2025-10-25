@@ -44,8 +44,42 @@ npm run lib:version
 | Styling | Tailwind CSS + shadcn/ui |
 | Routing | React Router v6 |
 | State | TanStack Query |
+| Backend | Supabase |
+| AI | OpenAI API |
 | Testing | Vitest + Testing Library |
 | Package Manager | pnpm 10.15.1+ |
+
+---
+
+## 🔧 Setup & Configuration
+
+### Prerequisites
+- Node.js 18+ and pnpm 10.15.1+
+- Supabase account (optional, for backend features)
+- OpenAI API key (optional, for AI features)
+
+### Environment Variables
+Create a `.env.local` file in the root directory based on `.env.example`:
+
+```bash
+# Copy the example file
+cp .env.example .env.local
+```
+
+Then add your credentials:
+
+```env
+# Supabase Configuration
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# OpenAI Configuration
+VITE_OPENAI_API_KEY=your_openai_api_key
+```
+
+**Getting API Keys:**
+- **Supabase:** Visit [supabase.com](https://supabase.com) → Create a project → Copy URL and anon key from Settings → API
+- **OpenAI:** Visit [platform.openai.com](https://platform.openai.com) → API Keys → Create new secret key
 
 ---
 
