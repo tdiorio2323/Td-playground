@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, KeyRound } from "lucide-react";
-import { SlotMachine } from "@/components/SlotMachine";
 
 interface AuthPage4Props {
   onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
@@ -69,9 +68,32 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
               ENTER
             </Button>
 
-            <div className="mt-4 w-full flex justify-center">
-              <SlotMachine />
-            </div>
+            {/* Pink Button - Cabana */}
+            <Button
+              type="button"
+              onClick={() => window.open('https://www.cabanagrp.com', '_blank')}
+              className="w-full h-14 bg-[#FF1493] hover:bg-[#E0127B] text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              CABANA
+            </Button>
+
+            {/* Green Button - Verde */}
+            <Button
+              type="button"
+              onClick={() => window.open('https://Verde.tdstudiosny.com/designs', '_blank')}
+              className="w-full h-14 bg-[#00FF7F] hover:bg-[#00E070] text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              VERDE
+            </Button>
+
+            {/* Red Button - Jackpot */}
+            <Button
+              type="button"
+              onClick={() => window.open('https://jackpot.tdstudiosny.com', '_blank')}
+              className="w-full h-14 bg-[#FF0000] hover:bg-[#E00000] text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              JACKPOT
+            </Button>
           </div>
         </CardContent>
       </Card>
