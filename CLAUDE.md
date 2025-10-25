@@ -2,19 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ CRITICAL: FRONTEND PROTOTYPING ONLY
+
+This is a **pure frontend sandbox** for rapid UI/UX prototyping. Focus exclusively on UI components, mock data, interactions, and design system refinement. **DO NOT implement** real API integrations, database queries, authentication logic, server-side functionality, or environment configurations for real services. All Supabase/backend references are **mocked for UI testing only**.
+
 ## Overview
 
-TD Playground is a component experimentation environment used by TD Studios for prototyping, visual testing, and design library management.
-
-## Project Intent
-
-This repo is **not production-bound**.
-It exists for:
-
-- Testing UI ideas
-- Experimenting with design language
-- Refining component behavior
-- Building reusable templates for client projects
+TD Playground is a component experimentation environment used by TD Studios for prototyping, visual testing, design library management, and building reusable templates for client projects. This repo is **not production-bound**.
 
 ## Key Commands
 
@@ -34,6 +28,7 @@ It exists for:
 | `pnpm lib:version` | Show library version info |
 | `pnpm routes:preview` | Generate route screenshots (requires dev server on :8081) |
 | `pnpm routes:preview:fast` | Fast preview generation without images |
+| `pnpm optimize:images` | Optimize images in public/lovable-uploads using Squoosh |
 
 ## Architecture
 
@@ -57,41 +52,108 @@ src/
 └── SharedLayout.tsx          # Global layout wrapper
 ```
 
-## Dependencies
+## Tech Stack
 
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- shadcn/ui
-- TanStack Query
-- Vitest
+- **React 18 + TypeScript + Vite** - UI framework with SWC fast refresh
+- **Tailwind CSS + shadcn/ui** - Utility-first styling with Radix UI primitives
+- **React Router v6** - Client-side routing (no authentication guards)
+- **TanStack Query** - Server state management
+- **Vitest + Testing Library** - Unit testing with jsdom
+- **pnpm 10.15.1+** - Package manager (required, not npm)
+
+## App Initialization & Providers
+
+The app is initialized in `src/App.tsx` with the following provider hierarchy:
+
+```
+<QueryClientProvider>        # TanStack Query for server state
+  <TooltipProvider>           # Radix UI tooltip context
+    <Toaster />               # shadcn/ui toast notifications
+    <Sonner />                # Sonner toast system
+    <BrowserRouter>           # React Router v6
+      <Routes>
+        <Route element={<SharedLayout />}>  # Metadata & layout wrapper
+          {/* All app routes */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </TooltipProvider>
+</QueryClientProvider>
+```
+
+All routes are nested under `SharedLayout`, which provides:
+- Automatic metadata management (title, OG tags, Twitter cards)
+- Consistent `min-h-screen bg-background` wrapper
+- Route-based metadata exclusions for branded pages
 
 ## Testing
 
 All UI components are tested via Vitest and @testing-library/react.
-Testing setup is configured within `vite.config.ts` and `src/setupTests.ts`.
 
-Run individual test files:
+**Test Configuration:**
+- Test environment: jsdom (configured in `vite.config.ts`)
+- Setup file: `src/setupTests.ts`
+- Coverage provider: v8
+- Coverage output: `coverage/` directory with text, html, and lcov formats
+
+**Running Tests:**
 ```bash
-pnpm test path/to/test.test.tsx
+pnpm test                    # Watch mode
+pnpm test path/to/file.tsx   # Run specific file
+pnpm test:coverage           # Generate coverage report
 ```
 
 ## Design Library System
 
 The design library is a core feature of this playground, accessible at `/library`:
 
-- **Registry System**: Components, templates, icons, fonts, and backgrounds are cataloged in `src/design-library/registry/*.ts`
-- **Adding Components**: Register new components in `src/design-library/registry/components.ts` with name, path, category, and description
-- **CLI Tool**: `tools/design-lib.cjs` manages library operations (stats, export, sync, version)
-- **Categories**: Auth Pages, Management, Dashboards, Apps, Layouts
+**Registry System:**
+All design assets are cataloged in `src/design-library/registry/`:
+- `components.ts` - Component catalog with ComponentDefinition interface
+- `templates.ts` - Page templates
+- `icons.ts` - Icon registry
+- `fonts.ts` - Typography definitions
+- `backgrounds.ts` - Background images and textures
+
+**Adding New Components:**
+Register components in `src/design-library/registry/components.ts`:
+```typescript
+{
+  name: 'ComponentName',
+  path: '/src/components/ComponentName.tsx',
+  category: 'Auth Pages', // or: Management, Dashboards, Apps, Layouts
+  description: 'Brief component description'
+}
+```
+
+**CLI Tool** (`tools/design-lib.cjs`):
+- Shows library stats (component counts, registry info)
+- Exports library snapshots with manifest.json
+- Syncs library to other projects
+- Manages versioning
 
 ## Routing Architecture
 
-- Built on React Router v6 with centralized route definitions in `src/App.tsx`
-- All routes wrapped in `SharedLayout` for consistent global metadata and layout
-- No authentication guards - all routes publicly accessible for prototyping
-- Route naming convention: `/auth*` for auth pages, branded routes use client names (e.g., `/starluv`, `/cabana`, `/lcg`)
+Built on React Router v6 with centralized route definitions in `src/App.tsx`:
+
+- **Layout Wrapper**: All routes wrapped in `SharedLayout` for consistent metadata and global layout
+- **No Authentication**: All routes publicly accessible for prototyping (no auth guards)
+- **Route Naming**: `/auth*` for auth pages, branded routes use client names (`/starluv`, `/cabana`, `/lcg`, `/quickprintz`)
+
+### SharedLayout & Metadata System
+
+`SharedLayout` (src/SharedLayout.tsx) automatically manages document metadata:
+
+**Default Behavior:**
+- Sets "CABANA" branding with OG image and Twitter cards
+- Dynamically updates meta tags on route changes
+
+**Metadata Exclusions:**
+Routes that manage their own metadata (defined in `excludedExact` set in SharedLayout.tsx):
+- Branded routes: `/quickprintz`, `/starluv*`, `/lilsex`, `/juanita*`, `/cabana`, `/thecabana`
+- All routes starting with `/auth`
+
+When adding new branded routes with custom metadata, add them to the `excludedExact` set in SharedLayout.tsx
 
 ### Key Routes
 - `/` - Home page with ENTER button and Breakout game
@@ -99,22 +161,23 @@ The design library is a core feature of this playground, accessible at `/library
 - `/directory` - Centralized component showcase
 - `/authcard` - UI-only AuthCard component preview
 - `/thedash` - Dashboard template
-- `/auth`, `/auth2-21`, `/juanita`, `/cabana`, `/starluv`, etc. - Auth page variations
+- `/storage` - Storage management interface
+- `/auth`, `/auth2`, `/auth3-21` - Auth page variations
+- `/juanita`, `/cabana`, `/starluv`, `/lcg`, `/quickprintz` - Branded auth pages
+- `/cabanamgmt*` - Management portal variants
+- `/shop`, `/product/:id`, `/checkout` - E-commerce templates
+- `/bio/:username` - Dynamic link-in-bio pages
 
-## Path Alias
+## Important Notes
 
-Use `@/` to reference the `src/` directory:
-```typescript
-import { Button } from "@/components/ui/button"
-```
-
-## Notes
-
-- Authentication is stubbed; no actual backend connection (Supabase client included but locally simulated)
-- All mock data is local and can be edited in `lib/mockData.ts`
-- The `/library` route acts as a visual documentation layer for internal components
-- The `/directory` route provides a centralized component showcase
-- Dev server runs on port 8080 (configured in `vite.config.ts`)
-- Route preview tool expects dev server on port 8081
-- Package manager: pnpm 10.15.1+ (enforced via packageManager field)
-- IMPORTANT: Use `pnpm` not `npm` - this project requires pnpm
+- **Path Alias**: Use `@/` to reference `src/` directory (e.g., `import { Button } from "@/components/ui/button"`)
+- **Package Manager**: Requires pnpm 10.15.1+ (not npm)
+- **Dev Server**: Runs on port 8080 (vite.config.ts:11)
+- **Route Screenshots**: Tool expects dev server on port 8081
+- **Mock Data**: All backend operations use local mocks in `src/lib/` (mockStripe.ts, storage.ts, supabaseClient.ts, etc.)
+- **Client Branding**: Branded routes follow naming conventions:
+  - `/cabana`, `/thecabana`, `/cabanamgmt*` - CABANA
+  - `/starluv*` - Star Luv
+  - `/lcg` - Locust Growth Accelerator
+  - `/quickprintz` - Quick Printz
+  - `/juanita*` - Juanita

@@ -59,13 +59,12 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
             <img
-              src="/lovable-uploads/cabana-logo.png"
-              alt="Cabana"
-              className="h-32 w-32 object-contain"
+              src="/lovable-uploads/td-mtv.png"
+              alt="TD MTV"
+              className="w-full object-contain"
             />
           </div>
           <div className="space-y-4 w-full px-8">
-            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}>Cabana</h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"

@@ -81,7 +81,7 @@ export default function Auth21() {
           {/* YouTube Logo */}
           <div className="flex items-center justify-center mt-6 px-12">
             <img
-              src="/lovable-uploads/yt-logo-white.png"
+              src="/lovable-uploads/yt-logo-white_.png"
               alt="YouTube Logo"
               className="w-full object-contain"
             />

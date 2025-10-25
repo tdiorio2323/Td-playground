@@ -8,8 +8,8 @@ export const AuthPage10 = () => {
 
   const slideshowImages = [
     "/lovable-uploads/qp-store.jpg",
-    "/lovable-uploads/qp-billboard.png",
-    "/lovable-uploads/qp-reserve-tank-cd.png",
+    "/lovable-uploads/qp-billboard.webp",
+    "/lovable-uploads/qp-reserve-tank-cd.webp",
     "/lovable-uploads/qp-spooky.png",
   ];
 

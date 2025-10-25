@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseClient";
 import { ExternalLink, Instagram, Twitter, Globe, Plus } from "lucide-react";
 
 interface Creator {

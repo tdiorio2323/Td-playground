@@ -51,6 +51,8 @@ import Home1 from "./pages/Home1";
 import Directory from "./pages/Directory";
 import DesignLibrary from "./design-library";
 import AuthCardPreview from "./pages/AuthCardPreview";
+import ProductDetail from "./pages/ProductDetail";
+import Spooky from "./pages/Spooky";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +68,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/library" element={<DesignLibrary />} />
+              <Route path="/spooky" element={<Spooky />} />
               <Route path="/thedash" element={<TheDash />} />
               <Route path="/authcard" element={<AuthCardPreview />} />
               <Route path="/auth" element={<Auth />} />
@@ -106,6 +109,7 @@ const App = () => (
               <Route path="/waitlist" element={<VipWaitlist />} />
               <Route path="/bio/:username" element={<LinkInBio />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/storage" element={<Storage />} />
               <Route path="/premade-bag-designs" element={<PremadeBagDesigns />} />

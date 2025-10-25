@@ -88,7 +88,7 @@ export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
             {/* Lock Icon Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
               <img
-                src="/lovable-uploads/star-lock.png"
+                src="/lovable-uploads/star-lock.webp"
                 alt="Locked Content"
                 className="w-32 h-32 animate-pulse-slow"
               />

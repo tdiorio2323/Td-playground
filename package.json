@@ -17,7 +17,8 @@
     "lib:sync": "node tools/design-lib.cjs sync",
     "lib:version": "node tools/design-lib.cjs version",
     "routes:preview": "node tools/generate-route-screenshots.mjs --base=http://localhost:8081 --out=previews/routes-preview.html --open",
-    "routes:preview:fast": "node tools/generate-route-screenshots.mjs --base=http://localhost:8081 --out=previews/routes-preview.html --open --skip-screenshots"
+    "routes:preview:fast": "node tools/generate-route-screenshots.mjs --base=http://localhost:8081 --out=previews/routes-preview.html --open --skip-screenshots",
+    "optimize:images": "node optimize-images.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -73,6 +74,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@squoosh/cli": "^0.7.1",
     "@swc/core": "^1.13.5",
     "@tailwindcss/typography": "^0.5.15",
     "@testing-library/jest-dom": "^6.9.1",
@@ -90,6 +92,7 @@
     "jsdom": "^27.0.0",
     "postcss": "^8.4.47",
     "puppeteer": "^24.23.0",
+    "sharp": "^0.34.4",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",

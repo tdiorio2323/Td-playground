@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabaseClient';
 import { toast } from 'sonner';
 
 interface Product {
@@ -32,13 +32,121 @@ interface CustomerAppProps {
   onCheckout?: (items: CartItem[], total: number) => void;
 }
 
+// Mock products for display
+const mockProducts: Product[] = [
+  {
+    id: '1',
+    name: 'Premium Herbal Blend',
+    price: 4999,
+    description: 'Our signature blend of premium herbs for the ultimate experience',
+    image_url: '/verde-logo.webp',
+    category: 'premium',
+    is_active: true,
+    stock_quantity: 50,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '2',
+    name: 'Exotic Flower Collection',
+    price: 5999,
+    description: 'Rare and exotic flowers from around the world',
+    image_url: '/verde-logo.webp',
+    category: 'premium',
+    is_active: true,
+    stock_quantity: 30,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '3',
+    name: 'Artisan Rolling Papers',
+    price: 1299,
+    description: 'Handcrafted rolling papers made from organic materials',
+    image_url: '/verde-logo.webp',
+    category: 'accessories',
+    is_active: true,
+    stock_quantity: 100,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '4',
+    name: 'Luxury Glass Set',
+    price: 8999,
+    description: 'Premium handblown glass pieces for the connoisseur',
+    image_url: '/verde-logo.webp',
+    category: 'accessories',
+    is_active: true,
+    stock_quantity: 15,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '5',
+    name: 'Organic CBD Tincture',
+    price: 3999,
+    description: 'Pure organic CBD oil for relaxation and wellness',
+    image_url: '/verde-logo.webp',
+    category: 'wellness',
+    is_active: true,
+    stock_quantity: 75,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '6',
+    name: 'Designer Storage Case',
+    price: 6499,
+    description: 'Elegant storage solution with airtight seal',
+    image_url: '/verde-logo.webp',
+    category: 'accessories',
+    is_active: true,
+    stock_quantity: 40,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '7',
+    name: 'Botanical Grinder',
+    price: 2499,
+    description: 'Precision-engineered grinder for perfect consistency',
+    image_url: '/verde-logo.webp',
+    category: 'accessories',
+    is_active: true,
+    stock_quantity: 60,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: '8',
+    name: 'Deluxe Starter Kit',
+    price: 12999,
+    description: 'Everything you need to get started in one premium package',
+    image_url: '/verde-logo.webp',
+    category: 'bundles',
+    is_active: true,
+    stock_quantity: 25,
+    brand_id: 'verde',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+];
+
 const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(mockProducts);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
@@ -58,10 +166,16 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
         .eq('is_active', true);
 
       if (error) throw error;
-      setProducts(data || []);
+
+      // Merge database products with mock products, or use mock if no database products
+      const dbProducts = data || [];
+      if (dbProducts.length > 0) {
+        setProducts([...mockProducts, ...dbProducts]);
+      }
+      // If no database products, mockProducts are already set as initial state
     } catch (error) {
       console.error('Error fetching products:', error);
-      toast.error('Failed to load products');
+      // Keep mock products on error - don't show error toast in mock mode
     } finally {
       setIsLoading(false);
     }
@@ -121,22 +235,22 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
       <div className="min-h-screen">
         {/* Header */}
         <header className="bg-black/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4">
+          <div className="container mx-auto px-4 py-8">
             {/* Top row with centered logo */}
-            <div className="flex justify-center mb-4">
-              <img 
-                src="/lovable-uploads/bff2ab24-8836-4dfa-836d-bff37b607cfa.png" 
-                alt="TD Studios" 
-                className="h-16 w-auto"
+            <div className="flex justify-center mb-6">
+              <img
+                src="/verde-logo.webp"
+                alt="Verde"
+                className="h-64 w-auto"
               />
             </div>
-            
+
             {/* Bottom row with cart button */}
             <div className="flex items-center justify-center relative">
               <div className="absolute right-0">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="lg"
                   className="relative bg-white/10 border-white/20 text-white hover:bg-white/20"
                   onClick={() => {
                     if (cart.length > 0 && onCheckout) {
@@ -201,14 +315,18 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <Card key={product.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300">
+              <Card
+                key={product.id}
+                className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer"
+                onClick={() => navigate(`/product/${product.id}`)}
+              >
                 <CardContent className="p-6">
                   <div className="aspect-square mb-4 bg-white/5 rounded-lg overflow-hidden">
                     {product.image_url ? (
                       <img
                         src={product.image_url}
                         alt={product.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain p-4"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-white/40">
@@ -246,7 +364,10 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
                     
                     <div className="flex gap-2">
                       <Button
-                        onClick={() => addToCart(product)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(product);
+                        }}
                         className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
                       >
                         <Plus className="h-4 w-4 mr-2" />
@@ -255,6 +376,7 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
                       <Button
                         variant="outline"
                         size="icon"
+                        onClick={(e) => e.stopPropagation()}
                         className="border-white/20 text-white/80 hover:bg-white/20"
                       >
                         <Heart className="h-4 w-4" />
@@ -280,29 +402,37 @@ const CustomerApp = ({ onCheckout }: CustomerAppProps) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <img
-                  src="/lovable-uploads/bff2ab24-8836-4dfa-836d-bff37b607cfa.png"
-                  alt="Cabana"
-                  className="h-8 w-auto"
+                  src="/verde-logo.webp"
+                  alt="Verde"
+                  className="h-16 w-auto"
                 />
                 <p className="text-white/60 text-sm">
-                  Premium Cabana VIP delivery service bringing you the finest creator content right to your door.
+                  Premium Verde delivery service bringing you the finest botanical products right to your door.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-white mb-4">Follow @cabana</h3>
+                <h3 className="font-semibold text-white mb-4">Follow @verde</h3>
                 <div className="flex gap-3">
-                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
-                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
-                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
-                  <div className="bg-white/10 rounded-lg w-24 h-24"></div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24 overflow-hidden p-2">
+                    <img src="/verde-logo.png" alt="Verde" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24 overflow-hidden p-2">
+                    <img src="/verde-logo.png" alt="Verde" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24 overflow-hidden p-2">
+                    <img src="/verde-logo.png" alt="Verde" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="bg-white/10 rounded-lg w-24 h-24 overflow-hidden p-2">
+                    <img src="/verde-logo.png" alt="Verde" className="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
             </div>
-            
+
             <div className="border-t border-white/10 mt-8 pt-8 text-center">
               <p className="text-white/60 text-sm">
-                © 2024 Cabana. All rights reserved. Please consume responsibly.
+                © 2024 Verde. All rights reserved. Please consume responsibly.
               </p>
             </div>
           </div>

@@ -48,7 +48,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
-        backgroundImage: "url('/lovable-uploads/tdsparklesblack.jpg')",
+        backgroundImage: "url('/lovable-uploads/tdsparklesblack.webp')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
