@@ -1,5 +1,22 @@
 import { openai, isOpenAIConfigured } from '@/lib/openaiClient'
 
+// Default configuration for OpenAI API calls
+const DEFAULT_MODEL = 'gpt-3.5-turbo'
+const DEFAULT_TEMPERATURE = 0.7
+const DEFAULT_MAX_TOKENS = 500
+
+/**
+ * Validates OpenAI configuration and logs warning if not configured
+ * @returns true if configured, false otherwise
+ */
+function validateOpenAIConfig(): boolean {
+  if (!isOpenAIConfigured() || !openai) {
+    console.warn('OpenAI is not configured. Please set VITE_OPENAI_API_KEY.')
+    return false
+  }
+  return true
+}
+
 /**
  * Example usage of OpenAI client for chat completions
  * 
@@ -19,20 +36,19 @@ export async function getChatCompletion(
   prompt: string,
   systemMessage: string = 'You are a helpful assistant.'
 ): Promise<string | null> {
-  if (!isOpenAIConfigured() || !openai) {
-    console.warn('OpenAI is not configured. Please set VITE_OPENAI_API_KEY.')
+  if (!validateOpenAIConfig()) {
     return null
   }
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+    const completion = await openai!.chat.completions.create({
+      model: DEFAULT_MODEL,
       messages: [
         { role: 'system', content: systemMessage },
         { role: 'user', content: prompt }
       ],
-      temperature: 0.7,
-      max_tokens: 500
+      temperature: DEFAULT_TEMPERATURE,
+      max_tokens: DEFAULT_MAX_TOKENS
     })
 
     return completion.choices[0]?.message?.content || null
@@ -62,20 +78,19 @@ export async function streamChatCompletion(
   onChunk: (text: string) => void,
   systemMessage: string = 'You are a helpful assistant.'
 ): Promise<void> {
-  if (!isOpenAIConfigured() || !openai) {
-    console.warn('OpenAI is not configured. Please set VITE_OPENAI_API_KEY.')
+  if (!validateOpenAIConfig()) {
     return
   }
 
   try {
-    const stream = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+    const stream = await openai!.chat.completions.create({
+      model: DEFAULT_MODEL,
       messages: [
         { role: 'system', content: systemMessage },
         { role: 'user', content: prompt }
       ],
-      temperature: 0.7,
-      max_tokens: 500,
+      temperature: DEFAULT_TEMPERATURE,
+      max_tokens: DEFAULT_MAX_TOKENS,
       stream: true
     })
 
