@@ -10,14 +10,14 @@ export interface MetaData {
 }
 
 const defaultMeta: MetaData = {
-  title: "Cabana VIP",
-  description: "Private creator network. Invite-only access.",
-  ogTitle: "Cabana VIP",
-  ogDescription: "Private creator network. Invite-only access.",
-  ogImage: "https://vip.cabanagrp.com/og/cover.jpg",
-  twitterTitle: "Cabana VIP",
-  twitterDescription: "Private creator network. Invite-only access.",
-  twitterImage: "https://vip.cabanagrp.com/og/cover.jpg",
+  title: "TD STUDIOS PLAYGROUND",
+  description: "TD Studios creative playground - Interactive experiences and premium content",
+  ogTitle: "TD STUDIOS PLAYGROUND",
+  ogDescription: "TD Studios creative playground - Interactive experiences and premium content",
+  ogImage: "https://playground.tdstudiosny.com/lovable-uploads/td-mtv.png",
+  twitterTitle: "TD STUDIOS PLAYGROUND",
+  twitterDescription: "TD Studios creative playground - Interactive experiences and premium content",
+  twitterImage: "https://playground.tdstudiosny.com/lovable-uploads/td-mtv.png",
 };
 
 export const routeMeta: Record<string, MetaData> = {
