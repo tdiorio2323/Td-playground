@@ -64,8 +64,8 @@ border: 1px solid rgba(242, 214, 142, 0.4);`,
   {
     name: 'Black Marble',
     category: 'Textures',
-    tailwindClass: "bg-[url('/lovable-uploads/td studios black marble.png')] bg-cover bg-center",
-    cssCode: `background-image: url('/lovable-uploads/td studios black marble.png');
+    tailwindClass: "bg-[url('/lovable-uploads/td-studios-black-marble.webp')] bg-cover bg-center",
+    cssCode: `background-image: url('/lovable-uploads/td-studios-black-marble.webp');
 background-size: cover;
 background-position: center;`,
     description: 'Black marble texture background'

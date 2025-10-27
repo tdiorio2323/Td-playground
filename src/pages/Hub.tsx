@@ -31,7 +31,7 @@ const Hub = () => {
       <div
         className="min-h-screen p-8"
         style={{
-          backgroundImage: "url('/lovable-uploads/td studios black marble.png')",
+          backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -89,7 +89,7 @@ const Hub = () => {
     <div
       className="min-h-screen p-8"
       style={{
-        backgroundImage: "url('/lovable-uploads/td studios black marble.png')",
+        backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

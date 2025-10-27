@@ -26,3 +26,4 @@ previews/screenshots
 *.sw?
 .env
 .vercel
+supabase/.temp

@@ -6,9 +6,12 @@ import { Check, Copy, Code2, Search } from 'lucide-react';
 import { components } from '../registry/components';
 import { copyToClipboard } from '../utils/copyToClipboard';
 import { SafePreview } from '../utils/SafePreview';
+import { useNavigate } from 'react-router-dom';
 
 // Lazy load components for previews - handle both default and named exports
-const componentLoaders: Record<string, React.LazyExoticComponent<any>> = {
+type PreviewComponent = React.LazyExoticComponent<React.ComponentType<Record<string, unknown>>>;
+
+const componentLoaders: Record<string, PreviewComponent> = {
   'AuthPage': lazy(() => import('@/components/AuthPage').then(m => ({ default: m.default ?? m.AuthPage }))),
   'AuthPage2': lazy(() => import('@/components/AuthPage2').then(m => ({ default: m.default ?? m.AuthPage2 }))),
   'AuthPage3': lazy(() => import('@/components/AuthPage3').then(m => ({ default: m.default ?? m.AuthPage3 }))),
@@ -29,7 +32,7 @@ const componentLoaders: Record<string, React.LazyExoticComponent<any>> = {
 };
 
 // Safe preview props for components that need them
-const componentProps: Record<string, any> = {
+const componentProps: Record<string, Record<string, unknown>> = {
   'CheckoutFlow': {
     items: [{ id: 1, name: 'Sample Item', price: 10, quantity: 1 }],
     steps: ['cart', 'shipping', 'payment', 'confirmation'],
@@ -39,11 +42,79 @@ const componentProps: Record<string, any> = {
   'AuthCard': { mode: 'login' as const, onSubmit: () => {}, onToggle: () => {} },
 };
 
+const componentSourceModules = import.meta.glob('/src/components/**/*.tsx', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+}) as Record<string, string>;
+
+const backendImportPatterns = [
+  /@\/integrations\/supabase/i,
+  /@\/lib\/supabaseClient/i,
+  /@\/lib\/roomKeys/i,
+  /supabase/i
+];
+
+const sanitizeComponentCode = (code: string) => {
+  const lines = code.split('\n');
+  const sanitizedLines: string[] = [];
+  let needsStub = false;
+
+  for (const line of lines) {
+    if (backendImportPatterns.some(pattern => pattern.test(line.trim()) && line.trim().startsWith('import'))) {
+      needsStub = true;
+      continue;
+    }
+    sanitizedLines.push(line);
+  }
+
+  const firstNonImportIndex = sanitizedLines.findIndex(line => {
+    const trimmed = line.trim();
+    return trimmed.length > 0 && !trimmed.startsWith('import');
+  });
+
+  if (needsStub) {
+    const stub = [
+      '',
+      '// Backend placeholders keep this UI self-contained when copied.',
+      'const createBackendStub = () =>',
+      '  new Proxy(() => {}, {',
+      '    get: () => createBackendStub(),',
+      '    apply: () => undefined',
+      '  });',
+      'const supabase = createBackendStub();',
+      'const useSupabase = () => ({ supabase, user: null });',
+      ''
+    ];
+    const insertionIndex = firstNonImportIndex === -1 ? sanitizedLines.length : firstNonImportIndex;
+    sanitizedLines.splice(insertionIndex, 0, ...stub);
+  }
+
+  sanitizedLines.unshift('// Copied from TD Playground Design Library — wire imports/backends to your project.');
+  return sanitizedLines.join('\n');
+};
+
+const getComponentCode = (path: string): string => {
+  const normalizedPath = path.replace(/^\/+/, '');
+  const matchedKey =
+    componentSourceModules[path] !== undefined
+      ? path
+      : Object.keys(componentSourceModules).find(key =>
+          key.replace(/^\/+/, '').endsWith(normalizedPath)
+        );
+  const rawCode = matchedKey ? componentSourceModules[matchedKey] : undefined;
+  if (!rawCode) {
+    return `// Component code from ${path} is unavailable.`;
+  }
+  return sanitizeComponentCode(rawCode);
+};
+
 export function ComponentsTab() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const categories = ['All', ...Array.from(new Set(components.map(c => c.category)))];
 
@@ -62,10 +133,9 @@ export function ComponentsTab() {
     }
   };
 
-  const getComponentCode = (path: string): string => {
-    // In a real implementation, you'd use Vite's ?raw import
-    // For now, return a placeholder
-    return `// Component code from ${path}\n// Use Vite's ?raw import to load actual source`;
+  const handlePreviewNavigation = (route?: string) => {
+    if (!route) return;
+    navigate(route);
   };
 
   return (
@@ -117,22 +187,45 @@ export function ComponentsTab() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
-                  <div className="w-full h-96 overflow-hidden relative">
-                    {ComponentPreview ? (
-                      <SafePreview>
-                        <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
-                          <ComponentPreview {...(componentProps[component.name] || {})} />
+                  <button
+                    type="button"
+                    onClick={() => handlePreviewNavigation(component.demoRoute)}
+                    disabled={!component.demoRoute}
+                    className="w-full h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 disabled:cursor-not-allowed"
+                    aria-label={
+                      component.demoRoute
+                        ? `Open ${component.name} route at ${component.demoRoute}`
+                        : `Preview of ${component.name}`
+                    }
+                  >
+                    <div className="w-full h-96 overflow-hidden relative">
+                      {ComponentPreview ? (
+                        <SafePreview>
+                          <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
+                            <ComponentPreview {...(componentProps[component.name] || {})} />
+                          </div>
+                        </SafePreview>
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <div className="text-center text-gray-400 text-sm">
+                            <Code2 className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                            <p>Preview unavailable</p>
+                          </div>
                         </div>
-                      </SafePreview>
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="text-center text-gray-400 text-sm">
-                          <Code2 className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                          <p>Preview unavailable</p>
-                        </div>
+                      )}
+                      <div className="absolute top-3 left-3">
+                        {component.demoRoute ? (
+                          <span className="inline-flex items-center rounded-full bg-black/80 text-white text-xs px-3 py-1">
+                            {component.demoRoute}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center rounded-full bg-gray-400/60 text-white text-xs px-3 py-1">
+                            No route mapped
+                          </span>
+                        )}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  </button>
                 </div>
 
                 <div className="flex gap-2">

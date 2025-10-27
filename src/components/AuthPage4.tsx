@@ -38,7 +38,7 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
-        backgroundImage: "url('/lovable-uploads/td studios black marble.png')",
+        backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -93,6 +93,14 @@ export const AuthPage4 = ({ onLogin }: AuthPage4Props) => {
               className="w-full h-14 bg-[#FF0000] hover:bg-[#E00000] text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
             >
               JACKPOT
+            </Button>
+
+            <Button
+              type="button"
+              onClick={() => navigate('/vip')}
+              className="w-full h-14 bg-gradient-to-r from-[#7F5FFF] via-[#9257FF] to-[#B54CFF] hover:from-[#6D4AE6] hover:via-[#8241E6] hover:to-[#A03BE6] text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
+            >
+              VIP PAGE
             </Button>
           </div>
         </CardContent>

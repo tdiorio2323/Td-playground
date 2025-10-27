@@ -29,7 +29,7 @@ export function useMediaFiles(): MediaFile[] {
       'starluv.webp',
       'td sttone.png',
       'TD STUDIOS BLACK HERO IMAGE.jpg',
-      'td studios black marble.png',
+      'td-studios-black-marble.webp',
       'tdsparklesblack.jpg',
       'lcg-logo.avif'
     ];

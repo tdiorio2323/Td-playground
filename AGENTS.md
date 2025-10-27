@@ -1,42 +1,28 @@
 # Repository Guidelines
 
+Use this guide as the canonical onboarding reference for anyone collaborating in this repo.
+
 ## Project Structure & Module Organization
-- Source lives in `src/`. Route views in `src/pages/`, reusable UI in `src/components/`, hooks in `src/hooks/`, utilities in `src/lib/`, and third‑party connectors in `src/integrations/`.
-- Entry files: `index.html`, `src/main.tsx`, `src/App.tsx`.
-- Static assets in `public/`.
-- Core config at root: `vite.config.ts`, `tailwind.config.ts`, `eslint.config.js`, `tsconfig*.json`.
+All source lives in `src/`. Routed screens reside in `src/pages/`, shared UI in `src/components/`, showcase bundles in `design-library/`, hooks and helpers in `hooks/` + `lib/`, and client wiring in `integrations/` plus `boot/`. Entry points (`index.html`, `src/main.tsx`, `src/App.tsx`) boot the Vite app; static assets stay in `public/`, preview artifacts in `previews/`, and build + coverage outputs in `dist/` and `coverage/`. Keep feature tests beside their modules (or a sibling `__tests__/`) and reuse `src/setupTests.ts` for globals. Scripts under `tools/` manage the design library and preview rebuilds.
 
 ## Build, Test, and Development Commands
-- `pnpm install` — install dependencies.
-- `pnpm dev` — start dev server at http://localhost:8080.
-- `pnpm lint` — run ESLint on all TS/TSX files.
-- `pnpm build` — create production bundle.
-- `pnpm preview` — serve the production build locally.
-- `pnpm vitest` / `pnpm vitest run` — run tests (watch/CI).
-- `pnpm vitest --coverage` — generate coverage report.
+- `pnpm install` — installs deps with the pinned pnpm version.
+- `pnpm dev` — launches the Vite dev server on http://localhost:8080 with HMR.
+- `pnpm build` / `pnpm preview` — compiles for production and serves the result.
+- `pnpm build:dev` — emits a readable bundle for debugging build issues.
+- `pnpm lint` — runs ESLint across TS/TSX sources.
+- `pnpm test` / `pnpm test:coverage` — executes Vitest in watch or CI+coverage mode.
+- `pnpm lib:open|export|sync|version` — maintains `tools/design-lib.cjs` workflows.
+- `pnpm routes:preview(:fast)` — refreshes `previews/routes-preview.html`; `pnpm optimize:images` compresses new media.
 
 ## Coding Style & Naming Conventions
-- TypeScript + React function components, 2‑space indent, semicolons; match file’s quote style.
-- Components (in `pages/` and `components/`) use PascalCase, e.g., `LoginForm.tsx`.
-- Hooks use camelCase `useThing`, e.g., `useAuthGuard`.
-- Utilities in `lib/` expose named exports only.
-- Prefer Tailwind utilities; compose variants with `cn()` from `src/lib/utils.ts` and shadcn/ui patterns.
+Write TypeScript React function components with 2-space indentation, semicolons, and the `@` path alias from `vite.config.ts`. Components/pages adopt PascalCase, hooks use camelCase prefixed with `use`, utilities expose named exports, and constants prefer SCREAMING_SNAKE_CASE. Favor Tailwind, shadcn/ui, Radix primitives, and the shared `cn()` helper; centralize reusable data fetching inside TanStack Query-powered hooks. Let ESLint + Prettier in your editor enforce consistency before committing.
 
 ## Testing Guidelines
-- Vitest with jsdom (configured via `vite.config.ts`, bootstrap in `src/setupTests.ts`).
-- Name tests `*.test.ts` or `*.test.tsx`; colocate near code or in `src/__tests__/`.
-- Tests must be deterministic; mock network calls and external SDKs. Cover happy paths and critical edges.
-- Use `pnpm vitest --coverage` to review coverage for key modules.
+Vitest and React Testing Library are wired through `vite.config.ts` and `src/setupTests.ts`. Name specs `*.test.ts(x)`, colocate them with the code they cover, and mock Supabase, router, and browser APIs for determinism. Run `pnpm test:coverage` before merging auth, navigation, overlay, or command-palette changes so regressions surface early. Never accept snapshot updates blindly—confirm the rendered output.
 
 ## Commit & Pull Request Guidelines
-- Commits: compact, present tense; reference affected view/component (e.g., “Adjust Dashboard hero spacing”).
-- PRs: clear summary, linked issues/tickets, and screenshots/GIFs for UI changes.
-- Confirm `pnpm lint` and the Vitest suite pass before requesting review; flag breaking changes and required env updates.
+Follow Conventional Commits (`feat: workspace filters`, `fix: auth guard redirect`, etc.) and scope subjects to the surface touched. Squash WIP branches before opening a PR. Every PR should include a concise summary, linked issue, screenshots or preview links for UI work, QA or env-var impacts, and any manual migration steps. Run `pnpm lint` plus `pnpm test:coverage` locally and note failures or deviations in the description.
 
 ## Security & Configuration Tips
-- Never commit secrets. Use `.env.local` with `VITE_` prefixes (e.g., `VITE_SUPABASE_URL`).
-- Manage credentials via Supabase/Firebase/Vercel dashboards. Validate new external URLs and sanitize user input before rendering.
-
-## Agent‑Specific Instructions
-- When editing files, follow the structure and conventions above; keep changes minimal and focused. Update docs/tests when behavior changes. The scope of this file is the entire repository.
-
+Secrets belong in `.env.local` with `VITE_` prefixes (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, …) and should be managed via Supabase/Firebase dashboards. Validate new endpoints under `src/integrations/`, avoid committing preview HTML with real data, and strip dev-only overlays before production releases. Run `pnpm optimize:images` on new assets and document any required role or ACL changes when touching Supabase config.

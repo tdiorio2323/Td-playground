@@ -50,12 +50,16 @@ import CabanaMgmt4 from "./pages/CabanaMgmt4";
 import LCG from "./pages/LCG";
 import Home1 from "./pages/Home1";
 import Directory from "./pages/Directory";
-import DesignLibrary from "./design-library";
+import Library from "./pages/Library";
 import AuthCardPreview from "./pages/AuthCardPreview";
 import ProductDetail from "./pages/ProductDetail";
 import Spooky from "./pages/Spooky";
 import Hub from "./pages/Hub";
 import CasinoNav from "./pages/CasinoNav";
+import Vip from "./pages/Vip";
+import Backroom from "./pages/Backroom";
+import TestingLab from "./pages/TestingLab";
+import RequireKey from "./components/RequireKey";
 import { CommandPalette } from "./components/CommandPalette";
 import { FloatingNavButton } from "./components/FloatingNavButton";
 import { DevMenuOverlay } from "./components/DevMenuOverlay";
@@ -76,12 +80,29 @@ const App = () => {
             <Route element={<SharedLayout />}>
                 <Route path="/" element={<Index />} />
                 <Route path="/directory" element={<Directory />} />
-                <Route path="/library" element={<DesignLibrary />} />
+                <Route path="/library" element={<Library />} />
                 <Route path="/spooky" element={<Spooky />} />
                 <Route path="/thedash" element={<TheDash />} />
                 <Route path="/authcard" element={<AuthCardPreview />} />
                 <Route path="/hub" element={<Hub />} />
                 <Route path="/casino-nav" element={<CasinoNav />} />
+                <Route path="/vip" element={<Vip />} />
+                <Route
+                  path="/backroom"
+                  element={
+                    <RequireKey keySlug="backroom">
+                      <Backroom />
+                    </RequireKey>
+                  }
+                />
+                <Route
+                  path="/testing-lab"
+                  element={
+                    <RequireKey keySlug="testing-lab">
+                      <TestingLab />
+                    </RequireKey>
+                  }
+                />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/auth2" element={<Auth />} />
                 <Route path="/juanita" element={<Auth3 />} />

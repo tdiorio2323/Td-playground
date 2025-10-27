@@ -11,7 +11,7 @@ export const AuthPage7 = () => {
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
-        backgroundImage: "url('/lovable-uploads/td studios black marble.png')",
+        backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

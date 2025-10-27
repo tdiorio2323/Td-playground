@@ -7,6 +7,7 @@ import {
   Flame,
   type LucideIcon
 } from "lucide-react";
+import type { KeySlug } from "@/lib/roomKeys";
 
 export type RouteCategory =
   | "Authentication"
@@ -16,6 +17,10 @@ export type RouteCategory =
   | "Showcases"
   | "Experimental";
 
+export interface RouteMeta {
+  requiresKey?: KeySlug;
+}
+
 export interface RouteDefinition {
   path: string;
   name: string;
@@ -23,6 +28,7 @@ export interface RouteDefinition {
   description: string;
   icon?: LucideIcon;
   gradient?: string;
+  meta?: RouteMeta;
 }
 
 export const routeCategories: Record<RouteCategory, { icon: LucideIcon; gradient: string; color: string }> = {
@@ -447,6 +453,29 @@ export const routes: RouteDefinition[] = [
     category: "Experimental",
     description: "Slot machine meta-navigation",
     icon: Flame
+  },
+  {
+    path: "/vip",
+    name: "VIP Lounge",
+    category: "Experimental",
+    description: "Invitation-only VIP control room",
+    icon: Sparkles
+  },
+  {
+    path: "/backroom",
+    name: "Back Room",
+    category: "Experimental",
+    description: "Behind-the-scenes operations desk",
+    icon: LayoutDashboard,
+    meta: { requiresKey: "backroom" }
+  },
+  {
+    path: "/testing-lab",
+    name: "Testing Lab",
+    category: "Experimental",
+    description: "Experimental sandbox reserved for lab members",
+    icon: Flame,
+    meta: { requiresKey: "testing-lab" }
   },
   {
     path: "/hub",

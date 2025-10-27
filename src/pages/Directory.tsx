@@ -78,7 +78,7 @@ const Directory = () => {
     <div
       className="min-h-screen p-4 sm:p-6 md:p-8"
       style={{
-        backgroundImage: "url('/lovable-uploads/td studios black marble.png')",
+        backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         fontFamily: "'Inter', sans-serif"
