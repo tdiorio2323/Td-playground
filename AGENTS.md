@@ -1,28 +1,27 @@
 # Repository Guidelines
 
-Use this guide as the canonical onboarding reference for anyone collaborating in this repo.
+Use this guide to ramp quickly on the Vite + React app.
 
 ## Project Structure & Module Organization
-All source lives in `src/`. Routed screens reside in `src/pages/`, shared UI in `src/components/`, showcase bundles in `design-library/`, hooks and helpers in `hooks/` + `lib/`, and client wiring in `integrations/` plus `boot/`. Entry points (`index.html`, `src/main.tsx`, `src/App.tsx`) boot the Vite app; static assets stay in `public/`, preview artifacts in `previews/`, and build + coverage outputs in `dist/` and `coverage/`. Keep feature tests beside their modules (or a sibling `__tests__/`) and reuse `src/setupTests.ts` for globals. Scripts under `tools/` manage the design library and preview rebuilds.
+Source lives in `src/`: pages in `src/pages/`, shared UI in `src/components/`, hooks in `src/hooks/`, utilities in `src/lib/`, integrations and boot logic in `src/integrations/` + `src/boot/`. Entry points are `index.html`, `src/main.tsx`, and `src/App.tsx`. Assets stay in `public/`, previews in `previews/`, build and coverage output in `dist/` and `coverage/`. Co-locate tests beside modules or a sibling `__tests__/` and share setup via `src/setupTests.ts`. Design-library scripts sit under `tools/`.
 
 ## Build, Test, and Development Commands
-- `pnpm install` — installs deps with the pinned pnpm version.
-- `pnpm dev` — launches the Vite dev server on http://localhost:8080 with HMR.
-- `pnpm build` / `pnpm preview` — compiles for production and serves the result.
-- `pnpm build:dev` — emits a readable bundle for debugging build issues.
-- `pnpm lint` — runs ESLint across TS/TSX sources.
-- `pnpm test` / `pnpm test:coverage` — executes Vitest in watch or CI+coverage mode.
-- `pnpm lib:open|export|sync|version` — maintains `tools/design-lib.cjs` workflows.
-- `pnpm routes:preview(:fast)` — refreshes `previews/routes-preview.html`; `pnpm optimize:images` compresses new media.
+- `pnpm install` installs dependencies with the pinned pnpm.
+- `pnpm dev` runs Vite on http://localhost:8080 with HMR.
+- `pnpm build` / `pnpm preview` generate and serve the production bundle.
+- `pnpm build:dev` emits a readable bundle for debugging.
+- `pnpm lint` runs ESLint across TS/TSX.
+- `pnpm test` and `pnpm test:coverage` run Vitest locally or in CI.
+- `pnpm routes:preview` (or `:fast`), `pnpm optimize:images`, and `pnpm lib:open|export|sync|version` refresh previews and maintain the design library.
 
 ## Coding Style & Naming Conventions
-Write TypeScript React function components with 2-space indentation, semicolons, and the `@` path alias from `vite.config.ts`. Components/pages adopt PascalCase, hooks use camelCase prefixed with `use`, utilities expose named exports, and constants prefer SCREAMING_SNAKE_CASE. Favor Tailwind, shadcn/ui, Radix primitives, and the shared `cn()` helper; centralize reusable data fetching inside TanStack Query-powered hooks. Let ESLint + Prettier in your editor enforce consistency before committing.
+Write TypeScript React function components with 2-space indentation, semicolons, and the `@` path alias. Name components/pages in PascalCase, hooks in camelCase prefixed `use`, utilities as named exports, and constants as SCREAMING_SNAKE_CASE. Lean on Tailwind, shadcn/ui, Radix primitives, and the shared `cn()` helper. Let Prettier + ESLint autofix before commits.
 
 ## Testing Guidelines
-Vitest and React Testing Library are wired through `vite.config.ts` and `src/setupTests.ts`. Name specs `*.test.ts(x)`, colocate them with the code they cover, and mock Supabase, router, and browser APIs for determinism. Run `pnpm test:coverage` before merging auth, navigation, overlay, or command-palette changes so regressions surface early. Never accept snapshot updates blindly—confirm the rendered output.
+Vitest and React Testing Library are wired via `vite.config.ts` and `src/setupTests.ts`. Name specs `*.test.ts(x)`, mock Supabase, router, and browser APIs for determinism, and colocate mocks with their subjects. Run `pnpm test:coverage` before merging auth, navigation, overlay, or command palette changes. Review snapshots rather than auto-accepting.
 
 ## Commit & Pull Request Guidelines
-Follow Conventional Commits (`feat: workspace filters`, `fix: auth guard redirect`, etc.) and scope subjects to the surface touched. Squash WIP branches before opening a PR. Every PR should include a concise summary, linked issue, screenshots or preview links for UI work, QA or env-var impacts, and any manual migration steps. Run `pnpm lint` plus `pnpm test:coverage` locally and note failures or deviations in the description.
+Use Conventional Commits (e.g., `feat: workspace filters`, `fix: auth guard redirect`) scoped to the area touched. Squash WIP branches before PRs. Each PR links the issue, summarizes behavior changes, adds screenshots or preview URLs for UI, notes QA steps and env vars, and captures manual migrations. Run `pnpm lint` and `pnpm test:coverage` locally and document any exceptions.
 
 ## Security & Configuration Tips
-Secrets belong in `.env.local` with `VITE_` prefixes (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, …) and should be managed via Supabase/Firebase dashboards. Validate new endpoints under `src/integrations/`, avoid committing preview HTML with real data, and strip dev-only overlays before production releases. Run `pnpm optimize:images` on new assets and document any required role or ACL changes when touching Supabase config.
+Keep secrets in `.env.local` with `VITE_` prefixes such as `VITE_SUPABASE_URL`, managing them via Supabase or Firebase dashboards. Validate new endpoints under `src/integrations/`, avoid checking in previews with real data, strip dev-only overlays before release, and run `pnpm optimize:images` on fresh media. Document role or ACL updates when adjusting Supabase config.
