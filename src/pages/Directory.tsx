@@ -65,13 +65,15 @@ const Directory = () => {
   ];
 
   // Filter out top routes from allRoutes to avoid duplication in grouped categories
-  const filteredRoutes = allRoutes.filter(route => !topRoutes.some(topRoute => topRoute.path === route.path));
+  const filteredRoutes = allRoutes.filter(
+    (route) => !topRoutes.some((topRoute) => topRoute.path === route.path),
+  );
 
   // Group remaining routes by category
-  const categories = Array.from(new Set(filteredRoutes.map(r => r.category)));
-  const groupedRoutes = categories.map(category => ({
+  const categories = Array.from(new Set(filteredRoutes.map((r) => r.category)));
+  const groupedRoutes = categories.map((category) => ({
     category,
-    routes: filteredRoutes.filter(r => r.category === category)
+    routes: filteredRoutes.filter((r) => r.category === category),
   }));
 
   return (
@@ -79,9 +81,9 @@ const Directory = () => {
       className="min-h-screen p-4 sm:p-6 md:p-8"
       style={{
         backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        fontFamily: "'Inter', sans-serif"
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        fontFamily: "'Inter', sans-serif",
       }}
     >
       <div className="max-w-7xl mx-auto">
@@ -96,9 +98,15 @@ const Directory = () => {
         </div>
 
         <div className="grid gap-4 sm:gap-6 md:gap-8">
-          <Card key="top-routes" className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          <Card
+            key="top-routes"
+            className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+          >
             <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-xl sm:text-2xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <CardTitle
+                className="text-xl sm:text-2xl text-white"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
                 Quick Access
               </CardTitle>
             </CardHeader>
@@ -122,9 +130,15 @@ const Directory = () => {
             </CardContent>
           </Card>
           {groupedRoutes.map(({ category, routes: categoryRoutes }) => (
-            <Card key={category} className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+            <Card
+              key={category}
+              className="bg-white/10 backdrop-blur-md border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+            >
               <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-xl sm:text-2xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <CardTitle
+                  className="text-xl sm:text-2xl text-white"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
                   {category}
                 </CardTitle>
               </CardHeader>

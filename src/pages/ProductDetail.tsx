@@ -1,11 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Plus, Minus, ShoppingCart, Heart, Star, Share2, Package, Shield, Truck } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { toast } from 'sonner';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  Plus,
+  Minus,
+  ShoppingCart,
+  Heart,
+  Star,
+  Share2,
+  Package,
+  Shield,
+  Truck,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
 
 interface Product {
   id: string;
@@ -21,109 +32,113 @@ interface Product {
   updated_at: string;
 }
 
+interface CartItem extends Product {
+  quantity: number;
+}
+
 // Mock products (same as CustomerApp)
 const mockProducts: Product[] = [
   {
-    id: '1',
-    name: 'Premium Herbal Blend',
+    id: "1",
+    name: "Premium Herbal Blend",
     price: 4999,
-    description: 'Our signature blend of premium herbs for the ultimate experience',
-    image_url: '/verde-logo.webp',
-    category: 'premium',
+    description: "Our signature blend of premium herbs for the ultimate experience",
+    image_url: "/verde-logo.webp",
+    category: "premium",
     is_active: true,
     stock_quantity: 50,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '2',
-    name: 'Exotic Flower Collection',
+    id: "2",
+    name: "Exotic Flower Collection",
     price: 5999,
-    description: 'Rare and exotic flowers from around the world',
-    image_url: '/verde-logo.webp',
-    category: 'premium',
+    description: "Rare and exotic flowers from around the world",
+    image_url: "/verde-logo.webp",
+    category: "premium",
     is_active: true,
     stock_quantity: 30,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '3',
-    name: 'Artisan Rolling Papers',
+    id: "3",
+    name: "Artisan Rolling Papers",
     price: 1299,
-    description: 'Handcrafted rolling papers made from organic materials',
-    image_url: '/verde-logo.webp',
-    category: 'accessories',
+    description: "Handcrafted rolling papers made from organic materials",
+    image_url: "/verde-logo.webp",
+    category: "accessories",
     is_active: true,
     stock_quantity: 100,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '4',
-    name: 'Luxury Glass Set',
+    id: "4",
+    name: "Luxury Glass Set",
     price: 8999,
-    description: 'Premium handblown glass pieces for the connoisseur',
-    image_url: '/verde-logo.webp',
-    category: 'accessories',
+    description: "Premium handblown glass pieces for the connoisseur",
+    image_url: "/verde-logo.webp",
+    category: "accessories",
     is_active: true,
     stock_quantity: 15,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '5',
-    name: 'Organic CBD Tincture',
+    id: "5",
+    name: "Organic CBD Tincture",
     price: 3999,
-    description: 'Pure organic CBD oil for relaxation and wellness',
-    image_url: '/verde-logo.webp',
-    category: 'wellness',
+    description: "Pure organic CBD oil for relaxation and wellness",
+    image_url: "/verde-logo.webp",
+    category: "wellness",
     is_active: true,
     stock_quantity: 75,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '6',
-    name: 'Designer Storage Case',
+    id: "6",
+    name: "Designer Storage Case",
     price: 6499,
-    description: 'Elegant storage solution with airtight seal',
-    image_url: '/verde-logo.webp',
-    category: 'accessories',
+    description: "Elegant storage solution with airtight seal",
+    image_url: "/verde-logo.webp",
+    category: "accessories",
     is_active: true,
     stock_quantity: 40,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '7',
-    name: 'Botanical Grinder',
+    id: "7",
+    name: "Botanical Grinder",
     price: 2499,
-    description: 'Precision-engineered grinder for perfect consistency',
-    image_url: '/verde-logo.webp',
-    category: 'accessories',
+    description: "Precision-engineered grinder for perfect consistency",
+    image_url: "/verde-logo.webp",
+    category: "accessories",
     is_active: true,
     stock_quantity: 60,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
-    id: '8',
-    name: 'Deluxe Starter Kit',
+    id: "8",
+    name: "Deluxe Starter Kit",
     price: 12999,
-    description: 'Everything you need to get started in one premium package',
-    image_url: '/verde-logo.webp',
-    category: 'bundles',
+    description: "Everything you need to get started in one premium package",
+    image_url: "/verde-logo.webp",
+    category: "bundles",
     is_active: true,
     stock_quantity: 25,
-    brand_id: 'verde',
+    brand_id: "verde",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
@@ -138,7 +153,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     // Find product by ID
-    const foundProduct = mockProducts.find(p => p.id === id);
+    const foundProduct = mockProducts.find((p) => p.id === id);
     if (foundProduct) {
       setProduct(foundProduct);
     }
@@ -148,18 +163,18 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (product) {
       // Get existing cart from sessionStorage
-      const existingCart = sessionStorage.getItem('cart');
+      const existingCart = sessionStorage.getItem("cart");
       const cart = existingCart ? JSON.parse(existingCart) : [];
 
       // Add or update product in cart
-      const existingItem = cart.find((item: any) => item.id === product.id);
+      const existingItem = cart.find((item: CartItem) => item.id === product.id);
       if (existingItem) {
         existingItem.quantity += quantity;
       } else {
         cart.push({ ...product, quantity });
       }
 
-      sessionStorage.setItem('cart', JSON.stringify(cart));
+      sessionStorage.setItem("cart", JSON.stringify(cart));
       toast.success(`Added ${quantity} ${product.name} to cart`);
     }
   };
@@ -180,7 +195,11 @@ const ProductDetail = () => {
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-white mb-4">Product Not Found</h2>
-          <Button onClick={() => navigate('/shop')} variant="outline" className="border-white/20 text-white">
+          <Button
+            onClick={() => navigate("/shop")}
+            variant="outline"
+            className="border-white/20 text-white"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Shop
           </Button>
@@ -196,17 +215,13 @@ const ProductDetail = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center gap-6">
             {/* Logo centered at top */}
-            <img
-              src="/verde-logo.webp"
-              alt="Verde"
-              className="h-64 w-auto"
-            />
+            <img src="/verde-logo.webp" alt="Verde" className="h-64 w-auto" />
 
             {/* Navigation buttons below logo */}
             <div className="flex items-center justify-between w-full">
               <Button
                 variant="ghost"
-                onClick={() => navigate('/shop')}
+                onClick={() => navigate("/shop")}
                 className="text-white hover:bg-white/10"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -215,7 +230,7 @@ const ProductDetail = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => navigate('/checkout')}
+                onClick={() => navigate("/checkout")}
                 className="bg-white/10 border-white/20 text-white hover:bg-white/20"
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
@@ -248,8 +263,15 @@ const ProductDetail = () => {
             {/* Thumbnail Gallery - Placeholder for future images */}
             <div className="grid grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="aspect-square rounded-lg bg-white/5 border-2 border-white/10 hover:border-white/30 transition-colors cursor-pointer overflow-hidden">
-                  <img src="/verde-logo.png" alt="Preview" className="w-full h-full object-contain p-2" />
+                <div
+                  key={i}
+                  className="aspect-square rounded-lg bg-white/5 border-2 border-white/10 hover:border-white/30 transition-colors cursor-pointer overflow-hidden"
+                >
+                  <img
+                    src="/verde-logo.png"
+                    alt="Preview"
+                    className="w-full h-full object-contain p-2"
+                  />
                 </div>
               ))}
             </div>
@@ -259,7 +281,10 @@ const ProductDetail = () => {
           <div className="space-y-6">
             <div>
               <Badge className="mb-3 bg-white/20 text-white">
-                {product.category ? product.category.charAt(0).toUpperCase() + product.category.slice(1).replaceAll('_', ' ') : 'Product'}
+                {product.category
+                  ? product.category.charAt(0).toUpperCase() +
+                    product.category.slice(1).replaceAll("_", " ")
+                  : "Product"}
               </Badge>
               <h1 className="text-4xl font-bold text-white mb-2">{product.name}</h1>
               <div className="flex items-center gap-2 mb-4">
@@ -272,13 +297,9 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            <div className="text-4xl font-bold text-white">
-              ${(product.price / 100).toFixed(2)}
-            </div>
+            <div className="text-4xl font-bold text-white">${(product.price / 100).toFixed(2)}</div>
 
-            <p className="text-white/70 text-lg leading-relaxed">
-              {product.description}
-            </p>
+            <p className="text-white/70 text-lg leading-relaxed">{product.description}</p>
 
             {/* Additional product details - Editable by user later */}
             <div className="space-y-3 pt-4 border-t border-white/10">
@@ -360,7 +381,11 @@ const ProductDetail = () => {
               <TabsContent value="description" className="space-y-4 text-white/80 mt-6">
                 <h3 className="text-xl font-semibold text-white">Product Description</h3>
                 <p>{product.description}</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Edit this section with your detailed product information.</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Edit this section with your detailed
+                  product information.
+                </p>
               </TabsContent>
 
               <TabsContent value="specifications" className="space-y-4 text-white/80 mt-6">
@@ -394,7 +419,9 @@ const ProductDetail = () => {
                       </div>
                       <span className="font-medium text-white">Amazing product!</span>
                     </div>
-                    <p>Add customer reviews here. You can edit this section later with real reviews.</p>
+                    <p>
+                      Add customer reviews here. You can edit this section later with real reviews.
+                    </p>
                   </div>
                 </div>
               </TabsContent>

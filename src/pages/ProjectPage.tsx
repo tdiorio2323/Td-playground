@@ -27,7 +27,7 @@ import {
   Edit,
   Trash2,
   Crown,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -39,55 +39,103 @@ import {
 const ProjectPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Mock data - in real app this would come from API
   const files = [
-    { id: 1, name: 'Brand Guidelines.pdf', type: 'file', size: '2.4 MB', modified: '2 hours ago', starred: true, icon: File },
-    { id: 2, name: 'Product Photos', type: 'folder', items: 24, modified: '1 day ago', starred: false, icon: Folder },
-    { id: 3, name: 'Campaign Video.mp4', type: 'video', size: '156 MB', modified: '3 days ago', starred: true, icon: Video },
-    { id: 4, name: 'Logo Collection', type: 'folder', items: 12, modified: '1 week ago', starred: false, icon: Folder },
-    { id: 5, name: 'Hero Banner.png', type: 'image', size: '8.2 MB', modified: '2 days ago', starred: false, icon: Image },
-    { id: 6, name: 'Content Calendar', type: 'folder', items: 36, modified: '5 days ago', starred: true, icon: Calendar },
+    {
+      id: 1,
+      name: "Brand Guidelines.pdf",
+      type: "file",
+      size: "2.4 MB",
+      modified: "2 hours ago",
+      starred: true,
+      icon: File,
+    },
+    {
+      id: 2,
+      name: "Product Photos",
+      type: "folder",
+      items: 24,
+      modified: "1 day ago",
+      starred: false,
+      icon: Folder,
+    },
+    {
+      id: 3,
+      name: "Campaign Video.mp4",
+      type: "video",
+      size: "156 MB",
+      modified: "3 days ago",
+      starred: true,
+      icon: Video,
+    },
+    {
+      id: 4,
+      name: "Logo Collection",
+      type: "folder",
+      items: 12,
+      modified: "1 week ago",
+      starred: false,
+      icon: Folder,
+    },
+    {
+      id: 5,
+      name: "Hero Banner.png",
+      type: "image",
+      size: "8.2 MB",
+      modified: "2 days ago",
+      starred: false,
+      icon: Image,
+    },
+    {
+      id: 6,
+      name: "Content Calendar",
+      type: "folder",
+      items: 36,
+      modified: "5 days ago",
+      starred: true,
+      icon: Calendar,
+    },
   ];
 
   const getProjectTitle = (projectId: string) => {
     const titles: { [key: string]: string } = {
-      documents: 'Documents',
-      media: 'Media Gallery',
-      videos: 'Video Library',
-      projects: 'Projects',
-      settings: 'Settings',
-      team: 'Team',
-      calendar: 'Calendar',
-      messages: 'Messages',
-      analytics: 'Analytics',
-      premium: 'Premium Suite',
-      'ai-tools': 'AI Tools',
-      luxury: 'Luxury Suite'
+      documents: "Documents",
+      media: "Media Gallery",
+      videos: "Video Library",
+      projects: "Projects",
+      settings: "Settings",
+      team: "Team",
+      calendar: "Calendar",
+      messages: "Messages",
+      analytics: "Analytics",
+      premium: "Premium Suite",
+      "ai-tools": "AI Tools",
+      luxury: "Luxury Suite",
     };
-    return titles[projectId] || 'Project';
+    return titles[projectId] || "Project";
   };
 
-  const filteredFiles = files.filter(file =>
-    file.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFiles = files.filter((file) =>
+    file.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
-    <div 
+    <div
       className="min-h-screen relative"
       style={{
         backgroundImage: `url('/lovable-uploads/6884296d-7d53-4d5f-8169-0418ff1d5824.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
       }}
     >
       {/* Luxury overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-purple-900/40 backdrop-blur-[1px]" />
-      
+
       <div className="relative z-10">
         {/* Header */}
         <div className="border-b border-white/20 bg-black/20 backdrop-blur-md">
@@ -97,21 +145,19 @@ const ProjectPage = () => {
                 <Button
                   variant="frost"
                   size="sm"
-                  onClick={() => navigate('/portal')}
+                  onClick={() => navigate("/portal")}
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back to Portal
                 </Button>
-                <h1 className="text-2xl font-bold text-white">
-                  {getProjectTitle(id || '')}
-                </h1>
+                <h1 className="text-2xl font-bold text-white">{getProjectTitle(id || "")}</h1>
                 <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                   <Crown className="h-3 w-3 mr-1" />
                   Premium
                 </Badge>
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <Button variant="frost" size="sm">
                   <Share className="h-4 w-4 mr-2" />
@@ -149,19 +195,19 @@ const ProjectPage = () => {
                   Filter
                 </Button>
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <Button
-                  variant={viewMode === 'grid' ? 'default' : 'frost'}
+                  variant={viewMode === "grid" ? "default" : "frost"}
                   size="sm"
-                  onClick={() => setViewMode('grid')}
+                  onClick={() => setViewMode("grid")}
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </Button>
                 <Button
-                  variant={viewMode === 'list' ? 'default' : 'frost'}
+                  variant={viewMode === "list" ? "default" : "frost"}
                   size="sm"
-                  onClick={() => setViewMode('list')}
+                  onClick={() => setViewMode("list")}
                 >
                   <List className="h-4 w-4" />
                 </Button>
@@ -197,7 +243,7 @@ const ProjectPage = () => {
           </div>
 
           {/* Files and Folders */}
-          {viewMode === 'grid' ? (
+          {viewMode === "grid" ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
               {filteredFiles.map((file) => (
                 <Card
@@ -211,16 +257,12 @@ const ProjectPage = () => {
                         <Star className="absolute -top-1 -right-1 h-4 w-4 text-yellow-400 fill-current" />
                       )}
                     </div>
-                    <p className="text-white text-sm font-medium truncate">
-                      {file.name}
-                    </p>
+                    <p className="text-white text-sm font-medium truncate">{file.name}</p>
                     <p className="text-white/60 text-xs">
-                      {file.type === 'folder' ? `${file.items} items` : file.size}
+                      {file.type === "folder" ? `${file.items} items` : file.size}
                     </p>
-                    <p className="text-white/40 text-xs">
-                      {file.modified}
-                    </p>
-                    
+                    <p className="text-white/40 text-xs">{file.modified}</p>
+
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -276,15 +318,14 @@ const ProjectPage = () => {
                         <div>
                           <p className="text-white font-medium">{file.name}</p>
                           <p className="text-white/60 text-sm">
-                            {file.type === 'folder' ? `${file.items} items` : file.size} • {file.modified}
+                            {file.type === "folder" ? `${file.items} items` : file.size} •{" "}
+                            {file.modified}
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-2">
-                        {file.starred && (
-                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                        )}
+                        {file.starred && <Star className="h-4 w-4 text-yellow-400 fill-current" />}
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button

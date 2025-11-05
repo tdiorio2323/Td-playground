@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,14 +35,14 @@ const CasinoNav = () => {
 
   const slotSymbols = useMemo(() => {
     return routes
-      .filter(route => !route.path.includes(":"))
-      .map(route => {
+      .filter((route) => !route.path.includes(":"))
+      .map((route) => {
         const categoryMeta = routeCategories[route.category];
         return {
           ...route,
           icon: route.icon ?? categoryMeta.icon,
           gradient: route.gradient ?? categoryMeta.gradient,
-          color: categoryMeta.color
+          color: categoryMeta.color,
         } as SlotSymbol;
       });
   }, []);
@@ -60,17 +54,20 @@ const CasinoNav = () => {
       ...route,
       icon: route.icon ?? categoryMeta.icon,
       gradient: route.gradient ?? categoryMeta.gradient,
-      color: categoryMeta.color
+      color: categoryMeta.color,
     } as SlotSymbol;
   }, []);
 
   const [reels, setReels] = useState<ReelState[]>(() => {
     if (slotSymbols.length === 0) {
-      return Array.from({ length: REEL_COUNT }, () => ({ symbol: fallbackSymbol, spinning: false }));
+      return Array.from({ length: REEL_COUNT }, () => ({
+        symbol: fallbackSymbol,
+        spinning: false,
+      }));
     }
     return Array.from({ length: REEL_COUNT }, () => ({
       symbol: slotSymbols[Math.floor(Math.random() * slotSymbols.length)],
-      spinning: false
+      spinning: false,
     }));
   });
   const [isSpinning, setIsSpinning] = useState(false);
@@ -94,10 +91,10 @@ const CasinoNav = () => {
   }, [fallbackSymbol, slotSymbols]);
 
   const cleanupTimers = useCallback(() => {
-    intervalRefs.current.forEach(interval => interval && clearInterval(interval));
+    intervalRefs.current.forEach((interval) => interval && clearInterval(interval));
     intervalRefs.current = Array(REEL_COUNT).fill(null);
 
-    stopTimeouts.current.forEach(timeout => clearTimeout(timeout));
+    stopTimeouts.current.forEach((timeout) => clearTimeout(timeout));
     stopTimeouts.current = [];
 
     if (navigateTimeout.current) {
@@ -162,7 +159,7 @@ const CasinoNav = () => {
       if (!requiredKey) return true;
       return ownedKeys.includes(requiredKey);
     },
-    [ownedKeys]
+    [ownedKeys],
   );
 
   const finalizeReels = useCallback(async () => {
@@ -172,8 +169,8 @@ const CasinoNav = () => {
     setIsSpinning(false);
 
     const [first, ...rest] = finalSymbols;
-    const isMatch = rest.every(symbol => symbol.path === first.path);
-    const resultString = formatSpinResult(finalSymbols.map(symbol => symbol.path));
+    const isMatch = rest.every((symbol) => symbol.path === first.path);
+    const resultString = formatSpinResult(finalSymbols.map((symbol) => symbol.path));
 
     if (user?.id) {
       try {
@@ -195,7 +192,9 @@ const CasinoNav = () => {
         setJackpotSymbol(first);
         navigateTimeout.current = setTimeout(() => navigate(first.path), 900);
       } else {
-        setStatus(`Locked: ${first.name} requires the ${requiredKey} key. Claim it before spinning again.`);
+        setStatus(
+          `Locked: ${first.name} requires the ${requiredKey} key. Claim it before spinning again.`,
+        );
         setJackpotSymbol(null);
       }
     } else {
@@ -228,16 +227,19 @@ const CasinoNav = () => {
     setJackpotSymbol(null);
     setStatus("Reels spinning...");
 
-    setReels(prev => prev.map(reel => ({ ...reel, spinning: true })));
+    setReels((prev) => prev.map((reel) => ({ ...reel, spinning: true })));
 
     intervalRefs.current = intervalRefs.current.map((_, index) =>
-      setInterval(() => {
-        setReels(prev => {
-          const next = [...prev];
-          next[index] = { ...next[index], symbol: getRandomSymbol() };
-          return next;
-        });
-      }, SPIN_INTERVAL_BASE + index * 25)
+      setInterval(
+        () => {
+          setReels((prev) => {
+            const next = [...prev];
+            next[index] = { ...next[index], symbol: getRandomSymbol() };
+            return next;
+          });
+        },
+        SPIN_INTERVAL_BASE + index * 25,
+      ),
     );
 
     STOP_DELAYS.forEach((delay, index) => {
@@ -250,7 +252,7 @@ const CasinoNav = () => {
         const finalSymbol = getRandomSymbol();
         selectionsRef.current[index] = finalSymbol;
 
-        setReels(prev => {
+        setReels((prev) => {
           const next = [...prev];
           next[index] = { symbol: finalSymbol, spinning: false };
           return next;
@@ -266,7 +268,15 @@ const CasinoNav = () => {
 
       stopTimeouts.current.push(timeout);
     });
-  }, [canSpinToday, cleanupTimers, dailySpinLoaded, finalizeReels, getRandomSymbol, isSpinning, user?.id]);
+  }, [
+    canSpinToday,
+    cleanupTimers,
+    dailySpinLoaded,
+    finalizeReels,
+    getRandomSymbol,
+    isSpinning,
+    user?.id,
+  ]);
 
   const highlightedSymbols = useMemo(() => slotSymbols.slice(0, 6), [slotSymbols]);
 
@@ -295,7 +305,9 @@ const CasinoNav = () => {
           <div
             className={`flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br ${reel.symbol.gradient}`}
           >
-            <Icon className={`h-12 w-12 ${reel.spinning ? "animate-spin" : ""} text-white drop-shadow-lg`} />
+            <Icon
+              className={`h-12 w-12 ${reel.spinning ? "animate-spin" : ""} text-white drop-shadow-lg`}
+            />
           </div>
           <p className="mt-4 text-white font-semibold text-sm sm:text-base leading-tight">
             {reel.symbol.name}
@@ -316,14 +328,18 @@ const CasinoNav = () => {
         className="rounded-2xl border border-white/10 bg-white/5 p-4 flex flex-col gap-3"
       >
         <div className="flex items-center gap-3">
-          <div className={`h-12 w-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${symbol.gradient}`}>
+          <div
+            className={`h-12 w-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${symbol.gradient}`}
+          >
             <Icon className="h-6 w-6 text-white" />
           </div>
           <div>
             <p className="font-semibold flex items-center gap-2">
               {symbol.name}
               {symbol.meta?.requiresKey && (
-                <span className={`text-xs px-2 py-0.5 rounded-full ${locked ? "bg-red-500/20 text-red-200" : "bg-green-500/20 text-green-200"}`}>
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full ${locked ? "bg-red-500/20 text-red-200" : "bg-green-500/20 text-green-200"}`}
+                >
                   {locked ? "Locked" : "Unlocked"}
                 </span>
               )}
@@ -346,7 +362,7 @@ const CasinoNav = () => {
         style={{
           backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
           backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       />
 
@@ -419,10 +435,12 @@ const CasinoNav = () => {
                   <Sparkles className="h-4 w-4" /> Keys Owned
                 </h4>
                 {ownedKeys.length === 0 ? (
-                  <p className="text-sm text-white/60">No keys yet. Claim them on eligible pages.</p>
+                  <p className="text-sm text-white/60">
+                    No keys yet. Claim them on eligible pages.
+                  </p>
                 ) : (
                   <ul className="space-y-2 text-sm">
-                    {ownedKeys.map(key => (
+                    {ownedKeys.map((key) => (
                       <li key={key} className="flex items-center gap-2">
                         <span className="h-2 w-2 rounded-full bg-green-400" />
                         {key}
@@ -434,7 +452,8 @@ const CasinoNav = () => {
             </div>
 
             <p className="text-center text-sm text-white/40">
-              Need a specific destination? Use the command palette, collect room keys, or keep spinning—no coins or sounds required.
+              Need a specific destination? Use the command palette, collect room keys, or keep
+              spinning—no coins or sounds required.
             </p>
           </CardContent>
         </Card>

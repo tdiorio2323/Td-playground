@@ -1,60 +1,33 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { Instagram, Eye, EyeOff, KeyRound, Lock } from "lucide-react";
+import { Instagram, KeyRound, Lock } from "lucide-react";
 
 interface AuthPage3Props {
-  onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
+  onLogin?: (role: "customer" | "brand" | "admin") => void;
 }
 
 export const AuthPage3 = ({ onLogin }: AuthPage3Props) => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    secret: ""
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showSecret, setShowSecret] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-
-  const handleInputChange = (field: keyof typeof formData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     // Frontend demo - no actual authentication
     setIsLoading(true);
-
     setTimeout(() => {
-      toast({
-        title: "Demo Mode",
-        description: "This is a frontend component playground - no authentication required",
-      });
       setIsLoading(false);
     }, 1000);
   };
-
 
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
         backgroundImage: "url('/cabana-builder-background.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-
-
       <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10">
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
@@ -69,7 +42,7 @@ export const AuthPage3 = ({ onLogin }: AuthPage3Props) => {
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
-                onClick={() => window.open('https://www.instagram.com/juanita_jcv/', '_blank')}
+                onClick={() => window.open("https://www.instagram.com/juanita_jcv/", "_blank")}
                 className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 <Instagram className="w-5 h-5 mr-2" />
@@ -77,7 +50,7 @@ export const AuthPage3 = ({ onLogin }: AuthPage3Props) => {
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://onlyfans.com/juanitajcv', '_blank')}
+                onClick={() => window.open("https://onlyfans.com/juanitajcv", "_blank")}
                 className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none"
               >
                 Only Fans 💎

@@ -1,23 +1,22 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function TokensTab() {
   const colorTokens = [
-    { name: '--primary', value: '142 76% 36%', description: 'Primary brand color' },
-    { name: '--secondary', value: '140 10% 15%', description: 'Secondary color' },
-    { name: '--background', value: '0 0% 0%', description: 'Background color' },
-    { name: '--foreground', value: '0 0% 100%', description: 'Foreground text color' },
+    { name: "--primary", value: "142 76% 36%", description: "Primary brand color" },
+    { name: "--secondary", value: "140 10% 15%", description: "Secondary color" },
+    { name: "--background", value: "0 0% 0%", description: "Background color" },
+    { name: "--foreground", value: "0 0% 100%", description: "Foreground text color" },
   ];
 
-  const spacingTokens = [
-    { name: '--radius', value: '0.75rem', description: 'Border radius' },
-  ];
+  const spacingTokens = [{ name: "--radius", value: "0.75rem", description: "Border radius" }];
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-white mb-6">Design Tokens</h2>
         <p className="text-gray-300 mb-8">
-          Core design tokens used throughout the application. These CSS variables provide consistent styling.
+          Core design tokens used throughout the application. These CSS variables provide consistent
+          styling.
         </p>
       </div>
 
@@ -29,7 +28,10 @@ export function TokensTab() {
         <CardContent>
           <div className="space-y-4">
             {colorTokens.map((token) => (
-              <div key={token.name} className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+              <div
+                key={token.name}
+                className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10"
+              >
                 <div>
                   <code className="text-sm font-mono text-blue-300">{token.name}</code>
                   <p className="text-xs text-gray-400 mt-1">{token.description}</p>
@@ -55,7 +57,10 @@ export function TokensTab() {
         <CardContent>
           <div className="space-y-4">
             {spacingTokens.map((token) => (
-              <div key={token.name} className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+              <div
+                key={token.name}
+                className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10"
+              >
                 <div>
                   <code className="text-sm font-mono text-blue-300">{token.name}</code>
                   <p className="text-xs text-gray-400 mt-1">{token.description}</p>

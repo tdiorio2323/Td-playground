@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/lib/supabaseClient";
 import { toast } from "sonner";
 import { User, Sparkles, ArrowRight } from "lucide-react";
 
@@ -14,7 +13,7 @@ export default function CreatorOnboarding() {
   const [formData, setFormData] = useState({
     username: "",
     displayName: "",
-    bio: ""
+    bio: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -50,7 +49,9 @@ export default function CreatorOnboarding() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="username" className="text-white/90">Username*</Label>
+              <Label htmlFor="username" className="text-white/90">
+                Username*
+              </Label>
               <Input
                 id="username"
                 type="text"
@@ -61,9 +62,11 @@ export default function CreatorOnboarding() {
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
               />
             </div>
-            
+
             <div>
-              <Label htmlFor="displayName" className="text-white/90">Display Name*</Label>
+              <Label htmlFor="displayName" className="text-white/90">
+                Display Name*
+              </Label>
               <Input
                 id="displayName"
                 type="text"
@@ -76,7 +79,9 @@ export default function CreatorOnboarding() {
             </div>
 
             <div>
-              <Label htmlFor="bio" className="text-white/90">Bio (Optional)</Label>
+              <Label htmlFor="bio" className="text-white/90">
+                Bio (Optional)
+              </Label>
               <Textarea
                 id="bio"
                 placeholder="Tell your audience about your creator brand..."
@@ -86,12 +91,14 @@ export default function CreatorOnboarding() {
               />
             </div>
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting}
               className="w-full bg-gradient-to-r from-green-400 to-teal-600 text-black font-semibold hover:from-green-500 hover:to-teal-700"
             >
-              {isSubmitting ? "Creating Profile..." : (
+              {isSubmitting ? (
+                "Creating Profile..."
+              ) : (
                 <div className="flex items-center justify-center gap-2">
                   Create Profile <ArrowRight className="w-4 h-4" />
                 </div>

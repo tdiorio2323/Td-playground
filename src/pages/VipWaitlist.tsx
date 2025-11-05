@@ -31,7 +31,7 @@ export default function VipWaitlist() {
         setIsSubmitted(true);
         toast.success("Welcome to the VIP waitlist!");
       }
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -46,7 +46,8 @@ export default function VipWaitlist() {
             <Crown className="w-16 h-16 mx-auto mb-4 text-yellow-400" />
             <h2 className="text-2xl font-bold text-white mb-2">Welcome to VIP!</h2>
             <p className="text-white/80">
-              You're now on our exclusive VIP waitlist. We'll notify you when early access is available.
+              You're now on our exclusive VIP waitlist. We'll notify you when early access is
+              available.
             </p>
           </CardContent>
         </Card>
@@ -77,8 +78,8 @@ export default function VipWaitlist() {
               required
               className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
             />
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting}
               className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold hover:from-yellow-500 hover:to-yellow-700"
             >

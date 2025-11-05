@@ -27,3 +27,7 @@ previews/screenshots
 .env
 .vercel
 supabase/.temp
+
+# local lint setup
+/tools/dev/eslint.config.local.mjs
+reports/

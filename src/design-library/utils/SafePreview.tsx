@@ -1,9 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 
-class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { err?: any }
-> {
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { err?: any }> {
   state = { err: undefined as any };
 
   static getDerivedStateFromError(err: any) {
@@ -11,7 +8,7 @@ class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: any, errorInfo: any) {
-    console.error('Preview component error:', error, errorInfo);
+    console.error("Preview component error:", error, errorInfo);
   }
 
   render() {

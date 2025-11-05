@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect, useRef } from "react";
 
-const SYMBOLS = ['🍒', '🍋', '🍊', '🍇', '💎', '7️⃣', '⭐'];
-const SPIN_DURATION = 2000;
+const SYMBOLS = ["🍒", "🍋", "🍊", "🍇", "💎", "7️⃣", "⭐"];
 
 interface Reel {
   symbol: string;
@@ -12,12 +10,12 @@ interface Reel {
 
 export const SlotMachine = () => {
   const [reels, setReels] = useState<Reel[]>([
-    { symbol: '🍒', spinning: false, offset: 0 },
-    { symbol: '🍒', spinning: false, offset: 0 },
-    { symbol: '🍒', spinning: false, offset: 0 },
+    { symbol: "🍒", spinning: false, offset: 0 },
+    { symbol: "🍒", spinning: false, offset: 0 },
+    { symbol: "🍒", spinning: false, offset: 0 },
   ]);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [message, setMessage] = useState('Good Luck');
+  const [message, setMessage] = useState("Good Luck");
   const [credits, setCredits] = useState(1000);
   const [showWinAnimation, setShowWinAnimation] = useState(false);
   const [handlePulled, setHandlePulled] = useState(false);
@@ -26,44 +24,44 @@ export const SlotMachine = () => {
   const getRandomSymbol = () => SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
 
   const checkWin = (finalReels: Reel[]) => {
-    const symbols = finalReels.map(r => r.symbol);
+    const symbols = finalReels.map((r) => r.symbol);
 
     // Three of a kind
     if (symbols[0] === symbols[1] && symbols[1] === symbols[2]) {
       setShowWinAnimation(true);
       setTimeout(() => setShowWinAnimation(false), 2000);
 
-      if (symbols[0] === '💎') {
-        setMessage('JACKPOT - DIAMOND TRIPLET');
-        setCredits(prev => prev + 5000);
-      } else if (symbols[0] === '7️⃣') {
-        setMessage('LUCKY SEVENS - BIG WIN');
-        setCredits(prev => prev + 3000);
-      } else if (symbols[0] === '⭐') {
-        setMessage('STAR POWER - EXCELLENT');
-        setCredits(prev => prev + 2000);
+      if (symbols[0] === "💎") {
+        setMessage("JACKPOT - DIAMOND TRIPLET");
+        setCredits((prev) => prev + 5000);
+      } else if (symbols[0] === "7️⃣") {
+        setMessage("LUCKY SEVENS - BIG WIN");
+        setCredits((prev) => prev + 3000);
+      } else if (symbols[0] === "⭐") {
+        setMessage("STAR POWER - EXCELLENT");
+        setCredits((prev) => prev + 2000);
       } else {
-        setMessage('TRIPLE MATCH - WINNER');
-        setCredits(prev => prev + 1000);
+        setMessage("TRIPLE MATCH - WINNER");
+        setCredits((prev) => prev + 1000);
       }
       return;
     }
 
     // Two of a kind
     if (symbols[0] === symbols[1] || symbols[1] === symbols[2] || symbols[0] === symbols[2]) {
-      setMessage('PAIR BONUS');
-      setCredits(prev => prev + 200);
+      setMessage("PAIR BONUS");
+      setCredits((prev) => prev + 200);
       return;
     }
 
     // No match
-    setMessage('PLACE YOUR BET');
-    setCredits(prev => Math.max(0, prev - 100));
+    setMessage("PLACE YOUR BET");
+    setCredits((prev) => Math.max(0, prev - 100));
   };
 
   const pullHandle = () => {
     if (isSpinning || credits < 100) {
-      if (credits < 100) setMessage('INSUFFICIENT CREDITS');
+      if (credits < 100) setMessage("INSUFFICIENT CREDITS");
       return;
     }
 
@@ -74,18 +72,22 @@ export const SlotMachine = () => {
     // Start spinning after brief delay
     setTimeout(() => {
       setIsSpinning(true);
-      setMessage('SPINNING...');
+      setMessage("SPINNING...");
 
       // Start all reels spinning
-      const newReels = reels.map(reel => ({ ...reel, spinning: true }));
+      const newReels = reels.map((reel) => ({ ...reel, spinning: true }));
       setReels(newReels);
 
       // Animate each reel while spinning
       intervalRefs.current.forEach((_, index) => {
         intervalRefs.current[index] = setInterval(() => {
-          setReels(prev => {
+          setReels((prev) => {
             const updated = [...prev];
-            updated[index] = { ...updated[index], symbol: getRandomSymbol(), offset: Math.random() * 10 - 5 };
+            updated[index] = {
+              ...updated[index],
+              symbol: getRandomSymbol(),
+              offset: Math.random() * 10 - 5,
+            };
             return updated;
           });
         }, 100);
@@ -105,7 +107,7 @@ export const SlotMachine = () => {
           const finalSymbol = getRandomSymbol();
           finalSymbols[index] = finalSymbol;
 
-          setReels(prev => {
+          setReels((prev) => {
             const updated = [...prev];
             updated[index] = { symbol: finalSymbol, spinning: false, offset: 0 };
             return updated;
@@ -129,26 +131,28 @@ export const SlotMachine = () => {
   };
 
   useEffect(() => {
+    const ref = intervalRefs.current;
     return () => {
-      intervalRefs.current.forEach(interval => {
+      ref.forEach((interval) => {
         if (interval) clearInterval(interval);
       });
     };
   }, []);
 
   return (
-    <div className="w-full mx-auto relative" style={{ maxWidth: '380px' }}>
+    <div className="w-full mx-auto relative" style={{ maxWidth: "380px" }}>
       {/* Luxury Machine Frame with Handle */}
       <div className="relative flex items-start">
         {/* Main Machine Body */}
         <div
           className="flex-1 rounded-3xl p-4 sm:p-6 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
           style={{
-            background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)',
-            border: '3px solid transparent',
-            backgroundImage: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%), linear-gradient(135deg, #d4af37, #f4e5a1, #d4af37)',
-            backgroundOrigin: 'border-box',
-            backgroundClip: 'padding-box, border-box',
+            background: "linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)",
+            border: "3px solid transparent",
+            backgroundImage:
+              "linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%), linear-gradient(135deg, #d4af37, #f4e5a1, #d4af37)",
+            backgroundOrigin: "border-box",
+            backgroundClip: "padding-box, border-box",
           }}
         >
           {/* Top Crown/Header */}
@@ -157,11 +161,11 @@ export const SlotMachine = () => {
             <h2
               className="text-2xl sm:text-3xl font-bold tracking-[0.2em] relative"
               style={{
-                background: 'linear-gradient(135deg, #ffd700, #ffed4e, #ffd700)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textShadow: '0 0 30px rgba(255, 215, 0, 0.5)',
-                fontFamily: 'Georgia, serif',
+                background: "linear-gradient(135deg, #ffd700, #ffed4e, #ffd700)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                textShadow: "0 0 30px rgba(255, 215, 0, 0.5)",
+                fontFamily: "Georgia, serif",
               }}
             >
               ROYAL SLOTS
@@ -174,19 +178,21 @@ export const SlotMachine = () => {
             <div
               className="rounded-xl p-3 text-center relative overflow-hidden"
               style={{
-                background: 'linear-gradient(180deg, #0a0a0a, #1a1a1a)',
-                boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.3)',
-                border: '2px solid rgba(212, 175, 55, 0.3)'
+                background: "linear-gradient(180deg, #0a0a0a, #1a1a1a)",
+                boxShadow: "inset 0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.3)",
+                border: "2px solid rgba(212, 175, 55, 0.3)",
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent"></div>
-              <p className="text-[10px] font-semibold text-amber-400/60 tracking-widest mb-1">BALANCE</p>
+              <p className="text-[10px] font-semibold text-amber-400/60 tracking-widest mb-1">
+                BALANCE
+              </p>
               <p
                 className="text-2xl sm:text-3xl font-bold tracking-wider relative"
                 style={{
-                  color: '#00ff41',
-                  textShadow: '0 0 10px #00ff41, 0 0 20px #00ff41',
-                  fontFamily: 'Monaco, monospace'
+                  color: "#00ff41",
+                  textShadow: "0 0 10px #00ff41, 0 0 20px #00ff41",
+                  fontFamily: "Monaco, monospace",
                 }}
               >
                 ${credits.toLocaleString()}
@@ -198,9 +204,9 @@ export const SlotMachine = () => {
           <div
             className="rounded-2xl p-4 mb-4 relative overflow-hidden"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
-              boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.9), 0 0 30px rgba(212, 175, 55, 0.2)',
-              border: '1px solid rgba(212, 175, 55, 0.2)'
+              background: "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))",
+              boxShadow: "inset 0 4px 20px rgba(0,0,0,0.9), 0 0 30px rgba(212, 175, 55, 0.2)",
+              border: "1px solid rgba(212, 175, 55, 0.2)",
             }}
           >
             {/* Spotlight Effect */}
@@ -208,21 +214,20 @@ export const SlotMachine = () => {
 
             <div className="grid grid-cols-3 gap-2 sm:gap-3 relative">
               {reels.map((reel, index) => (
-                <div
-                  key={index}
-                  className="relative group"
-                >
+                <div key={index} className="relative group">
                   {/* Reel Frame */}
                   <div
                     className="aspect-square rounded-lg relative overflow-hidden"
                     style={{
-                      background: 'linear-gradient(135deg, #ffffff, #f5f5f5)',
-                      boxShadow: showWinAnimation && !reel.spinning
-                        ? '0 0 30px rgba(255, 215, 0, 0.8), inset 0 2px 4px rgba(0,0,0,0.1)'
-                        : 'inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.3)',
-                      border: '2px solid',
-                      borderColor: showWinAnimation && !reel.spinning ? '#ffd700' : 'rgba(212, 175, 55, 0.3)',
-                      transition: 'all 0.3s ease'
+                      background: "linear-gradient(135deg, #ffffff, #f5f5f5)",
+                      boxShadow:
+                        showWinAnimation && !reel.spinning
+                          ? "0 0 30px rgba(255, 215, 0, 0.8), inset 0 2px 4px rgba(0,0,0,0.1)"
+                          : "inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.3)",
+                      border: "2px solid",
+                      borderColor:
+                        showWinAnimation && !reel.spinning ? "#ffd700" : "rgba(212, 175, 55, 0.3)",
+                      transition: "all 0.3s ease",
                     }}
                   >
                     {/* Inner Shadow */}
@@ -232,12 +237,16 @@ export const SlotMachine = () => {
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span
                         className={`text-5xl sm:text-6xl transition-all duration-300 ${
-                          reel.spinning ? 'blur-md scale-90 opacity-70' : 'blur-0 scale-100 opacity-100'
+                          reel.spinning
+                            ? "blur-md scale-90 opacity-70"
+                            : "blur-0 scale-100 opacity-100"
                         }`}
                         style={{
-                          transform: reel.spinning ? `translateY(${reel.offset}px)` : 'translateY(0)',
-                          filter: reel.spinning ? 'blur(4px)' : 'none',
-                          textShadow: !reel.spinning ? '0 2px 8px rgba(0,0,0,0.2)' : 'none'
+                          transform: reel.spinning
+                            ? `translateY(${reel.offset}px)`
+                            : "translateY(0)",
+                          filter: reel.spinning ? "blur(4px)" : "none",
+                          textShadow: !reel.spinning ? "0 2px 8px rgba(0,0,0,0.2)" : "none",
                         }}
                       >
                         {reel.symbol}
@@ -266,20 +275,22 @@ export const SlotMachine = () => {
           <div
             className="rounded-xl p-3 text-center relative overflow-hidden"
             style={{
-              background: 'linear-gradient(180deg, #0a0a0a, #1a1a1a)',
-              boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.8)',
-              border: '1px solid rgba(212, 175, 55, 0.2)',
-              minHeight: '3rem'
+              background: "linear-gradient(180deg, #0a0a0a, #1a1a1a)",
+              boxShadow: "inset 0 2px 10px rgba(0,0,0,0.8)",
+              border: "1px solid rgba(212, 175, 55, 0.2)",
+              minHeight: "3rem",
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent"></div>
             <p
               className="text-sm sm:text-base font-bold tracking-[0.15em] relative uppercase"
               style={{
-                color: showWinAnimation ? '#ffd700' : '#d4af37',
-                textShadow: showWinAnimation ? '0 0 20px #ffd700' : '0 0 10px rgba(212, 175, 55, 0.5)',
-                fontFamily: 'Georgia, serif',
-                transition: 'all 0.3s ease'
+                color: showWinAnimation ? "#ffd700" : "#d4af37",
+                textShadow: showWinAnimation
+                  ? "0 0 20px #ffd700"
+                  : "0 0 10px rgba(212, 175, 55, 0.5)",
+                fontFamily: "Georgia, serif",
+                transition: "all 0.3s ease",
               }}
             >
               {message}
@@ -293,9 +304,9 @@ export const SlotMachine = () => {
           <div
             className="w-8 h-8 rounded-full"
             style={{
-              background: 'radial-gradient(circle, #d4af37, #8b7355)',
-              boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)',
-              border: '2px solid rgba(212, 175, 55, 0.5)'
+              background: "radial-gradient(circle, #d4af37, #8b7355)",
+              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)",
+              border: "2px solid rgba(212, 175, 55, 0.5)",
             }}
           ></div>
 
@@ -304,17 +315,17 @@ export const SlotMachine = () => {
             className="relative transition-all duration-500 origin-top cursor-pointer"
             onClick={pullHandle}
             style={{
-              transform: handlePulled ? 'rotate(25deg)' : 'rotate(0deg)',
-              height: '180px',
-              width: '8px',
+              transform: handlePulled ? "rotate(25deg)" : "rotate(0deg)",
+              height: "180px",
+              width: "8px",
             }}
           >
             {/* Metal Rod */}
             <div
               className="w-full h-full rounded-full"
               style={{
-                background: 'linear-gradient(to right, #c0c0c0, #e8e8e8, #c0c0c0)',
-                boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.3), 2px 0 6px rgba(0,0,0,0.2)',
+                background: "linear-gradient(to right, #c0c0c0, #e8e8e8, #c0c0c0)",
+                boxShadow: "inset -2px 0 4px rgba(0,0,0,0.3), 2px 0 6px rgba(0,0,0,0.2)",
               }}
             ></div>
 
@@ -322,16 +333,17 @@ export const SlotMachine = () => {
             <div
               className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full cursor-pointer active:scale-95 transition-transform"
               style={{
-                background: 'radial-gradient(circle at 30% 30%, #ff1744, #dc143c, #8b0000)',
-                boxShadow: 'inset -2px -2px 8px rgba(0,0,0,0.4), inset 2px 2px 8px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.5)',
-                border: '2px solid rgba(139, 0, 0, 0.8)'
+                background: "radial-gradient(circle at 30% 30%, #ff1744, #dc143c, #8b0000)",
+                boxShadow:
+                  "inset -2px -2px 8px rgba(0,0,0,0.4), inset 2px 2px 8px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.5)",
+                border: "2px solid rgba(139, 0, 0, 0.8)",
               }}
             >
               {/* Highlight */}
               <div
                 className="absolute top-2 left-2 w-4 h-4 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, rgba(255,255,255,0.6), transparent)',
+                  background: "radial-gradient(circle, rgba(255,255,255,0.6), transparent)",
                 }}
               ></div>
             </div>
@@ -340,7 +352,11 @@ export const SlotMachine = () => {
           {/* Instruction Text */}
           <p
             className="text-[10px] text-amber-400/60 text-center mt-2 tracking-wider"
-            style={{ fontFamily: 'Georgia, serif', writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            style={{
+              fontFamily: "Georgia, serif",
+              writingMode: "vertical-rl",
+              transform: "rotate(180deg)",
+            }}
           >
             PULL
           </p>

@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Check, Copy, Download, Search, Image as ImageIcon } from 'lucide-react';
-import { useMediaFiles } from '../utils/useMediaFiles';
-import { copyToClipboard } from '../utils/copyToClipboard';
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Check, Copy, Download, Search, Image as ImageIcon } from "lucide-react";
+import { useMediaFiles } from "../utils/useMediaFiles";
+import { copyToClipboard } from "../utils/copyToClipboard";
 
 export function MediaTab() {
   const mediaFiles = useMediaFiles();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const filteredMedia = mediaFiles.filter(media =>
-    media.filename.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredMedia = mediaFiles.filter((media) =>
+    media.filename.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleCopyPath = async (filename: string, path: string) => {
@@ -24,7 +24,7 @@ export function MediaTab() {
   };
 
   const handleDownload = (path: string, filename: string) => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = path;
     link.download = filename;
     link.click();
@@ -32,21 +32,21 @@ export function MediaTab() {
 
   const getFileTypeColor = (ext: string): string => {
     switch (ext.toLowerCase()) {
-      case 'png':
-        return 'bg-blue-100 text-blue-700';
-      case 'jpg':
-      case 'jpeg':
-        return 'bg-green-100 text-green-700';
-      case 'webp':
-        return 'bg-purple-100 text-purple-700';
-      case 'avif':
-        return 'bg-orange-100 text-orange-700';
-      case 'svg':
-        return 'bg-pink-100 text-pink-700';
-      case 'gif':
-        return 'bg-yellow-100 text-yellow-700';
+      case "png":
+        return "bg-blue-100 text-blue-700";
+      case "jpg":
+      case "jpeg":
+        return "bg-green-100 text-green-700";
+      case "webp":
+        return "bg-purple-100 text-purple-700";
+      case "avif":
+        return "bg-orange-100 text-orange-700";
+      case "svg":
+        return "bg-pink-100 text-pink-700";
+      case "gif":
+        return "bg-yellow-100 text-yellow-700";
       default:
-        return 'bg-gray-100 text-gray-700';
+        return "bg-gray-100 text-gray-700";
     }
   };
 
@@ -70,15 +70,15 @@ export function MediaTab() {
         </div>
         <div>
           <span className="font-semibold">
-            {new Set(filteredMedia.map(m => m.extension)).size}
-          </span>{' '}
+            {new Set(filteredMedia.map((m) => m.extension)).size}
+          </span>{" "}
           formats
         </div>
       </div>
 
       {/* Media Grid */}
       <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filteredMedia.map(media => {
+        {filteredMedia.map((media) => {
           const isCopied = copiedId === media.filename;
 
           return (
@@ -91,10 +91,10 @@ export function MediaTab() {
                   onError={(e) => {
                     // Fallback for broken images
                     const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    target.parentElement?.classList.add('flex', 'items-center', 'justify-center');
-                    const fallback = document.createElement('div');
-                    fallback.className = 'text-gray-400';
+                    target.style.display = "none";
+                    target.parentElement?.classList.add("flex", "items-center", "justify-center");
+                    const fallback = document.createElement("div");
+                    fallback.className = "text-gray-400";
                     fallback.innerHTML = `
                       <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -109,11 +109,7 @@ export function MediaTab() {
                     variant="secondary"
                     onClick={() => handleCopyPath(media.filename, media.path)}
                   >
-                    {isCopied ? (
-                      <Check className="h-4 w-4" />
-                    ) : (
-                      <Copy className="h-4 w-4" />
-                    )}
+                    {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   </Button>
                   <Button
                     size="sm"

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  ExternalLink,
-  Globe,
-  UserPlus,
-  User,
-  Link2,
-  Podcast,
-} from "lucide-react";
+import { ExternalLink, Globe, UserPlus, User, Link2, Podcast } from "lucide-react";
 
 interface PlatformLink {
   label: string;
@@ -25,7 +18,9 @@ const primaryLinks: PlatformLink[] = [
   {
     label: "YouTube",
     url: "https://www.youtube.com/channel/UCWV222tGzK3bTh_2s22222g",
-    icon: <img src="/lovable-uploads/youtube-logo.webp" alt="" className="w-8 h-8 object-contain" />,
+    icon: (
+      <img src="/lovable-uploads/youtube-logo.webp" alt="" className="w-8 h-8 object-contain" />
+    ),
     ariaLabel: "Visit YouTube Channel",
   },
   {
@@ -37,7 +32,9 @@ const primaryLinks: PlatformLink[] = [
   {
     label: "Spotify",
     url: "https://open.spotify.com/show/0w222p2w222h2F2222S2Q2",
-    icon: <img src="/lovable-uploads/spotify-logo.webp" alt="" className="w-8 h-8 object-contain" />,
+    icon: (
+      <img src="/lovable-uploads/spotify-logo.webp" alt="" className="w-8 h-8 object-contain" />
+    ),
     ariaLabel: "Listen on Spotify",
   },
   {
@@ -49,7 +46,13 @@ const primaryLinks: PlatformLink[] = [
   {
     label: "Amazon Music",
     url: "https://music.amazon.com/podcasts/222b2c22-2222-22f2-b2c2-c22f22b22f22/The-Lexis-Star-Show",
-    icon: <img src="/lovable-uploads/amazon-music-logo.webp" alt="" className="w-8 h-8 object-contain" />,
+    icon: (
+      <img
+        src="/lovable-uploads/amazon-music-logo.webp"
+        alt=""
+        className="w-8 h-8 object-contain"
+      />
+    ),
     ariaLabel: "Listen on Amazon Music",
   },
   {
@@ -114,12 +117,7 @@ export default function MobileCompactLinks() {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
 

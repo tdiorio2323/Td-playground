@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -17,7 +23,7 @@ import {
   Upload,
   LayoutTemplate,
   Share2,
-  Plus
+  Plus,
 } from "lucide-react";
 
 const fontOptions = [
@@ -25,7 +31,7 @@ const fontOptions = [
   { label: "Space Grotesk", value: "'Space Grotesk', sans-serif" },
   { label: "Playfair Display", value: "'Playfair Display', serif" },
   { label: "Bricolage Grotesque", value: "'Bricolage Grotesque', sans-serif" },
-  { label: "Archivo Black", value: "'Archivo Black', sans-serif" }
+  { label: "Archivo Black", value: "'Archivo Black', sans-serif" },
 ];
 
 const socialCatalog = [
@@ -33,7 +39,7 @@ const socialCatalog = [
   { key: "tiktok", label: "TikTok", icon: "TT" },
   { key: "youtube", label: "YouTube", icon: "YT" },
   { key: "x", label: "X / Twitter", icon: "X" },
-  { key: "website", label: "Website", icon: "↗" }
+  { key: "website", label: "Website", icon: "↗" },
 ];
 
 interface ButtonConfig {
@@ -62,15 +68,33 @@ const createButton = (): ButtonConfig => ({
   url: "https://",
   bg: "#111827",
   text: "#ffffff",
-  font: fontOptions[0].value
+  font: fontOptions[0].value,
 });
 
 const initialButtons: ButtonConfig[] = [
-  { id: createId(), label: "Shop Launch", url: "https://tdstudiosny.com", bg: "#111827", text: "#ffffff", font: fontOptions[0].value },
-  { id: createId(), label: "Watch Capsule", url: "https://youtube.com", bg: "#111827", text: "#ffffff", font: fontOptions[0].value }
+  {
+    id: createId(),
+    label: "Shop Launch",
+    url: "https://tdstudiosny.com",
+    bg: "#111827",
+    text: "#ffffff",
+    font: fontOptions[0].value,
+  },
+  {
+    id: createId(),
+    label: "Watch Capsule",
+    url: "https://youtube.com",
+    bg: "#111827",
+    text: "#ffffff",
+    font: fontOptions[0].value,
+  },
 ];
 
-const initialSocials: SocialConfig[] = socialCatalog.map(item => ({ key: item.key, url: "https://", enabled: item.key === "instagram" }));
+const initialSocials: SocialConfig[] = socialCatalog.map((item) => ({
+  key: item.key,
+  url: "https://",
+  enabled: item.key === "instagram",
+}));
 
 const Vip = () => {
   const navigate = useNavigate();
@@ -81,7 +105,9 @@ const Vip = () => {
   const [slug, setSlug] = useState("vip-demo");
   const [profileShape, setProfileShape] = useState<"circle" | "rounded">("circle");
   const [profileImage, setProfileImage] = useState("/lovable-uploads/td-studios-black-marble.webp");
-  const [backgroundImage, setBackgroundImage] = useState<string | null>("https://cdn.midjourney.com/4a36bb1c-b197-442f-a477-0c357f760cf5/0_0.jpeg");
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(
+    "https://cdn.midjourney.com/4a36bb1c-b197-442f-a477-0c357f760cf5/0_0.jpeg",
+  );
   const [backgroundColor, setBackgroundColor] = useState("#05050a");
   const [cardColor, setCardColor] = useState("rgba(0,0,0,0.78)");
   const [buttons, setButtons] = useState<ButtonConfig[]>(initialButtons);
@@ -90,12 +116,15 @@ const Vip = () => {
   const [copied, setCopied] = useState(false);
 
   const permalink = useMemo(() => {
-    const normalized = slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    const normalized = slug
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "-");
     return `playground.tdstudiosny.com/${normalized || "your-name"}`;
   }, [slug]);
 
-  const previewButtons = buttons.filter(btn => btn.label.trim().length > 0);
-  const enabledSocials = socials.filter(s => s.enabled && s.url.trim().length > 0);
+  const previewButtons = buttons.filter((btn) => btn.label.trim().length > 0);
+  const enabledSocials = socials.filter((s) => s.enabled && s.url.trim().length > 0);
 
   const handleImageUpload = (file: File | null, setter: (value: string) => void) => {
     if (!file) return;
@@ -104,19 +133,21 @@ const Vip = () => {
   };
 
   const updateButton = (id: string, field: keyof ButtonConfig, value: string) => {
-    setButtons(prev => prev.map(btn => (btn.id === id ? { ...btn, [field]: value } : btn)));
+    setButtons((prev) => prev.map((btn) => (btn.id === id ? { ...btn, [field]: value } : btn)));
   };
 
   const updateSocial = (key: string, updates: Partial<SocialConfig>) => {
-    setSocials(prev => prev.map(s => (s.key === key ? { ...s, ...updates } : s)));
+    setSocials((prev) => prev.map((s) => (s.key === key ? { ...s, ...updates } : s)));
   };
 
   const removeButton = (id: string) => {
-    setButtons(prev => prev.filter(btn => btn.id !== id));
+    setButtons((prev) => prev.filter((btn) => btn.id !== id));
   };
 
   const generateSnippet = () => {
-    const safeProfile = profileImage.startsWith("blob:") ? "https://placehold.co/160" : profileImage;
+    const safeProfile = profileImage.startsWith("blob:")
+      ? "https://placehold.co/160"
+      : profileImage;
     const safeBackground = backgroundImage?.startsWith("blob:") ? "" : backgroundImage;
 
     const payload = {
@@ -129,7 +160,7 @@ const Vip = () => {
       backgroundImage: safeBackground,
       buttons: previewButtons,
       socials: enabledSocials,
-      customRequestUrl
+      customRequestUrl,
     };
 
     return `import React from "react";
@@ -231,7 +262,10 @@ export const VipLinkCard = () => {
     try {
       await navigator.clipboard.writeText(generateSnippet());
       setCopied(true);
-      toast({ title: "Snippet copied", description: "Paste into any React project and wire your own data sources." });
+      toast({
+        title: "Snippet copied",
+        description: "Paste into any React project and wire your own data sources.",
+      });
       setTimeout(() => setCopied(false), 2500);
     } catch (error) {
       console.error(error);
@@ -241,14 +275,14 @@ export const VipLinkCard = () => {
 
   const profileShapeOptions = [
     { value: "circle", label: "Circle" },
-    { value: "rounded", label: "Rounded" }
+    { value: "rounded", label: "Rounded" },
   ];
 
   const builderBackground = {
     backgroundColor,
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   } as const;
 
   return (
@@ -259,11 +293,15 @@ export const VipLinkCard = () => {
             <p className="uppercase text-xs tracking-[0.3em] text-white/60">VIP Link Builder</p>
             <h1 className="text-4xl font-bold mt-2">Link-in-Bio composer</h1>
             <p className="text-white/60 mt-2 max-w-2xl">
-              Configure profile art, buttons, social embeds, and custom backgrounds in a mobile-focused preview.
-              Copy the generated snippet and wire any backend later.
+              Configure profile art, buttons, social embeds, and custom backgrounds in a
+              mobile-focused preview. Copy the generated snippet and wire any backend later.
             </p>
           </div>
-          <Button onClick={() => navigate("/library")} variant="outline" className="text-white border-white/30">
+          <Button
+            onClick={() => navigate("/library")}
+            variant="outline"
+            className="text-white border-white/30"
+          >
             Browse Library
           </Button>
         </div>
@@ -281,25 +319,50 @@ export const VipLinkCard = () => {
               <CardContent className="space-y-4">
                 <div>
                   <Label htmlFor="title">Title</Label>
-                  <Input id="title" value={cardTitle} onChange={e => setCardTitle(e.target.value)} className="mt-1 bg-white/10 border-white/20" />
+                  <Input
+                    id="title"
+                    value={cardTitle}
+                    onChange={(e) => setCardTitle(e.target.value)}
+                    className="mt-1 bg-white/10 border-white/20"
+                  />
                 </div>
                 <div>
                   <Label htmlFor="subtitle">Username</Label>
-                  <Input id="subtitle" value={subtitle} onChange={e => setSubtitle(e.target.value)} className="mt-1 bg-white/10 border-white/20" />
+                  <Input
+                    id="subtitle"
+                    value={subtitle}
+                    onChange={(e) => setSubtitle(e.target.value)}
+                    className="mt-1 bg-white/10 border-white/20"
+                  />
                 </div>
                 <div>
                   <Label htmlFor="slug">Custom link</Label>
-                  <Input id="slug" value={slug} onChange={e => setSlug(e.target.value)} className="mt-1 bg-white/10 border-white/20" />
+                  <Input
+                    id="slug"
+                    value={slug}
+                    onChange={(e) => setSlug(e.target.value)}
+                    className="mt-1 bg-white/10 border-white/20"
+                  />
                   <p className="text-xs text-white/50 mt-1">{permalink}</p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
                     <Label>Background color</Label>
-                    <Input type="color" value={backgroundColor} onChange={e => setBackgroundColor(e.target.value)} className="mt-1 h-10" />
+                    <Input
+                      type="color"
+                      value={backgroundColor}
+                      onChange={(e) => setBackgroundColor(e.target.value)}
+                      className="mt-1 h-10"
+                    />
                   </div>
                   <div>
                     <Label>Card fill</Label>
-                    <Input type="text" value={cardColor} onChange={e => setCardColor(e.target.value)} className="mt-1 bg-white/10 border-white/20" />
+                    <Input
+                      type="text"
+                      value={cardColor}
+                      onChange={(e) => setCardColor(e.target.value)}
+                      className="mt-1 bg-white/10 border-white/20"
+                    />
                     <p className="text-[11px] text-white/40 mt-1">Supports rgba or hex.</p>
                   </div>
                 </div>
@@ -317,10 +380,18 @@ export const VipLinkCard = () => {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={e => handleImageUpload(e.target.files?.[0] || null, value => setBackgroundImage(value))}
+                    onChange={(e) =>
+                      handleImageUpload(e.target.files?.[0] || null, (value) =>
+                        setBackgroundImage(value),
+                      )
+                    }
                   />
                   {backgroundImage && (
-                    <Button variant="ghost" className="text-xs text-red-300 px-0" onClick={() => setBackgroundImage(null)}>
+                    <Button
+                      variant="ghost"
+                      className="text-xs text-red-300 px-0"
+                      onClick={() => setBackgroundImage(null)}
+                    >
                       Remove background
                     </Button>
                   )}
@@ -339,12 +410,15 @@ export const VipLinkCard = () => {
               <CardContent className="space-y-4">
                 <div>
                   <Label>Profile shape</Label>
-                  <Select value={profileShape} onValueChange={value => setProfileShape(value as "circle" | "rounded")}>
+                  <Select
+                    value={profileShape}
+                    onValueChange={(value) => setProfileShape(value as "circle" | "rounded")}
+                  >
                     <SelectTrigger className="mt-1 bg-white/5 border-white/20">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#111] text-white border-white/10">
-                      {profileShapeOptions.map(option => (
+                      {profileShapeOptions.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
                         </SelectItem>
@@ -362,14 +436,26 @@ export const VipLinkCard = () => {
                     >
                       <Upload className="h-4 w-4 mr-2" /> Upload
                     </Button>
-                    <Button variant="ghost" className="text-sm text-white/60" onClick={() => setProfileImage("/lovable-uploads/td-studios-black-marble.webp")}>Reset</Button>
+                    <Button
+                      variant="ghost"
+                      className="text-sm text-white/60"
+                      onClick={() =>
+                        setProfileImage("/lovable-uploads/td-studios-black-marble.webp")
+                      }
+                    >
+                      Reset
+                    </Button>
                   </div>
                   <input
                     id="profile-upload"
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={e => handleImageUpload(e.target.files?.[0] || null, value => setProfileImage(value))}
+                    onChange={(e) =>
+                      handleImageUpload(e.target.files?.[0] || null, (value) =>
+                        setProfileImage(value),
+                      )
+                    }
                   />
                 </div>
               </CardContent>
@@ -384,8 +470,11 @@ export const VipLinkCard = () => {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {buttons.map(button => (
-                  <div key={button.id} className="rounded-xl border border-white/10 p-4 space-y-3 bg-white/5">
+                {buttons.map((button) => (
+                  <div
+                    key={button.id}
+                    className="rounded-xl border border-white/10 p-4 space-y-3 bg-white/5"
+                  >
                     <div className="flex items-center justify-between">
                       <Label className="text-sm text-white/70">{button.label || "Button"}</Label>
                       <Button variant="ghost" size="icon" onClick={() => removeButton(button.id)}>
@@ -394,34 +483,47 @@ export const VipLinkCard = () => {
                     </div>
                     <Input
                       value={button.label}
-                      onChange={e => updateButton(button.id, "label", e.target.value)}
+                      onChange={(e) => updateButton(button.id, "label", e.target.value)}
                       placeholder="Button text"
                       className="bg-white/10 border-white/20"
                     />
                     <Input
                       value={button.url}
-                      onChange={e => updateButton(button.id, "url", e.target.value)}
+                      onChange={(e) => updateButton(button.id, "url", e.target.value)}
                       placeholder="https://"
                       className="bg-white/10 border-white/20"
                     />
                     <div className="grid gap-3 sm:grid-cols-2">
                       <div>
                         <Label className="text-xs">Background</Label>
-                        <Input type="color" value={button.bg} onChange={e => updateButton(button.id, "bg", e.target.value)} className="mt-1 h-10" />
+                        <Input
+                          type="color"
+                          value={button.bg}
+                          onChange={(e) => updateButton(button.id, "bg", e.target.value)}
+                          className="mt-1 h-10"
+                        />
                       </div>
                       <div>
                         <Label className="text-xs">Text</Label>
-                        <Input type="color" value={button.text} onChange={e => updateButton(button.id, "text", e.target.value)} className="mt-1 h-10" />
+                        <Input
+                          type="color"
+                          value={button.text}
+                          onChange={(e) => updateButton(button.id, "text", e.target.value)}
+                          className="mt-1 h-10"
+                        />
                       </div>
                     </div>
                     <div>
                       <Label className="text-xs">Font</Label>
-                      <Select value={button.font} onValueChange={value => updateButton(button.id, "font", value)}>
+                      <Select
+                        value={button.font}
+                        onValueChange={(value) => updateButton(button.id, "font", value)}
+                      >
                         <SelectTrigger className="mt-1 bg-white/5 border-white/20">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent className="bg-[#111] text-white border-white/10">
-                          {fontOptions.map(option => (
+                          {fontOptions.map((option) => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
@@ -435,7 +537,7 @@ export const VipLinkCard = () => {
                   type="button"
                   variant="outline"
                   className="w-full border-dashed border-white/30 text-white"
-                  onClick={() => setButtons(prev => [...prev, createButton()])}
+                  onClick={() => setButtons((prev) => [...prev, createButton()])}
                 >
                   <Plus className="h-4 w-4 mr-2" /> Add button
                 </Button>
@@ -452,19 +554,24 @@ export const VipLinkCard = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  {socialCatalog.map(item => {
-                    const social = socials.find(s => s.key === item.key)!;
+                  {socialCatalog.map((item) => {
+                    const social = socials.find((s) => s.key === item.key)!;
                     return (
-                      <div key={item.key} className="flex items-center gap-3 border border-white/10 rounded-lg px-3 py-2">
+                      <div
+                        key={item.key}
+                        className="flex items-center gap-3 border border-white/10 rounded-lg px-3 py-2"
+                      >
                         <Switch
                           checked={social.enabled}
-                          onCheckedChange={checked => updateSocial(item.key, { enabled: checked })}
+                          onCheckedChange={(checked) =>
+                            updateSocial(item.key, { enabled: checked })
+                          }
                         />
                         <div className="flex-1">
                           <Label className="text-sm text-white/70">{item.label}</Label>
                           <Input
                             value={social.url}
-                            onChange={e => updateSocial(item.key, { url: e.target.value })}
+                            onChange={(e) => updateSocial(item.key, { url: e.target.value })}
                             placeholder="https://"
                             className="mt-1 bg-white/10 border-white/20"
                           />
@@ -477,14 +584,17 @@ export const VipLinkCard = () => {
                   <Label>Custom request URL</Label>
                   <Input
                     value={customRequestUrl}
-                    onChange={e => setCustomRequestUrl(e.target.value)}
+                    onChange={(e) => setCustomRequestUrl(e.target.value)}
                     placeholder="https://"
                     className="mt-1 bg-white/10 border-white/20"
                   />
                 </div>
                 <div>
                   <Label>Notes</Label>
-                  <Textarea className="bg-white/10 border-white/20" placeholder="Optional production notes for teammates" />
+                  <Textarea
+                    className="bg-white/10 border-white/20"
+                    placeholder="Optional production notes for teammates"
+                  />
                 </div>
                 <Button
                   onClick={handleCopySnippet}
@@ -508,7 +618,9 @@ export const VipLinkCard = () => {
             <div className="flex flex-col gap-4" style={builderBackground}>
               <div className="rounded-[40px] border border-white/15 bg-black/50 p-6 max-w-sm mx-auto w-full backdrop-blur-xl">
                 <div className="flex justify-end">
-                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/60">Preview</span>
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/60">
+                    Preview
+                  </span>
                 </div>
                 <div className="mt-4 flex justify-center">
                   <div
@@ -523,7 +635,7 @@ export const VipLinkCard = () => {
                   <p className="text-xs text-white/40">{permalink}</p>
                 </div>
                 <div className="mt-6 space-y-3">
-                  {previewButtons.map(button => (
+                  {previewButtons.map((button) => (
                     <a
                       key={button.id}
                       href={button.url}
@@ -538,10 +650,16 @@ export const VipLinkCard = () => {
                 </div>
                 {enabledSocials.length > 0 && (
                   <div className="flex justify-center gap-4 mt-6">
-                    {enabledSocials.map(social => {
-                      const meta = socialCatalog.find(item => item.key === social.key);
+                    {enabledSocials.map((social) => {
+                      const meta = socialCatalog.find((item) => item.key === social.key);
                       return (
-                        <a key={social.key} href={social.url} target="_blank" rel="noreferrer" className="text-white/70 text-sm">
+                        <a
+                          key={social.key}
+                          href={social.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-white/70 text-sm"
+                        >
                           {meta?.icon}
                         </a>
                       );

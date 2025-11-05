@@ -5,7 +5,7 @@ import {
   Palette,
   Sparkles,
   Flame,
-  type LucideIcon
+  type LucideIcon,
 } from "lucide-react";
 import type { KeySlug } from "@/lib/roomKeys";
 
@@ -31,37 +31,40 @@ export interface RouteDefinition {
   meta?: RouteMeta;
 }
 
-export const routeCategories: Record<RouteCategory, { icon: LucideIcon; gradient: string; color: string }> = {
-  "Authentication": {
+export const routeCategories: Record<
+  RouteCategory,
+  { icon: LucideIcon; gradient: string; color: string }
+> = {
+  Authentication: {
     icon: Lock,
     gradient: "from-purple-500 via-pink-500 to-red-500",
-    color: "text-purple-400"
+    color: "text-purple-400",
   },
   "E-commerce": {
     icon: ShoppingCart,
     gradient: "from-green-500 via-emerald-500 to-teal-500",
-    color: "text-green-400"
+    color: "text-green-400",
   },
-  "Management": {
+  Management: {
     icon: LayoutDashboard,
     gradient: "from-blue-500 via-cyan-500 to-indigo-500",
-    color: "text-blue-400"
+    color: "text-blue-400",
   },
   "Creator Tools": {
     icon: Palette,
     gradient: "from-orange-500 via-amber-500 to-yellow-500",
-    color: "text-orange-400"
+    color: "text-orange-400",
   },
-  "Showcases": {
+  Showcases: {
     icon: Sparkles,
     gradient: "from-violet-500 via-fuchsia-500 to-pink-500",
-    color: "text-violet-400"
+    color: "text-violet-400",
   },
-  "Experimental": {
+  Experimental: {
     icon: Flame,
     gradient: "from-red-500 via-rose-500 to-pink-500",
-    color: "text-red-400"
-  }
+    color: "text-red-400",
+  },
 };
 
 export const routes: RouteDefinition[] = [
@@ -71,203 +74,203 @@ export const routes: RouteDefinition[] = [
     name: "Home",
     category: "Authentication",
     description: "TD Studios / LCG domain-aware home page",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth",
     name: "Auth Base",
     category: "Authentication",
     description: "Base authentication page",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth2",
     name: "Auth v2",
     category: "Authentication",
     description: "Authentication variation 2",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/juanita",
     name: "Juanita Auth",
     category: "Authentication",
     description: "Juanita branded authentication",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/thecabana",
     name: "The Cabana",
     category: "Authentication",
     description: "Cabana branded entry",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/juanita2",
     name: "Juanita v2",
     category: "Authentication",
     description: "Juanita authentication v2",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/juanita3",
     name: "Juanita v3",
     category: "Authentication",
     description: "Juanita authentication v3",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/juanita4",
     name: "Juanita v4",
     category: "Authentication",
     description: "Juanita authentication v4",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/cabana",
     name: "Cabana",
     category: "Authentication",
     description: "Cabana authentication portal",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth4",
     name: "Auth v4",
     category: "Authentication",
     description: "Authentication variation 4",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/joincabana",
     name: "Join Cabana",
     category: "Authentication",
     description: "Cabana signup flow",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/lilsex",
     name: "Lil Sex",
     category: "Authentication",
     description: "Lil Sex branded auth",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/starluv",
     name: "Star Luv",
     category: "Authentication",
     description: "Star Luv authentication",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/starluv-2",
     name: "Star Luv v2",
     category: "Authentication",
     description: "Star Luv variation 2",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/starluv-3",
     name: "Star Luv v3",
     category: "Authentication",
     description: "Star Luv variation 3",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/starluv-4",
     name: "Star Luv v4",
     category: "Authentication",
     description: "Star Luv variation 4",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/quickprintz",
     name: "Quick Printz",
     category: "Authentication",
     description: "Quick Printz auth portal",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth8",
     name: "Auth v8",
     category: "Authentication",
     description: "Authentication variation 8",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth9",
     name: "Auth v9",
     category: "Authentication",
     description: "Authentication variation 9",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth11",
     name: "Auth v11",
     category: "Authentication",
     description: "Authentication variation 11",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth12",
     name: "Auth v12",
     category: "Authentication",
     description: "Authentication variation 12",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth13",
     name: "Auth v13",
     category: "Authentication",
     description: "Authentication variation 13",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth14",
     name: "Auth v14",
     category: "Authentication",
     description: "Authentication variation 14",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth15",
     name: "Auth v15",
     category: "Authentication",
     description: "Authentication variation 15",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth16",
     name: "Auth v16",
     category: "Authentication",
     description: "Authentication variation 16",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth17",
     name: "Auth v17",
     category: "Authentication",
     description: "Authentication variation 17",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth18",
     name: "Auth v18",
     category: "Authentication",
     description: "Authentication variation 18",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth19",
     name: "Auth v19",
     category: "Authentication",
     description: "Authentication variation 19",
-    icon: Lock
+    icon: Lock,
   },
   {
     path: "/auth20",
     name: "Auth v20",
     category: "Authentication",
     description: "Authentication variation 20",
-    icon: Lock
+    icon: Lock,
   },
 
   // E-commerce (5 routes)
@@ -276,35 +279,35 @@ export const routes: RouteDefinition[] = [
     name: "Shop",
     category: "E-commerce",
     description: "E-commerce shop interface",
-    icon: ShoppingCart
+    icon: ShoppingCart,
   },
   {
     path: "/product/:id",
     name: "Product Details",
     category: "E-commerce",
     description: "Product detail page",
-    icon: ShoppingCart
+    icon: ShoppingCart,
   },
   {
     path: "/checkout",
     name: "Checkout",
     category: "E-commerce",
     description: "Checkout flow",
-    icon: ShoppingCart
+    icon: ShoppingCart,
   },
   {
     path: "/storage",
     name: "Storage",
     category: "E-commerce",
     description: "Storage management interface",
-    icon: ShoppingCart
+    icon: ShoppingCart,
   },
   {
     path: "/premade-bag-designs",
     name: "Premade Bag Designs",
     category: "E-commerce",
     description: "Premade product designs",
-    icon: ShoppingCart
+    icon: ShoppingCart,
   },
 
   // Management (6 routes)
@@ -313,42 +316,42 @@ export const routes: RouteDefinition[] = [
     name: "The Dash",
     category: "Management",
     description: "Main dashboard template",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     path: "/cabanamgmt",
     name: "Cabana Management",
     category: "Management",
     description: "Cabana management portal",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     path: "/cabanamgmt-2",
     name: "Cabana Mgmt v2",
     category: "Management",
     description: "Cabana management v2",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     path: "/cabanamgmt-4",
     name: "Cabana Mgmt v4",
     category: "Management",
     description: "Cabana management v4",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     path: "/admin",
     name: "Admin",
     category: "Management",
     description: "Super admin dashboard",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     path: "/brand",
     name: "Brand",
     category: "Management",
     description: "Brand dashboard",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
 
   // Creator Tools (7 routes)
@@ -357,49 +360,49 @@ export const routes: RouteDefinition[] = [
     name: "Creator Onboarding",
     category: "Creator Tools",
     description: "Creator onboarding flow",
-    icon: Palette
+    icon: Palette,
   },
   {
     path: "/bio/:username",
     name: "Link in Bio",
     category: "Creator Tools",
     description: "Dynamic link-in-bio pages",
-    icon: Palette
+    icon: Palette,
   },
   {
     path: "/waitlist",
     name: "VIP Waitlist",
     category: "Creator Tools",
     description: "VIP waitlist signup",
-    icon: Palette
+    icon: Palette,
   },
   {
     path: "/portal",
     name: "Portal",
     category: "Creator Tools",
     description: "User portal interface",
-    icon: Palette
+    icon: Palette,
   },
   {
     path: "/project/:id",
     name: "Project Page",
     category: "Creator Tools",
     description: "Project detail pages",
-    icon: Palette
+    icon: Palette,
   },
   {
     path: "/lcg",
     name: "Locust Growth",
     category: "Creator Tools",
     description: "LCG branded portal",
-    icon: Palette
+    icon: Palette,
   },
   {
     path: "/home-1",
     name: "Home Alternative",
     category: "Creator Tools",
     description: "Alternative home page",
-    icon: Palette
+    icon: Palette,
   },
 
   // Showcases (4 routes)
@@ -408,21 +411,21 @@ export const routes: RouteDefinition[] = [
     name: "Directory",
     category: "Showcases",
     description: "Component showcase directory",
-    icon: Sparkles
+    icon: Sparkles,
   },
   {
     path: "/library",
     name: "Design Library",
     category: "Showcases",
     description: "40+ shadcn/ui components",
-    icon: Sparkles
+    icon: Sparkles,
   },
   {
     path: "/authcard",
     name: "AuthCard Preview",
     category: "Showcases",
     description: "AuthCard component preview",
-    icon: Sparkles
+    icon: Sparkles,
   },
 
   // Experimental (4 routes)
@@ -431,35 +434,35 @@ export const routes: RouteDefinition[] = [
     name: "Spooky",
     category: "Experimental",
     description: "Spooky themed page",
-    icon: Flame
+    icon: Flame,
   },
   {
     path: "/lexistarshow",
     name: "Lexi Star Show",
     category: "Experimental",
     description: "Lexi Star Show experience",
-    icon: Flame
+    icon: Flame,
   },
   {
     path: "/soundimageband",
     name: "Sound Image Band",
     category: "Experimental",
     description: "Sound Image Band portal",
-    icon: Flame
+    icon: Flame,
   },
   {
     path: "/casino-nav",
     name: "Casino Navigation",
     category: "Experimental",
     description: "Slot machine meta-navigation",
-    icon: Flame
+    icon: Flame,
   },
   {
     path: "/vip",
     name: "VIP Lounge",
     category: "Experimental",
     description: "Invitation-only VIP control room",
-    icon: Sparkles
+    icon: Sparkles,
   },
   {
     path: "/backroom",
@@ -467,7 +470,7 @@ export const routes: RouteDefinition[] = [
     category: "Experimental",
     description: "Behind-the-scenes operations desk",
     icon: LayoutDashboard,
-    meta: { requiresKey: "backroom" }
+    meta: { requiresKey: "backroom" },
   },
   {
     path: "/testing-lab",
@@ -475,33 +478,33 @@ export const routes: RouteDefinition[] = [
     category: "Experimental",
     description: "Experimental sandbox reserved for lab members",
     icon: Flame,
-    meta: { requiresKey: "testing-lab" }
+    meta: { requiresKey: "testing-lab" },
   },
   {
     path: "/hub",
     name: "Navigation Hub",
     category: "Experimental",
     description: "Interactive navigation portal",
-    icon: Flame
-  }
+    icon: Flame,
+  },
 ];
 
 // Helper functions
 export const getRoutesByCategory = (category: RouteCategory): RouteDefinition[] => {
-  return routes.filter(route => route.category === category);
+  return routes.filter((route) => route.category === category);
 };
 
 export const getCategoryStats = () => {
   const stats: Record<RouteCategory, number> = {
-    "Authentication": 0,
+    Authentication: 0,
     "E-commerce": 0,
-    "Management": 0,
+    Management: 0,
     "Creator Tools": 0,
-    "Showcases": 0,
-    "Experimental": 0
+    Showcases: 0,
+    Experimental: 0,
   };
 
-  routes.forEach(route => {
+  routes.forEach((route) => {
     stats[route.category]++;
   });
 
@@ -510,10 +513,11 @@ export const getCategoryStats = () => {
 
 export const searchRoutes = (query: string): RouteDefinition[] => {
   const lowercaseQuery = query.toLowerCase();
-  return routes.filter(route =>
-    route.name.toLowerCase().includes(lowercaseQuery) ||
-    route.path.toLowerCase().includes(lowercaseQuery) ||
-    route.description.toLowerCase().includes(lowercaseQuery) ||
-    route.category.toLowerCase().includes(lowercaseQuery)
+  return routes.filter(
+    (route) =>
+      route.name.toLowerCase().includes(lowercaseQuery) ||
+      route.path.toLowerCase().includes(lowercaseQuery) ||
+      route.description.toLowerCase().includes(lowercaseQuery) ||
+      route.category.toLowerCase().includes(lowercaseQuery),
   );
 };

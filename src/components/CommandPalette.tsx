@@ -49,7 +49,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onOpenChan
   }, [open, onOpenChange]);
 
   const addToRecent = (path: string) => {
-    const updated = [path, ...recentRoutes.filter(r => r !== path)].slice(0, MAX_RECENT);
+    const updated = [path, ...recentRoutes.filter((r) => r !== path)].slice(0, MAX_RECENT);
     setRecentRoutes(updated);
     localStorage.setItem(RECENT_ROUTES_KEY, JSON.stringify(updated));
   };
@@ -60,16 +60,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onOpenChan
     navigate(path);
   };
 
-  const groupedRoutes = routes.reduce((acc, route) => {
-    if (!acc[route.category]) {
-      acc[route.category] = [];
-    }
-    acc[route.category].push(route);
-    return acc;
-  }, {} as Record<RouteCategory, typeof routes>);
+  const groupedRoutes = routes.reduce(
+    (acc, route) => {
+      if (!acc[route.category]) {
+        acc[route.category] = [];
+      }
+      acc[route.category].push(route);
+      return acc;
+    },
+    {} as Record<RouteCategory, typeof routes>,
+  );
 
   const recentRouteObjects = recentRoutes
-    .map(path => routes.find(r => r.path === path))
+    .map((path) => routes.find((r) => r.path === path))
     .filter(Boolean);
 
   return (

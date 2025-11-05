@@ -1,54 +1,71 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/integrations/supabase/auth";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  FileText, 
-  Image, 
-  Video, 
-  Folder, 
+import {
+  FileText,
+  Image,
+  Video,
+  Folder,
   Settings,
   Sparkles,
   StickyNote,
   Crown,
   User,
-  Link
+  Link,
 } from "lucide-react";
 
 const Portal = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [username, setUsername] = useState('User');
-  const [notes, setNotes] = useState('');
+  const [username, setUsername] = useState("User");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     if (user) {
-      setUsername(user.email?.split('@')[0] || 'User');
+      setUsername(user.email?.split("@")[0] || "User");
     }
-    const savedNotes = localStorage.getItem('user-notes') || '';
+    const savedNotes = localStorage.getItem("user-notes") || "";
     setNotes(savedNotes);
   }, [user]);
 
   const handleNotesChange = (value: string) => {
     setNotes(value);
-    localStorage.setItem('user-notes', value);
+    localStorage.setItem("user-notes", value);
   };
 
   const projects = [
-    { id: 'documents', name: 'Documents', icon: FileText, color: 'from-blue-500 to-purple-600' },
-    { id: 'media', name: 'Media Gallery', icon: Image, color: 'from-pink-500 to-rose-500' },
-    { id: 'videos', name: 'Video Library', icon: Video, color: 'from-green-500 to-emerald-600' },
-    { id: 'projects', name: 'Projects', icon: Folder, color: 'from-orange-500 to-red-500' },
-    { id: 'settings', name: 'Settings', icon: Settings, color: 'from-gray-500 to-slate-600' },
-    { id: 'notes', name: 'Quick Notes', icon: StickyNote, color: 'from-teal-500 to-cyan-600' }
+    { id: "documents", name: "Documents", icon: FileText, color: "from-blue-500 to-purple-600" },
+    { id: "media", name: "Media Gallery", icon: Image, color: "from-pink-500 to-rose-500" },
+    { id: "videos", name: "Video Library", icon: Video, color: "from-green-500 to-emerald-600" },
+    { id: "projects", name: "Projects", icon: Folder, color: "from-orange-500 to-red-500" },
+    { id: "settings", name: "Settings", icon: Settings, color: "from-gray-500 to-slate-600" },
+    { id: "notes", name: "Quick Notes", icon: StickyNote, color: "from-teal-500 to-cyan-600" },
   ];
 
   const newFeatures = [
-    { id: 'vip', name: 'Join VIP', icon: Crown, color: 'from-yellow-500 to-amber-600', path: '/waitlist' },
-    { id: 'creator', name: 'Creator Onboard', icon: User, color: 'from-green-500 to-emerald-600', path: '/onboard' },
-    { id: 'bio', name: 'Link in Bio', icon: Link, color: 'from-purple-500 to-violet-600', path: '/bio/demo' }
+    {
+      id: "vip",
+      name: "Join VIP",
+      icon: Crown,
+      color: "from-yellow-500 to-amber-600",
+      path: "/waitlist",
+    },
+    {
+      id: "creator",
+      name: "Creator Onboard",
+      icon: User,
+      color: "from-green-500 to-emerald-600",
+      path: "/onboard",
+    },
+    {
+      id: "bio",
+      name: "Link in Bio",
+      icon: Link,
+      color: "from-purple-500 to-violet-600",
+      path: "/bio/demo",
+    },
   ];
 
   const handleProjectClick = (projectId: string) => {
@@ -60,19 +77,19 @@ const Portal = () => {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen relative"
       style={{
         backgroundImage: `url('/lovable-uploads/74a236e3-3b28-4ffa-8e8e-cd545be0f4e5.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
       }}
     >
       {/* Luxury overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-purple-900/30 backdrop-blur-[1px]" />
-      
+
       <div className="relative z-10 container mx-auto px-6 py-12">
         {/* Header */}
         <header className="text-center mb-16">
@@ -95,7 +112,9 @@ const Portal = () => {
               onClick={() => handleProjectClick(project.id)}
             >
               <CardContent className="p-8 text-center">
-                <div className={`w-20 h-20 mx-auto mb-6 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                <div
+                  className={`w-20 h-20 mx-auto mb-6 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
+                >
                   <project.icon className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-white font-semibold text-lg group-hover:text-purple-200 transition-colors duration-300">
@@ -116,7 +135,7 @@ const Portal = () => {
             </div>
             <p className="text-white/70">Discover our latest Cabana VIP community features</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {newFeatures.map((feature) => (
               <Card
@@ -125,7 +144,9 @@ const Portal = () => {
                 onClick={() => handleFeatureClick(feature.path)}
               >
                 <CardContent className="p-6 text-center">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                  <div
+                    className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
+                  >
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-white font-semibold text-lg group-hover:text-yellow-200 transition-colors duration-300">

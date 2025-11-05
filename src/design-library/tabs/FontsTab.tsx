@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Check, Copy } from 'lucide-react';
-import { fonts } from '../registry/fonts';
-import { copyToClipboard } from '../utils/copyToClipboard';
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Check, Copy } from "lucide-react";
+import { fonts } from "../registry/fonts";
+import { copyToClipboard } from "../utils/copyToClipboard";
 
-type CopyType = 'import' | 'tailwind' | 'css';
+type CopyType = "import" | "tailwind" | "css";
 
 export function FontsTab() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function FontsTab() {
   return (
     <div className="space-y-6">
       <div className="grid gap-6">
-        {fonts.map(font => {
+        {fonts.map((font) => {
           const importCopied = copiedId === `${font.name}-import`;
           const tailwindCopied = copiedId === `${font.name}-tailwind`;
           const cssCopied = copiedId === `${font.name}-css`;
@@ -40,12 +40,12 @@ export function FontsTab() {
                 {/* Font Preview */}
                 <div className="space-y-3 border-b pb-6">
                   <p className="text-sm font-semibold text-gray-700">Preview</p>
-                  {font.weights.map(weight => (
+                  {font.weights.map((weight) => (
                     <p
                       key={weight}
                       style={{
                         fontFamily: font.family,
-                        fontWeight: weight
+                        fontWeight: weight,
                       }}
                       className="text-2xl"
                     >
@@ -62,7 +62,7 @@ export function FontsTab() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleCopy(font.name, 'import', font.googleFontsImport)}
+                      onClick={() => handleCopy(font.name, "import", font.googleFontsImport)}
                     >
                       {importCopied ? (
                         <>
@@ -89,7 +89,7 @@ export function FontsTab() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleCopy(font.name, 'tailwind', font.tailwindConfig)}
+                      onClick={() => handleCopy(font.name, "tailwind", font.tailwindConfig)}
                     >
                       {tailwindCopied ? (
                         <>
@@ -116,7 +116,7 @@ export function FontsTab() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleCopy(font.name, 'css', font.cssDeclaration)}
+                      onClick={() => handleCopy(font.name, "css", font.cssDeclaration)}
                     >
                       {cssCopied ? (
                         <>

@@ -10,9 +10,8 @@ const TestingLab = () => {
         </CardHeader>
         <CardContent className="space-y-4 text-white/80">
           <p>
-            Use the lab to validate integrations, run destructive tests, and stage
-            unreleased concepts. Pair with a QA engineer when flipping experimental
-            flags.
+            Use the lab to validate integrations, run destructive tests, and stage unreleased
+            concepts. Pair with a QA engineer when flipping experimental flags.
           </p>
           <ul className="list-disc list-inside space-y-2">
             <li>Spin up preview builds</li>

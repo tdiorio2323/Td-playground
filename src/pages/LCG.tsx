@@ -9,8 +9,8 @@ const LCG = () => {
     const updateMetaTag = (property: string, content: string) => {
       let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
       if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('property', property);
+        meta = document.createElement("meta");
+        meta.setAttribute("property", property);
         document.head.appendChild(meta);
       }
       meta.content = content;
@@ -19,18 +19,18 @@ const LCG = () => {
     const updateMetaName = (name: string, content: string) => {
       let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
       if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('name', name);
+        meta = document.createElement("meta");
+        meta.setAttribute("name", name);
         document.head.appendChild(meta);
       }
       meta.content = content;
     };
 
-    updateMetaTag('og:title', 'Locust Growth');
-    updateMetaTag('og:image', `${window.location.origin}/lcglogo.avif`);
-    updateMetaName('twitter:title', 'Locust Growth');
-    updateMetaName('twitter:image', `${window.location.origin}/lcglogo.avif`);
-    updateMetaName('twitter:card', 'summary_large_image');
+    updateMetaTag("og:title", "Locust Growth");
+    updateMetaTag("og:image", `${window.location.origin}/lcglogo.avif`);
+    updateMetaName("twitter:title", "Locust Growth");
+    updateMetaName("twitter:image", `${window.location.origin}/lcglogo.avif`);
+    updateMetaName("twitter:card", "summary_large_image");
   }, []);
 
   return <AuthPageLCG />;

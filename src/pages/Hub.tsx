@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { routeCategories, getRoutesByCategory, getCategoryStats, type RouteCategory } from "@/lib/routes";
+import {
+  routeCategories,
+  getRoutesByCategory,
+  getCategoryStats,
+  type RouteCategory,
+} from "@/lib/routes";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ArrowLeft } from "lucide-react";
@@ -32,8 +37,8 @@ const Hub = () => {
         className="min-h-screen p-8"
         style={{
           backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="max-w-7xl mx-auto">
@@ -90,14 +95,16 @@ const Hub = () => {
       className="min-h-screen p-8"
       style={{
         backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-white mb-4">Navigation Hub</h1>
-          <p className="text-xl text-white/70">Explore {Object.values(stats).reduce((a, b) => a + b, 0)} routes across 6 categories</p>
+          <p className="text-xl text-white/70">
+            Explore {Object.values(stats).reduce((a, b) => a + b, 0)} routes across 6 categories
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -112,22 +119,28 @@ const Hub = () => {
                 className="relative overflow-hidden border-2 border-white/20 hover:border-white/40 cursor-pointer group transition-all duration-500 hover:scale-105"
                 onClick={() => handleCategoryClick(category)}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
+                />
 
                 <CardHeader className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
-                    <Icon className={`h-12 w-12 ${config.color} group-hover:scale-110 transition-transform duration-300`} />
+                    <Icon
+                      className={`h-12 w-12 ${config.color} group-hover:scale-110 transition-transform duration-300`}
+                    />
                     <ChevronRight className="h-8 w-8 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300" />
                   </div>
                   <CardTitle className="text-2xl text-white mb-2">{category}</CardTitle>
                   <CardDescription className="text-white/70 text-lg">
-                    {count} {count === 1 ? 'route' : 'routes'} available
+                    {count} {count === 1 ? "route" : "routes"} available
                   </CardDescription>
                 </CardHeader>
 
                 <CardContent className="relative z-10">
                   <div className="flex items-center gap-2">
-                    <div className={`h-2 flex-1 rounded-full bg-gradient-to-r ${config.gradient} opacity-50`} />
+                    <div
+                      className={`h-2 flex-1 rounded-full bg-gradient-to-r ${config.gradient} opacity-50`}
+                    />
                   </div>
                 </CardContent>
               </Card>
@@ -137,9 +150,8 @@ const Hub = () => {
 
         <div className="mt-12 text-center">
           <p className="text-white/50 text-sm">
-            Press{" "}
-            <kbd className="px-2 py-1 text-xs bg-white/20 rounded">⌘K</kbd>
-            {" "}to open quick navigation
+            Press <kbd className="px-2 py-1 text-xs bg-white/20 rounded">⌘K</kbd> to open quick
+            navigation
           </p>
         </div>
       </div>

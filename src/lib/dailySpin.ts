@@ -30,13 +30,13 @@ export const parseSpinResult = (result: string) => {
   if (!result) return [];
   return result
     .split(RESULT_SEPARATOR)
-    .map(token => token.trim())
-    .filter(token => token.length > 0);
+    .map((token) => token.trim())
+    .filter((token) => token.length > 0);
 };
 
 export const getTodaySpin = async (
   client: SupabaseClient,
-  userId: string
+  userId: string,
 ): Promise<DailySpinLog | null> => {
   const { data, error } = await client
     .from<DailySpinLog>(DAILY_SPIN_TABLE)
@@ -62,13 +62,13 @@ export const logSpin = async (
   userId: string,
   result: string,
   win: boolean,
-  route?: string
+  route?: string,
 ) => {
   const payload = {
     user_id: userId,
     result,
     win,
-    route: route ?? null
+    route: route ?? null,
   };
 
   const { error } = await client.from(DAILY_SPIN_TABLE).insert(payload);

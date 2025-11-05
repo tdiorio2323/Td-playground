@@ -1,7 +1,7 @@
-import React, { useMemo, useState, Suspense } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Code2, Check, Copy } from 'lucide-react';
+import React, { useMemo, useState, Suspense } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Code2, Check, Copy } from "lucide-react";
 
 type TemplateMeta = {
   name: string;
@@ -12,7 +12,7 @@ type TemplateMeta = {
   namedExport?: string; // e.g. "AuthPage" if no default export
 };
 
-import { templates } from '@/design-library/registry/templates'; // ensure this exists
+import { templates } from "@/design-library/registry/templates"; // ensure this exists
 
 function ErrorBoundary({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<Error | null>(null);
@@ -31,11 +31,23 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
 }
 
 // Minimal error boundary with render prop
-class Boundary extends React.Component<{ onError: (e: Error) => void; children: React.ReactNode }, { hasError: boolean }> {
-  constructor(props:any){ super(props); this.state = { hasError:false }; }
-  static getDerivedStateFromError(){ return { hasError:true }; }
-  componentDidCatch(error:Error){ this.props.onError(error); }
-  render(){ return this.state.hasError ? null : this.props.children; }
+class Boundary extends React.Component<
+  { onError: (e: Error) => void; children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error) {
+    this.props.onError(error);
+  }
+  render() {
+    return this.state.hasError ? null : this.props.children;
+  }
 }
 
 const templateLoaders: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {};
@@ -43,7 +55,8 @@ function getLoader(t: TemplateMeta) {
   if (templateLoaders[t.name]) return templateLoaders[t.name];
   templateLoaders[t.name] = React.lazy(async () => {
     const mod = await import(/* @vite-ignore */ t.importPath);
-    const Comp = (t.namedExport ? mod[t.namedExport] : mod.default) ?? mod.default ?? Object.values(mod)[0];
+    const Comp =
+      (t.namedExport ? mod[t.namedExport] : mod.default) ?? mod.default ?? Object.values(mod)[0];
     if (!Comp) throw new Error(`No export found for ${t.name}`);
     return { default: Comp };
   });
@@ -51,25 +64,29 @@ function getLoader(t: TemplateMeta) {
 }
 
 export function TemplatesTab() {
-  const [query, setQuery] = useState('');
-  const [cat, setCat] = useState<string | 'All'>('All');
+  const [query, setQuery] = useState("");
+  const [cat, setCat] = useState<string | "All">("All");
   const [copied, setCopied] = useState<string | null>(null);
 
-  const categories = useMemo(() => ['All', ...Array.from(new Set(templates.map(t => t.category)))], []);
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(templates.map((t) => t.category)))],
+    [],
+  );
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
-    return templates.filter(t =>
-      (cat === 'All' || t.category === cat) &&
-      (t.name.toLowerCase().includes(q) || t.tags.some(tag => tag.toLowerCase().includes(q)))
+    return templates.filter(
+      (t) =>
+        (cat === "All" || t.category === cat) &&
+        (t.name.toLowerCase().includes(q) || t.tags.some((tag) => tag.toLowerCase().includes(q))),
     );
   }, [query, cat]);
 
   async function handleCopy(name: string) {
-    const t = templates.find(x => x.name === name);
+    const t = templates.find((x) => x.name === name);
     if (!t) return;
     const importLine = t.namedExport
       ? `import { ${t.namedExport} } from "${t.importPath}";`
-      : `import ${t.name.replace(/\s+/g,'')} from "${t.importPath}";`;
+      : `import ${t.name.replace(/\s+/g, "")} from "${t.importPath}";`;
     await navigator.clipboard.writeText(importLine);
     setCopied(name);
     setTimeout(() => setCopied(null), 1200);
@@ -82,11 +99,16 @@ export function TemplatesTab() {
           className="border rounded px-3 py-2 w-full max-w-sm"
           placeholder="Search templates…"
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <div className="flex gap-2 flex-wrap">
-          {categories.map(c => (
-            <Button key={c} size="sm" variant={c===cat?'default':'outline'} onClick={()=>setCat(c as any)}>
+          {categories.map((c) => (
+            <Button
+              key={c}
+              size="sm"
+              variant={c === cat ? "default" : "outline"}
+              onClick={() => setCat(c as any)}
+            >
               {c}
             </Button>
           ))}
@@ -94,7 +116,7 @@ export function TemplatesTab() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filtered.map(t => {
+        {filtered.map((t) => {
           const Preview = getLoader(t);
           return (
             <Card key={t.name} className="bg-white border-gray-200">
@@ -107,8 +129,13 @@ export function TemplatesTab() {
                 </CardTitle>
                 <p className="text-sm text-gray-600 mt-2">{t.description}</p>
                 <div className="flex flex-wrap gap-1 mt-2">
-                  {t.tags.map(tag => (
-                    <span key={tag} className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">{tag}</span>
+                  {t.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded"
+                    >
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </CardHeader>
@@ -123,8 +150,23 @@ export function TemplatesTab() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1 text-white" onClick={()=>handleCopy(t.name)}>
-                    {copied===t.name ? (<><Check className="h-4 w-4 mr-2"/>Copied!</>) : (<><Copy className="h-4 w-4 mr-2"/>Copy Import</>)}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 text-white"
+                    onClick={() => handleCopy(t.name)}
+                  >
+                    {copied === t.name ? (
+                      <>
+                        <Check className="h-4 w-4 mr-2" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-4 w-4 mr-2" />
+                        Copy Import
+                      </>
+                    )}
                   </Button>
                 </div>
               </CardContent>
@@ -133,7 +175,7 @@ export function TemplatesTab() {
         })}
       </div>
 
-      {filtered.length===0 && (
+      {filtered.length === 0 && (
         <div className="text-center py-12 text-gray-500">
           <p>No templates found.</p>
         </div>

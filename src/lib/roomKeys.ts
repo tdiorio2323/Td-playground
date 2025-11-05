@@ -12,11 +12,7 @@ const ensureUser = (userId?: string | null) => {
   return userId;
 };
 
-export const hasKey = async (
-  supabase: SupabaseClient,
-  userId: string,
-  key: KeySlug
-) => {
+export const hasKey = async (supabase: SupabaseClient, userId: string, key: KeySlug) => {
   const { count, error } = await supabase
     .from(TABLE_NAME)
     .select("id", { count: "exact", head: true })
@@ -30,11 +26,7 @@ export const hasKey = async (
   return Boolean(count && count > 0);
 };
 
-export const grantKey = async (
-  supabase: SupabaseClient,
-  userId: string,
-  key: KeySlug
-) => {
+export const grantKey = async (supabase: SupabaseClient, userId: string, key: KeySlug) => {
   const { data, error } = await supabase
     .from(TABLE_NAME)
     .insert({ user_id: ensureUser(userId), key_slug: key })
@@ -48,10 +40,7 @@ export const grantKey = async (
   return data;
 };
 
-export const listKeys = async (
-  supabase: SupabaseClient,
-  userId: string
-): Promise<KeySlug[]> => {
+export const listKeys = async (supabase: SupabaseClient, userId: string): Promise<KeySlug[]> => {
   const { data, error } = await supabase
     .from(TABLE_NAME)
     .select("key_slug")
@@ -61,5 +50,5 @@ export const listKeys = async (
     throw error;
   }
 
-  return (data ?? []).map(record => record.key_slug as KeySlug);
+  return (data ?? []).map((record) => record.key_slug as KeySlug);
 };

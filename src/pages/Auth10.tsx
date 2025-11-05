@@ -8,8 +8,8 @@ const Auth = () => {
     const updateMetaTag = (property: string, content: string) => {
       let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
       if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('property', property);
+        meta = document.createElement("meta");
+        meta.setAttribute("property", property);
         document.head.appendChild(meta);
       }
       meta.content = content;
@@ -18,8 +18,8 @@ const Auth = () => {
     const updateMetaName = (name: string, content: string) => {
       let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
       if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('name', name);
+        meta = document.createElement("meta");
+        meta.setAttribute("name", name);
         document.head.appendChild(meta);
       }
       meta.content = content;
@@ -27,25 +27,24 @@ const Auth = () => {
 
     // Social share tags for Quick Printz
     const shareImage = `${window.location.origin}/lovable-uploads/qp.png`;
-    updateMetaTag('og:title', 'QUICK PRINTZ');
-    updateMetaTag('og:image', shareImage);
-    updateMetaName('twitter:title', 'QUICK PRINTZ');
-    updateMetaName('twitter:image', shareImage);
-    updateMetaName('twitter:card', 'summary_large_image');
+    updateMetaTag("og:title", "QUICK PRINTZ");
+    updateMetaTag("og:image", shareImage);
+    updateMetaName("twitter:title", "QUICK PRINTZ");
+    updateMetaName("twitter:image", shareImage);
+    updateMetaName("twitter:card", "summary_large_image");
     // Update meta tags for Quick Printz social share
 
-
     // Favicon: switch to Quick Printz logo while on this page
-    const defaultFavicon = '/favicon.ico';
+    const defaultFavicon = "/favicon.ico";
     const qpFavicon = shareImage;
     const ensureFavicon = (href: string) => {
       let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
       if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
+        link = document.createElement("link");
+        link.rel = "icon";
         document.head.appendChild(link);
       }
-      link.type = 'image/png';
+      link.type = "image/png";
       link.href = href;
     };
     const prevFavicon = (document.querySelector('link[rel="icon"]') as HTMLLinkElement)?.href;

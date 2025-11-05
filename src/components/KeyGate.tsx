@@ -23,7 +23,9 @@ const KeyGate = ({ reason }: KeyGateProps) => {
         </button>
         <div className="text-left">
           <p className="text-xs uppercase tracking-wide text-white/50 mb-1">Requested Path</p>
-          <pre className="text-xs rounded-lg bg-black/60 p-3 overflow-auto">{location.pathname}</pre>
+          <pre className="text-xs rounded-lg bg-black/60 p-3 overflow-auto">
+            {location.pathname}
+          </pre>
         </div>
       </div>
     </div>

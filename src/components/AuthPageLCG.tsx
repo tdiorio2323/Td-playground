@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff } from "lucide-react";
 
 export const AuthPageLCG = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     adminLogin: "",
-    adminPassword: ""
+    adminPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +24,7 @@ export const AuthPageLCG = () => {
 
     // No real authentication - just redirect to external site
     setTimeout(() => {
-      window.location.href = 'https://lcg.tdstudiosny.com';
+      window.location.href = "https://lcg.tdstudiosny.com";
     }, 400);
   };
 
@@ -146,7 +142,7 @@ export const AuthPageLCG = () => {
               disabled={isLoading}
               className="w-full h-14 mt-6 relative overflow-hidden bg-gradient-to-br from-[#d9b24a] via-[#b58b32] to-[#6a4d1f] text-white border border-[#f2d68e]/40 font-semibold text-lg tracking-[0.2em] shadow-[inset_0_3px_10px_rgba(255,255,255,0.45),inset_0_-6px_16px_rgba(0,0,0,0.55),0_15px_28px_rgba(0,0,0,0.7),0_0_35px_rgba(212,175,55,0.35)] before:absolute before:inset-0 before:bg-[linear-gradient(120deg,transparent_10%,rgba(255,255,255,0.35)_45%,rgba(255,255,255,0.65)_50%,rgba(255,255,255,0.35)_55%,transparent_90%)] before:translate-x-[-20%] before:pointer-events-none before:animate-[shimmer_2.4s_infinite] transition-all duration-200 hover:shadow-[inset_0_3px_12px_rgba(255,255,255,0.55),inset_0_-6px_18px_rgba(0,0,0,0.6),0_18px_32px_rgba(0,0,0,0.75),0_0_40px_rgba(212,175,55,0.45)]"
               style={{
-                backgroundSize: '220% 120%',
+                backgroundSize: "220% 120%",
               }}
             >
               {isLoading ? (

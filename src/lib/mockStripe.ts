@@ -1,14 +1,14 @@
-import { mockCreatePaymentIntent, mockConfirmPayment, MockPaymentIntent } from './mockData';
+import { mockCreatePaymentIntent, mockConfirmPayment, MockPaymentIntent } from "./mockData";
 
 export interface StripeCardElement {
   mount: (element: string | HTMLElement) => void;
   unmount: () => void;
-  on: (event: string, handler: Function) => void;
+  on: (event: string, handler: () => void) => void;
   destroy: () => void;
 }
 
 export interface StripeElements {
-  create: (type: string, options?: any) => StripeCardElement;
+  create: (type: string, options?: Record<string, unknown>) => StripeCardElement;
 }
 
 export interface MockStripe {
@@ -16,14 +16,14 @@ export interface MockStripe {
   createPaymentMethod: (options: {
     type: string;
     card: StripeCardElement;
-    billing_details?: any;
+    billing_details?: Record<string, unknown>;
   }) => Promise<{
     paymentMethod?: { id: string };
     error?: { message: string };
   }>;
   confirmCardPayment: (
     clientSecret: string,
-    options: { payment_method: string }
+    options: { payment_method: string },
   ) => Promise<{
     paymentIntent?: MockPaymentIntent;
     error?: { message: string };
@@ -33,20 +33,20 @@ export interface MockStripe {
 export const createMockStripe = (): MockStripe => {
   const createMockCardElement = (): StripeCardElement => ({
     mount: (element) => {
-      console.log('[Mock Stripe] Card element mounted');
+      console.log("[Mock Stripe] Card element mounted");
     },
     unmount: () => {
-      console.log('[Mock Stripe] Card element unmounted');
+      console.log("[Mock Stripe] Card element unmounted");
     },
     on: (event, handler) => {
       console.log(`[Mock Stripe] Event listener added: ${event}`);
       // Simulate ready event
-      if (event === 'ready') {
+      if (event === "ready") {
         setTimeout(() => handler(), 100);
       }
     },
     destroy: () => {
-      console.log('[Mock Stripe] Card element destroyed');
+      console.log("[Mock Stripe] Card element destroyed");
     },
   });
 
@@ -58,8 +58,8 @@ export const createMockStripe = (): MockStripe => {
       },
     }),
     createPaymentMethod: async (options) => {
-      console.log('[Mock Stripe] Creating payment method');
-      await new Promise(resolve => setTimeout(resolve, 500));
+      console.log("[Mock Stripe] Creating payment method");
+      await new Promise((resolve) => setTimeout(resolve, 500));
       return {
         paymentMethod: {
           id: `pm_mock_${Date.now()}`,
@@ -67,16 +67,16 @@ export const createMockStripe = (): MockStripe => {
       };
     },
     confirmCardPayment: async (clientSecret, options) => {
-      console.log('[Mock Stripe] Confirming card payment');
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("[Mock Stripe] Confirming card payment");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Simulate successful payment
       return {
         paymentIntent: {
           id: `pi_mock_${Date.now()}`,
           amount: 0,
-          currency: 'usd',
-          status: 'succeeded',
+          currency: "usd",
+          status: "succeeded",
           client_secret: clientSecret,
         },
       };

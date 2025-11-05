@@ -17,9 +17,7 @@ const formatDuration = (ms: number) => {
 };
 
 export const SpinCountdown = ({ target, className }: SpinCountdownProps) => {
-  const [remaining, setRemaining] = useState(() =>
-    target ? Math.max(target - Date.now(), 0) : 0
-  );
+  const [remaining, setRemaining] = useState(() => (target ? Math.max(target - Date.now(), 0) : 0));
 
   useEffect(() => {
     if (!target) return;
@@ -38,8 +36,6 @@ export const SpinCountdown = ({ target, className }: SpinCountdownProps) => {
   }
 
   return (
-    <span className={cn("font-semibold tabular-nums", className)}>
-      {formatDuration(remaining)}
-    </span>
+    <span className={cn("font-semibold tabular-nums", className)}>{formatDuration(remaining)}</span>
   );
 };

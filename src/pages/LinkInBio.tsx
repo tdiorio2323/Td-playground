@@ -69,7 +69,8 @@ export default function LinkInBio() {
 
   const getIconForUrl = (url: string) => {
     if (url.includes("instagram.com")) return <Instagram className="w-4 h-4" />;
-    if (url.includes("twitter.com") || url.includes("x.com")) return <Twitter className="w-4 h-4" />;
+    if (url.includes("twitter.com") || url.includes("x.com"))
+      return <Twitter className="w-4 h-4" />;
     return <Globe className="w-4 h-4" />;
   };
 
@@ -116,9 +117,7 @@ export default function LinkInBio() {
             </Avatar>
             <h1 className="text-2xl font-bold text-white">{creator.display_name}</h1>
             <p className="text-white/60">@{creator.username}</p>
-            {creator.bio && (
-              <p className="text-white/80 mt-2">{creator.bio}</p>
-            )}
+            {creator.bio && <p className="text-white/80 mt-2">{creator.bio}</p>}
           </CardHeader>
         </Card>
 
@@ -132,7 +131,10 @@ export default function LinkInBio() {
             </Card>
           ) : (
             links.map((link) => (
-              <Card key={link.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/20 transition-colors">
+              <Card
+                key={link.id}
+                className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/20 transition-colors"
+              >
                 <CardContent className="p-4">
                   <a
                     href={link.url}
@@ -154,7 +156,10 @@ export default function LinkInBio() {
 
         {/* Footer */}
         <div className="text-center pt-4">
-          <Link to="/onboard" className="text-white/60 hover:text-white/80 text-sm transition-colors">
+          <Link
+            to="/onboard"
+            className="text-white/60 hover:text-white/80 text-sm transition-colors"
+          >
             Create your own bio page
           </Link>
         </div>

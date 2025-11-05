@@ -1,9 +1,9 @@
-import { openai, isOpenAIConfigured } from '@/lib/openaiClient'
+import { openai, isOpenAIConfigured } from "@/lib/openaiClient";
 
 // Default configuration for OpenAI API calls
-const DEFAULT_MODEL = 'gpt-3.5-turbo'
-const DEFAULT_TEMPERATURE = 0.7
-const DEFAULT_MAX_TOKENS = 500
+const DEFAULT_MODEL = "gpt-3.5-turbo";
+const DEFAULT_TEMPERATURE = 0.7;
+const DEFAULT_MAX_TOKENS = 500;
 
 /**
  * Validates OpenAI configuration and logs warning if not configured
@@ -11,19 +11,19 @@ const DEFAULT_MAX_TOKENS = 500
  */
 function validateOpenAIConfig(): boolean {
   if (!isOpenAIConfigured() || !openai) {
-    console.warn('OpenAI is not configured. Please set VITE_OPENAI_API_KEY.')
-    return false
+    console.warn("OpenAI is not configured. Please set VITE_OPENAI_API_KEY.");
+    return false;
   }
-  return true
+  return true;
 }
 
 /**
  * Example usage of OpenAI client for chat completions
- * 
+ *
  * @param prompt - The user's prompt
  * @param systemMessage - Optional system message to set behavior
  * @returns The AI response text or null if OpenAI is not configured
- * 
+ *
  * @example
  * ```tsx
  * const response = await getChatCompletion('Tell me a joke');
@@ -34,37 +34,37 @@ function validateOpenAIConfig(): boolean {
  */
 export async function getChatCompletion(
   prompt: string,
-  systemMessage: string = 'You are a helpful assistant.'
+  systemMessage: string = "You are a helpful assistant.",
 ): Promise<string | null> {
   if (!validateOpenAIConfig()) {
-    return null
+    return null;
   }
 
   try {
     const completion = await openai!.chat.completions.create({
       model: DEFAULT_MODEL,
       messages: [
-        { role: 'system', content: systemMessage },
-        { role: 'user', content: prompt }
+        { role: "system", content: systemMessage },
+        { role: "user", content: prompt },
       ],
       temperature: DEFAULT_TEMPERATURE,
-      max_tokens: DEFAULT_MAX_TOKENS
-    })
+      max_tokens: DEFAULT_MAX_TOKENS,
+    });
 
-    return completion.choices[0]?.message?.content || null
+    return completion.choices[0]?.message?.content || null;
   } catch (error) {
-    console.error('Error calling OpenAI API:', error)
-    return null
+    console.error("Error calling OpenAI API:", error);
+    return null;
   }
 }
 
 /**
  * Example usage of OpenAI client for streaming chat completions
- * 
+ *
  * @param prompt - The user's prompt
  * @param onChunk - Callback function called with each chunk of text
  * @param systemMessage - Optional system message to set behavior
- * 
+ *
  * @example
  * ```tsx
  * await streamChatCompletion(
@@ -76,31 +76,31 @@ export async function getChatCompletion(
 export async function streamChatCompletion(
   prompt: string,
   onChunk: (text: string) => void,
-  systemMessage: string = 'You are a helpful assistant.'
+  systemMessage: string = "You are a helpful assistant.",
 ): Promise<void> {
   if (!validateOpenAIConfig()) {
-    return
+    return;
   }
 
   try {
     const stream = await openai!.chat.completions.create({
       model: DEFAULT_MODEL,
       messages: [
-        { role: 'system', content: systemMessage },
-        { role: 'user', content: prompt }
+        { role: "system", content: systemMessage },
+        { role: "user", content: prompt },
       ],
       temperature: DEFAULT_TEMPERATURE,
       max_tokens: DEFAULT_MAX_TOKENS,
-      stream: true
-    })
+      stream: true,
+    });
 
     for await (const chunk of stream) {
-      const content = chunk.choices[0]?.delta?.content
+      const content = chunk.choices[0]?.delta?.content;
       if (content) {
-        onChunk(content)
+        onChunk(content);
       }
     }
   } catch (error) {
-    console.error('Error streaming from OpenAI API:', error)
+    console.error("Error streaming from OpenAI API:", error);
   }
 }

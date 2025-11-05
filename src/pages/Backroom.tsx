@@ -11,8 +11,8 @@ const Backroom = () => {
         <CardContent className="space-y-4 text-white/80">
           <p>
             The Back Room aggregates staging toggles, rollout notes, and quick links to
-            infrastructure dashboards. Keep this space tidy and record changes before
-            handing off to production.
+            infrastructure dashboards. Keep this space tidy and record changes before handing off to
+            production.
           </p>
           <ul className="list-disc list-inside space-y-2">
             <li>Track environment changes</li>

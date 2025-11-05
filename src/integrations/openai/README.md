@@ -15,32 +15,26 @@ This directory contains utilities for integrating OpenAI's API into the TD Playg
 ### Chat Completions
 
 ```tsx
-import { getChatCompletion } from '@/integrations/openai/chat'
+import { getChatCompletion } from "@/integrations/openai/chat";
 
 // Basic usage
-const response = await getChatCompletion('What is React?')
-console.log(response)
+const response = await getChatCompletion("What is React?");
+console.log(response);
 
 // With custom system message
-const response = await getChatCompletion(
-  'Write a haiku',
-  'You are a creative poet.'
-)
+const response = await getChatCompletion("Write a haiku", "You are a creative poet.");
 ```
 
 ### Streaming Chat
 
 ```tsx
-import { streamChatCompletion } from '@/integrations/openai/chat'
+import { streamChatCompletion } from "@/integrations/openai/chat";
 
 // Stream response chunks
-await streamChatCompletion(
-  'Tell me a story',
-  (chunk) => {
-    // Update UI with each chunk
-    setContent(prev => prev + chunk)
-  }
-)
+await streamChatCompletion("Tell me a story", (chunk) => {
+  // Update UI with each chunk
+  setContent((prev) => prev + chunk);
+});
 ```
 
 ## Available Functions
@@ -76,9 +70,10 @@ Streams chat response chunks in real-time.
 
 ## Security Note
 
-⚠️ **Client-side API key usage**: The OpenAI client is configured with `dangerouslyAllowBrowser: true` for development and prototyping. 
+⚠️ **Client-side API key usage**: The OpenAI client is configured with `dangerouslyAllowBrowser: true` for development and prototyping.
 
 For production applications, you should:
+
 - Move OpenAI API calls to a backend server
 - Never expose your API key in client-side code
 - Implement rate limiting and user authentication

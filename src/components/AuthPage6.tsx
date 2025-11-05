@@ -1,60 +1,21 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { Facebook, Instagram, Twitter, Youtube, Eye, EyeOff, KeyRound, Lock, Mail } from "lucide-react";
 
 interface AuthPage6Props {
-  onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
+  onLogin?: (role: "customer" | "brand" | "admin") => void;
 }
 
 export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    secret: ""
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showSecret, setShowSecret] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-
-  const handleInputChange = (field: keyof typeof formData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Frontend demo - no actual authentication
-    setIsLoading(true);
-
-    setTimeout(() => {
-      toast({
-        title: "Demo Mode",
-        description: "This is a frontend component playground - no authentication required",
-      });
-      setIsLoading(false);
-    }, 1000);
-  };
-
 
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
         backgroundImage: "url('/lovable-uploads/tdsparklesblack.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-
-
       <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10">
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
@@ -65,11 +26,16 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
             />
           </div>
           <div className="space-y-4 w-full px-8">
-            <h1 className="text-6xl text-white text-center" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}>Lil Sex 💫</h1>
+            <h1
+              className="text-6xl text-white text-center"
+              style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}
+            >
+              Lil Sex 💫
+            </h1>
             <div className="flex flex-col gap-3 w-full">
               <Button
                 type="button"
-                onClick={() => window.open('https://www.instagram.com/lilsex_/', '_blank')}
+                onClick={() => window.open("https://www.instagram.com/lilsex_/", "_blank")}
                 className="w-full h-14 bg-gradient-to-b from-white to-white/90 hover:from-white/95 hover:to-white/85 text-black font-bold text-xl tracking-wider relative overflow-hidden shadow-[0_4px_6px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/40 before:to-transparent before:pointer-events-none"
                 style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
@@ -77,7 +43,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
               </Button>
               <Button
                 type="button"
-                onClick={() => window.open('https://onlyfans.com', '_blank')}
+                onClick={() => window.open("https://onlyfans.com", "_blank")}
                 className="w-full h-14 bg-gradient-to-b from-white to-white/90 hover:from-white/95 hover:to-white/85 text-black font-bold text-xl tracking-wider relative overflow-hidden shadow-[0_4px_6px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/40 before:to-transparent before:pointer-events-none"
                 style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
@@ -90,7 +56,10 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
 
             {/* Exclusive Text */}
             <div className="text-center mt-4">
-              <h2 className="text-2xl font-bold text-white animate-shimmer bg-gradient-to-r from-white via-gray-200 to-white bg-[length:200%_100%] bg-clip-text text-transparent" style={{ width: '90%', margin: '0 auto' }}>
+              <h2
+                className="text-2xl font-bold text-white animate-shimmer bg-gradient-to-r from-white via-gray-200 to-white bg-[length:200%_100%] bg-clip-text text-transparent"
+                style={{ width: "90%", margin: "0 auto" }}
+              >
                 EXCLUSIVE
               </h2>
             </div>
@@ -113,7 +82,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
               <a
                 href="mailto:inquiries@lilsex.com"
                 className="text-white/80 text-sm hover:text-white transition-colors underline"
-                style={{ fontFamily: "'Inter', sans-serif", width: '90%', display: 'inline-block' }}
+                style={{ fontFamily: "'Inter', sans-serif", width: "90%", display: "inline-block" }}
               >
                 BOOKINGS/CONTACT
               </a>
@@ -121,8 +90,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-6 pb-8">
-        </CardContent>
+        <CardContent className="space-y-6 pb-8"></CardContent>
       </Card>
     </div>
   );

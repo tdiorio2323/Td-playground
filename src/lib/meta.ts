@@ -16,7 +16,8 @@ const defaultMeta: MetaData = {
   ogDescription: "TD Studios creative playground - Interactive experiences and premium content",
   ogImage: "https://playground.tdstudiosny.com/lovable-uploads/td-mtv.png",
   twitterTitle: "TD STUDIOS PLAYGROUND",
-  twitterDescription: "TD Studios creative playground - Interactive experiences and premium content",
+  twitterDescription:
+    "TD Studios creative playground - Interactive experiences and premium content",
   twitterImage: "https://playground.tdstudiosny.com/lovable-uploads/td-mtv.png",
 };
 
@@ -28,7 +29,8 @@ export const routeMeta: Record<string, MetaData> = {
     ogDescription: "Get exclusive early access to premium creator content and special experiences.",
     ogImage: "https://vip.cabanagrp.com/og/waitlist.jpg",
     twitterTitle: "Join VIP Waitlist - Cabana VIP",
-    twitterDescription: "Get exclusive early access to premium creator content and special experiences.",
+    twitterDescription:
+      "Get exclusive early access to premium creator content and special experiences.",
     twitterImage: "https://vip.cabanagrp.com/og/waitlist.jpg",
   },
   "/onboard": {
@@ -38,7 +40,8 @@ export const routeMeta: Record<string, MetaData> = {
     ogDescription: "Join the exclusive Cabana VIP creator network and build your brand presence.",
     ogImage: "https://vip.cabanagrp.com/og/onboard.jpg",
     twitterTitle: "Creator Onboarding - Cabana VIP",
-    twitterDescription: "Join the exclusive Cabana VIP creator network and build your brand presence.",
+    twitterDescription:
+      "Join the exclusive Cabana VIP creator network and build your brand presence.",
     twitterImage: "https://vip.cabanagrp.com/og/onboard.jpg",
   },
 };
@@ -62,9 +65,9 @@ export const getMetaForRoute = (path: string, username?: string): MetaData => {
 
 export const updatePageMeta = (meta: MetaData) => {
   document.title = meta.title;
-  
+
   const updateMetaTag = (selector: string, content: string) => {
-    let tag = document.querySelector(selector) as HTMLMetaElement;
+    const tag = document.querySelector(selector) as HTMLMetaElement;
     if (tag) {
       tag.content = content;
     }

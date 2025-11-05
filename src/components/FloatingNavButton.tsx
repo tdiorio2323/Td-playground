@@ -1,11 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Command } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface FloatingNavButtonProps {
   onClick: () => void;

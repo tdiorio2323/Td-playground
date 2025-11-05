@@ -86,6 +86,16 @@ All routes are nested under `SharedLayout`, which provides:
 - Consistent `min-h-screen bg-background` wrapper
 - Route-based metadata exclusions for branded pages
 
+**Global Navigation Components** (mounted outside route hierarchy in App.tsx):
+- `CommandPalette` - Global command palette for quick navigation
+- `FloatingNavButton` - Floating button to trigger command palette
+- `DevMenuOverlay` - Developer tools overlay for testing
+
+**Key-Gated Routes:**
+Some routes require special access keys (managed via `RequireKey` component):
+- `/backroom` - Requires "backroom" key
+- `/testing-lab` - Requires "testing-lab" key
+
 ## Testing
 
 All UI components are tested via Vitest and @testing-library/react.
@@ -145,7 +155,7 @@ Built on React Router v6 with centralized route definitions in `src/App.tsx`:
 `SharedLayout` (src/SharedLayout.tsx) automatically manages document metadata:
 
 **Default Behavior:**
-- Sets "CABANA" branding with OG image and Twitter cards
+- Sets "TD STUDIOS" branding with OG image and Twitter cards
 - Dynamically updates meta tags on route changes
 
 **Metadata Exclusions:**
@@ -178,6 +188,8 @@ When adding new branded routes with custom metadata, add them to the `excludedEx
 - **Client Branding**: Branded routes follow naming conventions:
   - `/cabana`, `/thecabana`, `/cabanamgmt*` - CABANA
   - `/starluv*` - Star Luv
-  - `/lcg` - Locust Growth Accelerator
+  - `/lcg` - Locust Growth Accelerator (locust_growth_accelerator)
   - `/quickprintz` - Quick Printz
   - `/juanita*` - Juanita
+  - `/soundimageband` - Sound Image Band
+  - `/lexistarshow` - Lexi Star Show

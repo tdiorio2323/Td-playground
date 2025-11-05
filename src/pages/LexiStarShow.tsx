@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import MobileCompactLinks from "@/components/MobileCompactLinks";
 
 export default function LexiStarShow() {
-
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"

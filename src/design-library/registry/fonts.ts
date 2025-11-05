@@ -10,58 +10,63 @@ export interface FontDefinition {
 
 export const fonts: FontDefinition[] = [
   {
-    name: 'Inter',
+    name: "Inter",
     family: "'Inter', sans-serif",
-    googleFontsImport: "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');",
+    googleFontsImport:
+      "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');",
     tailwindConfig: `fontFamily: {
   sans: ['Inter', 'sans-serif'],
 }`,
     cssDeclaration: "font-family: 'Inter', sans-serif;",
     weights: [400, 600, 700],
-    category: 'Sans Serif'
+    category: "Sans Serif",
   },
   {
-    name: 'Ballet',
+    name: "Ballet",
     family: "'Ballet', cursive",
-    googleFontsImport: "@import url('https://fonts.googleapis.com/css2?family=Ballet&display=swap');",
+    googleFontsImport:
+      "@import url('https://fonts.googleapis.com/css2?family=Ballet&display=swap');",
     tailwindConfig: `fontFamily: {
   ballet: ['Ballet', 'cursive'],
 }`,
     cssDeclaration: "font-family: 'Ballet', cursive;",
     weights: [400],
-    category: 'Display'
+    category: "Display",
   },
   {
-    name: 'Bebas Neue',
+    name: "Bebas Neue",
     family: "'Bebas Neue', sans-serif",
-    googleFontsImport: "@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');",
+    googleFontsImport:
+      "@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');",
     tailwindConfig: `fontFamily: {
   bebas: ['Bebas Neue', 'sans-serif'],
 }`,
     cssDeclaration: "font-family: 'Bebas Neue', sans-serif;",
     weights: [400],
-    category: 'Display'
+    category: "Display",
   },
   {
-    name: 'Cinzel',
+    name: "Cinzel",
     family: "'Cinzel', serif",
-    googleFontsImport: "@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');",
+    googleFontsImport:
+      "@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');",
     tailwindConfig: `fontFamily: {
   cinzel: ['Cinzel', 'serif'],
 }`,
     cssDeclaration: "font-family: 'Cinzel', serif;",
     weights: [400, 600, 700],
-    category: 'Serif'
+    category: "Serif",
   },
   {
-    name: 'Dancing Script',
+    name: "Dancing Script",
     family: "'Dancing Script', cursive",
-    googleFontsImport: "@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');",
+    googleFontsImport:
+      "@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');",
     tailwindConfig: `fontFamily: {
   dancing: ['Dancing Script', 'cursive'],
 }`,
     cssDeclaration: "font-family: 'Dancing Script', cursive;",
     weights: [400, 600, 700],
-    category: 'Handwriting'
-  }
+    category: "Handwriting",
+  },
 ];

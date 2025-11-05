@@ -11,14 +11,14 @@ export const AuthPageMgmt2 = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    vipCode: ""
+    vipCode: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,13 +41,13 @@ export const AuthPageMgmt2 = () => {
       });
       // Navigate to admin portal or appropriate page
       setTimeout(() => {
-        navigate('/admin');
+        navigate("/admin");
       }, 500);
     } else {
       toast({
         title: "Access Denied",
         description: "Invalid credentials or VIP code",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
 
@@ -59,8 +59,8 @@ export const AuthPageMgmt2 = () => {
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
         backgroundImage: "url('/cabana-background.jpeg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative z-10">
@@ -90,7 +90,10 @@ export const AuthPageMgmt2 = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Username Input */}
             <div className="space-y-2">
-              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <label
+                className="text-white font-bold text-sm"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
                 Username
               </label>
               <Input
@@ -103,7 +106,10 @@ export const AuthPageMgmt2 = () => {
 
             {/* Password Input */}
             <div className="space-y-2">
-              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <label
+                className="text-white font-bold text-sm"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
                 Password
               </label>
               <div className="relative">
@@ -134,7 +140,10 @@ export const AuthPageMgmt2 = () => {
 
             {/* VIP/Admin Code Input */}
             <div className="space-y-2">
-              <label className="text-white font-bold text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <label
+                className="text-white font-bold text-sm"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
                 Admin/VIP Access Code
               </label>
               <Input

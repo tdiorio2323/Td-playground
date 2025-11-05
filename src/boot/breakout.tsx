@@ -6,9 +6,9 @@ function mount() {
   const el = document.getElementById("breakout-slot");
   if (!el) return;
   // avoid double-mount
-  // @ts-ignore
+  // @ts-expect-error simple guard to prevent double-mounting
   if (el.__mounted) return; // simple guard
-  // @ts-ignore
+  // @ts-expect-error simple guard to prevent double-mounting
   el.__mounted = true;
   const root = createRoot(el);
   root.render(<Breakout />);

@@ -7,7 +7,18 @@ import { Badge } from "@/components/ui/badge";
 import { X, Copy, ExternalLink, Code, Smartphone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+const KONAMI_CODE = [
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+  "b",
+  "a",
+];
 
 export const DevMenuOverlay: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +32,7 @@ export const DevMenuOverlay: React.FC = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // ESC to close
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === "Escape" && isOpen) {
         setIsOpen(false);
         return;
       }
@@ -44,10 +55,10 @@ export const DevMenuOverlay: React.FC = () => {
       }
 
       // Shift+Shift detection (double tap within 500ms)
-      if (e.key === 'Shift') {
+      if (e.key === "Shift") {
         const now = Date.now();
         if (now - lastShiftTime < 500) {
-          setShiftPresses(prev => prev + 1);
+          setShiftPresses((prev) => prev + 1);
           if (shiftPresses >= 1) {
             setIsOpen(true);
             setShiftPresses(0);
@@ -63,8 +74,8 @@ export const DevMenuOverlay: React.FC = () => {
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [konamiIndex, shiftPresses, lastShiftTime, isOpen, toast]);
 
   const copyToClipboard = (text: string) => {
@@ -82,13 +93,16 @@ export const DevMenuOverlay: React.FC = () => {
 
   if (!isOpen) return null;
 
-  const groupedRoutes = routes.reduce((acc, route) => {
-    if (!acc[route.category]) {
-      acc[route.category] = [];
-    }
-    acc[route.category].push(route);
-    return acc;
-  }, {} as Record<RouteCategory, typeof routes>);
+  const groupedRoutes = routes.reduce(
+    (acc, route) => {
+      if (!acc[route.category]) {
+        acc[route.category] = [];
+      }
+      acc[route.category].push(route);
+      return acc;
+    },
+    {} as Record<RouteCategory, typeof routes>,
+  );
 
   return (
     <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-lg flex items-center justify-center p-4 animate-in fade-in-0 duration-300">
@@ -111,7 +125,8 @@ export const DevMenuOverlay: React.FC = () => {
             </Button>
           </div>
           <p className="text-cyan-300/70 font-mono text-sm mt-2">
-            {routes.length} routes across {Object.keys(groupedRoutes).length} categories • Hover to preview mobile viewport
+            {routes.length} routes across {Object.keys(groupedRoutes).length} categories • Hover to
+            preview mobile viewport
           </p>
         </CardHeader>
 
@@ -135,7 +150,9 @@ export const DevMenuOverlay: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {categoryRoutes.map((route) => {
                       const isHovered = hoveredRoute === route.path;
-                      const cleanPath = route.path.replace(':id', '1').replace(':username', 'preview');
+                      const cleanPath = route.path
+                        .replace(":id", "1")
+                        .replace(":username", "preview");
 
                       return (
                         <div
@@ -178,7 +195,9 @@ export const DevMenuOverlay: React.FC = () => {
                               <div className="bg-gray-900 border-2 border-cyan-500/50 rounded-lg shadow-2xl overflow-hidden">
                                 <div className="bg-gradient-to-r from-cyan-900/50 to-purple-900/50 px-3 py-2 flex items-center gap-2 border-b border-cyan-500/30">
                                   <Smartphone className="h-4 w-4 text-cyan-400" />
-                                  <span className="text-xs font-mono text-white">Mobile Preview</span>
+                                  <span className="text-xs font-mono text-white">
+                                    Mobile Preview
+                                  </span>
                                 </div>
                                 <div className="bg-black p-2">
                                   <div className="relative w-[375px] h-[667px] bg-white rounded-lg overflow-hidden shadow-lg">

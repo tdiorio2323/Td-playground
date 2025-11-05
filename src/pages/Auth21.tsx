@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function Auth21() {
-
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
@@ -39,12 +38,16 @@ export default function Auth21() {
               className="w-full h-14 text-gray-800 font-bold text-xl tracking-wider relative overflow-hidden"
               style={{
                 background: "linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%)",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
+                boxShadow:
+                  "0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
               <span className="relative z-10">INSTAGRAM</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent" style={{ height: "50%" }} />
+              <div
+                className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent"
+                style={{ height: "50%" }}
+              />
             </Button>
 
             {/* YouTube */}
@@ -54,12 +57,16 @@ export default function Auth21() {
               className="w-full h-14 text-gray-800 font-bold text-xl tracking-wider relative overflow-hidden"
               style={{
                 background: "linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%)",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
+                boxShadow:
+                  "0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
               <span className="relative z-10">YOUTUBE</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent" style={{ height: "50%" }} />
+              <div
+                className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent"
+                style={{ height: "50%" }}
+              />
             </Button>
 
             {/* Facebook */}
@@ -69,12 +76,16 @@ export default function Auth21() {
               className="w-full h-14 text-gray-800 font-bold text-xl tracking-wider relative overflow-hidden"
               style={{
                 background: "linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%)",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
+                boxShadow:
+                  "0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
                 fontFamily: "'Bebas Neue', sans-serif",
               }}
             >
               <span className="relative z-10">FACEBOOK</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent" style={{ height: "50%" }} />
+              <div
+                className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent"
+                style={{ height: "50%" }}
+              />
             </Button>
           </div>
 
@@ -108,11 +119,14 @@ export default function Auth21() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-white text-lg font-semibold underline hover:text-white/80 transition-colors inline-block tracking-wide"
-              style={{ fontFamily: 'Inter, sans-serif' }}
+              style={{ fontFamily: "Inter, sans-serif" }}
             >
               Visit Our Website
             </a>
-            <div className="text-white text-sm uppercase" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <div
+              className="text-white text-sm uppercase"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
               www.soundimageband.com
             </div>
           </div>

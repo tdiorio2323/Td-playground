@@ -1,31 +1,51 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Ghost, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { Ghost, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Spooky = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [floatingGhosts, setFloatingGhosts] = useState<Array<{ id: number; x: number; y: number }>>([]);
+  const [floatingGhosts, setFloatingGhosts] = useState<Array<{ id: number; x: number; y: number }>>(
+    [],
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Slideshow data - two images per slide
   const slides = [
     {
-      left: { src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', alt: 'Placeholder 1' },
-      right: { src: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6', alt: 'Placeholder 2' },
+      left: {
+        src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+        alt: "Placeholder 1",
+      },
+      right: {
+        src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+        alt: "Placeholder 2",
+      },
     },
     {
-      left: { src: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b', alt: 'Placeholder 3' },
-      right: { src: 'https://images.unsplash.com/photo-1518770660439-4636190af475', alt: 'Placeholder 4' },
+      left: {
+        src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        alt: "Placeholder 3",
+      },
+      right: {
+        src: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+        alt: "Placeholder 4",
+      },
     },
     {
-      left: { src: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853', alt: 'Placeholder 5' },
-      right: { src: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613', alt: 'Placeholder 6' },
+      left: {
+        src: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+        alt: "Placeholder 5",
+      },
+      right: {
+        src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613",
+        alt: "Placeholder 6",
+      },
     },
   ];
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
+  }, [slides.length]);
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -36,7 +56,7 @@ const Spooky = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     // Generate floating ghosts
     const ghosts = Array.from({ length: 8 }, (_, i) => ({
@@ -52,10 +72,10 @@ const Spooky = () => {
     }, 5000);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
       clearInterval(interval);
     };
-  }, []);
+  }, [nextSlide]);
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative">
@@ -110,16 +130,17 @@ const Spooky = () => {
                 <span
                   className="bg-gradient-to-r from-orange-600 via-orange-400 via-orange-300 via-yellow-400 to-orange-600 bg-clip-text text-transparent"
                   style={{
-                    backgroundSize: '200% auto',
-                    animation: 'shimmer 3s ease-in-out infinite',
-                    textShadow: '0 0 40px rgba(251, 146, 60, 0.5), 0 0 80px rgba(251, 146, 60, 0.3)',
+                    backgroundSize: "200% auto",
+                    animation: "shimmer 3s ease-in-out infinite",
+                    textShadow:
+                      "0 0 40px rgba(251, 146, 60, 0.5), 0 0 80px rgba(251, 146, 60, 0.3)",
                   }}
                 >
                   TD STUDIOS
                 </span>
               </h1>
               <p className="text-xl md:text-3xl text-orange-200/80 font-light max-w-3xl mx-auto leading-relaxed">
-                Where creativity meets{' '}
+                Where creativity meets{" "}
                 <span className="text-orange-400 font-semibold italic">the supernatural</span>
               </p>
             </div>
@@ -176,10 +197,16 @@ const Spooky = () => {
             {/* Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
-                { src: '/lovable-uploads/td-halloween-rooftop.jpg', title: 'Website Design & Development' },
-                { src: '/lovable-uploads/td-halloween-pool.jpg', title: 'Graphic Design & Branding' },
-                { src: '/lovable-uploads/td-halloween-mansion.jpg', title: 'Development' },
-                { src: '/lovable-uploads/td-halloween-house.jpg', title: 'Social Media Marketing' },
+                {
+                  src: "/lovable-uploads/td-halloween-rooftop.jpg",
+                  title: "Website Design & Development",
+                },
+                {
+                  src: "/lovable-uploads/td-halloween-pool.jpg",
+                  title: "Graphic Design & Branding",
+                },
+                { src: "/lovable-uploads/td-halloween-mansion.jpg", title: "Development" },
+                { src: "/lovable-uploads/td-halloween-house.jpg", title: "Social Media Marketing" },
               ].map((image, index) => (
                 <div
                   key={index}
@@ -265,8 +292,8 @@ const Spooky = () => {
                     onClick={() => setCurrentSlide(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                       index === currentSlide
-                        ? 'bg-orange-500 w-8'
-                        : 'bg-orange-500/30 hover:bg-orange-500/50'
+                        ? "bg-orange-500 w-8"
+                        : "bg-orange-500/30 hover:bg-orange-500/50"
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />

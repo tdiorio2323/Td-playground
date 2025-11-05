@@ -16,7 +16,7 @@ const Library = () => {
     if (!user?.id) {
       toast({
         title: "Sign in required",
-        description: "Authenticate to claim keys and unlock hidden rooms."
+        description: "Authenticate to claim keys and unlock hidden rooms.",
       });
       return;
     }
@@ -31,7 +31,7 @@ const Library = () => {
       toast({
         title: "Unable to grant key",
         description: "Check Supabase logs or try again shortly.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setClaiming(false);

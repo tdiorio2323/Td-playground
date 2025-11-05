@@ -11,7 +11,7 @@ interface SupabaseContextType {
 const SupabaseContext = createContext<SupabaseContextType>({
   supabase,
   user: null,
-  loading: true
+  loading: true,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

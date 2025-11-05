@@ -1,16 +1,23 @@
-import { useMemo } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Separator } from '@/components/ui/separator';
-import { Folder, UploadCloud, RefreshCcw } from 'lucide-react';
+import { useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Separator } from "@/components/ui/separator";
+import { Folder, UploadCloud, RefreshCcw } from "lucide-react";
 
 interface StorageItem {
   id: string;
   bucket: string;
   name: string;
-  type: 'image' | 'video' | 'document' | 'other';
+  type: "image" | "video" | "document" | "other";
   size: string;
   updatedAt: string;
   path: string;
@@ -18,60 +25,63 @@ interface StorageItem {
 
 const placeholderItems: StorageItem[] = [
   {
-    id: '1',
-    bucket: 'creative-assets',
-    name: 'hero-banner.png',
-    type: 'image',
-    size: '1.2 MB',
-    updatedAt: '2024-08-04 09:21',
-    path: 'marketing/hero-banner.png',
+    id: "1",
+    bucket: "creative-assets",
+    name: "hero-banner.png",
+    type: "image",
+    size: "1.2 MB",
+    updatedAt: "2024-08-04 09:21",
+    path: "marketing/hero-banner.png",
   },
   {
-    id: '2',
-    bucket: 'creative-assets',
-    name: 'promo-reel.mp4',
-    type: 'video',
-    size: '42 MB',
-    updatedAt: '2024-08-02 16:03',
-    path: 'campaigns/promo-reel.mp4',
+    id: "2",
+    bucket: "creative-assets",
+    name: "promo-reel.mp4",
+    type: "video",
+    size: "42 MB",
+    updatedAt: "2024-08-02 16:03",
+    path: "campaigns/promo-reel.mp4",
   },
   {
-    id: '3',
-    bucket: 'sales-collateral',
-    name: 'vip-one-pager.pdf',
-    type: 'document',
-    size: '380 KB',
-    updatedAt: '2024-07-28 12:47',
-    path: 'vip/vip-one-pager.pdf',
+    id: "3",
+    bucket: "sales-collateral",
+    name: "vip-one-pager.pdf",
+    type: "document",
+    size: "380 KB",
+    updatedAt: "2024-07-28 12:47",
+    path: "vip/vip-one-pager.pdf",
   },
 ];
 
 const bucketSummary = [
   {
-    name: 'creative-assets',
-    description: 'Brand visuals, hero shots, and marketing collateral',
-    groups: ['marketing', 'design'],
+    name: "creative-assets",
+    description: "Brand visuals, hero shots, and marketing collateral",
+    groups: ["marketing", "design"],
     items: 124,
   },
   {
-    name: 'sales-collateral',
-    description: 'Pitch decks, PDFs, and downloadable resources',
-    groups: ['sales', 'partnerships'],
+    name: "sales-collateral",
+    description: "Pitch decks, PDFs, and downloadable resources",
+    groups: ["sales", "partnerships"],
     items: 46,
   },
   {
-    name: 'raw-uploads',
-    description: 'Incoming creator uploads pending review',
-    groups: ['community', 'ops'],
+    name: "raw-uploads",
+    description: "Incoming creator uploads pending review",
+    groups: ["community", "ops"],
     items: 18,
   },
 ];
 
-const storageTypes: Record<StorageItem['type'], { label: string; variant: 'default' | 'secondary' | 'outline' | 'destructive'; }> = {
-  image: { label: 'Image', variant: 'default' },
-  video: { label: 'Video', variant: 'secondary' },
-  document: { label: 'Document', variant: 'outline' },
-  other: { label: 'Other', variant: 'destructive' },
+const storageTypes: Record<
+  StorageItem["type"],
+  { label: string; variant: "default" | "secondary" | "outline" | "destructive" }
+> = {
+  image: { label: "Image", variant: "default" },
+  video: { label: "Video", variant: "secondary" },
+  document: { label: "Document", variant: "outline" },
+  other: { label: "Other", variant: "destructive" },
 };
 
 const Storage = () => {
@@ -119,7 +129,9 @@ const Storage = () => {
                 <Separator className="my-3" />
                 <div className="flex flex-wrap gap-2">
                   {bucket.groups.map((group) => (
-                    <Badge key={group} variant="outline">{group}</Badge>
+                    <Badge key={group} variant="outline">
+                      {group}
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -170,12 +182,10 @@ const Storage = () => {
           </CardHeader>
           <CardContent className="space-y-3 text-sm text-muted-foreground">
             <p>
-              1. Provide the Supabase project URL and service role credentials (store privately) so we can
-              script migrations with the Supabase CLI.
+              1. Provide the Supabase project URL and service role credentials (store privately) so
+              we can script migrations with the Supabase CLI.
             </p>
-            <p>
-              2. Configure target buckets (above) to mirror the legacy project structure.
-            </p>
+            <p>2. Configure target buckets (above) to mirror the legacy project structure.</p>
             <p>
               3. Once credentials are ready, we can wire the action buttons to list objects via
               <code className="ml-1 font-mono">supabase.storage.from(bucket).list()</code>.

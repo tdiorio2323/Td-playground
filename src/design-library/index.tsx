@@ -1,18 +1,21 @@
-import { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ComponentsTab } from './tabs/ComponentsTab';
-import { FontsTab } from './tabs/FontsTab';
-import { BackgroundsTab } from './tabs/BackgroundsTab';
-import { MediaTab } from './tabs/MediaTab';
-import { IconsTab } from './tabs/IconsTab';
-import { TemplatesTab } from './tabs/TemplatesTab';
-import { TokensTab } from './tabs/TokensTab';
+import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ComponentsTab } from "./tabs/ComponentsTab";
+import { FontsTab } from "./tabs/FontsTab";
+import { BackgroundsTab } from "./tabs/BackgroundsTab";
+import { MediaTab } from "./tabs/MediaTab";
+import { IconsTab } from "./tabs/IconsTab";
+import { TemplatesTab } from "./tabs/TemplatesTab";
+import { TokensTab } from "./tabs/TokensTab";
 
 export default function DesignLibrary() {
-  const [activeTab, setActiveTab] = useState('components');
+  const [activeTab, setActiveTab] = useState("components");
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')" }}>
+    <div
+      className="min-h-screen bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')" }}
+    >
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -41,25 +44,46 @@ export default function DesignLibrary() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
           <TabsList className="bg-white border border-gray-200 p-1">
-            <TabsTrigger value="components" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="components"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Components
             </TabsTrigger>
-            <TabsTrigger value="templates" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="templates"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Templates
             </TabsTrigger>
-            <TabsTrigger value="icons" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="icons"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Icons
             </TabsTrigger>
-            <TabsTrigger value="fonts" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="fonts"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Fonts
             </TabsTrigger>
-            <TabsTrigger value="backgrounds" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="backgrounds"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Backgrounds
             </TabsTrigger>
-            <TabsTrigger value="media" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="media"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Media
             </TabsTrigger>
-            <TabsTrigger value="tokens" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide">
+            <TabsTrigger
+              value="tokens"
+              className="data-[state=active]:bg-gray-900 data-[state=active]:text-white uppercase font-['Inter',sans-serif] tracking-wide"
+            >
               Tokens
             </TabsTrigger>
           </TabsList>

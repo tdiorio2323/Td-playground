@@ -2,7 +2,7 @@ const projectUrl = import.meta.env.VITE_SUPABASE_URL;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!projectUrl || !anonKey) {
-  console.warn('Supabase environment variables are missing. Storage calls will fail.');
+  console.warn("Supabase environment variables are missing. Storage calls will fail.");
 }
 
 interface StorageListResponseItem {
@@ -20,27 +20,24 @@ interface StorageListResponseItem {
   };
 }
 
-export async function listBagDesignObjects(prefix = 'public'): Promise<StorageListResponseItem[]> {
+export async function listBagDesignObjects(prefix = "public"): Promise<StorageListResponseItem[]> {
   if (!projectUrl || !anonKey) {
-    throw new Error('Supabase storage environment variables are not configured.');
+    throw new Error("Supabase storage environment variables are not configured.");
   }
 
-  const response = await fetch(
-    `${projectUrl}/storage/v1/object/list/bag-designs`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: anonKey,
-        Authorization: `Bearer ${anonKey}`,
-      },
-      body: JSON.stringify({
-        prefix,
-        limit: 1000,
-        sortBy: { column: 'name', order: 'asc' as const },
-      }),
+  const response = await fetch(`${projectUrl}/storage/v1/object/list/bag-designs`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: anonKey,
+      Authorization: `Bearer ${anonKey}`,
     },
-  );
+    body: JSON.stringify({
+      prefix,
+      limit: 1000,
+      sortBy: { column: "name", order: "asc" as const },
+    }),
+  });
 
   if (!response.ok) {
     const message = await response.text();
@@ -48,24 +45,22 @@ export async function listBagDesignObjects(prefix = 'public'): Promise<StorageLi
   }
 
   const data = (await response.json()) as StorageListResponseItem[];
-  return data?.map((item) => ({
-    ...item,
-    name: prefix ? `${prefix.replace(/\/?$/, '')}/${item.name}` : item.name,
-  })) ?? [];
+  return (
+    data?.map((item) => ({
+      ...item,
+      name: prefix ? `${prefix.replace(/\/?$/, "")}/${item.name}` : item.name,
+    })) ?? []
+  );
 }
 
 export function buildBagDesignThumbnailPath(path: string, { width = 600, quality = 40 } = {}) {
-  if (!projectUrl) return '';
-  const encoded = path
-    .split('/')
-    .filter(Boolean)
-    .map(encodeURIComponent)
-    .join('/');
+  if (!projectUrl) return "";
+  const encoded = path.split("/").filter(Boolean).map(encodeURIComponent).join("/");
 
   const params = new URLSearchParams({
     width: String(width),
     quality: String(quality),
-    resize: 'contain',
+    resize: "contain",
   });
 
   return `${projectUrl}/storage/v1/render/image/public/bag-designs/${encoded}?${params.toString()}`;

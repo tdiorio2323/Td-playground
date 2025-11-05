@@ -1,106 +1,150 @@
-import { useState, lazy } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Check, Copy, Code2, Search } from 'lucide-react';
-import { components } from '../registry/components';
-import { copyToClipboard } from '../utils/copyToClipboard';
-import { SafePreview } from '../utils/SafePreview';
-import { useNavigate } from 'react-router-dom';
+import { useState, lazy } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Check, Copy, Code2, Search } from "lucide-react";
+import { components } from "../registry/components";
+import { copyToClipboard } from "../utils/copyToClipboard";
+import { SafePreview } from "../utils/SafePreview";
+import { useNavigate } from "react-router-dom";
 
 // Lazy load components for previews - handle both default and named exports
 type PreviewComponent = React.LazyExoticComponent<React.ComponentType<Record<string, unknown>>>;
 
 const componentLoaders: Record<string, PreviewComponent> = {
-  'AuthPage': lazy(() => import('@/components/AuthPage').then(m => ({ default: m.default ?? m.AuthPage }))),
-  'AuthPage2': lazy(() => import('@/components/AuthPage2').then(m => ({ default: m.default ?? m.AuthPage2 }))),
-  'AuthPage3': lazy(() => import('@/components/AuthPage3').then(m => ({ default: m.default ?? m.AuthPage3 }))),
-  'AuthPage4': lazy(() => import('@/components/AuthPage4').then(m => ({ default: m.default ?? m.AuthPage4 }))),
-  'AuthPage6': lazy(() => import('@/components/AuthPage6').then(m => ({ default: m.default ?? m.AuthPage6 }))),
-  'AuthPage7': lazy(() => import('@/components/AuthPage7').then(m => ({ default: m.default ?? m.AuthPage7 }))),
-  'AuthPage7_2': lazy(() => import('@/components/AuthPage7_2').then(m => ({ default: m.default ?? m.AuthPage7_2 }))),
-  'AuthPage10': lazy(() => import('@/components/AuthPage10').then(m => ({ default: m.default ?? m.AuthPage10 }))),
-  'AuthPageLCG': lazy(() => import('@/components/AuthPageLCG').then(m => ({ default: m.default ?? m.AuthPageLCG }))),
-  'AuthPageMgmt': lazy(() => import('@/components/AuthPageMgmt').then(m => ({ default: m.default ?? m.AuthPageMgmt }))),
-  'AuthPageMgmt2': lazy(() => import('@/components/AuthPageMgmt2').then(m => ({ default: m.default ?? m.AuthPageMgmt2 }))),
-  'BrandDashboard': lazy(() => import('@/components/BrandDashboard').then(m => ({ default: m.default ?? m.BrandDashboard }))),
-  'SuperAdminDashboard': lazy(() => import('@/components/SuperAdminDashboard').then(m => ({ default: m.default ?? m.SuperAdminDashboard }))),
-  'CustomerApp': lazy(() => import('@/components/CustomerApp').then(m => ({ default: m.default ?? m.CustomerApp }))),
-  'CheckoutFlow': lazy(() => import('@/components/CheckoutFlow').then(m => ({ default: m.default ?? m.CheckoutFlow }))),
-  'DashboardLayout': lazy(() => import('@/components/DashboardLayout').then(m => ({ default: m.default ?? m.DashboardLayout }))),
-  'AuthCard': lazy(() => import('@/components/AuthCard').then(m => ({ default: m.default ?? m.AuthCard }))),
+  AuthPage: lazy(() =>
+    import("@/components/AuthPage").then((m) => ({ default: m.default ?? m.AuthPage })),
+  ),
+  AuthPage2: lazy(() =>
+    import("@/components/AuthPage2").then((m) => ({ default: m.default ?? m.AuthPage2 })),
+  ),
+  AuthPage3: lazy(() =>
+    import("@/components/AuthPage3").then((m) => ({ default: m.default ?? m.AuthPage3 })),
+  ),
+  AuthPage4: lazy(() =>
+    import("@/components/AuthPage4").then((m) => ({ default: m.default ?? m.AuthPage4 })),
+  ),
+  AuthPage6: lazy(() =>
+    import("@/components/AuthPage6").then((m) => ({ default: m.default ?? m.AuthPage6 })),
+  ),
+  AuthPage7: lazy(() =>
+    import("@/components/AuthPage7").then((m) => ({ default: m.default ?? m.AuthPage7 })),
+  ),
+  AuthPage7_2: lazy(() =>
+    import("@/components/AuthPage7_2").then((m) => ({ default: m.default ?? m.AuthPage7_2 })),
+  ),
+  AuthPage10: lazy(() =>
+    import("@/components/AuthPage10").then((m) => ({ default: m.default ?? m.AuthPage10 })),
+  ),
+  AuthPageLCG: lazy(() =>
+    import("@/components/AuthPageLCG").then((m) => ({ default: m.default ?? m.AuthPageLCG })),
+  ),
+  AuthPageMgmt: lazy(() =>
+    import("@/components/AuthPageMgmt").then((m) => ({ default: m.default ?? m.AuthPageMgmt })),
+  ),
+  AuthPageMgmt2: lazy(() =>
+    import("@/components/AuthPageMgmt2").then((m) => ({ default: m.default ?? m.AuthPageMgmt2 })),
+  ),
+  BrandDashboard: lazy(() =>
+    import("@/components/BrandDashboard").then((m) => ({ default: m.default ?? m.BrandDashboard })),
+  ),
+  SuperAdminDashboard: lazy(() =>
+    import("@/components/SuperAdminDashboard").then((m) => ({
+      default: m.default ?? m.SuperAdminDashboard,
+    })),
+  ),
+  CustomerApp: lazy(() =>
+    import("@/components/CustomerApp").then((m) => ({ default: m.default ?? m.CustomerApp })),
+  ),
+  CheckoutFlow: lazy(() =>
+    import("@/components/CheckoutFlow").then((m) => ({ default: m.default ?? m.CheckoutFlow })),
+  ),
+  DashboardLayout: lazy(() =>
+    import("@/components/DashboardLayout").then((m) => ({
+      default: m.default ?? m.DashboardLayout,
+    })),
+  ),
+  AuthCard: lazy(() =>
+    import("@/components/AuthCard").then((m) => ({ default: m.default ?? m.AuthCard })),
+  ),
 };
 
 // Safe preview props for components that need them
 const componentProps: Record<string, Record<string, unknown>> = {
-  'CheckoutFlow': {
-    items: [{ id: 1, name: 'Sample Item', price: 10, quantity: 1 }],
-    steps: ['cart', 'shipping', 'payment', 'confirmation'],
-    onSubmit: () => {}
+  CheckoutFlow: {
+    items: [{ id: 1, name: "Sample Item", price: 10, quantity: 1 }],
+    steps: ["cart", "shipping", "payment", "confirmation"],
+    onSubmit: () => {},
   },
-  'DashboardLayout': { children: null },
-  'AuthCard': { mode: 'login' as const, onSubmit: () => {}, onToggle: () => {} },
+  DashboardLayout: { children: null },
+  AuthCard: { mode: "login" as const, onSubmit: () => {}, onToggle: () => {} },
 };
 
-const componentSourceModules = import.meta.glob('/src/components/**/*.tsx', {
-  query: '?raw',
-  import: 'default',
-  eager: true
+const componentSourceModules = import.meta.glob("/src/components/**/*.tsx", {
+  query: "?raw",
+  import: "default",
+  eager: true,
 }) as Record<string, string>;
 
 const backendImportPatterns = [
   /@\/integrations\/supabase/i,
   /@\/lib\/supabaseClient/i,
   /@\/lib\/roomKeys/i,
-  /supabase/i
+  /supabase/i,
 ];
 
 const sanitizeComponentCode = (code: string) => {
-  const lines = code.split('\n');
+  const lines = code.split("\n");
   const sanitizedLines: string[] = [];
   let needsStub = false;
 
   for (const line of lines) {
-    if (backendImportPatterns.some(pattern => pattern.test(line.trim()) && line.trim().startsWith('import'))) {
+    if (
+      backendImportPatterns.some(
+        (pattern) => pattern.test(line.trim()) && line.trim().startsWith("import"),
+      )
+    ) {
       needsStub = true;
       continue;
     }
     sanitizedLines.push(line);
   }
 
-  const firstNonImportIndex = sanitizedLines.findIndex(line => {
+  const firstNonImportIndex = sanitizedLines.findIndex((line) => {
     const trimmed = line.trim();
-    return trimmed.length > 0 && !trimmed.startsWith('import');
+    return trimmed.length > 0 && !trimmed.startsWith("import");
   });
 
   if (needsStub) {
     const stub = [
-      '',
-      '// Backend placeholders keep this UI self-contained when copied.',
-      'const createBackendStub = () =>',
-      '  new Proxy(() => {}, {',
-      '    get: () => createBackendStub(),',
-      '    apply: () => undefined',
-      '  });',
-      'const supabase = createBackendStub();',
-      'const useSupabase = () => ({ supabase, user: null });',
-      ''
+      "",
+      "// Backend placeholders keep this UI self-contained when copied.",
+      "const createBackendStub = () =>",
+      "  new Proxy(() => {}, {",
+      "    get: () => createBackendStub(),",
+      "    apply: () => undefined",
+      "  });",
+      "const supabase = createBackendStub();",
+      "const useSupabase = () => ({ supabase, user: null });",
+      "",
     ];
     const insertionIndex = firstNonImportIndex === -1 ? sanitizedLines.length : firstNonImportIndex;
     sanitizedLines.splice(insertionIndex, 0, ...stub);
   }
 
-  sanitizedLines.unshift('// Copied from TD Playground Design Library — wire imports/backends to your project.');
-  return sanitizedLines.join('\n');
+  sanitizedLines.unshift(
+    "// Copied from TD Playground Design Library — wire imports/backends to your project.",
+  );
+  return sanitizedLines.join("\n");
 };
 
 const getComponentCode = (path: string): string => {
-  const normalizedPath = path.replace(/^\/+/, '');
+  const normalizedPath = path.replace(/^\/+/, "");
   const matchedKey =
     componentSourceModules[path] !== undefined
       ? path
-      : Object.keys(componentSourceModules).find(key =>
-          key.replace(/^\/+/, '').endsWith(normalizedPath)
+      : Object.keys(componentSourceModules).find((key) =>
+          key.replace(/^\/+/, "").endsWith(normalizedPath),
         );
   const rawCode = matchedKey ? componentSourceModules[matchedKey] : undefined;
   if (!rawCode) {
@@ -110,18 +154,19 @@ const getComponentCode = (path: string): string => {
 };
 
 export function ComponentsTab() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const categories = ['All', ...Array.from(new Set(components.map(c => c.category)))];
+  const categories = ["All", ...Array.from(new Set(components.map((c) => c.category)))];
 
-  const filteredComponents = components.filter(comp => {
-    const matchesSearch = comp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         comp.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || comp.category === selectedCategory;
+  const filteredComponents = components.filter((comp) => {
+    const matchesSearch =
+      comp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      comp.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || comp.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -152,10 +197,10 @@ export function ComponentsTab() {
           />
         </div>
         <div className="flex gap-2 flex-wrap">
-          {categories.map(category => (
+          {categories.map((category) => (
             <Button
               key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
+              variant={selectedCategory === category ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedCategory(category)}
               className="text-white"
@@ -168,7 +213,7 @@ export function ComponentsTab() {
 
       {/* Component Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filteredComponents.map(component => {
+        {filteredComponents.map((component) => {
           const isExpanded = expandedCode === component.name;
           const isCopied = copiedId === component.name;
           const code = getComponentCode(component.path);
@@ -236,7 +281,7 @@ export function ComponentsTab() {
                     onClick={() => setExpandedCode(isExpanded ? null : component.name)}
                   >
                     <Code2 className="h-4 w-4 mr-2" />
-                    {isExpanded ? 'Hide Code' : 'View Code'}
+                    {isExpanded ? "Hide Code" : "View Code"}
                   </Button>
                   <Button
                     variant="outline"
