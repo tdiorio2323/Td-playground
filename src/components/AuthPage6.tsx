@@ -83,7 +83,7 @@ export const AuthPage6 = ({ onLogin }: AuthPage6Props) => {
             {/* Bookings/Contact Link */}
             <div className="text-center mt-3">
               <a
-                href="mailto:inquiries@lilsex.com"
+                href="mailto:lunanextshow@gmail.com"
                 className="text-white/80 text-sm hover:text-white transition-colors underline"
                 style={{ fontFamily: "'Inter', sans-serif", width: "90%", display: "inline-block" }}
               >
