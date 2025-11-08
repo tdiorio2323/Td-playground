@@ -147,10 +147,10 @@ export const routes: RouteDefinition[] = [
     icon: Lock,
   },
   {
-    path: "/lilsex",
-    name: "Lil Sex",
+    path: "/luna-star-link",
+    name: "Luna Star",
     category: "Authentication",
-    description: "Lil Sex branded auth",
+    description: "Luna Star link-in-bio page",
     icon: Lock,
   },
   {
@@ -404,8 +404,22 @@ export const routes: RouteDefinition[] = [
     description: "Alternative home page",
     icon: Palette,
   },
+  {
+    path: "/luna-star",
+    name: "Luna Star",
+    category: "Creator Tools",
+    description: "Premium custom link page for Luna Star",
+    icon: Sparkles,
+  },
 
-  // Showcases (4 routes)
+  // Showcases (5 routes)
+  {
+    path: "/carousel",
+    name: "Route Carousel",
+    category: "Showcases",
+    description: "Interactive carousel slideshow of all routes",
+    icon: Sparkles,
+  },
   {
     path: "/directory",
     name: "Directory",
@@ -428,7 +442,7 @@ export const routes: RouteDefinition[] = [
     icon: Sparkles,
   },
 
-  // Experimental (4 routes)
+  // Experimental (7 routes)
   {
     path: "/spooky",
     name: "Spooky",

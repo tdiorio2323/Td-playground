@@ -165,6 +165,16 @@ Routes that manage their own metadata (defined in `excludedExact` set in SharedL
 
 When adding new branded routes with custom metadata, add them to the `excludedExact` set in SharedLayout.tsx
 
+### Route Organization
+
+Routes are organized by category in `src/lib/routes.ts`:
+- **Authentication** (21 routes) - Auth pages and branded auth portals
+- **E-commerce** (5 routes) - Shop, product details, checkout flows
+- **Management** (6 routes) - Dashboards and admin interfaces
+- **Creator Tools** (7 routes) - Onboarding, link-in-bio, portals
+- **Showcases** (4 routes) - Component library and directory
+- **Experimental** (7 routes) - Special effects, key-gated routes, experimental UI
+
 ### Key Routes
 - `/` - Home page with ENTER button and Breakout game
 - `/library` - Design library browser (40+ shadcn/ui components)
@@ -172,11 +182,13 @@ When adding new branded routes with custom metadata, add them to the `excludedEx
 - `/authcard` - UI-only AuthCard component preview
 - `/thedash` - Dashboard template
 - `/storage` - Storage management interface
-- `/auth`, `/auth2`, `/auth3-21` - Auth page variations
+- `/auth`, `/auth2`, `/auth[4-20]` - Auth page variations (numbered 1-20)
 - `/juanita`, `/cabana`, `/starluv`, `/lcg`, `/quickprintz` - Branded auth pages
+- `/luna-star`, `/luna-star/analytics`, `/luna-star/cms`, `/luna-star/premium` - Luna Star creator suite
 - `/cabanamgmt*` - Management portal variants
 - `/shop`, `/product/:id`, `/checkout` - E-commerce templates
 - `/bio/:username` - Dynamic link-in-bio pages
+- `/backroom`, `/testing-lab` - Key-gated experimental routes
 
 ## Important Notes
 
@@ -188,8 +200,10 @@ When adding new branded routes with custom metadata, add them to the `excludedEx
 - **Client Branding**: Branded routes follow naming conventions:
   - `/cabana`, `/thecabana`, `/cabanamgmt*` - CABANA
   - `/starluv*` - Star Luv
+  - `/luna-star*` - Luna Star (premium creator suite)
   - `/lcg` - Locust Growth Accelerator (locust_growth_accelerator)
   - `/quickprintz` - Quick Printz
   - `/juanita*` - Juanita
   - `/soundimageband` - Sound Image Band
   - `/lexistarshow` - Lexi Star Show
+- **Route Metadata**: Route definitions in `src/lib/routes.ts` include category, description, icons, and metadata for key-gated routes

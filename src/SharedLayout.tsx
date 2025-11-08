@@ -14,7 +14,7 @@ const SharedLayout = () => {
       "/starluv-2",
       "/starluv-3",
       "/starluv-4",
-      "/lilsex",
+      "/luna-star-link",
       "/juanita",
       "/juanita2",
       "/juanita3",

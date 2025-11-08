@@ -59,6 +59,11 @@ import CasinoNav from "./pages/CasinoNav";
 import Vip from "./pages/Vip";
 import Backroom from "./pages/Backroom";
 import TestingLab from "./pages/TestingLab";
+import LunaStarPage from "./pages/LunaStarPage";
+import LunaStarAnalytics from "./pages/LunaStarAnalytics";
+import LunaStarCMS from "./pages/LunaStarCMS";
+import LunaStarPremium from "./pages/LunaStarPremium";
+import RouteCarousel from "./pages/RouteCarousel";
 import RequireKey from "./components/RequireKey";
 import { CommandPalette } from "./components/CommandPalette";
 import { FloatingNavButton } from "./components/FloatingNavButton";
@@ -79,6 +84,7 @@ const App = () => {
             {/* All routes - no auth required */}
             <Route element={<SharedLayout />}>
               <Route path="/" element={<Index />} />
+              <Route path="/carousel" element={<RouteCarousel />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/library" element={<Library />} />
               <Route path="/spooky" element={<Spooky />} />
@@ -116,9 +122,13 @@ const App = () => {
               <Route path="/cabanamgmt-4" element={<CabanaMgmt4 />} />
               <Route path="/lcg" element={<LCG />} />
               <Route path="/home-1" element={<Home1 />} />
+              <Route path="/luna-star" element={<LunaStarPage />} />
+              <Route path="/luna-star/analytics" element={<LunaStarAnalytics />} />
+              <Route path="/luna-star/cms" element={<LunaStarCMS />} />
+              <Route path="/luna-star/premium" element={<LunaStarPremium />} />
               <Route path="/auth4" element={<Auth4 />} />
               <Route path="/joincabana" element={<Auth5 />} />
-              <Route path="/lilsex" element={<Auth6 />} />
+              <Route path="/luna-star-link" element={<Auth6 />} />
               <Route path="/starluv" element={<Auth7 />} />
               <Route path="/starluv-2" element={<Auth7_2 />} />
               <Route path="/starluv-3" element={<Auth7 />} />
