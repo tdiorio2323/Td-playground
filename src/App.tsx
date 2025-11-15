@@ -68,6 +68,7 @@ import RequireKey from "./components/RequireKey";
 import { CommandPalette } from "./components/CommandPalette";
 import { FloatingNavButton } from "./components/FloatingNavButton";
 import { DevMenuOverlay } from "./components/DevMenuOverlay";
+import RouteSyncMonitor from "./components/RouteSyncMonitor";
 
 const queryClient = new QueryClient();
 
@@ -168,6 +169,7 @@ const App = () => {
           <CommandPalette open={commandPaletteOpen} onOpenChange={setCommandPaletteOpen} />
           <FloatingNavButton onClick={() => setCommandPaletteOpen(true)} />
           <DevMenuOverlay />
+          {import.meta.env.DEV && <RouteSyncMonitor />}
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
