@@ -1,39 +1,18 @@
-import React, { useEffect } from "react";
-import { AuthPage } from "@/components/AuthPage";
+import { AuthCardBase } from "@/components/auth/AuthCardBase";
 
-const Auth = () => {
-  useEffect(() => {
-    document.title = "Cabana | Join";
-
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
-
-    const setProp = (property: string, content: string) => {
-      let el = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("property", property);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
-
-    const desc = "Join Cabana. Private access, premium creators, secure checkout.";
-    setMeta("description", desc);
-    setProp("og:title", "Cabana | Join");
-    setProp("og:description", desc);
-    setProp("og:type", "website");
-    setProp("og:url", window.location.origin + "/joincabana");
-  }, []);
-
-  return <AuthPage />;
-};
-
-export default Auth;
+export default function Auth5() {
+  return (
+    <AuthCardBase
+      name="Cabana MGMT"
+      headline="Apply for Management & Bookings"
+      avatar="/images/cabana-logo.png"
+      accentGradient="from-emerald-400 via-teal-400 to-cyan-400"
+      backgroundVariant="cyber-grid"
+      buttons={[
+        { label: "Apply Now", href: "#" },
+        { label: "Instagram", href: "#" },
+      ]}
+      tags={["Cabana", "Management", "Bookings"]}
+    />
+  );
+}

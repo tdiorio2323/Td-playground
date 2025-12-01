@@ -32,14 +32,16 @@ import Auth18 from "./pages/Auth18";
 import Auth19 from "./pages/Auth19";
 import Auth20 from "./pages/Auth20";
 import Auth21 from "./pages/Auth21";
-import LexiStarShow from "./pages/LexiStarShow";
+import Auth22 from "./pages/Auth22";
+import Auth23 from "./pages/Auth23";
+
 import Admin from "./pages/Admin";
 import Brand from "./pages/Brand";
 import Portal from "./pages/Portal";
 import ProjectPage from "./pages/ProjectPage";
 import VipWaitlist from "./pages/VipWaitlist";
 import CreatorOnboarding from "./pages/CreatorOnboarding";
-import LinkInBio from "./pages/LinkInBio";
+import BioProfile from "./pages/BioProfile";
 import Shop from "./pages/Shop";
 import Checkout from "./pages/Checkout";
 import Storage from "./pages/Storage";
@@ -59,10 +61,7 @@ import CasinoNav from "./pages/CasinoNav";
 import Vip from "./pages/Vip";
 import Backroom from "./pages/Backroom";
 import TestingLab from "./pages/TestingLab";
-import LunaStarPage from "./pages/LunaStarPage";
-import LunaStarAnalytics from "./pages/LunaStarAnalytics";
-import LunaStarCMS from "./pages/LunaStarCMS";
-import LunaStarPremium from "./pages/LunaStarPremium";
+
 import RouteCarousel from "./pages/RouteCarousel";
 import RequireKey from "./components/RequireKey";
 import { CommandPalette } from "./components/CommandPalette";
@@ -123,10 +122,7 @@ const App = () => {
               <Route path="/cabanamgmt-4" element={<CabanaMgmt4 />} />
               <Route path="/lcg" element={<LCG />} />
               <Route path="/home-1" element={<Home1 />} />
-              <Route path="/luna-star" element={<LunaStarPage />} />
-              <Route path="/luna-star/analytics" element={<LunaStarAnalytics />} />
-              <Route path="/luna-star/cms" element={<LunaStarCMS />} />
-              <Route path="/luna-star/premium" element={<LunaStarPremium />} />
+
               <Route path="/auth4" element={<Auth4 />} />
               <Route path="/joincabana" element={<Auth5 />} />
               <Route path="/luna-star-link" element={<Auth6 />} />
@@ -148,9 +144,11 @@ const App = () => {
               <Route path="/auth19" element={<Auth19 />} />
               <Route path="/auth20" element={<Auth20 />} />
               <Route path="/soundimageband" element={<Auth21 />} />
-              <Route path="/lexistarshow" element={<LexiStarShow />} />
+              <Route path="/auth22" element={<Auth22 />} />
+              <Route path="/auth23" element={<Auth23 />} />
+
               <Route path="/waitlist" element={<VipWaitlist />} />
-              <Route path="/bio/:username" element={<LinkInBio />} />
+              <Route path="/bio/:username" element={<BioProfile />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/checkout" element={<Checkout />} />

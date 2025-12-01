@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "lint": "eslint -c eslint.config.local.mjs src/**/*.{ts,tsx}",
+    "lint": "eslint -c eslint.config.js src/**/*.{ts,tsx}",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
@@ -20,7 +20,8 @@
     "routes:preview:fast": "node tools/generate-route-screenshots.mjs --base=http://localhost:8081 --out=previews/routes-preview.html --open --skip-screenshots",
     "optimize:images": "node optimize-images.mjs",
     "lint:strict": "eslint -c .eslintrc-local.cjs src/**/*.{ts,tsx}",
-    "lint:local": "eslint -c tools/dev/eslint.config.local.mjs src/**/*.{ts,tsx}"
+    "lint:local": "eslint -c tools/dev/eslint.config.local.mjs src/**/*.{ts,tsx}",
+    "auth:checklist": "ls src/pages/Auth*.tsx 2>/dev/null | sed 's|src/pages/||' | sed 's|\\.tsx$||' | sort | awk '{printf \"- [ ] %s\\n\", $1}' > AUTH_CHECKLIST.md"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

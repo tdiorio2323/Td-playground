@@ -1,39 +1,18 @@
-import React, { useEffect } from "react";
-import { AuthPage7_2 } from "@/components/AuthPage7_2";
+import { AuthCardBase } from "@/components/auth/AuthCardBase";
 
-const Auth = () => {
-  useEffect(() => {
-    document.title = "STAR LUV ⭐";
-
-    // Update or create meta tags
-    const updateMetaTag = (property: string, content: string) => {
-      let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("property", property);
-        document.head.appendChild(meta);
-      }
-      meta.content = content;
-    };
-
-    const updateMetaName = (name: string, content: string) => {
-      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("name", name);
-        document.head.appendChild(meta);
-      }
-      meta.content = content;
-    };
-
-    updateMetaTag("og:title", "STAR LUV ⭐");
-    updateMetaTag("og:image", `${window.location.origin}/lovable-uploads/starluv.webp`);
-    updateMetaName("twitter:title", "STAR LUV ⭐");
-    updateMetaName("twitter:image", `${window.location.origin}/lovable-uploads/starluv.webp`);
-    updateMetaName("twitter:card", "summary_large_image");
-  }, []);
-
-  return <AuthPage7_2 />;
-};
-
-export default Auth;
+export default function Auth7_2() {
+  return (
+    <AuthCardBase
+      name="StarLuv"
+      headline="OnlyFans • Premium Content"
+      avatar="/images/starluv-2.png"
+      accentGradient="from-pink-500 via-purple-500 to-blue-500"
+      backgroundVariant="night-club"
+      buttons={[
+        { label: "OnlyFans", href: "#" },
+        { label: "VIP Bundle", href: "#" },
+      ]}
+      tags={["OnlyFans", "Premium"]}
+    />
+  );
+}

@@ -1,39 +1,18 @@
-import React, { useEffect } from "react";
-import { AuthPage2 } from "@/components/AuthPage2";
+import { AuthCardBase } from "@/components/auth/AuthCardBase";
 
-const Auth = () => {
-  useEffect(() => {
-    document.title = "JUANITA 2 💫";
-
-    // Update or create meta tags
-    const updateMetaTag = (property: string, content: string) => {
-      let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("property", property);
-        document.head.appendChild(meta);
-      }
-      meta.content = content;
-    };
-
-    const updateMetaName = (name: string, content: string) => {
-      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("name", name);
-        document.head.appendChild(meta);
-      }
-      meta.content = content;
-    };
-
-    updateMetaTag("og:title", "JUANITA 2 💫");
-    updateMetaTag("og:image", `${window.location.origin}/lovable-uploads/juanita.jpg`);
-    updateMetaName("twitter:title", "JUANITA 2 💫");
-    updateMetaName("twitter:image", `${window.location.origin}/lovable-uploads/juanita.jpg`);
-    updateMetaName("twitter:card", "summary_large_image");
-  }, []);
-
-  return <AuthPage2 />;
-};
-
-export default Auth;
+export default function Auth3_2() {
+  return (
+    <AuthCardBase
+      name="Juanita"
+      headline="Behind-the-Scenes • Daily Story Access"
+      avatar="/images/juanita-2.png"
+      accentGradient="from-orange-400 via-rose-400 to-pink-500"
+      backgroundVariant="night-club"
+      buttons={[
+        { label: "Stories Feed", href: "#" },
+        { label: "Instagram", href: "#" },
+      ]}
+      tags={["Stories", "Daily", "Uncut"]}
+    />
+  );
+}
