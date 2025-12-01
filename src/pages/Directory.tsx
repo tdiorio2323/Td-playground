@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PlaygroundNavbar } from "@/components/PlaygroundNavbar";
 
 const Directory = () => {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ const Directory = () => {
 
   return (
     <div
-      className="min-h-screen p-4 sm:p-6 md:p-8"
+      className="min-h-screen"
       style={{
         backgroundImage: "url('/lovable-uploads/td-studios-black-marble.webp')",
         backgroundSize: "cover",
@@ -86,6 +87,8 @@ const Directory = () => {
         fontFamily: "'Inter', sans-serif",
       }}
     >
+      <PlaygroundNavbar />
+      <div className="p-4 sm:p-6 md:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 sm:mb-12">
           <div className="w-full h-48 sm:h-64 md:h-80 lg:h-96 bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
@@ -163,6 +166,7 @@ const Directory = () => {
             </Card>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );

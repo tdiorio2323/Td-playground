@@ -6,6 +6,7 @@ import { useSupabase } from "@/integrations/supabase/auth";
 import { grantKey, ROOM_KEYS_UPDATED_EVENT } from "@/lib/roomKeys";
 import { useToast } from "@/hooks/use-toast";
 import { KeyRound } from "lucide-react";
+import { PlaygroundNavbar } from "@/components/PlaygroundNavbar";
 
 const Library = () => {
   const { supabase, user } = useSupabase();
@@ -39,7 +40,9 @@ const Library = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-black">
+      <PlaygroundNavbar />
+      <div className="space-y-6 p-4 sm:p-6 md:p-8">
       <Card className="border-white/10 bg-white/5 text-white">
         <CardHeader className="flex flex-col gap-2">
           <CardTitle className="flex items-center gap-2 text-xl">
@@ -63,6 +66,7 @@ const Library = () => {
       </Card>
 
       <DesignLibrary />
+      </div>
     </div>
   );
 };
