@@ -72,7 +72,7 @@ export const AuthPage2 = ({ onLogin }: AuthPage2Props) => {
               src={images[currentImageIndex]}
               alt={`Slide ${currentImageIndex + 1}`}
               className="w-full h-full object-cover transition-opacity duration-500"
-              key={currentImageIndex}
+              key={images[currentImageIndex]}
             />
           </div>
         </CardContent>

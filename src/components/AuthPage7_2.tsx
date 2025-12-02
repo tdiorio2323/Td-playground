@@ -67,10 +67,7 @@ export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
         <CardContent className="space-y-6 pb-8">
           {/* Exclusive Text */}
           <div className="text-center">
-            <h2
-              className="text-4xl font-bold text-white tracking-widest animate-glitter"
-              style={{ fontFamily: "Bebas Neue, sans-serif" }}
-            >
+            <h2 className="text-4xl font-bold text-white tracking-widest animate-glitter font-bebas">
               EXCLUSIVE
             </h2>
           </div>
@@ -81,7 +78,7 @@ export const AuthPage7_2 = ({ onLogin }: AuthPage7_2Props) => {
               src={images[currentImageIndex]}
               alt={`Slide ${currentImageIndex + 1}`}
               className="w-full h-full object-cover transition-opacity duration-500 blur-xl"
-              key={currentImageIndex}
+              key={images[currentImageIndex]}
             />
 
             {/* Lock Icon Overlay */}

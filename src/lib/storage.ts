@@ -1,9 +1,7 @@
 const projectUrl = import.meta.env.VITE_SUPABASE_URL;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!projectUrl || !anonKey) {
-  console.warn("Supabase environment variables are missing. Storage calls will fail.");
-}
+const USE_MOCK_STORAGE = !projectUrl || !anonKey;
 
 interface StorageListResponseItem {
   id?: string;
@@ -21,8 +19,9 @@ interface StorageListResponseItem {
 }
 
 export async function listBagDesignObjects(prefix = "public"): Promise<StorageListResponseItem[]> {
-  if (!projectUrl || !anonKey) {
-    throw new Error("Supabase storage environment variables are not configured.");
+  if (USE_MOCK_STORAGE) {
+    // Return mock data for development
+    return [];
   }
 
   const response = await fetch(`${projectUrl}/storage/v1/object/list/bag-designs`, {

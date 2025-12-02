@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff } from "lucide-react";
+import { mockAuthenticateUser } from "@/lib/mockAuth";
 
 export const AuthPageMgmt = () => {
   const navigate = useNavigate();
@@ -25,33 +26,31 @@ export const AuthPageMgmt = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Check credentials
-    const validUsername = "admin";
-    const validPassword = "cabana2025";
-    const validVipCode = "VIP2025";
+    try {
+      const result = await mockAuthenticateUser(formData);
 
-    const isUsernamePasswordValid =
-      formData.username === validUsername && formData.password === validPassword;
-    const isVipCodeValid = formData.vipCode === validVipCode;
-
-    if (isUsernamePasswordValid || isVipCodeValid) {
-      toast({
-        title: "Access Granted",
-        description: "Welcome to Cabana Management",
-      });
-      // Navigate to admin portal or appropriate page
-      setTimeout(() => {
+      if (result.success) {
+        toast({
+          title: "Access Granted",
+          description: "Welcome to Cabana Management",
+        });
         navigate("/admin");
-      }, 500);
-    } else {
+      } else {
+        toast({
+          title: "Access Denied",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
       toast({
-        title: "Access Denied",
-        description: "Invalid credentials or VIP code",
+        title: "Error",
+        description: "An error occurred during authentication",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -72,16 +71,10 @@ export const AuthPageMgmt = () => {
               className="h-32 w-32 object-contain"
             />
           </div>
-          <h1
-            className="text-6xl text-white text-center leading-tight tracking-wider"
-            style={{ fontFamily: "'Ballet', cursive", fontOpticalSizing: "auto", fontWeight: 400 }}
-          >
+          <h1 className="text-6xl text-white text-center leading-tight tracking-wider font-ballet font-normal">
             Cabana
           </h1>
-          <p
-            className="text-xl text-white/90 text-center tracking-[0.3em] uppercase"
-            style={{ fontFamily: "'Cinzel', serif", fontWeight: 300 }}
-          >
+          <p className="text-xl text-white/90 text-center tracking-[0.3em] uppercase font-cinzel font-light">
             Management Group
           </p>
         </CardHeader>
@@ -90,10 +83,7 @@ export const AuthPageMgmt = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Username Input */}
             <div className="space-y-2">
-              <label
-                className="text-white font-bold text-sm"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
+              <label className="text-white font-bold text-sm font-inter">
                 Username
               </label>
               <Input
@@ -106,10 +96,7 @@ export const AuthPageMgmt = () => {
 
             {/* Password Input */}
             <div className="space-y-2">
-              <label
-                className="text-white font-bold text-sm"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
+              <label className="text-white font-bold text-sm font-inter">
                 Password
               </label>
               <div className="relative">
@@ -140,10 +127,7 @@ export const AuthPageMgmt = () => {
 
             {/* VIP/Admin Code Input */}
             <div className="space-y-2">
-              <label
-                className="text-white font-bold text-sm"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
+              <label className="text-white font-bold text-sm font-inter">
                 Admin/VIP Access Code
               </label>
               <Input
@@ -174,8 +158,7 @@ export const AuthPageMgmt = () => {
             <div className="text-center mt-4">
               <a
                 href="mailto:admin@cabanagrp.com?subject=New%20Onboard%20Request"
-                className="text-white underline text-sm hover:text-white/80 transition-colors"
-                style={{ fontFamily: "'Inter', sans-serif" }}
+                className="text-white underline text-sm hover:text-white/80 transition-colors font-inter"
               >
                 Request Access
               </a>

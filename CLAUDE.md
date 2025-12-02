@@ -29,6 +29,9 @@ TD Playground is a component experimentation environment used by TD Studios for 
 | `pnpm routes:preview` | Generate route screenshots (requires dev server on :8081) |
 | `pnpm routes:preview:fast` | Fast preview generation without images |
 | `pnpm optimize:images` | Optimize images in public/lovable-uploads using Squoosh |
+| `pnpm lint:strict` | Run ESLint with local strict configuration |
+| `pnpm lint:local` | Run ESLint with local development rules |
+| `pnpm auth:checklist` | Generate checklist of all Auth*.tsx pages |
 
 ## Architecture
 
@@ -90,6 +93,7 @@ All routes are nested under `SharedLayout`, which provides:
 - `CommandPalette` - Global command palette for quick navigation
 - `FloatingNavButton` - Floating button to trigger command palette
 - `DevMenuOverlay` - Developer tools overlay for testing
+- `RouteSyncMonitor` - Development-only monitor for route synchronization (only loads in dev mode)
 
 **Key-Gated Routes:**
 Some routes require special access keys (managed via `RequireKey` component):
@@ -168,12 +172,18 @@ When adding new branded routes with custom metadata, add them to the `excludedEx
 ### Route Organization
 
 Routes are organized by category in `src/lib/routes.ts`:
-- **Authentication** (21 routes) - Auth pages and branded auth portals
+- **Authentication** (30 routes) - Auth pages and branded auth portals
 - **E-commerce** (5 routes) - Shop, product details, checkout flows
 - **Management** (6 routes) - Dashboards and admin interfaces
-- **Creator Tools** (7 routes) - Onboarding, link-in-bio, portals
+- **Creator Tools** (11 routes) - Onboarding, link-in-bio, portals, Luna Star suite
 - **Showcases** (4 routes) - Component library and directory
-- **Experimental** (7 routes) - Special effects, key-gated routes, experimental UI
+- **Experimental** (8 routes) - Special effects, key-gated routes, experimental UI
+
+Use helper functions in `src/lib/routes.ts`:
+- `getRoutesByCategory(category)` - Filter routes by category
+- `searchRoutes(query)` - Search routes by name, path, description, or category
+- `validateRouteExists(path)` - Check if a route path exists
+- `getCategoryStats()` - Get count of routes per category
 
 ### Key Routes
 - `/` - Home page with ENTER button and Breakout game
@@ -182,13 +192,13 @@ Routes are organized by category in `src/lib/routes.ts`:
 - `/authcard` - UI-only AuthCard component preview
 - `/thedash` - Dashboard template
 - `/storage` - Storage management interface
-- `/auth`, `/auth2`, `/auth[4-20]` - Auth page variations (numbered 1-20)
-- `/juanita`, `/cabana`, `/starluv`, `/lcg`, `/quickprintz` - Branded auth pages
-- `/luna-star`, `/luna-star/analytics`, `/luna-star/cms`, `/luna-star/premium` - Luna Star creator suite
-- `/cabanamgmt*` - Management portal variants
+- `/auth`, `/auth2`, `/auth[4-23]` - Auth page variations (numbered 1-23)
+- `/juanita`, `/juanita[2-4]`, `/cabana`, `/thecabana`, `/starluv`, `/starluv-[2-4]`, `/lcg`, `/quickprintz`, `/soundimageband` - Branded auth pages
+- `/cabanamgmt`, `/cabanamgmt-2`, `/cabanamgmt-4` - Management portal variants
 - `/shop`, `/product/:id`, `/checkout` - E-commerce templates
 - `/bio/:username` - Dynamic link-in-bio pages
 - `/backroom`, `/testing-lab` - Key-gated experimental routes
+- `/hub`, `/casino-nav`, `/vip`, `/spooky` - Experimental navigation interfaces
 
 ## Important Notes
 
@@ -200,10 +210,9 @@ Routes are organized by category in `src/lib/routes.ts`:
 - **Client Branding**: Branded routes follow naming conventions:
   - `/cabana`, `/thecabana`, `/cabanamgmt*` - CABANA
   - `/starluv*` - Star Luv
-  - `/luna-star*` - Luna Star (premium creator suite)
   - `/lcg` - Locust Growth Accelerator (locust_growth_accelerator)
   - `/quickprintz` - Quick Printz
   - `/juanita*` - Juanita
   - `/soundimageband` - Sound Image Band
-  - `/lexistarshow` - Lexi Star Show
 - **Route Metadata**: Route definitions in `src/lib/routes.ts` include category, description, icons, and metadata for key-gated routes
+- **Browser Router**: Uses React Router v6 with future flags enabled (`v7_startTransition`, `v7_relativeSplatPath`)

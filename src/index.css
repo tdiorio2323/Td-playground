@@ -162,6 +162,30 @@ All colors MUST be HSL.
   }
 }
 
+/* Custom Font Utility Classes */
+@layer utilities {
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-ballet {
+    font-family: 'Ballet', cursive;
+    font-optical-sizing: auto;
+  }
+
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+
+  .font-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .font-dancing {
+    font-family: 'Dancing Script', cursive;
+  }
+}
+
 @keyframes shimmer {
   0% {
     background-position: 200% center;

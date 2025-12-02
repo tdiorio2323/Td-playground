@@ -23,7 +23,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         backgroundPosition: "center",
       }}
     >
-      <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10">
+      <Card className="w-full max-w-md bg-black/10 backdrop-blur-sm border-2 border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10 transform-gpu will-change-transform">
         <CardHeader className="text-center space-y-4">
           <div className="flex items-center justify-center">
             <img src="/lovable-uploads/td-mtv.png" alt="TD MTV" className="w-full object-contain" />
@@ -33,7 +33,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               <Button
                 type="button"
                 onClick={() => window.open("https://letslink.tdstudiosny.com/cabana", "_blank")}
-                className="w-full h-14 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 hover:from-yellow-600 hover:via-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg relative overflow-hidden backdrop-blur-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_0_20px_rgba(234,179,8,0.4)] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/30 before:to-transparent before:pointer-events-none before:animate-[pulse_3s_ease-in-out_infinite]"
+                className="w-full h-14 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 hover:from-yellow-600 hover:via-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg relative overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_0_20px_rgba(234,179,8,0.4)] transform-gpu will-change-transform before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/30 before:to-transparent before:pointer-events-none before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500"
               >
                 <Lock className="w-5 h-5 mr-2 relative z-10" />
                 <span className="relative z-10">Exclusive</span>
@@ -85,10 +85,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </Button>
             </div>
             <div className="mt-4 text-center space-y-3">
-              <div
-                className="text-white text-sm underline"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
+              <div className="text-white text-sm underline font-inter">
                 Request Custom Link Page
               </div>
               <div className="flex items-center justify-center gap-4">
